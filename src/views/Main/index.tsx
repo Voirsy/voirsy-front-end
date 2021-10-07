@@ -6,8 +6,8 @@ import theme from 'theme';
 
 const Main = () => (
   <ThemeProvider theme={theme}>
+    <Header />
     <main>
-      <Header />
       <Filters />
       <Container maxWidth={false}>
         <Grid container>

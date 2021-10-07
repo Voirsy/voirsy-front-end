@@ -18,7 +18,7 @@ export const CustomLocationButton = styled(Button)(() => ({
 }));
 
 export const CustomChipContainer = styled(Grid)(() => ({
-  overflowX: 'scroll',
+  overflowX: 'auto',
 }));
 
 export const CustomChip = styled(Chip)(({ theme }) => ({

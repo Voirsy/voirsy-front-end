@@ -12,16 +12,18 @@ const ResultList = () => {
     setSortType(event.target.value);
   };
   return (
-    <CustomContainer disableGutters={true}>
+    <CustomContainer disableGutters>
       <Grid container justifyContent="space-between" alignItems="center">
-        <Typography variant="h5">Results</Typography>
+        <Typography variant="h5" component="h2">
+          Results
+        </Typography>
         <Grid item xs={4}>
           <CustomSelect
             select
             label="Sort by:"
             variant="outlined"
             size="small"
-            fullWidth={true}
+            fullWidth
             value={sortType}
             onChange={handleChange}
           >

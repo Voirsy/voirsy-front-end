@@ -1,8 +1,8 @@
 import { styled } from '@mui/system';
-import { Typography, Button } from '@mui/material';
+import { Button, Toolbar } from '@mui/material';
 
-export const CustomTypography = styled(Typography)(() => ({
-  flexGrow: 1,
+export const CustomToolbar = styled(Toolbar)(() => ({
+  justifyContent: 'space-between',
 }));
 
 export const CustomButton = styled(Button)(() => ({

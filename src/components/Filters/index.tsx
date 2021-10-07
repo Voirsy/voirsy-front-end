@@ -16,7 +16,7 @@ const Filters = () => (
           variant="outlined"
           size="small"
           placeholder="Search"
-          fullWidth={true}
+          fullWidth
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -31,7 +31,7 @@ const Filters = () => (
           variant="outlined"
           size="large"
           endIcon={<ExpandMore />}
-          fullWidth={true}
+          fullWidth
         >
           Location
         </CustomLocationButton>
@@ -45,10 +45,10 @@ const Filters = () => (
         justifyContent="space-between"
         wrap="nowrap"
       >
-        <CustomChip label="Barbers" variant="outlined" clickable={true} />
-        <CustomChip label="Hairdressers" variant="outlined" clickable={true} />
-        <CustomChip label="Beauticians" variant="outlined" clickable={true} />
-        <CustomChip label="Tattooists" variant="outlined" clickable={true} />
+        <CustomChip label="Barbers" variant="outlined" clickable />
+        <CustomChip label="Hairdressers" variant="outlined" clickable />
+        <CustomChip label="Beauticians" variant="outlined" clickable />
+        <CustomChip label="Tattooists" variant="outlined" clickable />
       </CustomChipContainer>
     </Grid>
   </Container>

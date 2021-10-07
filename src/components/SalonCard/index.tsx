@@ -4,29 +4,26 @@ import { CustomImg, CustomPaper } from './salonCard.styles';
 import RoomIcon from '@mui/icons-material/Room';
 
 const SalonCard = ({ data }: { data: any }) => (
-  <Paper>
+  <CustomPaper>
     <Grid container columnSpacing={1}>
-      <CustomGrid
-        item
-        container
-        xs={4}
-        justifyContent="center"
-        alignItems="center"
-      >
+      <Grid item container xs={2} justifyContent="center" alignItems="center">
         <CustomImg alt="salon image" src={image} />
-      </CustomGrid>
-      <Grid item xs container direction="column">
+      </Grid>
+      <Grid item xs container direction="column" justifyContent="space-evenly">
         <Grid item>
           <Typography variant="subtitle1">{data.title}</Typography>
         </Grid>
         <Grid item>
           <Rating readOnly value={data.rating} size="small" precision={0.5} />
         </Grid>
-        <Grid item>
-          <Typography variant="body2">{`${data.street}, ${data.zipCode}, ${data.city}`}</Typography>
+        <Grid item container alignItems="center">
+          <RoomIcon color="action" />
+          <Typography variant="body2">
+            {`${data.street}, ${data.zipCode}, ${data.city}`}
+          </Typography>
         </Grid>
       </Grid>
     </Grid>
-  </Paper>
+  </CustomPaper>
 );
 export default SalonCard;

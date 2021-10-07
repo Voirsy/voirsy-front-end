@@ -1,14 +1,16 @@
-import { AppBar, Toolbar } from '@mui/material';
-import { CustomTypography, CustomButton } from './header.styles';
+import { AppBar, Typography } from '@mui/material';
+import { CustomToolbar, CustomButton } from './header.styles';
 
 const Header = () => (
   <AppBar color="transparent" elevation={0} position="static">
-    <Toolbar>
-      <CustomTypography variant="h4">Voirsy</CustomTypography>
-      <CustomButton variant="contained" color="primary" disableElevation={true}>
+    <CustomToolbar>
+      <Typography variant="h4" component="h1">
+        Voirsy
+      </Typography>
+      <CustomButton variant="contained" color="primary" disableElevation>
         Sign In
       </CustomButton>
-    </Toolbar>
+    </CustomToolbar>
   </AppBar>
 );
 
