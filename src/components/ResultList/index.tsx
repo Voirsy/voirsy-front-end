@@ -1,6 +1,6 @@
 import { Grid, MenuItem, Typography } from '@mui/material';
 import { ChangeEvent, useState } from 'react';
-import SalonCard from '../SalonCard';
+import SalonCard from 'components/SalonCard';
 import { CustomContainer, CustomSelect, CustomBox } from './resultList.styles';
 import { sortSelectData } from './sortSelectInput.data';
 import MOCK_DATA from './mock_data';

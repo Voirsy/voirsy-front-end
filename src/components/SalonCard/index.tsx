@@ -1,6 +1,7 @@
-import { Grid, Typography, Rating, Paper } from '@mui/material';
-import image from '../../assets/salon.jpg';
-import { CustomImg, CustomGrid } from './salonCard.styles';
+import { Grid, Typography, Rating } from '@mui/material';
+import image from 'assets/salon.jpg';
+import { CustomImg, CustomPaper } from './salonCard.styles';
+import RoomIcon from '@mui/icons-material/Room';
 
 const SalonCard = ({ data }: { data: any }) => (
   <Paper>
