@@ -1,5 +1,8 @@
+import Main from './views/Main';
+import './global.scss';
+
 function App() {
-  return <div></div>;
+  return <Main />;
 }
 
 export default App;
