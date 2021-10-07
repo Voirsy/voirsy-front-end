@@ -7,8 +7,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint .",
-    "lint:fix": "eslint . -- --fix"
+    "lint": "eslint . --max-warnings 15",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@emotion/react": "^11.4.1",
@@ -22,7 +22,7 @@
     "@types/node": "^12.20.16",
     "@types/react": "^17.0.14",
     "@types/react-dom": "^17.0.9",
-    "axios": "^0.21.1",
+    "axios": "^0.21.4",
     "node-sass": "^6.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -38,7 +38,10 @@
     "cypress": "^8.0.0",
     "eslint": "^7.31.0",
     "eslint-plugin-import": "^2.23.4",
-    "eslint-plugin-react": "^7.24.0"
+    "eslint-plugin-react": "^7.24.0",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.2.0",
+    "prettier": "2.4.1"
   },
   "eslintConfig": {
     "extends": [
@@ -57,5 +60,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": "eslint --max-warnings 15 --fix",
+    "*": "prettier --ignore-unknown --write"
   }
 }
