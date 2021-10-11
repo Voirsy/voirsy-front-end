@@ -18,9 +18,7 @@ const SalonCard = ({ data }: { data: any }) => (
         </Grid>
         <Grid item container alignItems="center">
           <RoomIcon color="action" />
-          <Typography variant="body2">
-            {`${data.street}, ${data.zipCode}, ${data.city}`}
-          </Typography>
+          <Typography variant="body2">{`${data.street}, ${data.zipCode}, ${data.city}`}</Typography>
         </Grid>
       </Grid>
     </Grid>
