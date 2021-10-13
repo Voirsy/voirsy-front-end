@@ -1,21 +1,18 @@
-import { Container, Grid, ThemeProvider } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import Filters from 'components/Filters';
 import ResultList from 'components/ResultList';
-import theme from 'theme';
 
 const Home = () => (
-  <ThemeProvider theme={theme}>
-    <main>
-      <Filters />
-      <Container maxWidth={false}>
-        <Grid container>
-          <Grid item xs={12} lg={6}>
-            <ResultList />
-          </Grid>
+  <main>
+    <Filters />
+    <Container maxWidth={false}>
+      <Grid container>
+        <Grid item xs={12} lg={6}>
+          <ResultList />
         </Grid>
-      </Container>
-    </main>
-  </ThemeProvider>
+      </Grid>
+    </Container>
+  </main>
 );
 
 export default Home;
