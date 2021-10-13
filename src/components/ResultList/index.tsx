@@ -7,7 +7,7 @@ import { sortSelectData } from './sortSelectInput.data';
 import MOCK_DATA from './mock_data';
 
 const ResultList = () => {
-  const [t] = useTranslation();
+  const [translation] = useTranslation();
   const [sortType, setSortType] = useState<string | undefined>(undefined);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -17,12 +17,12 @@ const ResultList = () => {
     <CustomContainer disableGutters>
       <Grid container justifyContent="space-between" alignItems="center">
         <Typography variant="h5" component="h2">
-          {t('home:headings.results')}
+          {translation('home:headings.results')}
         </Typography>
         <Grid item xs={4}>
           <CustomSelect
             select
-            label={t('home:sort.label')}
+            label={translation('home:sort.label')}
             variant="outlined"
             size="small"
             fullWidth
@@ -31,7 +31,7 @@ const ResultList = () => {
           >
             {sortSelectData.map((item, index) => (
               <MenuItem key={index} value={item.value}>
-                {t(`home:sort.items.${item.value}`)}
+                {translation(`home:sort.items.${item.value}`)}
               </MenuItem>
             ))}
           </CustomSelect>

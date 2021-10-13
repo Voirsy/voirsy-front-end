@@ -4,7 +4,7 @@ import { CustomTextField, CustomChipContainer, CustomChip, CustomLocationButton 
 import { useTranslation } from 'react-i18next';
 
 const Filters = () => {
-  const [t] = useTranslation();
+  const [translation] = useTranslation();
 
   return (
     <Container component="nav" maxWidth={false}>
@@ -14,7 +14,7 @@ const Filters = () => {
             type="search"
             variant="outlined"
             size="small"
-            placeholder={t('home:filters.search.label')}
+            placeholder={translation('home:filters.search.label')}
             fullWidth
             InputProps={{
               startAdornment: (
@@ -27,7 +27,7 @@ const Filters = () => {
         </Grid>
         <Grid item xs={12} sm={6} md>
           <CustomLocationButton variant="outlined" size="large" endIcon={<ExpandMore />} fullWidth>
-            {t('home:filters.location.label')}
+            {translation('home:filters.location.label')}
           </CustomLocationButton>
         </Grid>
         <CustomChipContainer
@@ -39,10 +39,10 @@ const Filters = () => {
           justifyContent="space-between"
           wrap="nowrap"
         >
-          <CustomChip label={t('home:filters.chip.barbers')} variant="outlined" clickable />
-          <CustomChip label={t('home:filters.chip.hairdressers')} variant="outlined" clickable />
-          <CustomChip label={t('home:filters.chip.beauticians')} variant="outlined" clickable />
-          <CustomChip label={t('home:filters.chip.tattooists')} variant="outlined" clickable />
+          <CustomChip label={translation('home:filters.chip.barbers')} variant="outlined" clickable />
+          <CustomChip label={translation('home:filters.chip.hairdressers')} variant="outlined" clickable />
+          <CustomChip label={translation('home:filters.chip.beauticians')} variant="outlined" clickable />
+          <CustomChip label={translation('home:filters.chip.tattooists')} variant="outlined" clickable />
         </CustomChipContainer>
       </Grid>
     </Container>
