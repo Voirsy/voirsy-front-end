@@ -1,0 +1,27 @@
+{
+  "filters": {
+    "search": {
+      "label": "Search"
+    },
+    "location": {
+      "label": "Location"
+    },
+    "chip": {
+      "barbers": "Barbers",
+      "hairdressers": "Hairdressers",
+      "beauticians": "Beauticians",
+      "tattooists": "Tattooists"
+    }
+  },
+  "sort": {
+    "label": "Sort by",
+    "items": {
+      "most-popular": "Most popular",
+      "top-rated": "Top rated",
+      "number-of-ratings": "Number of ratings"
+    }
+  },
+  "headings": {
+    "results": "Results"
+  }
+}
