@@ -1,20 +1,21 @@
 import { ThemeProvider } from '@mui/material';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Header from 'components/Header';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import theme from 'theme';
+import EditProfile from 'views/EditProfile';
 import Home from 'views/Home';
 
 const Root = () => (
   <Router>
     <ThemeProvider theme={theme}>
       <Switch>
-        <Route path="login">
+        <Route path="/login">
           <p>Login</p>
         </Route>
-        <Route path="signin">
+        <Route path="/signin">
           <p>Sign in</p>
         </Route>
-        <Route path="signup">
+        <Route path="/signup">
           <p>Sign up</p>
         </Route>
 
@@ -23,15 +24,20 @@ const Root = () => (
           render={({ match: { url } }) => (
             <>
               <Header />
-              <Route path={`${url}/password`}>
-                <p>Change password</p>
-              </Route>
-              <Route path={`${url}/delete`}>
-                <p>Delete account</p>
-              </Route>
-              <Route path="*">
-                <p>Edit</p>
-              </Route>
+              <Switch>
+                <Route path={`${url}/edit`}>
+                  <EditProfile />
+                </Route>
+                <Route path={`${url}/password`}>
+                  <p>Change password</p>
+                </Route>
+                <Route path={`${url}/delete`}>
+                  <p>Delete account</p>
+                </Route>
+                <Route path="*">
+                  <Redirect to="/edit" />
+                </Route>
+              </Switch>
             </>
           )}
         />
