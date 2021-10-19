@@ -1,51 +1,53 @@
-import { MenuOutlined, PersonOutlined, DeleteOutlined, LockOpenOutlined, CloseOutlined } from '@mui/icons-material';
-import { Divider, IconButton, ListItem, ListItemIcon, ListItemText } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { PersonOutlined, DeleteOutlined, LockOpenOutlined, CloseOutlined } from '@mui/icons-material';
+import { IconButton, ListItem, ListItemIcon, ListItemText, useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/system';
+import { useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { CustomDrawer, CustomList, CustomToolbar } from './profileNavigation.styles';
 
-const ProfileNavigation = () => {
-  const location = useLocation();
-  const [isOpen, setIsOpen] = useState(false);
+const navigationElements = [
+  {
+    link: '/profile/edit',
+    text: 'Account',
+    icon: <PersonOutlined />,
+  },
+  {
+    link: '/profile/password',
+    text: 'Password',
+    icon: <LockOpenOutlined />,
+  },
+  {
+    link: '/profile/delete',
+    text: 'Delete account',
+    icon: <DeleteOutlined />,
+  },
+];
 
-  useEffect(() => {
-    setIsOpen(false);
-  }, [location]);
+const ProfileNavigation = ({ isMenuOpen, handleClose }: { isMenuOpen: boolean; handleClose: () => void }) => {
+  const location = useLocation();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('md'));
+
+  useEffect(() => handleClose(), [location]);
 
   return (
-    <>
-      <IconButton onClick={() => setIsOpen(true)}>
-        <MenuOutlined />
-      </IconButton>
-      <CustomDrawer open={isOpen}>
-        <CustomToolbar>
-          <IconButton onClick={() => setIsOpen(false)}>
+    <CustomDrawer open={isMenuOpen} variant={matches ? 'temporary' : 'permanent'}>
+      <CustomToolbar>
+        {matches ? (
+          <IconButton onClick={handleClose}>
             <CloseOutlined />
           </IconButton>
-        </CustomToolbar>
-        <Divider />
-        <CustomList>
-          <ListItem component={NavLink} activeClassName="selected" to="/profile/edit">
-            <ListItemIcon>
-              <PersonOutlined />
-            </ListItemIcon>
-            <ListItemText primary="Account" />
+        ) : null}
+      </CustomToolbar>
+      <CustomList>
+        {navigationElements.map(({ icon, link, text }) => (
+          <ListItem button key={link} component={NavLink} activeClassName="selected" to={link}>
+            <ListItemIcon>{icon}</ListItemIcon>
+            <ListItemText primary={text} />
           </ListItem>
-          <ListItem component={NavLink} activeClassName="selected" to="/profile/password">
-            <ListItemIcon>
-              <LockOpenOutlined />
-            </ListItemIcon>
-            <ListItemText primary="Password" />
-          </ListItem>
-          <ListItem component={NavLink} activeClassName="selected" to="/profile/delete">
-            <ListItemIcon>
-              <DeleteOutlined />
-            </ListItemIcon>
-            <ListItemText primary="Delete account" />
-          </ListItem>
-        </CustomList>
-      </CustomDrawer>
-    </>
+        ))}
+      </CustomList>
+    </CustomDrawer>
   );
 };
 

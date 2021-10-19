@@ -5,15 +5,30 @@ export const CustomToolbar = styled(Toolbar)(() => ({
   justifyContent: 'flex-end',
 }));
 
-export const CustomDrawer = styled(Drawer)(() => ({
+export const CustomDrawer = styled(Drawer)(({ theme }) => ({
+  [theme.breakpoints.down('md')]: {
+    '.MuiDrawer-paper': {
+      width: '100%',
+    },
+  },
+
   '.MuiDrawer-paper': {
-    width: '100%',
+    border: 0,
   },
 }));
 
 export const CustomList = styled(List)(({ theme }) => ({
+  paddingTop: 70,
+
   '& > a': {
     color: theme.palette.text.primary,
+    [theme.breakpoints.up('md')]: {
+      width: '100%',
+      padding: '8px 40px',
+      '&:not(:last-of-type)': {
+        marginBottom: 10,
+      },
+    },
   },
 
   '& > .selected': {
