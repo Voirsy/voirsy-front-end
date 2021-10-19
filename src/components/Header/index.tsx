@@ -38,7 +38,9 @@ const Header = () => {
           </div>
         </CustomToolbar>
       </AppBar>
-      <ProfileNavigation handleClose={() => setIsMenuOpen(false)} isMenuOpen={isMenuOpen} />
+      {pathname.startsWith('/profile') && (
+        <ProfileNavigation handleClose={() => setIsMenuOpen(false)} isMenuOpen={isMenuOpen} />
+      )}
     </>
   );
 };

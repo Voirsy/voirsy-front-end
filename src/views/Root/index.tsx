@@ -2,7 +2,7 @@ import { ThemeProvider } from '@mui/material';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Header from 'components/Header';
 import theme from 'theme';
-import EditProfile from 'views/EditProfile';
+import DeleteAccount from 'views/DeleteAccount';
 import Home from 'views/Home';
 
 const Root = () => (
@@ -26,13 +26,13 @@ const Root = () => (
               <Header />
               <Switch>
                 <Route path={`${url}/edit`}>
-                  <EditProfile />
+                  <p>Edit account</p>
                 </Route>
                 <Route path={`${url}/password`}>
                   <p>Change password</p>
                 </Route>
                 <Route path={`${url}/delete`}>
-                  <p>Delete account</p>
+                  <DeleteAccount />
                 </Route>
                 <Route path="*">
                   <Redirect to="/edit" />

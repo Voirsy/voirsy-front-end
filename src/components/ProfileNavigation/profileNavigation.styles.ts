@@ -18,7 +18,9 @@ export const CustomDrawer = styled(Drawer)(({ theme }) => ({
 }));
 
 export const CustomList = styled(List)(({ theme }) => ({
-  paddingTop: 70,
+  [theme.breakpoints.up('md')]: {
+    paddingTop: 70,
+  },
 
   '& > a': {
     color: theme.palette.text.primary,
