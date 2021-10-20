@@ -101,10 +101,12 @@ const EditAccount = () => {
                 inputFormat="dd-MM-yyyy"
                 mask="__-__-____"
                 label={translation('profile:edit.input.birthdate')}
-                onChange={(date) => setValue('birthdate', date || '', { shouldValidate: true, shouldDirty: true })}
+                onChange={(date) =>
+                  setValue('birthdate', date?.toString() || '', { shouldValidate: true, shouldDirty: true })
+                }
                 value={field.value}
-                maxDate={new Date().toString()}
-                minDate={new Date('1900-01-01T00:00:00').toString()}
+                maxDate={new Date()}
+                minDate={new Date('1900-01-01T00:00:00')}
                 renderInput={(params) => (
                   <TextField {...params} {...field} error={!!error} helperText={error?.message} fullWidth />
                 )}
