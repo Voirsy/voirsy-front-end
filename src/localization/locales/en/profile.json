@@ -17,5 +17,18 @@
       "cancel": "Cancel",
       "save": "Save"
     }
+  },
+  "edit": {
+    "heading": "Edit profile",
+    "input": {
+      "fullname": "Fullname",
+      "email": "Email",
+      "birthdate": "Birthdate",
+      "phonenumber": "Phonenumber"
+    },
+    "action": {
+      "cancel": "Cancel",
+      "save": "Save"
+    }
   }
 }
