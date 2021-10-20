@@ -6,5 +6,16 @@
       "cancel": "Cancel",
       "delete": "Delete"
     }
+  },
+  "password": {
+    "heading": "Change password",
+    "input": {
+      "currentPassword": "Current password",
+      "newPassword": "New password"
+    },
+    "action": {
+      "cancel": "Cancel",
+      "save": "Save"
+    }
   }
 }

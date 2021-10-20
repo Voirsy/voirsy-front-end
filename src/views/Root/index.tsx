@@ -4,6 +4,7 @@ import Header from 'components/Header';
 import theme from 'theme';
 import DeleteAccount from 'views/DeleteAccount';
 import Home from 'views/Home';
+import ChangePassword from 'views/ChangePassword';
 
 const Root = () => (
   <Router>
@@ -29,7 +30,7 @@ const Root = () => (
                   <p>Edit account</p>
                 </Route>
                 <Route path={`${url}/password`}>
-                  <p>Change password</p>
+                  <ChangePassword />
                 </Route>
                 <Route path={`${url}/delete`}>
                   <DeleteAccount />
