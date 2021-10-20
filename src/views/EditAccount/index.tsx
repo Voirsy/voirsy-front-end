@@ -5,6 +5,20 @@ import InputMask from 'react-input-mask';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+const schema = yup
+  .object({
+    fullname: yup.string().required('Field is required'),
+    email: yup.string().email('Must be an email format').required('Field is required'),
+    birthdate: yup.date().min('1900-01-01T00:00:00', 'Min date is 01-01-1900').nullable().typeError('Invalid date'),
+    phonenumber: yup
+      .string()
+      .required('Field is required')
+      .matches(/^[0-9]{3}-[0-9]{3}-[0-9]{3}$/, 'Invalid field value'),
+  })
+  .required();
 
 interface EditAccountForm {
   fullname: string;
@@ -15,13 +29,15 @@ interface EditAccountForm {
 
 const EditAccount = () => {
   const [translation] = useTranslation();
-  const { handleSubmit, control } = useForm<EditAccountForm>({
+  const { handleSubmit, control, setValue } = useForm<EditAccountForm>({
     defaultValues: {
       fullname: 'Alex Smith',
       email: 'alex@gmail.com',
       birthdate: '2014-08-18T00:00:00',
-      phonenumber: '324562647',
+      phonenumber: '324-562-647',
     },
+    resolver: yupResolver(schema),
+    mode: 'onBlur',
   });
 
   const onSubmit: SubmitHandler<EditAccountForm> = (data) => console.log(data);
@@ -36,41 +52,61 @@ const EditAccount = () => {
           <Controller
             name="fullname"
             control={control}
-            render={({ field }) => (
-              <TextField {...field} fullWidth label={translation('profile:edit.input.fullname')} />
+            render={({ field, fieldState: { error } }) => (
+              <TextField
+                {...field}
+                fullWidth
+                label={translation('profile:edit.input.fullname')}
+                error={!!error}
+                helperText={error?.message}
+              />
             )}
           />
           <Controller
             name="email"
             control={control}
-            render={({ field }) => (
-              <TextField {...field} fullWidth label={translation('profile:edit.input.email')} type="email" />
+            render={({ field, fieldState: { error } }) => (
+              <TextField
+                {...field}
+                fullWidth
+                label={translation('profile:edit.input.email')}
+                type="email"
+                error={!!error}
+                helperText={error?.message}
+              />
             )}
           />
           <Controller
             name="birthdate"
             control={control}
-            render={({ field }) => (
+            render={({ field, fieldState: { error } }) => (
               <DesktopDatePicker
                 inputFormat="dd-MM-yyyy"
+                mask="__-__-____"
                 label={translation('profile:edit.input.birthdate')}
-                onChange={field.onChange}
+                onChange={(date) => setValue('birthdate', date || '', { shouldValidate: true, shouldDirty: true })}
                 value={field.value}
-                renderInput={(params) => <TextField {...params} {...field} fullWidth />}
+                maxDate={new Date().toString()}
+                minDate={new Date('1900-01-01T00:00:00').toString()}
+                renderInput={(params) => (
+                  <TextField {...params} {...field} error={!!error} helperText={error?.message} fullWidth />
+                )}
               />
             )}
           />
           <Controller
             name="phonenumber"
             control={control}
-            render={({ field }) => (
-              <InputMask {...field} mask="999-999-999">
+            render={({ field, fieldState: { error } }) => (
+              <InputMask {...{ ...field, error: error }} mask="999-999-999">
                 {(inputProps: any) => (
                   <TextField
                     {...inputProps}
                     fullWidth
                     label={translation('profile:edit.input.phonenumber')}
                     type="tel"
+                    error={!!inputProps.error}
+                    helperText={inputProps.error?.message}
                   />
                 )}
               </InputMask>
