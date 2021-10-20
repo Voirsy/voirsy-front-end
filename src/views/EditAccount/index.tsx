@@ -1,9 +1,10 @@
 import { Button, Stack, TextField, Typography } from '@mui/material';
+import { DesktopDatePicker } from '@mui/lab';
 import { Box } from '@mui/system';
+import InputMask from 'react-input-mask';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { DesktopDatePicker } from '@mui/lab';
 
 interface EditAccountForm {
   fullname: string;
@@ -36,14 +37,14 @@ const EditAccount = () => {
             name="fullname"
             control={control}
             render={({ field }) => (
-              <TextField fullWidth label={translation('profile:edit.input.fullname')} {...field} />
+              <TextField {...field} fullWidth label={translation('profile:edit.input.fullname')} />
             )}
           />
           <Controller
             name="email"
             control={control}
             render={({ field }) => (
-              <TextField fullWidth label={translation('profile:edit.input.email')} type="email" {...field} />
+              <TextField {...field} fullWidth label={translation('profile:edit.input.email')} type="email" />
             )}
           />
           <Controller
@@ -55,7 +56,7 @@ const EditAccount = () => {
                 label={translation('profile:edit.input.birthdate')}
                 onChange={field.onChange}
                 value={field.value}
-                renderInput={(params) => <TextField fullWidth {...params} {...field} />}
+                renderInput={(params) => <TextField {...params} {...field} fullWidth />}
               />
             )}
           />
@@ -63,7 +64,16 @@ const EditAccount = () => {
             name="phonenumber"
             control={control}
             render={({ field }) => (
-              <TextField fullWidth label={translation('profile:edit.input.phonenumber')} type="tel" {...field} />
+              <InputMask {...field} mask="999-999-999">
+                {(inputProps: any) => (
+                  <TextField
+                    {...inputProps}
+                    fullWidth
+                    label={translation('profile:edit.input.phonenumber')}
+                    type="tel"
+                  />
+                )}
+              </InputMask>
             )}
           />
           <Box display="flex" gap={2.5}>

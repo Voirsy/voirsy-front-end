@@ -38,6 +38,7 @@
     "web-vitals": "^1.1.2"
   },
   "devDependencies": {
+    "@types/react-input-mask": "^3.0.1",
     "@types/react-router-dom": "^5.3.1",
     "@types/styled-components": "^5.1.14",
     "@typescript-eslint/eslint-plugin": "^4.28.4",
@@ -50,7 +51,8 @@
     "eslint-plugin-react": "^7.24.0",
     "husky": "^7.0.2",
     "lint-staged": "^11.2.0",
-    "prettier": "2.4.1"
+    "prettier": "2.4.1",
+    "react-input-mask": "^2.0.4"
   },
   "browserslist": {
     "production": [
