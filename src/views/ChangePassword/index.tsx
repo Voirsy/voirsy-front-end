@@ -34,11 +34,11 @@ const ChangePassword = () => {
   const onSubmit: SubmitHandler<ChangePasswordForm> = (data) => console.log(data);
 
   return (
-    <main>
-      <Typography variant="h3" component="h1" textAlign="center">
+    <Box component="main" maxWidth={400} margin="0 auto" padding={2}>
+      <Typography marginBottom={6} variant="h3" component="h1" textAlign="center">
         {translation('profile:password.heading')}
       </Typography>
-      <Box maxWidth={400} margin="50px auto 0" component="form" onSubmit={handleSubmit(onSubmit)}>
+      <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={2.5}>
           <Controller
             rules={{ required: true }}
@@ -70,7 +70,7 @@ const ChangePassword = () => {
           </Stack>
         </Stack>
       </Box>
-    </main>
+    </Box>
   );
 };
 

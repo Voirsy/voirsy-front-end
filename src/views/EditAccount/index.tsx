@@ -1,12 +1,14 @@
-import { Button, Stack, TextField, Typography } from '@mui/material';
+import { Avatar, Button, IconButton, Stack, TextField, Typography } from '@mui/material';
 import { DesktopDatePicker } from '@mui/lab';
 import { Box } from '@mui/system';
 import InputMask from 'react-input-mask';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { CustomInput, CustomUploadWrapper } from './editAccount.styles';
+import { PhotoCamera } from '@mui/icons-material';
+import * as yup from 'yup';
 
 const schema = yup
   .object({
@@ -43,11 +45,26 @@ const EditAccount = () => {
   const onSubmit: SubmitHandler<EditAccountForm> = (data) => console.log(data);
 
   return (
-    <main>
-      <Typography variant="h3" component="h1" textAlign="center">
+    <Box component="main" maxWidth={400} margin="0 auto" padding={2}>
+      <Typography marginBottom={6} variant="h3" component="h1" textAlign="center">
         {translation('profile:edit.heading')}
       </Typography>
-      <Box maxWidth={400} margin="50px auto 0" component="form" onSubmit={handleSubmit(onSubmit)}>
+      <Box margin="0 auto 80px" position="relative" width="fit-content">
+        <Avatar
+          alt="Alex Smith"
+          sx={{ margin: '0 auto', width: 216, height: 216 }}
+          src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
+        />
+        <CustomUploadWrapper>
+          <label htmlFor="icon-button-file">
+            <CustomInput accept="image/*" id="icon-button-file" type="file" />
+            <IconButton color="inherit" aria-label="upload picture" component="span" size="large">
+              <PhotoCamera />
+            </IconButton>
+          </label>
+        </CustomUploadWrapper>
+      </Box>
+      <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={2.5}>
           <Controller
             name="fullname"
@@ -122,7 +139,7 @@ const EditAccount = () => {
           </Stack>
         </Stack>
       </Box>
-    </main>
+    </Box>
   );
 };
 
