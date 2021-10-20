@@ -112,14 +112,14 @@ const EditAccount = () => {
               </InputMask>
             )}
           />
-          <Box display="flex" gap={2.5}>
+          <Stack direction="row" spacing={2.5}>
             <Button variant="outlined" fullWidth size="large" color="info" component={Link} to="/">
               {translation('profile:edit.action.cancel')}
             </Button>
             <Button variant="contained" fullWidth size="large" type="submit">
               {translation('profile:edit.action.save')}
             </Button>
-          </Box>
+          </Stack>
         </Stack>
       </Box>
     </main>
