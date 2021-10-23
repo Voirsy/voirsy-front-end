@@ -1,11 +1,11 @@
 import { Button, Stack, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import PasswordTextfield from 'components/PasswordTextfield';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import CancelButton from 'components/CancelButton';
 
 const schema = yup
   .object({
@@ -61,10 +61,8 @@ const ChangePassword = () => {
             )}
           />
           <Stack direction="row" spacing={2.5}>
-            <Button variant="outlined" fullWidth size="large" color="info" component={Link} to="/">
-              {translation('profile:password.action.cancel')}
-            </Button>
-            <Button variant="contained" fullWidth size="large" type="submit">
+            <CancelButton>{translation('profile:delete.action.cancel')}</CancelButton>
+            <Button variant="contained" fullWidth size="large" type="submit" sx={{ color: 'common.white' }}>
               {translation('profile:password.action.save')}
             </Button>
           </Stack>

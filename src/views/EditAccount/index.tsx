@@ -2,13 +2,13 @@ import { Avatar, Button, IconButton, Stack, TextField, Typography } from '@mui/m
 import { DesktopDatePicker } from '@mui/lab';
 import { Box } from '@mui/system';
 import InputMask from 'react-input-mask';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { CustomInput, CustomUploadWrapper } from './editAccount.styles';
 import { PhotoCamera } from '@mui/icons-material';
 import * as yup from 'yup';
+import CancelButton from 'components/CancelButton';
+import { CustomInput, CustomUploadWrapper } from './editAccount.styles';
 
 const schema = yup
   .object({
@@ -132,10 +132,8 @@ const EditAccount = () => {
             )}
           />
           <Stack direction="row" spacing={2.5}>
-            <Button variant="outlined" fullWidth size="large" color="info" component={Link} to="/">
-              {translation('profile:edit.action.cancel')}
-            </Button>
-            <Button variant="contained" fullWidth size="large" type="submit">
+            <CancelButton>{translation('profile:delete.action.cancel')}</CancelButton>
+            <Button variant="contained" fullWidth size="large" type="submit" sx={{ color: 'common.white' }}>
               {translation('profile:edit.action.save')}
             </Button>
           </Stack>
