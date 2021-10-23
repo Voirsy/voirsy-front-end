@@ -32,13 +32,14 @@ const EditAccount = () => {
     mode: 'onBlur',
   });
 
-  const handleChangeImg = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
-      const reader = new FileReader();
-      const url = reader.readAsDataURL(file);
-      console.log(URL.createObjectURL(e.target.files[0]));
-      setImg(URL.createObjectURL(e.target.files[0]));
+  const handleChangeImg = (file: any) => {
+    if (file && file[0].preview.url) {
+      setImg(file[0].preview.url);
+
+      //preparation for send
+      //the image will be sent separately from the form data
+      const formData = new FormData();
+      formData.append('avatar', new Blob([file], { type: file.type }), file.name || 'file');
     }
   };
 

@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { styled } from '@mui/system';
 
-export const DropzoneContainer = styled('div')(({ theme }) => ({
+export const CustomDropzoneContainer = styled('div')(({ theme }) => ({
   margin: '0 auto 80px',
   position: 'relative',
   width: 216,
@@ -40,6 +41,7 @@ export const CustomUploadWrapper = styled('div')(({ theme }) => ({
   borderRadius: '50%',
   zIndex: 4,
   border: `2px solid ${theme.palette.common.white}`,
+  cursor: 'pointer',
   '& svg': {
     fill: theme.palette.common.white,
   },
