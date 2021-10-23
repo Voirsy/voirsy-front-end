@@ -1,14 +1,13 @@
-import { Avatar, Button, IconButton, Stack, TextField, Typography } from '@mui/material';
+import { Button, Stack, TextField, Typography } from '@mui/material';
 import { DesktopDatePicker } from '@mui/lab';
 import { Box } from '@mui/system';
 import InputMask from 'react-input-mask';
 import { useTranslation } from 'react-i18next';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { PhotoCamera } from '@mui/icons-material';
 import CancelButton from 'components/CancelButton';
-import { CustomInput, CustomUploadWrapper } from './editAccount.styles';
 import { editAccountSchema } from 'validation/profile';
+import ProfileAvatar from 'components/ProfileAvatar';
 
 interface EditAccountForm {
   fullname: string;
@@ -37,21 +36,7 @@ const EditAccount = () => {
       <Typography marginBottom={6} variant="h3" component="h1" textAlign="center">
         {translation('profile:edit.heading')}
       </Typography>
-      <Box margin="0 auto 80px" position="relative" width="fit-content">
-        <Avatar
-          alt="Alex Smith"
-          sx={{ margin: '0 auto', width: 216, height: 216 }}
-          src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
-        />
-        <CustomUploadWrapper>
-          <label htmlFor="icon-button-file">
-            <CustomInput accept="image/*" id="icon-button-file" type="file" />
-            <IconButton color="inherit" aria-label="upload picture" component="span" size="large">
-              <PhotoCamera />
-            </IconButton>
-          </label>
-        </CustomUploadWrapper>
-      </Box>
+      <ProfileAvatar url="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80" />
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={2.5}>
           <Controller
