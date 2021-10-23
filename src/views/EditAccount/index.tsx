@@ -6,21 +6,9 @@ import { useTranslation } from 'react-i18next';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { PhotoCamera } from '@mui/icons-material';
-import * as yup from 'yup';
 import CancelButton from 'components/CancelButton';
 import { CustomInput, CustomUploadWrapper } from './editAccount.styles';
-
-const schema = yup
-  .object({
-    fullname: yup.string().required('Field is required'),
-    email: yup.string().email('Must be an email format').required('Field is required'),
-    birthdate: yup.date().min('1900-01-01T00:00:00', 'Min date is 01-01-1900').nullable().typeError('Invalid date'),
-    phonenumber: yup
-      .string()
-      .required('Field is required')
-      .matches(/^[0-9]{3}-[0-9]{3}-[0-9]{3}$/, 'Invalid field value'),
-  })
-  .required();
+import { editAccountSchema } from 'validation/profile';
 
 interface EditAccountForm {
   fullname: string;
@@ -38,7 +26,7 @@ const EditAccount = () => {
       birthdate: '2014-08-18T00:00:00',
       phonenumber: '324-562-647',
     },
-    resolver: yupResolver(schema),
+    resolver: yupResolver(editAccountSchema),
     mode: 'onBlur',
   });
 
