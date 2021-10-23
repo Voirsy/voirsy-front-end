@@ -8,6 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import CancelButton from 'components/CancelButton';
 import { editAccountSchema } from 'validation/profile';
 import ProfileAvatar from 'components/ProfileAvatar';
+import { useEffect, useState } from 'react';
 
 interface EditAccountForm {
   fullname: string;
@@ -17,6 +18,8 @@ interface EditAccountForm {
 }
 
 const EditAccount = () => {
+  const [img, setImg] = useState('https://bit.ly/2Zbhp10');
+
   const [translation] = useTranslation();
   const { handleSubmit, control, setValue } = useForm<EditAccountForm>({
     defaultValues: {
@@ -29,6 +32,16 @@ const EditAccount = () => {
     mode: 'onBlur',
   });
 
+  const handleChangeImg = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      const url = reader.readAsDataURL(file);
+      console.log(URL.createObjectURL(e.target.files[0]));
+      setImg(URL.createObjectURL(e.target.files[0]));
+    }
+  };
+
   const onSubmit: SubmitHandler<EditAccountForm> = (data) => console.log(data);
 
   return (
@@ -36,7 +49,7 @@ const EditAccount = () => {
       <Typography marginBottom={6} variant="h3" component="h1" textAlign="center">
         {translation('profile:edit.heading')}
       </Typography>
-      <ProfileAvatar url="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80" />
+      <ProfileAvatar url={img} handleChangeImg={handleChangeImg} />
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={2.5}>
           <Controller
