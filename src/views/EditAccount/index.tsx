@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import CancelButton from 'components/CancelButton';
 import { editAccountSchema } from 'validation/profile';
 import ProfileAvatar from 'components/ProfileAvatar';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface EditAccountForm {
   fullname: string;
@@ -33,7 +33,7 @@ const EditAccount = () => {
   });
 
   const handleChangeImg = (file: any) => {
-    if (file && file[0].preview.url) {
+    if (file && file.length > 0 && file[0].preview.url) {
       setImg(file[0].preview.url);
 
       //preparation for send
