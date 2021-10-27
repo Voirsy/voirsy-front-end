@@ -6,6 +6,8 @@ import { User } from 'models/user.model';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory, useLocation } from 'react-router-dom';
+import { setUserData } from 'store/slices/userSlice';
+import { useAppDispatch } from 'store/store';
 import { CustomButton, CustomForm } from 'views/Login/loginForms.styles';
 
 type ServerResponse = {
@@ -23,6 +25,7 @@ const SignUpForm = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const location = useLocation();
   const history = useHistory();
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -46,6 +49,7 @@ const SignUpForm = () => {
     try {
       const result = await axios.post<ServerResponse>('http://localhost:8080/auth/signup', data);
       localStorage.setItem('JWT_TOKEN', result.data.token);
+      dispatch(setUserData(result.data.user));
       history.push('/');
     } catch (error: any) {
       console.log(error.response.data.error.message);
