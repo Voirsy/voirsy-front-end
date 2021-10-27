@@ -1,6 +1,7 @@
 import { VisibilityOffOutlined, VisibilityOutlined } from '@mui/icons-material';
 import { FormControl, FormControlLabel, FormLabel, IconButton, Radio, RadioGroup, TextField } from '@mui/material';
 import axios from 'axios';
+import { UserRole } from 'enums/userRole.enum';
 import { User } from 'models/user.model';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -123,15 +124,15 @@ const SignUpForm = () => {
       />
       <FormControl component="fieldset">
         <FormLabel component="legend">Account type</FormLabel>
-        <RadioGroup name="account-type" defaultValue="standard">
+        <RadioGroup name="account-type" defaultValue={UserRole.Standard}>
           <FormControlLabel
-            value="standard"
+            value={UserRole.Standard}
             control={<Radio />}
             label="Standard"
             {...register('role', { required: true })}
           />
           <FormControlLabel
-            value="business"
+            value={UserRole.Business}
             control={<Radio />}
             label="Business"
             {...register('role', { required: true })}
