@@ -9,6 +9,7 @@ import { CustomForm, CustomButton } from '../../loginForms.styles';
 import { setUserData } from 'store/slices/userSlice';
 import { User } from 'models/user.model';
 import { UserRole } from 'enums/userRole.enum';
+import { useTranslation } from 'react-i18next';
 
 type ServerResponse = {
   token: string;
@@ -27,6 +28,7 @@ const SignInForm = () => {
   const location = useLocation();
   const history = useHistory();
   const dispatch = useAppDispatch();
+  const [translation] = useTranslation();
 
   const {
     register,
@@ -61,20 +63,20 @@ const SignInForm = () => {
         variant="outlined"
         type="text"
         size="small"
-        label="Email"
+        label={translation('login:form.email.label')}
         margin="normal"
         {...register('email', {
           required: {
             value: true,
-            message: 'Field is required',
+            message: translation('login:form.email.validation.required'),
           },
           minLength: {
             value: 3,
-            message: 'Email should contains at least 3 characters',
+            message: translation('login:form.email.validation.minLength'),
           },
           pattern: {
             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: 'Invalid email address',
+            message: translation('login:form.email.validation.pattern'),
           },
         })}
         error={!!errors.email}
@@ -84,7 +86,7 @@ const SignInForm = () => {
         variant="outlined"
         type={isPasswordVisible ? 'text' : 'password'}
         size="small"
-        label="Password"
+        label={translation('login:form.password.label')}
         margin="normal"
         InputProps={{
           endAdornment: (
@@ -96,18 +98,18 @@ const SignInForm = () => {
         {...register('password', {
           required: {
             value: true,
-            message: 'Field is required',
+            message: translation('login:form.password.validation.required'),
           },
           minLength: {
             value: 8,
-            message: 'Password should contains at least 8 characters',
+            message: translation('login:form.password.validation.minLength'),
           },
         })}
         error={!!errors.password}
         helperText={!!errors.password && errors.password.message}
       />
       <CustomButton type="submit" variant="contained" disableElevation disabled={!isDirty || !isValid}>
-        Sign in
+        {translation('login:form.signInButton.label')}
       </CustomButton>
     </CustomForm>
   );

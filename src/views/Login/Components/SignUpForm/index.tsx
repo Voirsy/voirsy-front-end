@@ -5,6 +5,7 @@ import { UserRole } from 'enums/userRole.enum';
 import { User } from 'models/user.model';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useHistory, useLocation } from 'react-router-dom';
 import { setUserData } from 'store/slices/userSlice';
 import { useAppDispatch } from 'store/store';
@@ -26,6 +27,7 @@ const SignUpForm = () => {
   const location = useLocation();
   const history = useHistory();
   const dispatch = useAppDispatch();
+  const [translation] = useTranslation();
 
   const {
     register,
@@ -81,20 +83,20 @@ const SignUpForm = () => {
         variant="outlined"
         type="text"
         size="small"
-        label="Email"
+        label={translation('login:form.email.label')}
         margin="normal"
         {...register('email', {
           required: {
             value: true,
-            message: 'Field is required',
+            message: translation('login:form.email.validation.required'),
           },
           minLength: {
             value: 3,
-            message: 'Email should contains at least 3 characters',
+            message: translation('login:form.email.validation.minLength'),
           },
           pattern: {
             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: 'Invalid email address',
+            message: translation('login:form.email.validation.pattern'),
           },
         })}
         error={!!errors.email}
@@ -104,7 +106,7 @@ const SignUpForm = () => {
         variant="outlined"
         type={isPasswordVisible ? 'text' : 'password'}
         size="small"
-        label="Password"
+        label={translation('login:form.password.label')}
         margin="normal"
         InputProps={{
           endAdornment: (
@@ -116,11 +118,11 @@ const SignUpForm = () => {
         {...register('password', {
           required: {
             value: true,
-            message: 'Field is required',
+            message: translation('login:form.password.validation.required'),
           },
           minLength: {
             value: 8,
-            message: 'Password should contains at least 8 characters',
+            message: translation('login:form.password.validation.minLength'),
           },
         })}
         error={!!errors.password}
@@ -144,7 +146,7 @@ const SignUpForm = () => {
         </RadioGroup>
       </FormControl>
       <CustomButton type="submit" variant="contained" disableElevation disabled={!isDirty || !isValid}>
-        Create account
+        {translation('login:form.signInButton.label')}
       </CustomButton>
     </CustomForm>
   );
