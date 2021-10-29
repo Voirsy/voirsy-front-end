@@ -5,18 +5,11 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootState } from 'store/store';
 import { CustomToolbar, CustomButton } from './header.styles';
+import { isAuth } from 'helpers/auth';
 
 const Header = () => {
   const [translation] = useTranslation();
   const fullname = useSelector((state: RootState) => state.user?.fullname);
-
-  const [userFullname, setUserFullname] = useState(fullname);
-
-  useEffect(() => {
-    setUserFullname(fullname);
-  }, [fullname]);
-
-  const isAuth = (): boolean => (!!localStorage.getItem('JWT_TOKEN') ? true : false);
 
   return (
     <AppBar color="transparent" elevation={0} position="static">
@@ -25,7 +18,7 @@ const Header = () => {
           {translation('header:title')}
         </Typography>
         {isAuth() ? (
-          userFullname
+          fullname
         ) : (
           <Link to="/login">
             <CustomButton variant="contained" color="primary" disableElevation>
