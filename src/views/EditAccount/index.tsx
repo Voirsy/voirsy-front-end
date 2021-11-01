@@ -1,12 +1,10 @@
 import { Button, Stack, TextField, Typography } from '@mui/material';
-import { DesktopDatePicker } from '@mui/lab';
+import { MobileDatePicker } from '@mui/lab';
 import { Box } from '@mui/system';
 import InputMask from 'react-input-mask';
 import { useTranslation } from 'react-i18next';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import CancelButton from 'components/CancelButton';
-import { editAccountSchema } from 'validation/profile';
 import ProfileAvatar from 'components/ProfileAvatar';
 import { useState } from 'react';
 
@@ -19,16 +17,20 @@ interface EditAccountForm {
 
 const EditAccount = () => {
   const [img, setImg] = useState('https://bit.ly/2Zbhp10');
-
   const [translation] = useTranslation();
-  const { handleSubmit, control, setValue } = useForm<EditAccountForm>({
+  const {
+    handleSubmit,
+    control,
+    setValue,
+    register,
+    formState: { errors },
+  } = useForm<EditAccountForm>({
     defaultValues: {
       fullname: 'Alex Smith',
       email: 'alex@gmail.com',
       birthdate: '2014-08-18T00:00:00',
       phonenumber: '324-562-647',
     },
-    resolver: yupResolver(editAccountSchema),
     mode: 'onBlur',
   });
 
@@ -53,47 +55,51 @@ const EditAccount = () => {
       <ProfileAvatar url={img} handleChangeImg={handleChangeImg} />
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={2.5}>
-          <Controller
-            name="fullname"
-            control={control}
-            render={({ field, fieldState: { error } }) => (
-              <TextField
-                {...field}
-                fullWidth
-                label={translation('profile:edit.input.fullname')}
-                error={!!error}
-                helperText={error?.message}
-              />
-            )}
+          <TextField
+            variant="outlined"
+            type="text"
+            label={translation('profile:edit.input.email')}
+            {...register('fullname', {
+              required: translation('validation:common.required') as string,
+            })}
+            error={!!errors.fullname}
+            helperText={!!errors.fullname && errors.fullname.message}
           />
-          <Controller
-            name="email"
-            control={control}
-            render={({ field, fieldState: { error } }) => (
-              <TextField
-                {...field}
-                fullWidth
-                label={translation('profile:edit.input.email')}
-                type="email"
-                error={!!error}
-                helperText={error?.message}
-              />
-            )}
+          <TextField
+            variant="outlined"
+            type="text"
+            label={translation('profile:edit.input.email')}
+            {...register('email', {
+              required: translation('validation:common.required') as string,
+              minLength: {
+                value: 3,
+                message: translation('validation:common.minLength', { min: '3' }),
+              },
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: translation('validation:common.invalidFormat', { format: 'email' }),
+              },
+            })}
+            error={!!errors.email}
+            helperText={!!errors.email && errors.email.message}
           />
           <Controller
             name="birthdate"
             control={control}
+            rules={{
+              required: translation('validation:common.required') as string,
+            }}
             render={({ field, fieldState: { error } }) => (
-              <DesktopDatePicker
+              <MobileDatePicker
                 inputFormat="dd-MM-yyyy"
                 mask="__-__-____"
                 label={translation('profile:edit.input.birthdate')}
-                onChange={(date) =>
+                onChange={(date: Date | null) =>
                   setValue('birthdate', date?.toString() || '', { shouldValidate: true, shouldDirty: true })
                 }
                 value={field.value}
                 maxDate={new Date()}
-                minDate={new Date('1900-01-01T00:00:00')}
+                minDate={new Date('1900-01-01')}
                 renderInput={(params) => (
                   <TextField {...params} {...field} error={!!error} helperText={error?.message} fullWidth />
                 )}
@@ -103,6 +109,13 @@ const EditAccount = () => {
           <Controller
             name="phonenumber"
             control={control}
+            rules={{
+              required: translation('validation:common.required') as string,
+              pattern: {
+                value: /^[0-9]{3}-[0-9]{3}-[0-9]{3}$/,
+                message: translation('validation:common.invalidFormat', { format: 'phone number' }),
+              },
+            }}
             render={({ field, fieldState: { error } }) => (
               <InputMask {...{ ...field, error: error }} mask="999-999-999">
                 {(inputProps: any) => (

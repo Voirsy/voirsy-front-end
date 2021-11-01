@@ -4,13 +4,24 @@ import { useTranslation } from 'react-i18next';
 import PasswordTextfield from 'components/PasswordTextfield';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import CancelButton from 'components/CancelButton';
-import { changePasswordSchema } from 'validation/profile';
 
 interface ChangePasswordForm {
   currentPassword: string;
   newPassword: string;
 }
+
+const changePasswordSchema = yup
+  .object({
+    currentPassword: yup.string().min(8, 'Must be minimum ${min} characters').required('Field is required'),
+    newPassword: yup
+      .string()
+      .min(8, 'Must be minimum ${min} characters')
+      .required('Field is required')
+      .notOneOf([yup.ref('currentPassword'), null], 'Passwords must be different'),
+  })
+  .required();
 
 const ChangePassword = () => {
   const [translation] = useTranslation();
@@ -30,7 +41,6 @@ const ChangePassword = () => {
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={2.5}>
           <Controller
-            rules={{ required: true }}
             name="currentPassword"
             control={control}
             render={({ field, fieldState: { error } }) => (
@@ -42,7 +52,6 @@ const ChangePassword = () => {
             )}
           />
           <Controller
-            rules={{ required: true }}
             name="newPassword"
             control={control}
             render={({ field, fieldState: { error } }) => (

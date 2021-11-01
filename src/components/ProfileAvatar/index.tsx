@@ -8,13 +8,14 @@ import { CustomDropzoneContainer, CustomUploadWrapper } from './profileAvatar.st
 
 const ProfileAvatar = ({ url, handleChangeImg }: { url: string; handleChangeImg: (e: any) => void }) => {
   const { enqueueSnackbar } = useSnackbar();
-  const [t] = useTranslation();
+  const [translation] = useTranslation();
 
+  // error codes come from react-files documentation: https://github.com/mother/react-files#props
   const onError = ({ code }: { code: number; message: string }) => {
-    if (code === 1) enqueueSnackbar(t('profile:edit.file.errors.invalid'), { variant: 'error' });
-    if (code === 2) enqueueSnackbar(t('profile:edit.file.errors.tooLarge'), { variant: 'error' });
-    if (code === 3) enqueueSnackbar(t('profile:edit.file.errors.tooSmall'), { variant: 'error' });
-    if (code === 4) enqueueSnackbar(t('profile:edit.file.errors.fileReached'), { variant: 'error' });
+    if (code === 1) enqueueSnackbar(translation('validation:file.invalid'), { variant: 'error' });
+    if (code === 2) enqueueSnackbar(translation('validation:file.tooLarge'), { variant: 'error' });
+    if (code === 3) enqueueSnackbar(translation('validation:file.tooSmall'), { variant: 'error' });
+    if (code === 4) enqueueSnackbar(translation('validation:file.fileReached'), { variant: 'error' });
   };
 
   return (
@@ -37,7 +38,12 @@ const ProfileAvatar = ({ url, handleChangeImg }: { url: string; handleChangeImg:
               onChange={handleChangeImg}
               onError={onError}
             >
-              <IconButton color="inherit" aria-label={t('profile:edit.file.uploadAria')} component="span" size="large">
+              <IconButton
+                color="inherit"
+                aria-label={translation('profile:edit.form.file.uploadAria')}
+                component="span"
+                size="large"
+              >
                 <PhotoCamera />
               </IconButton>
             </Files>

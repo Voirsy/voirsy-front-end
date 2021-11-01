@@ -26,18 +26,16 @@
       "birthdate": "Birthdate",
       "phonenumber": "Phonenumber"
     },
+    "form": {
+      "fullname": "Fullname",
+      "email": "Email",
+      "birthdate": "Birthdate",
+      "phonenumber": "Phonenumber",
+      "file": "Upload picture"
+    },
     "action": {
       "cancel": "Cancel",
       "save": "Save"
-    },
-    "file": {
-      "uploadAria": "upload picture",
-      "errors": {
-        "invalid": "Invalid file type.",
-        "tooLarge": "Image is too large. 2MB maximum.",
-        "tooSmall": "Image is too small.",
-        "fileReached": "Maximum file count reached."
-      }
     }
   }
 }
