@@ -5,21 +5,15 @@ import Home from 'views/Home';
 import ChangePassword from 'views/ChangePassword';
 import EditAccount from 'views/EditAccount';
 import MainTemplate from 'templates/Main';
+import Login from 'views/Login';
 
 const Root = () => (
   <Router>
     <MainTemplate>
       <Switch>
         <Route path="/login">
-          <p>Login</p>
+          <Login />
         </Route>
-        <Route path="/signin">
-          <p>Sign in</p>
-        </Route>
-        <Route path="/signup">
-          <p>Sign up</p>
-        </Route>
-
         <Route
           path="/profile"
           render={({ match: { url } }) => (
