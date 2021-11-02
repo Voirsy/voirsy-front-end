@@ -31,7 +31,7 @@ const EditAccount = () => {
       birthdate: '2014-08-18T00:00:00',
       phonenumber: '324-562-647',
     },
-    mode: 'onBlur',
+    mode: 'all',
   });
 
   const handleChangeImg = (file: any) => {
@@ -58,7 +58,7 @@ const EditAccount = () => {
           <TextField
             variant="outlined"
             type="text"
-            label={translation('profile:edit.input.email')}
+            label={translation('profile:edit.input.fullname')}
             {...register('fullname', {
               required: translation('validation:common.required') as string,
             })}
@@ -67,7 +67,7 @@ const EditAccount = () => {
           />
           <TextField
             variant="outlined"
-            type="text"
+            type="email"
             label={translation('profile:edit.input.email')}
             {...register('email', {
               required: translation('validation:common.required') as string,
