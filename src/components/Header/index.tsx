@@ -54,25 +54,6 @@ const Header = () => {
       )}
     </>
   );
-
-  // return (
-  //   <AppBar color="transparent" elevation={0} position="static">
-  //     <CustomToolbar>
-  //       <Typography variant="h4" component="h1">
-  //         {translation('header:title')}
-  //       </Typography>
-  //       {isAuth() ? (
-  //         fullname
-  //       ) : (
-  //         <Link to="/login">
-  //           <CustomButton variant="contained" color="primary" disableElevation>
-  //             {translation('header:button.signin')}
-  //           </CustomButton>
-  //         </Link>
-  //       )}
-  //     </CustomToolbar>
-  //   </AppBar>
-  // );
 };
 
 export default Header;
