@@ -1,10 +1,10 @@
 import { PhotoCamera } from '@mui/icons-material';
-import { Avatar, IconButton } from '@mui/material';
+import { IconButton } from '@mui/material';
 import { Box } from '@mui/system';
 import { useSnackbar } from 'notistack';
 import Files from 'react-files';
 import { useTranslation } from 'react-i18next';
-import { CustomDropzoneContainer, CustomUploadWrapper } from './profileAvatar.styles';
+import { CustomAvatar, CustomDropzoneContainer, CustomUploadWrapper } from './profileAvatar.styles';
 
 const ProfileAvatar = ({ url, handleChangeImg }: { url: string; handleChangeImg: (e: any) => void }) => {
   const { enqueueSnackbar } = useSnackbar();
@@ -29,7 +29,7 @@ const ProfileAvatar = ({ url, handleChangeImg }: { url: string; handleChangeImg:
         onError={onError}
       >
         <Box position="relative" width="fit-content">
-          <Avatar alt="Alex Smith" sx={{ width: 216, height: 216 }} src={url} />
+          <CustomAvatar alt="Avatar image" src={url} />
           <CustomUploadWrapper>
             <Files
               accepts={['image/*']}

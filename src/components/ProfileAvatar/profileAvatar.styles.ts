@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Avatar } from '@mui/material';
 import { styled } from '@mui/system';
 
 export const CustomDropzoneContainer = styled('div')(({ theme }) => ({
@@ -27,6 +28,11 @@ export const CustomDropzoneContainer = styled('div')(({ theme }) => ({
     color: theme.palette.common.white,
     backgroundColor: theme.palette.text.disabled,
   },
+}));
+
+export const CustomAvatar = styled(Avatar)(() => ({
+  width: 216,
+  height: 216,
 }));
 
 export const CustomInput = styled('input')(() => ({
