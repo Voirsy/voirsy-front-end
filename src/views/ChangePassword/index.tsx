@@ -3,33 +3,24 @@ import { Box } from '@mui/system';
 import { useTranslation } from 'react-i18next';
 import PasswordTextfield from 'components/PasswordTextfield';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import CancelButton from 'components/CancelButton';
+import { useRef } from 'react';
 
 interface ChangePasswordForm {
   currentPassword: string;
   newPassword: string;
 }
 
-const changePasswordSchema = yup
-  .object({
-    currentPassword: yup.string().min(8, 'Must be minimum ${min} characters').required('Field is required'),
-    newPassword: yup
-      .string()
-      .min(8, 'Must be minimum ${min} characters')
-      .required('Field is required')
-      .notOneOf([yup.ref('currentPassword'), null], 'Passwords must be different'),
-  })
-  .required();
-
 const ChangePassword = () => {
+  const [t] = useTranslation();
   const [translation] = useTranslation();
-  const { handleSubmit, control } = useForm<ChangePasswordForm>({
+  const { handleSubmit, control, watch } = useForm<ChangePasswordForm>({
     defaultValues: { currentPassword: '', newPassword: '' },
-    resolver: yupResolver(changePasswordSchema),
-    mode: 'onBlur',
+    mode: 'all',
   });
+
+  const currentPassword = useRef({});
+  currentPassword.current = watch('currentPassword', '');
 
   const onSubmit: SubmitHandler<ChangePasswordForm> = (data) => console.log(data);
 
@@ -43,6 +34,13 @@ const ChangePassword = () => {
           <Controller
             name="currentPassword"
             control={control}
+            rules={{
+              required: t('validation:common.required') as string,
+              minLength: {
+                value: 8,
+                message: t('validation:common.minLength', { min: 8 }),
+              },
+            }}
             render={({ field, fieldState: { error } }) => (
               <PasswordTextfield
                 label={translation('profile:password.input.currentPassword')}
@@ -54,6 +52,14 @@ const ChangePassword = () => {
           <Controller
             name="newPassword"
             control={control}
+            rules={{
+              required: t('validation:common.required') as string,
+              validate: (value) => value !== currentPassword.current || (t('validation:password.cantMatch') as string),
+              minLength: {
+                value: 8,
+                message: t('validation:common.minLength', { min: 8 }),
+              },
+            }}
             render={({ field, fieldState: { error } }) => (
               <PasswordTextfield label={translation('profile:password.input.newPassword')} error={error} {...field} />
             )}

@@ -1,4 +1,7 @@
 {
+  "password": {
+    "cantMatch": "Passwords must be different"
+  },
   "common": {
     "required": "Field is required",
     "minLength": "Must be minimum {{min}} characters",
