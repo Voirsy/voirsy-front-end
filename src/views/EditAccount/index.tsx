@@ -49,7 +49,7 @@ const EditAccount = () => {
 
   return (
     <Box component="main" maxWidth={400} margin="0 auto" padding={2}>
-      <Typography marginBottom={6} variant="h3" component="h1" textAlign="center">
+      <Typography marginBottom={6} variant="h4" component="h1" textAlign="center">
         {translation('profile:edit.heading')}
       </Typography>
       <ProfileAvatar url={img} handleChangeImg={handleChangeImg} />
@@ -58,6 +58,7 @@ const EditAccount = () => {
           <TextField
             variant="outlined"
             type="text"
+            size="small"
             label={translation('profile:edit.input.fullname')}
             {...register('fullname', {
               required: translation('validation:common.required') as string,
@@ -68,6 +69,7 @@ const EditAccount = () => {
           <TextField
             variant="outlined"
             type="email"
+            size="small"
             label={translation('profile:edit.input.email')}
             {...register('email', {
               required: translation('validation:common.required') as string,
@@ -101,7 +103,14 @@ const EditAccount = () => {
                 maxDate={new Date()}
                 minDate={new Date('1900-01-01')}
                 renderInput={(params) => (
-                  <TextField {...params} {...field} error={!!error} helperText={error?.message} fullWidth />
+                  <TextField
+                    {...params}
+                    {...field}
+                    error={!!error}
+                    helperText={error?.message}
+                    fullWidth
+                    size="small"
+                  />
                 )}
               />
             )}
@@ -124,6 +133,7 @@ const EditAccount = () => {
                     fullWidth
                     label={translation('profile:edit.input.phonenumber')}
                     type="tel"
+                    size="small"
                     error={!!inputProps.error}
                     helperText={inputProps.error?.message}
                   />

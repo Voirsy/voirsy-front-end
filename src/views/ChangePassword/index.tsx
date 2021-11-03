@@ -26,7 +26,7 @@ const ChangePassword = () => {
 
   return (
     <Box component="main" maxWidth={400} margin="0 auto" padding={2}>
-      <Typography marginBottom={6} variant="h3" component="h1" textAlign="center">
+      <Typography marginBottom={6} variant="h4" component="h1" textAlign="center">
         {translation('profile:password.heading')}
       </Typography>
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>

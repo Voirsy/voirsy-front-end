@@ -28,6 +28,7 @@ const PasswordTextfield = forwardRef<HTMLInputElement, { label: string; error: F
         margin="dense"
         error={!!error}
         helperText={error?.message}
+        size="small"
       />
     );
   }

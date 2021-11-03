@@ -8,10 +8,10 @@ const DeleteAccount = () => {
 
   return (
     <Box component="main" maxWidth={400} margin="0 auto" padding={2}>
-      <Typography marginBottom={6} variant="h3" component="h1" textAlign="center">
+      <Typography marginBottom={6} variant="h4" component="h1" textAlign="center">
         {translation('profile:delete.heading')}
       </Typography>
-      <Typography marginBottom={10} textAlign="center" fontSize="1.35rem">
+      <Typography marginBottom={10} textAlign="center" fontSize="1.25rem">
         <Trans defaults={translation('profile:delete.content')} components={[<strong key="delete" />]} />
       </Typography>
       <Stack direction="row" spacing={2.5}>
