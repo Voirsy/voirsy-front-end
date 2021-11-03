@@ -18,26 +18,19 @@ export const CustomDrawer = styled(Drawer)(({ theme }) => ({
 }));
 
 export const CustomList = styled(List)(({ theme }) => ({
-  [theme.breakpoints.up('md')]: {
-    paddingTop: 70,
-  },
-
   '& > a': {
     color: theme.palette.text.primary,
     [theme.breakpoints.up('md')]: {
       width: '100%',
       padding: '8px 40px',
-      '&:not(:last-of-type)': {
-        marginBottom: 10,
-      },
     },
   },
 
   '& > .selected': {
     color: theme.palette.primary.main,
-  },
 
-  '& > .selected svg': {
-    fill: theme.palette.primary.main,
+    '& svg': {
+      fill: theme.palette.primary.main,
+    },
   },
 }));

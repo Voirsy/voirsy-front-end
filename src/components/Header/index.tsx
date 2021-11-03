@@ -1,5 +1,5 @@
 import { MenuOutlined } from '@mui/icons-material';
-import { AppBar, IconButton, Theme, Typography, useMediaQuery } from '@mui/material';
+import { IconButton, Theme, Typography, useMediaQuery } from '@mui/material';
 import ProfileNavigation from 'components/ProfileNavigation';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootState } from 'store/store';
-import { CustomToolbar, CustomButton } from './header.styles';
+import { CustomToolbar, CustomButton, CustomAppBar } from './header.styles';
 import { isAuth } from 'helpers/auth';
 
 const Header = () => {
@@ -19,12 +19,7 @@ const Header = () => {
 
   return (
     <>
-      <AppBar
-        color="transparent"
-        elevation={0}
-        position="relative"
-        sx={{ zIndex: (theme) => ({ md: theme.zIndex.drawer + 1, sm: 1 }) }}
-      >
+      <CustomAppBar color="transparent" elevation={0} position="relative">
         <CustomToolbar>
           <Typography variant="h4" component="h1">
             {translation('header:title')}
@@ -48,7 +43,7 @@ const Header = () => {
             )}
           </div>
         </CustomToolbar>
-      </AppBar>
+      </CustomAppBar>
       {pathname.startsWith('/profile') && (
         <ProfileNavigation handleClose={() => setIsMenuOpen(false)} isMenuOpen={isMenuOpen} />
       )}
