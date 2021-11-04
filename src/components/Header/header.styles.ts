@@ -3,10 +3,10 @@ import { AppBar, Button, Toolbar } from '@mui/material';
 
 export const CustomAppBar = styled(AppBar)(({ theme }) => ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  zIndex: (theme.zIndex as any).drawer,
+  zIndex: 1,
 
   [theme.breakpoints.up('md')]: {
-    zIndex: 1,
+    zIndex: (theme.zIndex as any).drawer + 1,
   },
 }));
 
