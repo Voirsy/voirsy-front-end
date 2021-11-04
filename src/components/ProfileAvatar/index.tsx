@@ -12,10 +12,7 @@ const ProfileAvatar = ({ url, handleChangeImg }: { url: string; handleChangeImg:
 
   // error codes come from react-files documentation: https://github.com/mother/react-files#props
   const onError = ({ code }: { code: number; message: string }) => {
-    if (code === 1) enqueueSnackbar(translation('validation:file.invalid'), { variant: 'error' });
-    if (code === 2) enqueueSnackbar(translation('validation:file.tooLarge'), { variant: 'error' });
-    if (code === 3) enqueueSnackbar(translation('validation:file.tooSmall'), { variant: 'error' });
-    if (code === 4) enqueueSnackbar(translation('validation:file.fileReached'), { variant: 'error' });
+    enqueueSnackbar(translation(`validation:file.errors.${code - 1}`), { variant: 'error' });
   };
 
   return (

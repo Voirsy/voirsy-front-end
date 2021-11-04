@@ -8,9 +8,11 @@
     "invalidFormat": "Invalid {{format}} format"
   },
   "file": {
-    "invalid": "Invalid file type.",
-    "tooLarge": "Image is too large. 2MB maximum.",
-    "tooSmall": "Image is too small.",
-    "fileReached": "Maximum file count reached."
+    "errors": [
+      "Invalid file type.",
+      "Image is too large. 2MB maximum.",
+      "Image is too small.",
+      "Maximum file count reached."
+    ]
   }
 }
