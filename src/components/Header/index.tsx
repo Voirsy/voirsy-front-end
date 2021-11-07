@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { RootState } from 'store/store';
 import { CustomToolbar, CustomButton, CustomAppBar } from './header.styles';
 import { isAuth } from 'helpers/auth';
+import AdminPanelNavigation from 'components/AdminPanelNavigation';
 
 const Header = () => {
   const hidden = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'));
@@ -28,11 +29,16 @@ const Header = () => {
             {isAuth() ? (
               <>
                 {fullname}
-                {pathname.startsWith('/profile') && !hidden ? (
+                {(pathname.startsWith('/profile') || pathname.startsWith('/salons')) && !hidden ? (
                   <IconButton onClick={() => setIsMenuOpen(true)}>
                     <MenuOutlined />
                   </IconButton>
-                ) : null}
+                ) : (
+                  <>
+                    <Link to="/salons">S</Link>
+                    <Link to="/profile/edit">P</Link>
+                  </>
+                )}
               </>
             ) : (
               <Link to="/login">
@@ -44,8 +50,11 @@ const Header = () => {
           </div>
         </CustomToolbar>
       </CustomAppBar>
-      {pathname.startsWith('/profile') && (
+      {isAuth() && pathname.startsWith('/profile') && (
         <ProfileNavigation handleClose={() => setIsMenuOpen(false)} isMenuOpen={isMenuOpen} />
+      )}
+      {isAuth() && pathname.startsWith('/salons') && (
+        <AdminPanelNavigation handleClose={() => setIsMenuOpen(false)} isMenuOpen={isMenuOpen} />
       )}
     </>
   );
