@@ -1,0 +1,22 @@
+{
+  "salons": [
+    {
+      "name": "Barber Shop Warszawa",
+      "address": "Złota 73, 00-819, Warszawa, Wola",
+      "phone": "893780321",
+      "description": "Barber Shop Warszawa - profesjonalny salon strzyżenia i stylizacji męskiego zarostu i fryzur. Wyjątkowa atmosfera, wykwalifikowani barberzy i jakość na najwyższym poziomie. Prowadzimy także sprzedaż kosmetyków i akcesoriów do pielęgnacji i stylizacji męskiego zarostu i włosów."
+    },
+    {
+      "name": "Black Cat Beauty & Spa Praga Północ",
+      "address": "Targowa 59 lok. 1, 03-729, Warszawa, Praga-Północ",
+      "phone": "394681397",
+      "description": "Black Cat Beauty & Spa Praga Północ - profesjonalny salon strzyżenia i stylizacji męskiego zarostu i fryzur."
+    },
+    {
+      "name": "Dream Style",
+      "address": "Krzycka 35, 53-019, Wrocław, Krzyki",
+      "phone": "828497138",
+      "description": "Barber Shop Warszawa - profesjonalny salon strzyżenia i stylizacji męskiego zarostu i fryzur."
+    }
+  ]
+}

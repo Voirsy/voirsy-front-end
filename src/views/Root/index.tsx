@@ -6,6 +6,7 @@ import ChangePassword from 'views/ChangePassword';
 import EditAccount from 'views/EditAccount';
 import MainTemplate from 'templates/Main';
 import Login from 'views/Login';
+import SalonsTemplate from 'templates/Salons';
 
 const Root = () => (
   <Router>
@@ -42,23 +43,25 @@ const Root = () => (
           render={({ match: { url } }) => (
             <>
               <Header />
-              <Switch>
-                <Route path={`${url}/:salonId/schedule`}>
-                  <p>Schedule</p>
-                </Route>
-                <Route path={`${url}/:salonId/portfolio`}>
-                  <p>Portfolio</p>
-                </Route>
-                <Route path={`${url}/add/:step`}>
-                  <p>Add salon</p>
-                </Route>
-                <Route path={`${url}/:salonId/edit`}>
-                  <p>Edit</p>
-                </Route>
-                <Route path="*">
-                  <p>All salons</p>
-                </Route>
-              </Switch>
+              <SalonsTemplate>
+                <Switch>
+                  <Route path={`${url}/:salonId/schedule`}>
+                    <p>Schedule</p>
+                  </Route>
+                  <Route path={`${url}/:salonId/portfolio`}>
+                    <p>Portfolio</p>
+                  </Route>
+                  <Route path={`${url}/add/:step`}>
+                    <p>Add salon</p>
+                  </Route>
+                  <Route path={`${url}/:salonId/edit`}>
+                    <p>Edit</p>
+                  </Route>
+                  <Route path="*">
+                    <p>All salons</p>
+                  </Route>
+                </Switch>
+              </SalonsTemplate>
             </>
           )}
         />
