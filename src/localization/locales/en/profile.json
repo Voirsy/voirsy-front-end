@@ -1,0 +1,41 @@
+{
+  "delete": {
+    "heading": "Delete account",
+    "content": "Are you sure to <0>delete</0> account? This process is irreversible.",
+    "action": {
+      "cancel": "Cancel",
+      "delete": "Delete"
+    }
+  },
+  "password": {
+    "heading": "Change password",
+    "input": {
+      "currentPassword": "Current password",
+      "newPassword": "New password"
+    },
+    "action": {
+      "cancel": "Cancel",
+      "save": "Save"
+    }
+  },
+  "edit": {
+    "heading": "Edit profile",
+    "input": {
+      "fullname": "Fullname",
+      "email": "Email",
+      "birthdate": "Birthdate",
+      "phonenumber": "Phonenumber"
+    },
+    "form": {
+      "fullname": "Fullname",
+      "email": "Email",
+      "birthdate": "Birthdate",
+      "phonenumber": "Phonenumber",
+      "file": "Upload picture"
+    },
+    "action": {
+      "cancel": "Cancel",
+      "save": "Save"
+    }
+  }
+}
