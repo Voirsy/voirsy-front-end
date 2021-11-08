@@ -44,22 +44,26 @@ const Root = () => (
           render={({ match: { url } }) => (
             <>
               <Header />
-              <SalonsTemplate>
-                <Switch>
-                  <Route path={`${url}/:salonId/schedule`}>
+              <Switch>
+                <Route path={`${url}/:salonId/schedule`}>
+                  <SalonsTemplate>
                     <p>Schedule</p>
-                  </Route>
-                  <Route path={`${url}/:salonId/portfolio`}>
+                  </SalonsTemplate>
+                </Route>
+                <Route path={`${url}/:salonId/portfolio`}>
+                  <SalonsTemplate>
                     <p>Portfolio</p>
-                  </Route>
-                  <Route path={`${url}/add/:step`}>
-                    <p>Add salon</p>
-                  </Route>
-                  <Route path={`${url}/:salonId/edit`}>
+                  </SalonsTemplate>
+                </Route>
+                <Route path={`${url}/add/:step`}>
+                  <p>Add salon</p>
+                </Route>
+                <Route path={`${url}/:salonId/edit`}>
+                  <SalonsTemplate>
                     <Edit />
-                  </Route>
-                </Switch>
-              </SalonsTemplate>
+                  </SalonsTemplate>
+                </Route>
+              </Switch>
             </>
           )}
         />

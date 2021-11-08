@@ -1,10 +1,12 @@
 import { Tab, Tabs, useMediaQuery } from '@mui/material';
 import { Box } from '@mui/system';
 import { useTranslation } from 'react-i18next';
-import { useRouteMatch, Link } from 'react-router-dom';
+import { useRouteMatch, Link, useParams } from 'react-router-dom';
+import theme from 'theme';
 
 const NavTabs = () => {
-  const matches = useMediaQuery('(max-width:400px)');
+  const { salonId } = useParams<{ salonId: string }>();
+  const matches = useMediaQuery(theme.breakpoints.down('md'));
   const routeMatch = useRouteMatch([
     '/salons/:salonId/schedule',
     '/salons/:salonId/portfolio',
@@ -24,19 +26,19 @@ const NavTabs = () => {
           component={Link}
           label={translation('admin:salonTemplate.nav.edit')}
           value="/salons/:salonId/edit"
-          to="/salons/540d638c-44b1-4aa7-a4b3-289decfa2968/edit"
+          to={`/salons/${salonId}/edit`}
         />
         <Tab
           component={Link}
           label={translation('admin:salonTemplate.nav.schedule')}
           value="/salons/:salonId/schedule"
-          to="/salons/540d638c-44b1-4aa7-a4b3-289decfa2968/schedule"
+          to={`/salons/${salonId}/schedule`}
         />
         <Tab
           component={Link}
           label={translation('admin:salonTemplate.nav.portfolio')}
           value="/salons/:salonId/portfolio"
-          to="/salons/540d638c-44b1-4aa7-a4b3-289decfa2968/portfolio"
+          to={`/salons/${salonId}/portfolio`}
         />
       </Tabs>
     </Box>

@@ -2,8 +2,6 @@
 import { Box, styled } from '@mui/system';
 import theme from 'theme';
 
-console.log(theme.mixins.toolbar['@media (min-width:600px)']);
-
 export const CustomBox = styled(Box)(() => ({
   display: 'flex',
   alignItems: 'center',
