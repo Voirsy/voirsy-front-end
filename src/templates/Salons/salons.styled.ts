@@ -20,3 +20,10 @@ export const CustomBox = styled(Box)(() => ({
     }px)`,
   },
 }));
+
+export const CustomEditHeader = styled(Box)(() => ({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  marginBottom: theme.spacing(2),
+}));

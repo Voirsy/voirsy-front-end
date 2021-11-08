@@ -1,5 +1,16 @@
 {
   "salonTemplate": {
-    "error": "Unknown error occured"
+    "error": "Unknown error occured",
+    "heading": {
+      "salonName": "Salon name",
+      "mySalons": "My salons"
+    },
+    "deleteSalon": "Delete salon",
+    "nav": {
+      "edit": "Edit",
+      "schedule": "Schedule",
+      "portfolio": "Portfolio",
+      "aria": "admin panel navigation"
+    }
   }
 }

@@ -6,8 +6,10 @@ import { useLocation } from 'react-router-dom';
 import { useFetchAllSalonsQuery } from 'store/api/admin';
 import { CustomCard, CustomDrawer, CustomToolbar } from './adminPanelNavigation.styled';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const AdminPanelNavigation = ({ isMenuOpen, handleClose }: { isMenuOpen: boolean; handleClose: () => void }) => {
+  const [translation] = useTranslation();
   const location = useLocation();
   const { data = [] } = useFetchAllSalonsQuery();
 
@@ -22,7 +24,7 @@ const AdminPanelNavigation = ({ isMenuOpen, handleClose }: { isMenuOpen: boolean
       </CustomToolbar>
       <Box p={2}>
         <Stack spacing={2.5}>
-          <Typography variant="h5">My salons</Typography>
+          <Typography variant="h5">{translation('admin:salonTemplate.heading.salonName')}</Typography>
           {data.length > 0 &&
             data.map(({ _id, name, address }) => (
               <CustomCard key={_id}>
