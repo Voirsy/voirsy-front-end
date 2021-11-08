@@ -7,6 +7,7 @@ import EditAccount from 'views/EditAccount';
 import MainTemplate from 'templates/Main';
 import Login from 'views/Login';
 import SalonsTemplate from 'templates/Salons';
+import Edit from 'views/Admin/Edit';
 
 const Root = () => (
   <Router>
@@ -55,10 +56,7 @@ const Root = () => (
                     <p>Add salon</p>
                   </Route>
                   <Route path={`${url}/:salonId/edit`}>
-                    <p>Edit</p>
-                  </Route>
-                  <Route path="*">
-                    <p>All salons</p>
+                    <Edit />
                   </Route>
                 </Switch>
               </SalonsTemplate>
