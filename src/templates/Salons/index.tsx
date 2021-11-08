@@ -1,30 +1,18 @@
-import { Button, Tab, Tabs, Typography, useMediaQuery } from '@mui/material';
+import { Button, CardActionArea, CardContent, Stack, Typography } from '@mui/material';
 import Spinner from 'components/Spinner';
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useFetchAllSalonsQuery } from 'store/api/admin';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Box } from '@mui/system';
-import { CustomEditHeader } from './salons.styled';
-
-interface LinkTabProps {
-  label: string;
-  to: string;
-  value: string;
-}
-
-const LinkTab = (props: LinkTabProps) => <Tab component={Link} {...props} />;
+import { CustomEditHeader, CustomSalonsNavigation } from './salons.styled';
+import { CustomCard } from 'components/AdminPanelNavigation/adminPanelNavigation.styled';
+import { RoomOutlined } from '@mui/icons-material';
+import NavTabs from './salons.navtabs';
 
 const SalonsTemplate = ({ children }: { children: ReactNode }) => {
-  const matches = useMediaQuery('(max-width:400px)');
   const [translation] = useTranslation();
   const { data = [], isFetching, isError } = useFetchAllSalonsQuery();
-  const routeMatch = useRouteMatch([
-    '/salons/:salonId/schedule',
-    '/salons/:salonId/portfolio',
-    '/salons/:salonId/edit',
-  ]);
-  const currentTab = routeMatch?.path;
 
   if (isError)
     return (
@@ -36,38 +24,43 @@ const SalonsTemplate = ({ children }: { children: ReactNode }) => {
   if (isFetching) return <Spinner />;
 
   return (
-    <Box p={2}>
-      <CustomEditHeader>
-        <Typography variant="h5">{translation('admin:salonTemplate.heading.salonName')}</Typography>
-        <Button variant="outlined" color="error" size="small">
-          {translation('admin:salonTemplate.deleteSalon')}
-        </Button>
-      </CustomEditHeader>
-      <Box>
-        <Tabs
-          aria-label={translation('admin:salonTemplate.nav.aria')}
-          value={currentTab}
-          variant={matches ? 'fullWidth' : 'standard'}
-        >
-          <LinkTab
-            label={translation('admin:salonTemplate.nav.edit')}
-            value="/salons/:salonId/edit"
-            to="/salons/540d638c-44b1-4aa7-a4b3-289decfa2968/edit"
-          />
-          <LinkTab
-            label={translation('admin:salonTemplate.nav.schedule')}
-            value="/salons/:salonId/schedule"
-            to="/salons/540d638c-44b1-4aa7-a4b3-289decfa2968/schedule"
-          />
-          <LinkTab
-            label={translation('admin:salonTemplate.nav.portfolio')}
-            value="/salons/:salonId/portfolio"
-            to="/salons/540d638c-44b1-4aa7-a4b3-289decfa2968/portfolio"
-          />
-        </Tabs>
+    <Stack direction="row">
+      <CustomSalonsNavigation p={2}>
+        <Stack spacing={2.5}>
+          <Typography variant="h5">My salons</Typography>
+          {data.length > 0 &&
+            data.map(({ _id, name, address }) => (
+              <CustomCard key={_id}>
+                <Link to={`/salons/${_id}/edit`}>
+                  <CardActionArea>
+                    <CardContent>
+                      <Typography marginBottom={1.25} variant="h6" noWrap>
+                        {name}
+                      </Typography>
+                      <Stack direction="row" spacing={1} alignItems="center">
+                        <RoomOutlined />
+                        <Typography variant="body2" noWrap>
+                          {address}
+                        </Typography>
+                      </Stack>
+                    </CardContent>
+                  </CardActionArea>
+                </Link>
+              </CustomCard>
+            ))}
+        </Stack>
+      </CustomSalonsNavigation>
+      <Box p={2} width="100%">
+        <CustomEditHeader>
+          <Typography variant="h5">{translation('admin:salonTemplate.heading.salonName')}</Typography>
+          <Button variant="outlined" color="error" size="small">
+            {translation('admin:salonTemplate.deleteSalon')}
+          </Button>
+        </CustomEditHeader>
+        <NavTabs />
+        <div>{children}</div>
       </Box>
-      <div>{children}</div>
-    </Box>
+    </Stack>
   );
 };
 

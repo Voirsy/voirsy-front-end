@@ -27,3 +27,12 @@ export const CustomEditHeader = styled(Box)(() => ({
   alignItems: 'center',
   marginBottom: theme.spacing(2),
 }));
+
+export const CustomSalonsNavigation = styled(Box)(() => ({
+  display: 'none',
+
+  [theme.breakpoints.up('md')]: {
+    display: 'block',
+    maxWidth: '250px',
+  },
+}));
