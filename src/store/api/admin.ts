@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { ENV } from 'config/enviroments';
 import { ADMIN_PANEL } from 'endpoints/adminPanel';
 import { Salon } from 'models/admin.model';
 
 export const adminPanelApi = createApi({
   reducerPath: 'adminPanelApi',
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_URL }),
+  baseQuery: fetchBaseQuery({ baseUrl: ENV.apiUrl }),
   endpoints: (builder) => ({
     fetchAllSalons: builder.query<Pick<Salon, '_id' | 'address' | 'name'>[], void>({
       query: () => `${ADMIN_PANEL.FETCH_SALONS}`,
