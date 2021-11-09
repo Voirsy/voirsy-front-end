@@ -5,21 +5,102 @@
       "name": "Barber Shop Warszawa",
       "address": "Złota 73, 00-819, Warszawa, Wola",
       "phone": "893780321",
-      "description": "Barber Shop Warszawa - profesjonalny salon strzyżenia i stylizacji męskiego zarostu i fryzur. Wyjątkowa atmosfera, wykwalifikowani barberzy i jakość na najwyższym poziomie. Prowadzimy także sprzedaż kosmetyków i akcesoriów do pielęgnacji i stylizacji męskiego zarostu i włosów."
+      "description": "Barber Shop Warszawa - profesjonalny salon strzyżenia i stylizacji męskiego zarostu i fryzur. Wyjątkowa atmosfera, wykwalifikowani barberzy i jakość na najwyższym poziomie. Prowadzimy także sprzedaż kosmetyków i akcesoriów do pielęgnacji i stylizacji męskiego zarostu i włosów.",
+      "crew": [
+        {
+          "_id": "615b24eac9fac70ee4d58b8e",
+          "name": "Jessica",
+          "imageUrl": "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBmYWNlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+        }
+      ],
+      "services": [
+        {
+          "_id": "615b24eac9fac70ee4d58b8e",
+          "name": "Trwała ondulacja",
+          "price": 42.8,
+          "duration": 80,
+          "description": "Najnowszy trend w męskich fryzurach."
+        },
+        {
+          "_id": "845q24eac9fac70ee4d58b8e",
+          "name": "Włosy + broda",
+          "price": 33.25,
+          "duration": 50,
+          "description": "Najnowszy trend w męskich fryzurach."
+        }
+      ],
+      "portfolio": [
+        "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBmYWNlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+      ],
+      "schedule": "Something will be returned, but I don't know what :)"
     },
     {
       "_id": "2284a371-daad-4bd4-9f11-ad3e44665bc5",
       "name": "Black Cat Beauty & Spa Praga Północ",
       "address": "Targowa 59 lok. 1, 03-729, Warszawa, Praga-Północ",
       "phone": "394681397",
-      "description": "Black Cat Beauty & Spa Praga Północ - profesjonalny salon strzyżenia i stylizacji męskiego zarostu i fryzur."
+      "description": "Black Cat Beauty & Spa Praga Północ - profesjonalny salon strzyżenia i stylizacji męskiego zarostu i fryzur.",
+      "crew": [
+        {
+          "_id": "615b24eac9fac70ee4d58b8e",
+          "name": "Jessica",
+          "imageUrl": "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBmYWNlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+        }
+      ],
+      "services": [
+        {
+          "_id": "615b24eac9fac70ee4d58b8e",
+          "name": "Trwała ondulacja",
+          "price": 42.8,
+          "duration": 80,
+          "description": "Najnowszy trend w męskich fryzurach."
+        },
+        {
+          "_id": "845q24eac9fac70ee4d58b8e",
+          "name": "Włosy + broda",
+          "price": 33.25,
+          "duration": 50,
+          "description": "Najnowszy trend w męskich fryzurach."
+        }
+      ],
+      "portfolio": [
+        "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBmYWNlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+      ],
+      "schedule": "Something will be returned, but I don't know what :)"
     },
     {
       "_id": "70416e22-762a-40b5-a31d-3f78a4e95c32",
       "name": "Dream Style",
       "address": "Krzycka 35, 53-019, Wrocław, Krzyki",
       "phone": "828497138",
-      "description": "Barber Shop Warszawa - profesjonalny salon strzyżenia i stylizacji męskiego zarostu i fryzur."
+      "description": "Barber Shop Warszawa - profesjonalny salon strzyżenia i stylizacji męskiego zarostu i fryzur.",
+      "crew": [
+        {
+          "_id": "615b24eac9fac70ee4d58b8e",
+          "name": "Jessica",
+          "imageUrl": "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBmYWNlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+        }
+      ],
+      "services": [
+        {
+          "_id": "615b24eac9fac70ee4d58b8e",
+          "name": "Trwała ondulacja",
+          "price": 42.8,
+          "duration": 80,
+          "description": "Najnowszy trend w męskich fryzurach."
+        },
+        {
+          "_id": "845q24eac9fac70ee4d58b8e",
+          "name": "Włosy + broda",
+          "price": 33.25,
+          "duration": 50,
+          "description": "Najnowszy trend w męskich fryzurach."
+        }
+      ],
+      "portfolio": [
+        "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBmYWNlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+      ],
+      "schedule": "Something will be returned, but I don't know what :)"
     }
   ]
 }
