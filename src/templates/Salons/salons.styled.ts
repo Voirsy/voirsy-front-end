@@ -23,7 +23,7 @@ export const CustomEditHeader = styled(Box)(() => ({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  marginBottom: theme.spacing(2),
+  padding: theme.spacing(2),
 }));
 
 export const CustomSalonsNavigation = styled(Box)(() => ({

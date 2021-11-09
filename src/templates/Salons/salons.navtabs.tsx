@@ -16,7 +16,7 @@ const NavTabs = () => {
   const [translation] = useTranslation();
 
   return (
-    <Box>
+    <Box pl={matches ? 0 : 2}>
       <Tabs
         aria-label={translation('admin:salonTemplate.nav.aria')}
         value={currentTab}

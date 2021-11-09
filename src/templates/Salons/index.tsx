@@ -26,7 +26,7 @@ const SalonsTemplate = ({ children }: { children: ReactNode }) => {
       <CustomSalonsNavigation p={2}>
         <SalonsNavigation data={data} />
       </CustomSalonsNavigation>
-      <Box p={2} width="100%">
+      <Box width="100%" display="flex" flexDirection="column" minHeight="300">
         <CustomEditHeader>
           <Typography variant="h5">{translation('admin:salonTemplate.heading.salonName')}</Typography>
           <Button variant="outlined" color="error" size="small">
@@ -34,7 +34,7 @@ const SalonsTemplate = ({ children }: { children: ReactNode }) => {
           </Button>
         </CustomEditHeader>
         <NavTabs />
-        <div>{children}</div>
+        {children}
       </Box>
     </Stack>
   );
