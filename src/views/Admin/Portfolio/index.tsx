@@ -1,11 +1,11 @@
 import { CircularProgress, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useParams } from 'react-router-dom';
-import { useFetchSalonDataQuery } from 'store/api/admin';
+import { useFetchSalonPortfolioQuery } from 'store/api/admin';
 
-const Edit = () => {
+const Portfolio = () => {
   const { salonId } = useParams<{ salonId: string }>();
-  const { data, isFetching } = useFetchSalonDataQuery({ salonId });
+  const { data, isFetching } = useFetchSalonPortfolioQuery({ salonId });
 
   if (isFetching)
     return (
@@ -15,10 +15,10 @@ const Edit = () => {
     );
 
   return (
-    <Box p={2}>
+    <Box p={1.5}>
       <Typography sx={{ overflowWrap: 'break-word' }}>{JSON.stringify(data)}</Typography>
     </Box>
   );
 };
 
-export default Edit;
+export default Portfolio;

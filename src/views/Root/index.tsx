@@ -8,6 +8,8 @@ import MainTemplate from 'templates/Main';
 import Login from 'views/Login';
 import SalonsTemplate from 'templates/Salons';
 import Edit from 'views/Admin/Edit';
+import Portfolio from 'views/Admin/Portfolio';
+import Schedule from 'views/Admin/Schedule';
 
 const Root = () => (
   <Router>
@@ -47,12 +49,12 @@ const Root = () => (
               <Switch>
                 <Route path={`${url}/:salonId/schedule`}>
                   <SalonsTemplate>
-                    <p>Schedule</p>
+                    <Schedule />
                   </SalonsTemplate>
                 </Route>
                 <Route path={`${url}/:salonId/portfolio`}>
                   <SalonsTemplate>
-                    <p>Portfolio</p>
+                    <Portfolio />
                   </SalonsTemplate>
                 </Route>
                 <Route path={`${url}/add/:step`}>
