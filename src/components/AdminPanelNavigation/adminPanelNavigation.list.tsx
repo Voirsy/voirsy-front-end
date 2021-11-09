@@ -1,11 +1,11 @@
 import { RoomOutlined } from '@mui/icons-material';
 import { CardActionArea, CardContent, Stack, Typography } from '@mui/material';
+import { Salon } from 'models/admin.model';
 import { Link } from 'react-router-dom';
-import { Salon } from 'types/common';
 import AddSalonCard from './adminPanelNavigation.addSalon';
 import { CustomCard } from './adminPanelNavigation.styled';
 
-const SalonsNavigation = ({ data }: { data: Salon[] }) => (
+const SalonsNavigation = ({ data }: { data: Pick<Salon, '_id' | 'name' | 'address'>[] }) => (
   <Stack spacing={2.5}>
     <Typography variant="h5">My salons</Typography>
     {data.length > 0 &&
