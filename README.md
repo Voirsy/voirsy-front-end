@@ -1,10 +1,12 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Voirsy - frontend
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm run start:dev`
+
+Runs the app in the development mode with local database.
 
 ### `npm start`
 
