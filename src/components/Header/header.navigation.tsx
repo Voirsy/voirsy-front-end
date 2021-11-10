@@ -4,6 +4,7 @@ import {
   FavoriteBorderRounded,
   CalendarTodayRounded,
   ExitToAppRounded,
+  StoreRounded,
 } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
@@ -41,6 +42,12 @@ const HeaderNavigation = ({
         <CalendarTodayRounded />
       </ListItemIcon>
       Schedule
+    </MenuItem>
+    <MenuItem component={Link} to="/salons">
+      <ListItemIcon>
+        <StoreRounded />
+      </ListItemIcon>
+      Business
     </MenuItem>
     <MenuItem>
       <ListItemIcon>

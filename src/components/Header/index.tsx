@@ -15,14 +15,14 @@ import { Box } from '@mui/system';
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [translation] = useTranslation();
+  const { pathname } = useLocation();
+  const fullname = useSelector((state: RootState) => state.user?.fullname);
   const open = Boolean(anchorEl);
   const handleMenuHeaderOpen = (event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget);
   const handleMenuHeaderClose = () => setAnchorEl(null);
   const hidden = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'));
-  const [translation] = useTranslation();
-  const { pathname } = useLocation();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const fullname = useSelector((state: RootState) => state.user?.fullname);
 
   return (
     <>

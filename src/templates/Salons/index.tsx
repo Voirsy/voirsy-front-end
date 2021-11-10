@@ -1,9 +1,10 @@
 import { Button, Stack, Typography } from '@mui/material';
-import Spinner from 'components/Spinner';
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useFetchAllSalonsQuery } from 'store/api/admin';
 import { Box } from '@mui/system';
+import { useLocation, Redirect } from 'react-router-dom';
+import Spinner from 'components/Spinner';
+import { useFetchAllSalonsQuery } from 'store/api/admin';
 import { CustomEditHeader, CustomSalonsNavigation } from './salons.styled';
 import NavTabs from './salons.navtabs';
 import SalonsNavigation from 'components/AdminPanelNavigation/adminPanelNavigation.list';
@@ -11,6 +12,7 @@ import SalonsNavigation from 'components/AdminPanelNavigation/adminPanelNavigati
 const SalonsTemplate = ({ children }: { children: ReactNode }) => {
   const [translation] = useTranslation();
   const { data = [], isFetching, isError } = useFetchAllSalonsQuery();
+  const { pathname } = useLocation();
 
   if (isError)
     return (
@@ -20,6 +22,8 @@ const SalonsTemplate = ({ children }: { children: ReactNode }) => {
     );
 
   if (isFetching) return <Spinner />;
+
+  if (pathname === '/salons') return <Redirect to={`/salons/${data[0]._id || 1}/edit`} />;
 
   return (
     <Stack direction="row">

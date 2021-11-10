@@ -60,9 +60,14 @@ const Root = () => (
                 <Route path={`${url}/add/:step`}>
                   <p>Add salon</p>
                 </Route>
-                <Route path={`${url}/:salonId/edit`}>
+                <Route path={[`${url}/:salonId/edit`]}>
                   <SalonsTemplate>
                     <Edit />
+                  </SalonsTemplate>
+                </Route>
+                <Route path="*">
+                  <SalonsTemplate>
+                    <span>Loading...</span>
                   </SalonsTemplate>
                 </Route>
               </Switch>
