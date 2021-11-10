@@ -31,6 +31,7 @@ export const CustomSalonsNavigation = styled(Box)(() => ({
 
   [theme.breakpoints.up('md')]: {
     display: 'block',
+    minWidth: '250px',
     maxWidth: '250px',
   },
 }));

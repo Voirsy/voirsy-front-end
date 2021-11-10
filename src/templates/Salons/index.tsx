@@ -30,15 +30,25 @@ const SalonsTemplate = ({ children }: { children: ReactNode }) => {
       <CustomSalonsNavigation p={2}>
         <SalonsNavigation data={data} />
       </CustomSalonsNavigation>
-      <Box width="100%" display="flex" flexDirection="column" minHeight="300">
-        <CustomEditHeader>
-          <Typography variant="h5">{translation('admin:salonTemplate.heading.salonName')}</Typography>
-          <Button variant="outlined" color="error" size="small">
-            {translation('admin:salonTemplate.deleteSalon')}
-          </Button>
-        </CustomEditHeader>
-        <NavTabs />
-        {children}
+      <Box width="100%" display="flex" flexDirection="column" minHeight="400px">
+        {data.length > 0 ? (
+          <>
+            <CustomEditHeader>
+              <Typography variant="h5">{translation('admin:salonTemplate.heading.salonName')}</Typography>
+              <Button variant="outlined" color="error" size="small">
+                {translation('admin:salonTemplate.deleteSalon')}
+              </Button>
+            </CustomEditHeader>
+            <NavTabs />
+            {children}
+          </>
+        ) : (
+          <Box height="100%" display="flex" justifyContent="center" alignItems="center">
+            <Typography variant="h5" textAlign="center">
+              You don’t have any salons yet. <br /> Add your salon to begin bussiness on Voirsy
+            </Typography>
+          </Box>
+        )}
       </Box>
     </Stack>
   );
