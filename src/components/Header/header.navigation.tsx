@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'store/store';
 import { logOut } from 'helpers/auth';
 import { CustomMenuItem } from './header.styles';
+import { useTranslation } from 'react-i18next';
 
 const HeaderNavigation = ({
   open,
@@ -23,6 +24,7 @@ const HeaderNavigation = ({
 }) => {
   const role = useSelector((state: RootState) => state.user?.role);
   const history = useHistory();
+  const [translation] = useTranslation();
 
   return (
     <Menu
@@ -37,7 +39,7 @@ const HeaderNavigation = ({
         <ListItemIcon>
           <PersonOutlineRounded />
         </ListItemIcon>
-        Profile
+        {translation('header:navigation.profile')}
       </CustomMenuItem>
       {role === 'STANDARD' && (
         <>
@@ -45,13 +47,13 @@ const HeaderNavigation = ({
             <ListItemIcon>
               <FavoriteBorderRounded />
             </ListItemIcon>
-            Favorites
+            {translation('header:navigation.favorites')}
           </CustomMenuItem>
           <CustomMenuItem>
             <ListItemIcon>
               <CalendarTodayRounded />
             </ListItemIcon>
-            Schedule
+            {translation('header:navigation.schedule')}
           </CustomMenuItem>
         </>
       )}
@@ -60,14 +62,14 @@ const HeaderNavigation = ({
           <ListItemIcon>
             <StoreRounded />
           </ListItemIcon>
-          Business
+          {translation('header:navigation.business')}
         </CustomMenuItem>
       )}
       <CustomMenuItem onClick={() => logOut(history.push)}>
         <ListItemIcon>
           <ExitToAppRounded />
         </ListItemIcon>
-        Sign out
+        {translation('header:navigation.signOut')}
       </CustomMenuItem>
     </Menu>
   );

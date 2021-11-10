@@ -2,5 +2,12 @@
   "title": "Voirsy",
   "button": {
     "signin": "Sign in"
+  },
+  "navigation": {
+    "profile": "Profile",
+    "favorites": "Favorites",
+    "schedule": "Schedule",
+    "business": "Business",
+    "signOut": "Sign out"
   }
 }
