@@ -7,7 +7,14 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootState } from 'store/store';
-import { CustomToolbar, CustomButton, CustomAppBar, CustomMenuButton, CustomAvatarButton } from './header.styles';
+import {
+  CustomToolbar,
+  CustomButton,
+  CustomAppBar,
+  CustomMenuButton,
+  CustomAvatarButton,
+  CustomAuthorName,
+} from './header.styles';
 import { isAuth } from 'helpers/auth';
 import AdminPanelNavigation from 'components/AdminPanelNavigation';
 import HeaderNavigation from './header.navigation';
@@ -38,10 +45,10 @@ const Header = () => {
               {translation('header:title')}
             </Typography>
           </Box>
-          <div>
+          <Box display="flex" alignItems="center">
             {isAuth() ? (
               <>
-                {fullname}
+                <CustomAuthorName variant="body2">{fullname}</CustomAuthorName>
                 <CustomAvatarButton onClick={handleMenuHeaderOpen}>
                   <Avatar>S</Avatar>
                 </CustomAvatarButton>
@@ -53,7 +60,7 @@ const Header = () => {
                 </CustomButton>
               </Link>
             )}
-          </div>
+          </Box>
         </CustomToolbar>
       </CustomAppBar>
       <HeaderNavigation open={open} onClose={handleMenuHeaderClose} anchorEl={anchorEl} />

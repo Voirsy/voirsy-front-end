@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { styled } from '@mui/system';
-import { AppBar, Button, IconButton, Toolbar } from '@mui/material';
+import { AppBar, Button, IconButton, Toolbar, Typography } from '@mui/material';
+import theme from 'theme';
 
-export const CustomAppBar = styled(AppBar)(({ theme }) => ({
+export const CustomAppBar = styled(AppBar)(() => ({
   zIndex: 1,
 
   [theme.breakpoints.up('md')]: {
@@ -25,4 +26,10 @@ export const CustomMenuButton = styled(IconButton)(() => ({
 
 export const CustomAvatarButton = styled(IconButton)(() => ({
   padding: 0,
+}));
+
+export const CustomAuthorName = styled(Typography)(() => ({
+  marginRight: theme.spacing(1),
+  height: 'fit-content',
+  color: theme.palette.grey[500],
 }));
