@@ -6,7 +6,7 @@ import {
   ExitToAppRounded,
   StoreRounded,
 } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/store';
 import { logOut } from 'helpers/auth';
@@ -22,6 +22,7 @@ const HeaderNavigation = ({
   onClose: () => void;
 }) => {
   const role = useSelector((state: RootState) => state.user?.role);
+  const history = useHistory();
 
   return (
     <Menu
@@ -62,7 +63,7 @@ const HeaderNavigation = ({
           Business
         </CustomMenuItem>
       )}
-      <CustomMenuItem onClick={logOut}>
+      <CustomMenuItem onClick={() => logOut(history.push)}>
         <ListItemIcon>
           <ExitToAppRounded />
         </ListItemIcon>
