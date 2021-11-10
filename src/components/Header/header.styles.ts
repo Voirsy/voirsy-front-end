@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { styled } from '@mui/system';
-import { AppBar, Button, IconButton, Toolbar, Typography } from '@mui/material';
+import { AppBar, Button, IconButton, MenuItem, Toolbar, Typography } from '@mui/material';
 import theme from 'theme';
+import { LinkProps } from 'react-router-dom';
 
 export const CustomAppBar = styled(AppBar)(() => ({
   zIndex: 1,
@@ -32,4 +33,8 @@ export const CustomAuthorName = styled(Typography)(() => ({
   marginRight: theme.spacing(1),
   height: 'fit-content',
   color: theme.palette.grey[500],
+}));
+
+export const CustomMenuItem = styled(MenuItem)<Partial<LinkProps>>(() => ({
+  paddingRight: theme.spacing(3),
 }));
