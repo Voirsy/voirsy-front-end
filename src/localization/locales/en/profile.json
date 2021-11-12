@@ -37,5 +37,8 @@
       "cancel": "Cancel",
       "save": "Save"
     }
+  },
+  "favorites": {
+    "heading": "Favorites"
   }
 }

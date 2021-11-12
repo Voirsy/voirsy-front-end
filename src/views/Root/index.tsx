@@ -10,6 +10,7 @@ import SalonsTemplate from 'templates/Salons';
 import Edit from 'views/Admin/Edit';
 import Portfolio from 'views/Admin/Portfolio';
 import Schedule from 'views/Admin/Schedule';
+import Favorites from 'views/Favorites';
 
 const Root = () => (
   <Router>
@@ -34,7 +35,7 @@ const Root = () => (
                   <DeleteAccount />
                 </Route>
                 <Route path={`${url}/favorites`}>
-                  <DeleteAccount />
+                  <Favorites />
                 </Route>
                 <Route path="*">
                   <Redirect to="/edit" />
