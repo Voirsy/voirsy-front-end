@@ -33,6 +33,9 @@ const Root = () => (
                 <Route path={`${url}/delete`}>
                   <DeleteAccount />
                 </Route>
+                <Route path={`${url}/favorites`}>
+                  <DeleteAccount />
+                </Route>
                 <Route path="*">
                   <Redirect to="/edit" />
                 </Route>
