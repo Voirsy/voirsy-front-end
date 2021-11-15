@@ -1,6 +1,6 @@
 import { Button, Stack, Typography } from '@mui/material';
 import { ReactNode } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { Box } from '@mui/system';
 import { useLocation, Redirect } from 'react-router-dom';
 import Spinner from 'components/Spinner';
@@ -45,7 +45,7 @@ const SalonsTemplate = ({ children }: { children: ReactNode }) => {
         ) : (
           <Box height="100%" display="flex" justifyContent="center" alignItems="center">
             <Typography variant="h5" textAlign="center">
-              You don’t have any salons yet. <br /> Add your salon to begin bussiness on Voirsy
+              <Trans defaults={translation('admin:salonTemplate.noSalons')} components={[<br key="breakLine" />]} />
             </Typography>
           </Box>
         )}

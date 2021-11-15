@@ -1,6 +1,7 @@
 {
   "salonTemplate": {
     "error": "Unknown error occured",
+    "noSalons": "You don’t have any salons yet. <0 /> Add your salon to begin bussiness on Voirsy",
     "heading": {
       "salonName": "Salon name",
       "mySalons": "My salons"
