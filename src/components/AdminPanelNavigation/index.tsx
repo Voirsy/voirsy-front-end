@@ -20,7 +20,7 @@ const AdminPanelNavigation = ({ isMenuOpen, handleClose }: { isMenuOpen: boolean
           <CloseOutlined />
         </IconButton>
       </CustomToolbar>
-      <Box p={2}>
+      <Box padding={2}>
         <SalonsNavigation data={data} />
       </Box>
     </CustomDrawer>

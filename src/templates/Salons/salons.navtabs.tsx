@@ -16,7 +16,7 @@ const NavTabs = () => {
   const [translation] = useTranslation();
 
   return (
-    <Box pl={matches ? 0 : 2}>
+    <Box paddingLeft={matches ? 0 : 2} maxWidth="100%">
       <Tabs
         aria-label={translation('admin:salonTemplate.nav.aria')}
         value={currentTab}

@@ -22,7 +22,7 @@ export const CustomButton = styled(Button)(() => ({
 
 export const CustomMenuButton = styled(IconButton)(() => ({
   paddingLeft: 0,
-  paddingRight: 20,
+  paddingRight: theme.spacing(2.5),
 }));
 
 export const CustomAvatarButton = styled(IconButton)(() => ({

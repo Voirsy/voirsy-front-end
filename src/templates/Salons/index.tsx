@@ -27,10 +27,10 @@ const SalonsTemplate = ({ children }: { children: ReactNode }) => {
 
   return (
     <Stack direction="row">
-      <CustomSalonsNavigation p={2}>
+      <CustomSalonsNavigation padding={2}>
         <SalonsNavigation data={data} />
       </CustomSalonsNavigation>
-      <Box width="100%" display="flex" flexDirection="column" minHeight="400px">
+      <Box display="flex" flexDirection="column" flexGrow={1}>
         {data.length > 0 ? (
           <>
             <CustomEditHeader>

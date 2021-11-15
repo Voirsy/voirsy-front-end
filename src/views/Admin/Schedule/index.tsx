@@ -16,7 +16,7 @@ const Schedule = () => {
 
   return (
     <Box p={1.5}>
-      <Typography sx={{ overflowWrap: 'break-word' }}>{JSON.stringify(data)}</Typography>
+      <Typography sx={{ overflowWrap: 'break-word', wordBreak: 'break-all' }}>{JSON.stringify(data)}</Typography>
     </Box>
   );
 };

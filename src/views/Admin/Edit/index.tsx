@@ -16,7 +16,7 @@ const Edit = () => {
 
   return (
     <Box p={2}>
-      <Typography sx={{ overflowWrap: 'break-word' }}>{JSON.stringify(data)}</Typography>
+      <Typography sx={{ overflowWrap: 'break-word', wordBreak: 'break-all' }}>{JSON.stringify(data)}</Typography>
     </Box>
   );
 };

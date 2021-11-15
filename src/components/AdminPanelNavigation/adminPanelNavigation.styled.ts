@@ -23,7 +23,7 @@ export const CustomCard = styled(Card)(() => ({
 
   '& a': {
     textDecoration: 'none',
-    color: theme.palette.common.white,
+    color: theme.palette.primary.contrastText,
   },
 }));
 
@@ -37,7 +37,7 @@ export const CustomAddSalonCard = styled(CustomCard)(() => ({
   },
 
   '& svg': {
-    width: theme.spacing(4.5),
-    height: theme.spacing(4.5),
+    width: '36px',
+    height: '36px',
   },
 }));
