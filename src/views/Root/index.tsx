@@ -6,6 +6,10 @@ import ChangePassword from 'views/ChangePassword';
 import EditAccount from 'views/EditAccount';
 import MainTemplate from 'templates/Main';
 import Login from 'views/Login';
+import SalonsTemplate from 'templates/Salons';
+import Edit from 'views/Admin/Edit';
+import Portfolio from 'views/Admin/Portfolio';
+import Schedule from 'views/Admin/Schedule';
 
 const Root = () => (
   <Router>
@@ -44,19 +48,27 @@ const Root = () => (
               <Header />
               <Switch>
                 <Route path={`${url}/:salonId/schedule`}>
-                  <p>Schedule</p>
+                  <SalonsTemplate>
+                    <Schedule />
+                  </SalonsTemplate>
                 </Route>
                 <Route path={`${url}/:salonId/portfolio`}>
-                  <p>Portfolio</p>
+                  <SalonsTemplate>
+                    <Portfolio />
+                  </SalonsTemplate>
                 </Route>
                 <Route path={`${url}/add/:step`}>
                   <p>Add salon</p>
                 </Route>
-                <Route path={`${url}/:salonId/edit`}>
-                  <p>Edit</p>
+                <Route path={[`${url}/:salonId/edit`]}>
+                  <SalonsTemplate>
+                    <Edit />
+                  </SalonsTemplate>
                 </Route>
                 <Route path="*">
-                  <p>All salons</p>
+                  <SalonsTemplate>
+                    <span>Loading...</span>
+                  </SalonsTemplate>
                 </Route>
               </Switch>
             </>
