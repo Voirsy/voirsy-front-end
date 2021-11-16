@@ -42,20 +42,20 @@ const HeaderNavigation = ({
         {translation('header:navigation.profile')}
       </CustomMenuItem>
       {role === 'STANDARD' && (
-        <>
-          <CustomMenuItem>
-            <ListItemIcon>
-              <FavoriteBorderRounded />
-            </ListItemIcon>
-            {translation('header:navigation.favorites')}
-          </CustomMenuItem>
-          <CustomMenuItem>
-            <ListItemIcon>
-              <CalendarTodayRounded />
-            </ListItemIcon>
-            {translation('header:navigation.schedule')}
-          </CustomMenuItem>
-        </>
+        <CustomMenuItem component={Link} to="/profile/favorites">
+          <ListItemIcon>
+            <FavoriteBorderRounded />
+          </ListItemIcon>
+          {translation('header:navigation.favorites')}
+        </CustomMenuItem>
+      )}
+      {role === 'STANDARD' && (
+        <CustomMenuItem>
+          <ListItemIcon>
+            <CalendarTodayRounded />
+          </ListItemIcon>
+          {translation('header:navigation.schedule')}
+        </CustomMenuItem>
       )}
       {role === 'BUSINESS' && (
         <CustomMenuItem component={Link} to="/salons">
