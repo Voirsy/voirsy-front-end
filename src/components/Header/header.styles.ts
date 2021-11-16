@@ -2,7 +2,7 @@
 import { styled } from '@mui/system';
 import { AppBar, Button, IconButton, MenuItem, Toolbar, Typography } from '@mui/material';
 import theme from 'theme';
-import { LinkProps } from 'react-router-dom';
+import { Link, LinkProps } from 'react-router-dom';
 
 export const CustomAppBar = styled(AppBar)(() => ({
   zIndex: 1,
@@ -38,3 +38,8 @@ export const CustomAuthorName = styled(Typography)(() => ({
 export const CustomMenuItem = styled(MenuItem)<Partial<LinkProps>>(() => ({
   paddingRight: theme.spacing(3),
 }));
+
+export const CustomPageTitle = styled(Link)`
+  text-decoration: none;
+  color: ${theme.palette.text.primary};
+`;

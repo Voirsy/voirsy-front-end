@@ -14,6 +14,7 @@ import {
   CustomMenuButton,
   CustomAvatarButton,
   CustomAuthorName,
+  CustomPageTitle,
 } from './header.styles';
 import { isAuth } from 'helpers/auth';
 import AdminPanelNavigation from 'components/AdminPanelNavigation';
@@ -41,9 +42,11 @@ const Header = () => {
                 <MenuOutlined />
               </CustomMenuButton>
             )}
-            <Typography variant="h4" component="h1">
-              {translation('header:title')}
-            </Typography>
+            <CustomPageTitle to="/">
+              <Typography variant="h4" component="h1">
+                {translation('header:title')}
+              </Typography>
+            </CustomPageTitle>
           </Box>
           <Box display="flex" alignItems="center">
             {isAuth() ? (
