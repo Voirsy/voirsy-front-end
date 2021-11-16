@@ -2,5 +2,6 @@
   "/business/salons": "/salons",
   "/business/:salonId/info": "/salons?_id=:salonId",
   "/business/:salonId/schedule": "/salons?_id=:salonId",
-  "/business/:salonId/portfolio": "/salons?_id=:salonId"
+  "/business/:salonId/portfolio": "/salons?_id=:salonId",
+  "/profile/favorites": "/salons"
 }
