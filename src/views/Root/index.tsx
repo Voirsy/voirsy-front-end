@@ -10,15 +10,16 @@ import SalonsTemplate from 'templates/Salons';
 import Edit from 'views/Admin/Edit';
 import Portfolio from 'views/Admin/Portfolio';
 import Schedule from 'views/Admin/Schedule';
+import CustomRoute from 'components/CustomRoute';
 
 const Root = () => (
   <Router>
     <MainTemplate>
       <Switch>
-        <Route path="/login">
+        <CustomRoute userType="unauthorized" path="/login">
           <Login />
-        </Route>
-        <Route
+        </CustomRoute>
+        <CustomRoute
           path="/profile"
           render={({ match: { url } }) => (
             <>
@@ -33,15 +34,19 @@ const Root = () => (
                 <Route path={`${url}/delete`}>
                   <DeleteAccount />
                 </Route>
+                <Route path={`${url}/favorites`}>
+                  <p>Favorites</p>
+                </Route>
                 <Route path="*">
-                  <Redirect to="/edit" />
+                  <Redirect to={`${url}/edit`} />
                 </Route>
               </Switch>
             </>
           )}
         />
 
-        <Route
+        <CustomRoute
+          userType="business"
           path="/salons"
           render={({ match: { url } }) => (
             <>
@@ -88,9 +93,9 @@ const Root = () => (
                 <Route path={`${url}:salonId/portfolio`}>
                   <p>The salon portfolio</p>
                 </Route>
-                <Route path={`${url}:salonId/reservation`}>
+                <CustomRoute path={`${url}:salonId/reservation`}>
                   <p>Reservation</p>
-                </Route>
+                </CustomRoute>
                 <Route path={[`${url}:salonId`, `${url}:salonId/information`]}>
                   <p>Information about salon</p>
                 </Route>
