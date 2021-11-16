@@ -39,6 +39,10 @@
     }
   },
   "favorites": {
-    "heading": "Favorites"
+    "heading": "Favorites",
+    "error": {
+      "noFavorites": "No favorites yet",
+      "unknown": "An error occured"
+    }
   }
 }

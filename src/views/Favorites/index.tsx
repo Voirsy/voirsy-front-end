@@ -12,7 +12,7 @@ const Favorites = () => {
 
   if (isFetching) return <Spinner />;
 
-  if (isError) return <Typography textAlign="center">An error occured</Typography>;
+  if (isError) return <Typography textAlign="center">{translation('profile:favorites.error.unknown')}</Typography>;
 
   return (
     <Box component="main" maxWidth={match ? 700 : 380} margin="0 auto" padding={2}>
@@ -43,7 +43,7 @@ const Favorites = () => {
           ))}
         </Grid>
       ) : (
-        <Typography>No favorites yet</Typography>
+        <Typography>{translation('profile:favorites.error.noFavorites')}</Typography>
       )}
     </Box>
   );
