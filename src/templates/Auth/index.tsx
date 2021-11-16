@@ -1,13 +1,12 @@
 import { ReactNode, useEffect, useState } from 'react';
 import { CircularProgress } from '@mui/material';
 import { Box } from '@mui/system';
-import axios from 'axios';
-import { ENV } from 'config/enviroments';
 import { AUTH } from 'endpoints/auth';
-import { getToken, isAuth, logOut } from 'helpers/auth';
+import { isAuth, logOut } from 'helpers/auth';
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { setUserData } from 'store/slices/userSlice';
+import { axiosAuth } from 'axios/axios';
 
 const AuthTemplate = ({ children }: { children: ReactNode }) => {
   const dispatch = useDispatch();
@@ -18,14 +17,7 @@ const AuthTemplate = ({ children }: { children: ReactNode }) => {
     setLoading(true);
 
     try {
-      const token = getToken();
-
-      //I leave a domain name hardcoded here because we are using json-server and our separate backend as well
-      //it causes that we have to different connection strings
-      //in the future it must we change to env variable
-      const { data } = await axios.get(`http://localhost:8080${AUTH.FETCH_USER_DATA}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const { data } = await axiosAuth.get(AUTH.FETCH_USER_DATA);
 
       dispatch(setUserData(data.user));
     } catch (error) {
