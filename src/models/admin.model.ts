@@ -22,4 +22,5 @@ export type Salon = {
   services: Service[];
   schedule: string;
   portfolio: string[];
+  images: string[];
 };
