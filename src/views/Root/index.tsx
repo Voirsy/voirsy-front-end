@@ -11,12 +11,13 @@ import Edit from 'views/Admin/Edit';
 import Portfolio from 'views/Admin/Portfolio';
 import Schedule from 'views/Admin/Schedule';
 import CustomRoute from 'components/CustomRoute';
+import { UserType } from 'enums/userType.enum';
 
 const Root = () => (
   <Router>
     <MainTemplate>
       <Switch>
-        <CustomRoute userType="unauthorized" path="/login">
+        <CustomRoute userType={UserType.Unauthorized} path="/login">
           <Login />
         </CustomRoute>
         <CustomRoute
@@ -46,7 +47,7 @@ const Root = () => (
         />
 
         <CustomRoute
-          userType="business"
+          userType={UserType.Business}
           path="/salons"
           render={({ match: { url } }) => (
             <>
