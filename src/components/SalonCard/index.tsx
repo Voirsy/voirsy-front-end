@@ -1,13 +1,16 @@
 import { CardContent, CardMedia, Typography, Chip, Stack } from '@mui/material';
-import { Place, LocationCity, Star } from '@mui/icons-material';
+import { Place, LocationCity, Star, Favorite } from '@mui/icons-material';
 import { SalonCardTypes } from './salonCard.types';
-import { CustomCard, Rating } from './salonCard.styled';
+import { CustomCard, CustomCardContent, HeartButton, Rating } from './salonCard.styled';
 
 const SalonCard = ({ imageUrl, name, city, address, rating, type }: SalonCardTypes) => (
   <CustomCard>
     <Rating size="small" label={rating} icon={<Star />} />
     <CardMedia component="img" height="160" image={imageUrl} alt={name} />
-    <CardContent>
+    <CustomCardContent>
+      <HeartButton size="large">
+        <Favorite />
+      </HeartButton>
       <Typography gutterBottom variant="subtitle1" component="div" noWrap>
         {name}
       </Typography>
@@ -24,7 +27,7 @@ const SalonCard = ({ imageUrl, name, city, address, rating, type }: SalonCardTyp
         </Typography>
       </Stack>
       <Chip label={type} size="small" />
-    </CardContent>
+    </CustomCardContent>
   </CustomCard>
 );
 
