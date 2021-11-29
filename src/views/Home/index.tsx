@@ -7,9 +7,9 @@ const Home = () => (
   <main>
     <Filters />
     <Container maxWidth={false} sx={{ display: 'flex', justifyContent: 'center', marginTop: 4 }}>
-      <Grid container spacing={3} maxWidth={1400} sx={{ justifyContent: 'center' }}>
+      <Grid container spacing={3}>
         {[...Array(14)].map((_, i) => (
-          <Grid item key={i} sx={{ maxWidth: '344px', width: '100%' }}>
+          <Grid item key={i} xs={12} sm={6} md={4} lg={3}>
             <SalonCard
               address="Targowa 59 lok. 1, 03-729"
               city="Warszawa"
