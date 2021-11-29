@@ -1,9 +1,11 @@
-import { Card, CardContent, CardMedia, Typography, Chip, Stack } from '@mui/material';
-import { Place, LocationCity } from '@mui/icons-material';
+import { CardContent, CardMedia, Typography, Chip, Stack } from '@mui/material';
+import { Place, LocationCity, Star } from '@mui/icons-material';
 import { SalonCardTypes } from './salonCard.types';
+import { CustomCard, Rating } from './salonCard.styled';
 
 const SalonCard = ({ imageUrl, name, city, address, rating, type }: SalonCardTypes) => (
-  <Card sx={{ width: 320 }}>
+  <CustomCard>
+    <Rating size="small" label={rating} icon={<Star />} />
     <CardMedia component="img" height="160" image={imageUrl} alt={name} />
     <CardContent>
       <Typography gutterBottom variant="subtitle1" component="div" noWrap>
@@ -23,7 +25,7 @@ const SalonCard = ({ imageUrl, name, city, address, rating, type }: SalonCardTyp
       </Stack>
       <Chip label={type} size="small" />
     </CardContent>
-  </Card>
+  </CustomCard>
 );
 
 export default SalonCard;
