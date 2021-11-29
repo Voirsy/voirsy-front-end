@@ -1,7 +1,7 @@
 import { Grid, MenuItem, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { ChangeEvent, useState } from 'react';
-import SalonCard from 'components/SalonCard';
+import SalonCard from 'components/SalonCard2';
 import { CustomContainer, CustomSelect, CustomBox } from './resultList.styles';
 import { sortSelectData } from './sortSelectInput.data';
 import MOCK_DATA from './mock_data';

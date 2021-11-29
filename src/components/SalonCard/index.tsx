@@ -1,27 +1,29 @@
-import { Grid, Typography, Rating } from '@mui/material';
-import image from 'assets/salon.jpg';
-import { CustomImg, CustomPaper } from './salonCard.styles';
-import RoomIcon from '@mui/icons-material/Room';
+import { Card, CardContent, CardMedia, Typography, Chip, Stack } from '@mui/material';
+import { Place, LocationCity } from '@mui/icons-material';
+import { SalonCardTypes } from './salonCard.types';
 
-const SalonCard = ({ data }: { data: any }) => (
-  <CustomPaper>
-    <Grid container columnSpacing={1}>
-      <Grid item container xs={2} justifyContent="center" alignItems="center">
-        <CustomImg alt="salon image" src={image} />
-      </Grid>
-      <Grid item xs container direction="column" justifyContent="space-evenly">
-        <Grid item>
-          <Typography variant="subtitle1">{data.title}</Typography>
-        </Grid>
-        <Grid item>
-          <Rating readOnly value={data.rating} size="small" precision={0.5} />
-        </Grid>
-        <Grid item container alignItems="center">
-          <RoomIcon color="action" />
-          <Typography variant="body2">{`${data.street}, ${data.zipCode}, ${data.city}`}</Typography>
-        </Grid>
-      </Grid>
-    </Grid>
-  </CustomPaper>
+const SalonCard = ({ imageUrl, name, city, address, rating, type }: SalonCardTypes) => (
+  <Card sx={{ width: 320 }}>
+    <CardMedia component="img" height="160" image={imageUrl} alt={name} />
+    <CardContent>
+      <Typography gutterBottom variant="subtitle1" component="div" noWrap>
+        {name}
+      </Typography>
+      <Stack direction="row" spacing={1} marginBottom={1} alignItems="center">
+        <Place sx={{ color: 'text.secondary', fontSize: 20 }} />
+        <Typography variant="body2" color="text.secondary">
+          {address}
+        </Typography>
+      </Stack>
+      <Stack direction="row" spacing={1} marginBottom={1.5} alignItems="center">
+        <LocationCity sx={{ color: 'text.secondary', fontSize: 20 }} />
+        <Typography variant="body2" color="text.secondary">
+          {city}
+        </Typography>
+      </Stack>
+      <Chip label={type} size="small" />
+    </CardContent>
+  </Card>
 );
+
 export default SalonCard;
