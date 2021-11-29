@@ -2,7 +2,6 @@ import { Card, CardContent, Chip, IconButton, styled } from '@mui/material';
 import theme from 'theme';
 
 export const CustomCard = styled(Card)`
-  width: 320px;
   position: relative;
 `;
 
