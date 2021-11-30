@@ -9,14 +9,14 @@ export const InputWrapper = styled('div')(() => ({
   display: 'flex',
   alignItems: 'center',
   width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    maxWidth: '400px',
-  },
   div: {
     flexGrow: 1,
   },
   button: {
     margin: `0 ${theme.spacing(1)}`,
+  },
+  [theme.breakpoints.up('sm')]: {
+    maxWidth: '400px',
   },
 }));
 
@@ -31,12 +31,16 @@ export const CustomInputLabel = styled(Typography)<{ isPrimary?: boolean }>(({ i
 }));
 
 export const CustomFormControl = styled(FormControl)<{ isPrimary?: boolean }>(({ isPrimary }) => ({
-  width: '140px',
+  flexGrow: 1,
+  borderRadius: theme.shape.borderRadius,
   background: isPrimary ? theme.palette.primary.main : theme.palette.background.paper,
   fieldset: {
     borderColor: isPrimary ? theme.palette.primary.main : theme.palette.grey[400],
   },
   'svg *': {
     fill: isPrimary ? theme.palette.background.paper : theme.palette.text.primary,
+  },
+  [theme.breakpoints.up('sm')]: {
+    width: '140px',
   },
 }));

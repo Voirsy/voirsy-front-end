@@ -1,7 +1,23 @@
-import { Checkbox, Container, IconButton, InputBase, ListItemText, MenuItem, Radio, Select } from '@mui/material';
+import { useEffect, useState } from 'react';
+import {
+  alpha,
+  Checkbox,
+  Chip,
+  Container,
+  hexToRgb,
+  IconButton,
+  InputBase,
+  ListItemText,
+  MenuItem,
+  Radio,
+  Select,
+  Stack,
+  useMediaQuery,
+} from '@mui/material';
 import { Search } from '@mui/icons-material';
 import { CustomFormControl, CustomInputLabel, InputWrapper } from './filters.styled';
-import { useEffect, useState } from 'react';
+import theme from 'theme';
+import { SalonType } from 'enums/salonType.enum';
 
 const cities = [
   { _id: '540d638c-44b1-4aa7-a4b3-289decfa2962', name: 'warsaw' },
@@ -16,10 +32,10 @@ const cities = [
 ];
 
 const salonTypes = [
-  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2972', name: 'barbers' },
-  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2973', name: 'hairdressers' },
-  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2974', name: 'beauticians' },
-  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2975', name: 'tattooists' },
+  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2972', name: SalonType.Barber },
+  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2973', name: SalonType.Hairdressers },
+  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2974', name: SalonType.Beauticians },
+  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2975', name: SalonType.Tattooists },
 ];
 
 const sortByOption = [
@@ -29,6 +45,7 @@ const sortByOption = [
 ];
 
 const Filters = () => {
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const [search, setSearch] = useState('');
   const [location, setLocation] = useState('');
   const [salonType, setSalonType] = useState<string[]>([]);
@@ -48,115 +65,175 @@ const Filters = () => {
 
   return (
     <Container component="nav" maxWidth={false}>
-      <InputWrapper>
-        <IconButton aria-label="menu" size="small">
-          <Search />
-        </IconButton>
-        <InputBase
-          placeholder="Search..."
-          inputProps={{ 'aria-label': 'search voirsy' }}
-          value={search}
-          onChange={handleSearchChange}
-        />
-      </InputWrapper>
+      <Stack direction={matches ? 'row' : 'column'} spacing={2}>
+        <InputWrapper>
+          <IconButton aria-label="menu" size="small">
+            <Search />
+          </IconButton>
+          <InputBase
+            placeholder="Search..."
+            inputProps={{ 'aria-label': 'search voirsy' }}
+            value={search}
+            onChange={handleSearchChange}
+          />
+        </InputWrapper>
 
-      <CustomFormControl isPrimary>
-        <CustomInputLabel isPrimary variant="body2" component="label" id="location-helper-label">
-          Location
-        </CustomInputLabel>
-        <Select
-          labelId="location-helper-label"
-          id="location-helper"
-          value={location}
-          onChange={handleLocationChange}
-          color="primary"
-          renderValue={() => ''}
-          size="small"
-          MenuProps={{
-            transformOrigin: {
-              vertical: 'top',
-              horizontal: 'left',
-            },
-            anchorOrigin: {
-              vertical: 'bottom',
-              horizontal: 'left',
-            },
-            style: {
-              maxHeight: '300px',
-            },
-          }}
-        >
-          {cities.map((el) => (
-            <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize' }}>
-              <Radio checked={el._id === location} />
-              <ListItemText primary={el.name} />
-            </MenuItem>
-          ))}
-        </Select>
-      </CustomFormControl>
+        <Stack direction="row" spacing={2}>
+          <CustomFormControl isPrimary>
+            <CustomInputLabel isPrimary variant="body2" component="label" id="location-helper-label">
+              Location
+            </CustomInputLabel>
+            <Select
+              labelId="location-helper-label"
+              id="location-helper"
+              value={location}
+              onChange={handleLocationChange}
+              color="primary"
+              renderValue={() => ''}
+              size="small"
+              MenuProps={{
+                transformOrigin: {
+                  vertical: 'top',
+                  horizontal: 'left',
+                },
+                anchorOrigin: {
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                },
+                style: {
+                  maxHeight: '300px',
+                },
+              }}
+            >
+              {cities.map((el) => (
+                <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize' }}>
+                  <Radio checked={el._id === location} />
+                  <ListItemText primary={el.name} />
+                </MenuItem>
+              ))}
+            </Select>
+          </CustomFormControl>
 
-      <CustomFormControl>
-        <CustomInputLabel variant="body2" component="label" id="saloType-helper-label">
-          Salon type
-        </CustomInputLabel>
-        <Select
-          labelId="saloType-helper-label"
-          id="saloType-helper"
-          value={salonType}
-          onChange={handleSalonTypeChange}
-          renderValue={() => ''}
-          size="small"
-          multiple
-          MenuProps={{
-            transformOrigin: {
-              vertical: 'top',
-              horizontal: 'left',
-            },
-            anchorOrigin: {
-              vertical: 'bottom',
-              horizontal: 'left',
-            },
-          }}
-        >
-          {salonTypes.map((el) => (
-            <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize' }}>
-              <Checkbox checked={salonType.indexOf(el._id) > -1} />
-              <ListItemText primary={el.name} />
-            </MenuItem>
-          ))}
-        </Select>
-      </CustomFormControl>
+          <CustomFormControl>
+            <CustomInputLabel variant="body2" component="label" id="saloType-helper-label">
+              Salon type
+            </CustomInputLabel>
+            <Select
+              labelId="saloType-helper-label"
+              id="saloType-helper"
+              value={salonType}
+              onChange={handleSalonTypeChange}
+              renderValue={() => ''}
+              size="small"
+              multiple
+              MenuProps={{
+                transformOrigin: {
+                  vertical: 'top',
+                  horizontal: 'left',
+                },
+                anchorOrigin: {
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                },
+              }}
+            >
+              {salonTypes.map((el) => (
+                <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize' }}>
+                  <Checkbox checked={salonType.indexOf(el._id) > -1} />
+                  <ListItemText primary={el.name} />
+                </MenuItem>
+              ))}
+            </Select>
+          </CustomFormControl>
 
-      <CustomFormControl>
-        <CustomInputLabel variant="body2" component="label" id="sortBy-helper-label">
-          Sort by
-        </CustomInputLabel>
-        <Select
-          labelId="sortBy-helper-label"
-          id="sortBy-helper"
-          value={sortBy}
-          onChange={handleSortByChange}
-          renderValue={() => ''}
-          size="small"
-          MenuProps={{
-            transformOrigin: {
-              vertical: 'top',
-              horizontal: 'left',
-            },
-            anchorOrigin: {
-              vertical: 'bottom',
-              horizontal: 'left',
-            },
-          }}
-        >
-          {sortByOption.map((el) => (
-            <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize' }}>
-              <Radio checked={el._id === sortBy} />
-              <ListItemText primary={el.name} />
-            </MenuItem>
+          <CustomFormControl>
+            <CustomInputLabel variant="body2" component="label" id="sortBy-helper-label">
+              Sort by
+            </CustomInputLabel>
+            <Select
+              labelId="sortBy-helper-label"
+              id="sortBy-helper"
+              value={sortBy}
+              onChange={handleSortByChange}
+              renderValue={() => ''}
+              size="small"
+              MenuProps={{
+                transformOrigin: {
+                  vertical: 'top',
+                  horizontal: 'left',
+                },
+                anchorOrigin: {
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                },
+              }}
+            >
+              {sortByOption.map((el) => (
+                <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize' }}>
+                  <Radio checked={el._id === sortBy} />
+                  <ListItemText primary={el.name} />
+                </MenuItem>
+              ))}
+            </Select>
+          </CustomFormControl>
+        </Stack>
+      </Stack>
+
+      <Stack direction="row" spacing={2} width="100%" overflow="auto" marginTop={2}>
+        {location !== '' && (
+          <Chip
+            label={`Location: ${cities.find((el) => el._id === location)?.name}`}
+            onDelete={() => setLocation('')}
+            sx={{
+              textTransform: 'capitalize',
+              color: theme.palette.background.paper,
+              backgroundColor: theme.palette.secondary.main,
+              'svg.MuiChip-deleteIcon': {
+                color: alpha(theme.palette.common.white, 0.4),
+              },
+              'svg.MuiChip-deleteIcon:hover': {
+                color: alpha(theme.palette.common.white, 0.5),
+              },
+            }}
+          />
+        )}
+        {salonType.length > 0 &&
+          salonType.map((type) => (
+            <Chip
+              key={type}
+              label={`Salon type: ${salonTypes.find((el) => el._id === type)?.name}`}
+              onDelete={() => setLocation('')}
+              sx={{
+                textTransform: 'capitalize',
+                color: theme.palette.background.paper,
+                backgroundColor: theme.palette.salonType[salonTypes.find((el) => el._id === type)?.name as SalonType],
+                'svg.MuiChip-deleteIcon': {
+                  color: alpha(theme.palette.common.white, 0.4),
+                },
+                'svg.MuiChip-deleteIcon:hover': {
+                  color: alpha(theme.palette.common.white, 0.5),
+                },
+              }}
+            />
           ))}
-        </Select>
-      </CustomFormControl>
+        {sortBy !== '' && (
+          <Chip
+            label={`Sort by: ${sortByOption.find((el) => el._id === sortBy)?.name}`}
+            onDelete={() => setSortBy('')}
+            sx={{
+              textTransform: 'capitalize',
+              color: theme.palette.background.paper,
+              backgroundColor: theme.palette.info.main,
+              'svg.MuiChip-deleteIcon': {
+                color: alpha(theme.palette.common.white, 0.4),
+              },
+              'svg.MuiChip-deleteIcon:hover': {
+                color: alpha(theme.palette.common.white, 0.5),
+              },
+            }}
+          />
+        )}
+      </Stack>
     </Container>
   );
 };
