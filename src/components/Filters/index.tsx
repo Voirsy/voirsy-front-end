@@ -4,7 +4,6 @@ import {
   Checkbox,
   Chip,
   Container,
-  hexToRgb,
   IconButton,
   InputBase,
   ListItemText,
@@ -65,7 +64,7 @@ const Filters = () => {
 
   return (
     <Container component="nav" maxWidth={false}>
-      <Stack direction={matches ? 'row' : 'column'} spacing={2}>
+      <Stack direction={matches ? 'row' : 'column'} spacing={matches ? 2 : 1}>
         <InputWrapper>
           <IconButton aria-label="menu" size="small">
             <Search />
@@ -78,7 +77,7 @@ const Filters = () => {
           />
         </InputWrapper>
 
-        <Stack direction="row" spacing={2}>
+        <Stack direction="row" spacing={matches ? 2 : 1} width="100%" overflow={matches ? 'visible' : 'auto'}>
           <CustomFormControl isPrimary>
             <CustomInputLabel isPrimary variant="body2" component="label" id="location-helper-label">
               Location
@@ -179,7 +178,7 @@ const Filters = () => {
         </Stack>
       </Stack>
 
-      <Stack direction="row" spacing={2} width="100%" overflow="auto" marginTop={2}>
+      <Stack direction="row" spacing={matches ? 2 : 1} width="100%" overflow="auto" marginTop={matches ? 2 : 1}>
         {location !== '' && (
           <Chip
             label={`Location: ${cities.find((el) => el._id === location)?.name}`}

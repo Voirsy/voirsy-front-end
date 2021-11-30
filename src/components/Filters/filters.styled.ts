@@ -15,6 +15,9 @@ export const InputWrapper = styled('div')(() => ({
   button: {
     margin: `0 ${theme.spacing(1)}`,
   },
+  ':focus-within': {
+    border: `1px solid ${theme.palette.primary.main}`,
+  },
   [theme.breakpoints.up('sm')]: {
     maxWidth: '400px',
   },
@@ -25,13 +28,18 @@ export const CustomInputLabel = styled(Typography)<{ isPrimary?: boolean }>(({ i
   inset: 0,
   display: 'flex',
   alignItems: 'center',
-  paddingLeft: theme.spacing(2),
+  paddingLeft: theme.spacing(1),
   color: isPrimary ? theme.palette.background.paper : theme.palette.text.primary,
   textTransform: 'uppercase',
+
+  [theme.breakpoints.up('sm')]: {
+    paddingLeft: theme.spacing(2),
+  },
 }));
 
 export const CustomFormControl = styled(FormControl)<{ isPrimary?: boolean }>(({ isPrimary }) => ({
   flexGrow: 1,
+  minWidth: '130px',
   borderRadius: theme.shape.borderRadius,
   background: isPrimary ? theme.palette.primary.main : theme.palette.background.paper,
   fieldset: {
@@ -41,6 +49,6 @@ export const CustomFormControl = styled(FormControl)<{ isPrimary?: boolean }>(({
     fill: isPrimary ? theme.palette.background.paper : theme.palette.text.primary,
   },
   [theme.breakpoints.up('sm')]: {
-    width: '140px',
+    maxWidth: '140px',
   },
 }));
