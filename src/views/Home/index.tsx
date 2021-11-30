@@ -1,7 +1,7 @@
 import { Container, Grid } from '@mui/material';
 import Filters from 'components/Filters';
 import SalonCard from 'components/SalonCard';
-import { SalonType } from '../../enums/salonType.enum';
+import { SalonType } from 'enums/salonType.enum';
 
 const Home = () => (
   <main>
