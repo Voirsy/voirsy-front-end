@@ -20,22 +20,23 @@ export const InputWrapper = styled('div')(() => ({
   },
 }));
 
-export const CustomInputLabel = styled(Typography)(() => ({
+export const CustomInputLabel = styled(Typography)<{ isPrimary?: boolean }>(({ isPrimary }) => ({
   position: 'absolute',
   inset: 0,
   display: 'flex',
   alignItems: 'center',
   paddingLeft: theme.spacing(2),
-  color: theme.palette.background.paper,
+  color: isPrimary ? theme.palette.background.paper : theme.palette.text.primary,
+  textTransform: 'uppercase',
 }));
 
-export const CustomFormControl = styled(FormControl)(() => ({
-  width: '120px',
-  background: theme.palette.primary.main,
+export const CustomFormControl = styled(FormControl)<{ isPrimary?: boolean }>(({ isPrimary }) => ({
+  width: '140px',
+  background: isPrimary ? theme.palette.primary.main : theme.palette.background.paper,
   fieldset: {
-    borderColor: theme.palette.primary.main,
+    borderColor: isPrimary ? theme.palette.primary.main : theme.palette.grey[400],
   },
   'svg *': {
-    fill: theme.palette.background.paper,
+    fill: isPrimary ? theme.palette.background.paper : theme.palette.text.primary,
   },
 }));
