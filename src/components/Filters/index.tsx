@@ -17,6 +17,7 @@ import { Search } from '@mui/icons-material';
 import { CustomFormControl, CustomInputLabel, InputWrapper } from './filters.styled';
 import theme from 'theme';
 import { SalonType } from 'enums/salonType.enum';
+import { SortType } from '../../enums/sortType.enum';
 
 const cities = [
   { _id: '540d638c-44b1-4aa7-a4b3-289decfa2962', name: 'warsaw' },
@@ -35,12 +36,6 @@ const salonTypes = [
   { _id: '540d638c-44b1-4aa7-a4b3-289decfa2973', name: SalonType.Hairdressers },
   { _id: '540d638c-44b1-4aa7-a4b3-289decfa2974', name: SalonType.Beauticians },
   { _id: '540d638c-44b1-4aa7-a4b3-289decfa2975', name: SalonType.Tattooists },
-];
-
-const sortByOption = [
-  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2982', name: 'most popular' },
-  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2983', name: 'top rated' },
-  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2984', name: 'quantity of ratings' },
 ];
 
 const Filters = () => {
@@ -79,7 +74,7 @@ const Filters = () => {
 
         <Stack direction="row" spacing={matches ? 2 : 1} width="100%" overflow={matches ? 'visible' : 'auto'}>
           <CustomFormControl isPrimary>
-            <CustomInputLabel isPrimary variant="body2" component="label" id="location-helper-label">
+            <CustomInputLabel isPrimary variant="body2" id="location-helper-label">
               Location
             </CustomInputLabel>
             <Select
@@ -114,7 +109,7 @@ const Filters = () => {
           </CustomFormControl>
 
           <CustomFormControl>
-            <CustomInputLabel variant="body2" component="label" id="saloType-helper-label">
+            <CustomInputLabel variant="body2" id="saloType-helper-label">
               Salon type
             </CustomInputLabel>
             <Select
@@ -146,7 +141,7 @@ const Filters = () => {
           </CustomFormControl>
 
           <CustomFormControl>
-            <CustomInputLabel variant="body2" component="label" id="sortBy-helper-label">
+            <CustomInputLabel variant="body2" id="sortBy-helper-label">
               Sort by
             </CustomInputLabel>
             <Select
@@ -167,10 +162,10 @@ const Filters = () => {
                 },
               }}
             >
-              {sortByOption.map((el) => (
-                <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize' }}>
-                  <Radio checked={el._id === sortBy} />
-                  <ListItemText primary={el.name} />
+              {Object.entries(SortType).map((key) => (
+                <MenuItem key={key[0]} value={key[0]} sx={{ textTransform: 'capitalize' }}>
+                  <Radio checked={key[0] === sortBy} />
+                  <ListItemText primary={key[1]} />
                 </MenuItem>
               ))}
             </Select>
@@ -217,7 +212,7 @@ const Filters = () => {
           ))}
         {sortBy !== '' && (
           <Chip
-            label={`Sort by: ${sortByOption.find((el) => el._id === sortBy)?.name}`}
+            label={`Sort by: ${Object.entries(SortType).find((el) => el[0] === sortBy)?.[1]}`}
             onDelete={() => setSortBy('')}
             sx={{
               textTransform: 'capitalize',
