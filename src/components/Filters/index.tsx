@@ -17,7 +17,8 @@ import { Search } from '@mui/icons-material';
 import { CustomFormControl, CustomInputLabel, InputWrapper } from './filters.styled';
 import theme from 'theme';
 import { SalonType } from 'enums/salonType.enum';
-import { SortType } from '../../enums/sortType.enum';
+import { SortType } from 'enums/sortType.enum';
+import { useLazyFetchAllSalonsQuery } from 'store/api/salons';
 
 const cities = [
   { _id: '540d638c-44b1-4aa7-a4b3-289decfa2962', name: 'warsaw' },
@@ -32,7 +33,7 @@ const cities = [
 ];
 
 const salonTypes = [
-  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2972', name: SalonType.Barber },
+  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2972', name: SalonType.Barbers },
   { _id: '540d638c-44b1-4aa7-a4b3-289decfa2973', name: SalonType.Hairdressers },
   { _id: '540d638c-44b1-4aa7-a4b3-289decfa2974', name: SalonType.Beauticians },
   { _id: '540d638c-44b1-4aa7-a4b3-289decfa2975', name: SalonType.Tattooists },
@@ -43,7 +44,9 @@ const Filters = () => {
   const [search, setSearch] = useState('');
   const [location, setLocation] = useState('');
   const [salonType, setSalonType] = useState<string[]>([]);
-  const [sortBy, setSortBy] = useState('');
+  const [sortBy, setSortBy] = useState<string>('');
+  const [fetchAllSalons, { error, data }] = useLazyFetchAllSalonsQuery();
+  console.log('From RTK: ', error, data);
 
   const handleSearchChange = (event: any) => setSearch(event.target.value);
   const handleLocationChange = (event: any) => setLocation(event.target.value);
@@ -55,6 +58,7 @@ const Filters = () => {
     console.log('Location: ', location);
     console.log('Salon type: ', salonType);
     console.log('Sort by: ', sortBy);
+    fetchAllSalons({ search, location, sortBy });
   }, [location, search, salonType, sortBy]);
 
   return (

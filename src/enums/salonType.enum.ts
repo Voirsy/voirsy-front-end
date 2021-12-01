@@ -1,5 +1,5 @@
 export enum SalonType {
-  Barber = 'Barber',
+  Barbers = 'Barbers',
   Hairdressers = 'Hairdressers',
   Beauticians = 'Beauticians',
   Tattooists = 'Tattooists',

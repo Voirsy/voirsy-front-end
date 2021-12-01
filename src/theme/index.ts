@@ -29,7 +29,7 @@ const theme = createTheme({
       contrastText: '#fff',
     },
     salonType: {
-      Barber: '#FF7F11',
+      Barbers: '#FF7F11',
       Beauticians: '#D6A2AD',
       Hairdressers: '#7371FC',
       Tattooists: '#B80C09',

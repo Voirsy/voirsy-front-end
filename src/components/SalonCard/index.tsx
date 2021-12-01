@@ -36,7 +36,11 @@ const SalonCard = ({ imageUrl, name, city, address, rating, salonType }: SalonCa
             {city}
           </Typography>
         </Stack>
-        <SalonTypeChip label={salonType} size="small" salonType={salonType} />
+        <Stack direction="row" spacing={1}>
+          {salonType.map((el) => (
+            <SalonTypeChip key={el} label={el} size="small" salonType={el} />
+          ))}
+        </Stack>
       </CustomCardContent>
     </CustomCard>
   );
