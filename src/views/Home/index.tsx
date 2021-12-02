@@ -12,8 +12,6 @@ const Home = () => {
     fetchAllSalons({ location, sortBy, salonType, search });
   }, []);
 
-  console.log('Is fetching: ', isFetching);
-
   useEffect(() => {
     fetchAllSalons({});
   }, []);

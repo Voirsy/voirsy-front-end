@@ -46,10 +46,14 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
   const [salonType, setSalonType] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<string>('');
 
-  const handleSearchChange = (event: any) => setSearch(event.target.value);
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => setSearch(event.target.value);
   const handleLocationChange = (event: any) => setLocation(event.target.value);
   const handleSalonTypeChange = (event: any) => setSalonType(event.target.value);
   const handleSortByChange = (event: any) => setSortBy(event.target.value);
+
+  const handleSubmitSearch = () => {
+    handleFetching({ search, location, sortBy, salonType });
+  };
 
   useEffect(() => {
     if (location === '' && search === '' && salonType.length === 0 && sortBy === '') return;
@@ -58,13 +62,13 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
     // console.log('Salon type: ', salonType);
     // console.log('Sort by: ', sortBy);
     handleFetching({ search, location, sortBy, salonType });
-  }, [location, search, salonType, sortBy]);
+  }, [location, salonType, sortBy]);
 
   return (
     <Container component="nav" maxWidth={false}>
       <Stack direction={matches ? 'row' : 'column'} spacing={matches ? 2 : 1}>
         <InputWrapper>
-          <IconButton aria-label="menu" size="small">
+          <IconButton aria-label="menu" size="small" onClick={handleSubmitSearch}>
             <Search />
           </IconButton>
           <InputBase
@@ -72,6 +76,9 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
             inputProps={{ 'aria-label': 'search voirsy' }}
             value={search}
             onChange={handleSearchChange}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleSubmitSearch();
+            }}
           />
         </InputWrapper>
 
