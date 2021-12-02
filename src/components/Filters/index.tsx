@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   Box,
   Checkbox,
@@ -19,8 +19,16 @@ import { SortType } from 'enums/sortType.enum';
 import FilterChip from './Components/FilterChip';
 import Select from './Components/Select';
 import { useFetchAllCategoriesQuery, useFetchAllCitiesQuery } from 'store/api/salons';
+import { useLocation } from 'react-router-dom';
+
+function useQuery() {
+  const { search } = useLocation();
+
+  return useMemo(() => new URLSearchParams(search), [search]);
+}
 
 const Filters = ({ handleFetching }: { handleFetching: any }) => {
+  const query = useQuery();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const [search, setSearch] = useState('');
   const [location, setLocation] = useState('');
@@ -37,6 +45,28 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
   const handleSubmitSearch = () => {
     handleFetching({ search, location, sortBy, salonType });
   };
+
+  useEffect(() => {
+    const querySearch = query.get('search') || '';
+    const querySortBy = query.get('sortBy') || '';
+
+    setSearch(querySearch);
+    if (Object.keys(SortType).includes(querySortBy)) setSortBy(querySortBy);
+  }, []);
+
+  useEffect(() => {
+    const queryLocation = query.get('location') || '';
+    const querySalonType = query.get('salonType') || '';
+    if (!salonTypesFetching) {
+      const types = salonTypes.filter((el) => querySalonType.toLowerCase().split(',').includes(el.name.toLowerCase()));
+      console.log(types, querySalonType.split(','));
+      setSalonType(types.map((type) => type._id));
+    }
+    if (!citiesFetching) {
+      const loc = cities.filter((el) => queryLocation.toLowerCase() === el.name.toLowerCase());
+      if (loc.length === 1) setLocation(loc[0]._id);
+    }
+  }, [salonTypesFetching, citiesFetching]);
 
   useEffect(() => {
     if (location === '' && search === '' && salonType.length === 0 && sortBy === '') return;
