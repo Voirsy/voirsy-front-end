@@ -1,7 +1,7 @@
 import { CardMedia, Typography, Chip, Stack } from '@mui/material';
 import { Place, LocationCity, Star, FavoriteBorder } from '@mui/icons-material';
 import { SalonCardTypes } from './salonCard.types';
-import { CustomCard, CustomCardContent, HeartButton, Rating, SalonTypeChip } from './salonCard.styled';
+import { CustomCard, CustomCardContent, HeartButton, Rating } from './salonCard.styled';
 import { isAuth } from 'helpers/auth';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/store';
@@ -38,7 +38,7 @@ const SalonCard = ({ imageUrl, name, city, address, rating, salonType }: SalonCa
         </Stack>
         <Stack direction="row" spacing={1}>
           {salonType.map((el) => (
-            <SalonTypeChip key={el} label={el} size="small" salonType={el} />
+            <Chip key={el} label={el} size="small" color="secondary" />
           ))}
         </Stack>
       </CustomCardContent>

@@ -18,7 +18,7 @@ import { CustomFormControl, CustomInputLabel, InputWrapper } from './filters.sty
 import theme from 'theme';
 import { SalonType } from 'enums/salonType.enum';
 import { SortType } from 'enums/sortType.enum';
-import { useLazyFetchAllSalonsQuery } from 'store/api/salons';
+import FilterChip from './Components/FilterChip';
 
 const cities = [
   { _id: '540d638c-44b1-4aa7-a4b3-289decfa2962', name: 'warsaw' },
@@ -39,14 +39,12 @@ const salonTypes = [
   { _id: '540d638c-44b1-4aa7-a4b3-289decfa2975', name: SalonType.Tattooists },
 ];
 
-const Filters = () => {
+const Filters = ({ handleFetching }: { handleFetching: any }) => {
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const [search, setSearch] = useState('');
   const [location, setLocation] = useState('');
   const [salonType, setSalonType] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<string>('');
-  const [fetchAllSalons, { error, data }] = useLazyFetchAllSalonsQuery();
-  console.log('From RTK: ', error, data);
 
   const handleSearchChange = (event: any) => setSearch(event.target.value);
   const handleLocationChange = (event: any) => setLocation(event.target.value);
@@ -54,11 +52,12 @@ const Filters = () => {
   const handleSortByChange = (event: any) => setSortBy(event.target.value);
 
   useEffect(() => {
-    console.log('Search: ', search);
-    console.log('Location: ', location);
-    console.log('Salon type: ', salonType);
-    console.log('Sort by: ', sortBy);
-    fetchAllSalons({ search, location, sortBy });
+    if (location === '' && search === '' && salonType.length === 0 && sortBy === '') return;
+    // console.log('Search: ', search);
+    // console.log('Location: ', location);
+    // console.log('Salon type: ', salonType);
+    // console.log('Sort by: ', sortBy);
+    handleFetching({ search, location, sortBy, salonType });
   }, [location, search, salonType, sortBy]);
 
   return (
@@ -179,56 +178,23 @@ const Filters = () => {
 
       <Stack direction="row" spacing={matches ? 2 : 1} width="100%" overflow="auto" marginTop={matches ? 2 : 1}>
         {location !== '' && (
-          <Chip
+          <FilterChip
             label={`Location: ${cities.find((el) => el._id === location)?.name}`}
             onDelete={() => setLocation('')}
-            sx={{
-              textTransform: 'capitalize',
-              color: theme.palette.background.paper,
-              backgroundColor: theme.palette.secondary.main,
-              'svg.MuiChip-deleteIcon': {
-                color: alpha(theme.palette.common.white, 0.4),
-              },
-              'svg.MuiChip-deleteIcon:hover': {
-                color: alpha(theme.palette.common.white, 0.5),
-              },
-            }}
           />
         )}
         {salonType.length > 0 &&
           salonType.map((type) => (
-            <Chip
+            <FilterChip
               key={type}
               label={`Salon type: ${salonTypes.find((el) => el._id === type)?.name}`}
-              onDelete={() => setLocation('')}
-              sx={{
-                textTransform: 'capitalize',
-                color: theme.palette.background.paper,
-                backgroundColor: theme.palette.salonType[salonTypes.find((el) => el._id === type)?.name as SalonType],
-                'svg.MuiChip-deleteIcon': {
-                  color: alpha(theme.palette.common.white, 0.4),
-                },
-                'svg.MuiChip-deleteIcon:hover': {
-                  color: alpha(theme.palette.common.white, 0.5),
-                },
-              }}
+              onDelete={() => setSalonType(salonType.filter((el) => el !== type))}
             />
           ))}
         {sortBy !== '' && (
-          <Chip
+          <FilterChip
             label={`Sort by: ${Object.entries(SortType).find((el) => el[0] === sortBy)?.[1]}`}
             onDelete={() => setSortBy('')}
-            sx={{
-              textTransform: 'capitalize',
-              color: theme.palette.background.paper,
-              backgroundColor: theme.palette.info.main,
-              'svg.MuiChip-deleteIcon': {
-                color: alpha(theme.palette.common.white, 0.4),
-              },
-              'svg.MuiChip-deleteIcon:hover': {
-                color: alpha(theme.palette.common.white, 0.5),
-              },
-            }}
           />
         )}
       </Stack>

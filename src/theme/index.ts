@@ -1,18 +1,4 @@
 import { createTheme } from '@mui/material';
-import { SalonType } from 'enums/salonType.enum';
-
-declare module '@mui/material/styles' {
-  interface Palette {
-    salonType: {
-      [key in SalonType]: string;
-    };
-  }
-  interface PaletteOptions {
-    salonType?: {
-      [key in SalonType]?: string;
-    };
-  }
-}
 
 const theme = createTheme({
   palette: {
@@ -27,12 +13,6 @@ const theme = createTheme({
       main: '#c43d7c',
       dark: '#8f0050',
       contrastText: '#fff',
-    },
-    salonType: {
-      Barbers: '#FF7F11',
-      Beauticians: '#D6A2AD',
-      Hairdressers: '#7371FC',
-      Tattooists: '#B80C09',
     },
   },
 });

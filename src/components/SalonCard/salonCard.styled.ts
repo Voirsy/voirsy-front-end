@@ -1,6 +1,5 @@
 import { Card, CardContent, Chip, IconButton, styled } from '@mui/material';
 import theme from 'theme';
-import { SalonType } from 'enums/salonType.enum';
 
 export const CustomCard = styled(Card)`
   position: relative;
@@ -8,6 +7,10 @@ export const CustomCard = styled(Card)`
 
 export const CustomCardContent = styled(CardContent)`
   position: relative;
+
+  :last-child {
+    padding-bottom: ${theme.spacing(2)};
+  }
 `;
 
 export const Rating = styled(Chip)(() => ({
@@ -31,9 +34,4 @@ export const HeartButton = styled(IconButton)(() => ({
   ':hover': {
     backgroundColor: theme.palette.background.paper,
   },
-}));
-
-export const SalonTypeChip = styled(Chip)<{ salonType: SalonType }>(({ salonType }) => ({
-  backgroundColor: theme.palette.salonType[salonType],
-  color: theme.palette.getContrastText(theme.palette.text.primary),
 }));

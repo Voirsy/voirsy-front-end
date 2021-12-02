@@ -8,6 +8,7 @@ interface FetchAllSalon {
   location?: string;
   search?: string;
   sortBy?: string;
+  salonType?: string;
 }
 
 export const salonsApi = createApi({
@@ -18,7 +19,7 @@ export const salonsApi = createApi({
       Pick<Salon, '_id' | 'address' | 'name' | 'city' | 'type' | 'rating' | 'imageUrl'>[],
       FetchAllSalon
     >({
-      query: ({ location = '', search = '', sortBy = '' }) => ({
+      query: ({ location = '', search = '', sortBy = '', salonType = '' }) => ({
         // we will need to add POST method and body with passed arguments
         url: `${SALONS.FETCH_SALONS}`,
       }),
