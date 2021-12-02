@@ -1,42 +1,24 @@
 import { useEffect, useState } from 'react';
 import {
+  Box,
   Checkbox,
+  CircularProgress,
   Container,
   IconButton,
   InputBase,
   ListItemText,
   MenuItem,
   Radio,
-  Select as MuiSelect,
   Stack,
   useMediaQuery,
 } from '@mui/material';
 import { Search } from '@mui/icons-material';
-import { CustomFormControl, CustomInputLabel, InputWrapper } from './filters.styled';
+import { InputWrapper } from './filters.styled';
 import theme from 'theme';
-import { SalonType } from 'enums/salonType.enum';
 import { SortType } from 'enums/sortType.enum';
 import FilterChip from './Components/FilterChip';
 import Select from './Components/Select';
-
-const cities = [
-  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2962', name: 'warsaw' },
-  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2963', name: 'cracow' },
-  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2964', name: 'poznan' },
-  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2965', name: 'gdansk' },
-  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2966', name: 'bydgoszcz' },
-  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2967', name: 'wroclaw' },
-  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2968', name: 'bialystok' },
-  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2969', name: 'szczecin' },
-  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2970', name: 'lodz' },
-];
-
-const salonTypes = [
-  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2972', name: SalonType.Barbers },
-  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2973', name: SalonType.Hairdressers },
-  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2974', name: SalonType.Beauticians },
-  { _id: '540d638c-44b1-4aa7-a4b3-289decfa2975', name: SalonType.Tattooists },
-];
+import { useFetchAllCategoriesQuery, useFetchAllCitiesQuery } from 'store/api/salons';
 
 const Filters = ({ handleFetching }: { handleFetching: any }) => {
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
@@ -44,6 +26,8 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
   const [location, setLocation] = useState('');
   const [salonType, setSalonType] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<string>('');
+  const { data: salonTypes = [], isFetching: salonTypesFetching } = useFetchAllCategoriesQuery();
+  const { data: cities = [], isFetching: citiesFetching } = useFetchAllCitiesQuery();
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => setSearch(event.target.value);
   const handleLocationChange = (event: any) => setLocation(event.target.value);
@@ -56,10 +40,6 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
 
   useEffect(() => {
     if (location === '' && search === '' && salonType.length === 0 && sortBy === '') return;
-    // console.log('Search: ', search);
-    // console.log('Location: ', location);
-    // console.log('Salon type: ', salonType);
-    // console.log('Sort by: ', sortBy);
     handleFetching({ search, location, sortBy, salonType });
   }, [location, salonType, sortBy]);
 
@@ -93,21 +73,33 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
               },
             }}
           >
-            {cities.map((el) => (
-              <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize' }}>
-                <Radio checked={el._id === location} />
-                <ListItemText primary={el.name} />
-              </MenuItem>
-            ))}
+            {citiesFetching ? (
+              <Box display="flex" justifyContent="center" padding="10px 0">
+                <CircularProgress />
+              </Box>
+            ) : (
+              cities.map((el) => (
+                <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize' }}>
+                  <Radio checked={el._id === location} />
+                  <ListItemText primary={el.name} />
+                </MenuItem>
+              ))
+            )}
           </Select>
 
           <Select label="Salon type" value={salonType} onChange={handleSalonTypeChange} multiple>
-            {salonTypes.map((el) => (
-              <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize' }}>
-                <Checkbox checked={salonType.indexOf(el._id) > -1} />
-                <ListItemText primary={el.name} />
-              </MenuItem>
-            ))}
+            {salonTypesFetching ? (
+              <Box display="flex" justifyContent="center" padding="10px 0">
+                <CircularProgress />
+              </Box>
+            ) : (
+              salonTypes.map((el) => (
+                <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize' }}>
+                  <Checkbox checked={salonType.indexOf(el._id) > -1} />
+                  <ListItemText primary={el.name} />
+                </MenuItem>
+              ))
+            )}
           </Select>
 
           <Select label="Sort by" value={sortBy} onChange={handleSortByChange}>
