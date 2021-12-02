@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
 import {
-  alpha,
   Checkbox,
-  Chip,
   Container,
   IconButton,
   InputBase,
   ListItemText,
   MenuItem,
   Radio,
-  Select,
+  Select as MuiSelect,
   Stack,
   useMediaQuery,
 } from '@mui/material';
@@ -19,6 +17,7 @@ import theme from 'theme';
 import { SalonType } from 'enums/salonType.enum';
 import { SortType } from 'enums/sortType.enum';
 import FilterChip from './Components/FilterChip';
+import Select from './Components/Select';
 
 const cities = [
   { _id: '540d638c-44b1-4aa7-a4b3-289decfa2962', name: 'warsaw' },
@@ -83,103 +82,42 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
         </InputWrapper>
 
         <Stack direction="row" spacing={matches ? 2 : 1} width="100%" overflow={matches ? 'visible' : 'auto'}>
-          <CustomFormControl isPrimary>
-            <CustomInputLabel isPrimary variant="body2" id="location-helper-label">
-              Location
-            </CustomInputLabel>
-            <Select
-              labelId="location-helper-label"
-              id="location-helper"
-              value={location}
-              onChange={handleLocationChange}
-              color="primary"
-              renderValue={() => ''}
-              size="small"
-              MenuProps={{
-                transformOrigin: {
-                  vertical: 'top',
-                  horizontal: 'left',
-                },
-                anchorOrigin: {
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                },
-                style: {
-                  maxHeight: '300px',
-                },
-              }}
-            >
-              {cities.map((el) => (
-                <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize' }}>
-                  <Radio checked={el._id === location} />
-                  <ListItemText primary={el.name} />
-                </MenuItem>
-              ))}
-            </Select>
-          </CustomFormControl>
+          <Select
+            isPrimary
+            label="Location"
+            value={location}
+            onChange={handleLocationChange}
+            MenuProps={{
+              style: {
+                maxHeight: '300px',
+              },
+            }}
+          >
+            {cities.map((el) => (
+              <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize' }}>
+                <Radio checked={el._id === location} />
+                <ListItemText primary={el.name} />
+              </MenuItem>
+            ))}
+          </Select>
 
-          <CustomFormControl>
-            <CustomInputLabel variant="body2" id="saloType-helper-label">
-              Salon type
-            </CustomInputLabel>
-            <Select
-              labelId="saloType-helper-label"
-              id="saloType-helper"
-              value={salonType}
-              onChange={handleSalonTypeChange}
-              renderValue={() => ''}
-              size="small"
-              multiple
-              MenuProps={{
-                transformOrigin: {
-                  vertical: 'top',
-                  horizontal: 'left',
-                },
-                anchorOrigin: {
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                },
-              }}
-            >
-              {salonTypes.map((el) => (
-                <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize' }}>
-                  <Checkbox checked={salonType.indexOf(el._id) > -1} />
-                  <ListItemText primary={el.name} />
-                </MenuItem>
-              ))}
-            </Select>
-          </CustomFormControl>
+          <Select label="Salon type" value={salonType} onChange={handleSalonTypeChange} multiple>
+            {salonTypes.map((el) => (
+              <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize' }}>
+                <Checkbox checked={salonType.indexOf(el._id) > -1} />
+                <ListItemText primary={el.name} />
+              </MenuItem>
+            ))}
+          </Select>
 
-          <CustomFormControl>
-            <CustomInputLabel variant="body2" id="sortBy-helper-label">
-              Sort by
-            </CustomInputLabel>
-            <Select
-              labelId="sortBy-helper-label"
-              id="sortBy-helper"
-              value={sortBy}
-              onChange={handleSortByChange}
-              renderValue={() => ''}
-              size="small"
-              MenuProps={{
-                transformOrigin: {
-                  vertical: 'top',
-                  horizontal: 'left',
-                },
-                anchorOrigin: {
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                },
-              }}
-            >
-              {Object.entries(SortType).map((key) => (
-                <MenuItem key={key[0]} value={key[0]} sx={{ textTransform: 'capitalize' }}>
-                  <Radio checked={key[0] === sortBy} />
-                  <ListItemText primary={key[1]} />
-                </MenuItem>
-              ))}
-            </Select>
-          </CustomFormControl>
+          <Select label="Sort by" value={sortBy} onChange={handleSortByChange}>
+            {Object.entries(SortType).map((key) => (
+              <MenuItem key={key[0]} value={key[0]} sx={{ textTransform: 'capitalize' }}>
+                <Radio checked={key[0] === sortBy} />
+                <ListItemText primary={key[1]} />
+              </MenuItem>
+            ))}
+          </Select>
         </Stack>
       </Stack>
 
