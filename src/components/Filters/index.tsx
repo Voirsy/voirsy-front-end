@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   Box,
   Checkbox,
@@ -19,16 +19,17 @@ import { SortType } from 'enums/sortType.enum';
 import FilterChip from './Components/FilterChip';
 import Select from './Components/Select';
 import { useFetchAllCategoriesQuery, useFetchAllCitiesQuery } from 'store/api/salons';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 function useQuery() {
   const { search } = useLocation();
-
   return useMemo(() => new URLSearchParams(search), [search]);
 }
 
 const Filters = ({ handleFetching }: { handleFetching: any }) => {
   const query = useQuery();
+  const { pathname } = useLocation();
+  const history = useHistory();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const [search, setSearch] = useState('');
   const [location, setLocation] = useState('');
@@ -37,12 +38,28 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
   const { data: salonTypes = [], isFetching: salonTypesFetching } = useFetchAllCategoriesQuery();
   const { data: cities = [], isFetching: citiesFetching } = useFetchAllCitiesQuery();
 
+  const setParams = useCallback(() => {
+    const params = new URLSearchParams();
+    if (search !== '') params.append('search', search);
+    if (sortBy !== '') params.append('sortBy', sortBy);
+    if (salonType.length > 0) {
+      const types = salonTypes.filter((el) => salonType.includes(el._id));
+      params.append('salonType', types.map((el) => el.name).join(','));
+    }
+    if (location !== '') {
+      const loc = cities.filter((el) => location === el._id);
+      if (loc.length === 1) params.append('location', loc[0].name);
+    }
+    history.replace({ pathname: pathname, search: params.toString() });
+  }, [search, location, sortBy, salonType, salonTypes, cities]);
+
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => setSearch(event.target.value);
   const handleLocationChange = (event: any) => setLocation(event.target.value);
   const handleSalonTypeChange = (event: any) => setSalonType(event.target.value);
   const handleSortByChange = (event: any) => setSortBy(event.target.value);
 
   const handleSubmitSearch = () => {
+    setParams();
     handleFetching({ search, location, sortBy, salonType });
   };
 
@@ -59,7 +76,6 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
     const querySalonType = query.get('salonType') || '';
     if (!salonTypesFetching) {
       const types = salonTypes.filter((el) => querySalonType.toLowerCase().split(',').includes(el.name.toLowerCase()));
-      console.log(types, querySalonType.split(','));
       setSalonType(types.map((type) => type._id));
     }
     if (!citiesFetching) {
@@ -69,9 +85,10 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
   }, [salonTypesFetching, citiesFetching]);
 
   useEffect(() => {
-    if (location === '' && search === '' && salonType.length === 0 && sortBy === '') return;
+    if (salonTypesFetching || citiesFetching) return;
+    setParams();
     handleFetching({ search, location, sortBy, salonType });
-  }, [location, salonType, sortBy]);
+  }, [location, salonType, sortBy, salonTypesFetching, citiesFetching]);
 
   return (
     <Container component="nav" maxWidth={false}>
