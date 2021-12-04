@@ -32,6 +32,7 @@ const Home = () => {
             {data.map((el, i) => (
               <Grid item key={i} xs={12} sm={6} md={4} lg={3}>
                 <SalonCard
+                  _id={el._id}
                   address={el.address}
                   city={el.city}
                   imageUrl={el.imageUrl}

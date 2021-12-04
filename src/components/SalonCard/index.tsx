@@ -1,13 +1,13 @@
 import { CardMedia, Typography, Chip, Stack } from '@mui/material';
 import { Place, LocationCity, Star, FavoriteBorder } from '@mui/icons-material';
 import { SalonCardTypes } from './salonCard.types';
-import { CustomCard, CustomCardContent, HeartButton, Rating } from './salonCard.styled';
+import { CustomCard, CustomCardContent, CustomLink, HeartButton, Rating } from './salonCard.styled';
 import { isAuth } from 'helpers/auth';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/store';
 import { UserRole } from 'enums/userRole.enum';
 
-const SalonCard = ({ imageUrl, name, city, address, rating, salonType }: SalonCardTypes) => {
+const SalonCard = ({ imageUrl, name, city, address, rating, salonType, _id }: SalonCardTypes) => {
   const userRole = useSelector((state: RootState) => state.user?.role);
   const showHeart = isAuth() && userRole !== UserRole.Business;
 
@@ -22,7 +22,7 @@ const SalonCard = ({ imageUrl, name, city, address, rating, salonType }: SalonCa
           </HeartButton>
         )}
         <Typography gutterBottom variant="subtitle1" component="div" noWrap maxWidth={showHeart ? '90%' : '100%'}>
-          {name}
+          <CustomLink to={`/${_id}`}>{name}</CustomLink>
         </Typography>
         <Stack direction="row" spacing={1} marginBottom={1} alignItems="center">
           <Place sx={{ color: 'text.secondary', fontSize: 20 }} />

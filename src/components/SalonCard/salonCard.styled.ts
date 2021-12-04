@@ -1,5 +1,6 @@
 import { Card, CardContent, Chip, IconButton, styled } from '@mui/material';
 import theme from 'theme';
+import { Link } from 'react-router-dom';
 
 export const CustomCard = styled(Card)`
   position: relative;
@@ -33,5 +34,14 @@ export const HeartButton = styled(IconButton)(() => ({
 
   ':hover': {
     backgroundColor: theme.palette.background.paper,
+  },
+}));
+
+export const CustomLink = styled(Link)(() => ({
+  textDecoration: 'none',
+  color: theme.palette.text.primary,
+
+  ':hover': {
+    color: theme.palette.text.secondary,
   },
 }));
