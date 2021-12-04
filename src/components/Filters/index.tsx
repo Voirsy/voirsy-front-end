@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Checkbox,
@@ -19,76 +19,28 @@ import { SortType } from 'enums/sortType.enum';
 import FilterChip from './Components/FilterChip';
 import Select from './Components/Select';
 import { useFetchAllCategoriesQuery, useFetchAllCitiesQuery } from 'store/api/salons';
-import { useHistory, useLocation } from 'react-router-dom';
-
-function useQuery() {
-  const { search } = useLocation();
-  return useMemo(() => new URLSearchParams(search), [search]);
-}
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'store/store';
+import { setFilters } from '../../store/slices/salonsFiltersSlice';
 
 const Filters = ({ handleFetching }: { handleFetching: any }) => {
-  const query = useQuery();
-  const { pathname } = useLocation();
-  const history = useHistory();
+  const filters = useSelector((state: RootState) => state.salonsFilters);
+  const dispatch = useDispatch();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const [search, setSearch] = useState('');
-  const [location, setLocation] = useState('');
-  const [salonType, setSalonType] = useState<string[]>([]);
-  const [sortBy, setSortBy] = useState<string>('');
   const { data: salonTypes = [], isFetching: salonTypesFetching } = useFetchAllCategoriesQuery();
   const { data: cities = [], isFetching: citiesFetching } = useFetchAllCitiesQuery();
 
-  const setParams = useCallback(() => {
-    const params = new URLSearchParams();
-    if (search !== '') params.append('search', search);
-    if (sortBy !== '') params.append('sortBy', sortBy);
-    if (salonType.length > 0) {
-      const types = salonTypes.filter((el) => salonType.includes(el._id));
-      params.append('salonType', types.map((el) => el.name).join(','));
-    }
-    if (location !== '') {
-      const loc = cities.filter((el) => location === el._id);
-      if (loc.length === 1) params.append('location', loc[0].name);
-    }
-    history.replace({ pathname: pathname, search: params.toString() });
-  }, [search, location, sortBy, salonType, salonTypes, cities]);
-
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => setSearch(event.target.value);
-  const handleLocationChange = (event: any) => setLocation(event.target.value);
-  const handleSalonTypeChange = (event: any) => setSalonType(event.target.value);
-  const handleSortByChange = (event: any) => setSortBy(event.target.value);
-
-  const handleSubmitSearch = () => {
-    setParams();
-    handleFetching({ search, location, sortBy, salonType });
-  };
-
-  useEffect(() => {
-    const querySearch = query.get('search') || '';
-    const querySortBy = query.get('sortBy') || '';
-
-    setSearch(querySearch);
-    if (Object.keys(SortType).includes(querySortBy)) setSortBy(querySortBy);
-  }, []);
-
-  useEffect(() => {
-    const queryLocation = query.get('location') || '';
-    const querySalonType = query.get('salonType') || '';
-    if (!salonTypesFetching) {
-      const types = salonTypes.filter((el) => querySalonType.toLowerCase().split(',').includes(el.name.toLowerCase()));
-      setSalonType(types.map((type) => type._id));
-    }
-    if (!citiesFetching) {
-      const loc = cities.filter((el) => queryLocation.toLowerCase() === el.name.toLowerCase());
-      if (loc.length === 1) setLocation(loc[0]._id);
-    }
-  }, [salonTypesFetching, citiesFetching]);
+  const handleLocationChange = (event: any) => dispatch(setFilters({ location: event.target.value }));
+  const handleSalonTypeChange = (event: any) => dispatch(setFilters({ salonType: event.target.value }));
+  const handleSortByChange = (event: any) => dispatch(setFilters({ sortBy: event.target.value }));
+  const handleSubmitSearch = () => dispatch(setFilters({ search }));
 
   useEffect(() => {
     if (salonTypesFetching || citiesFetching) return;
-    setParams();
-    handleFetching({ search, location, sortBy, salonType });
-  }, [location, salonType, sortBy, salonTypesFetching, citiesFetching]);
+    handleFetching({ filters });
+  }, [filters, salonTypesFetching, citiesFetching]);
 
   return (
     <Container component="nav" maxWidth={false}>
@@ -112,7 +64,7 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
           <Select
             isPrimary
             label="Location"
-            value={location}
+            value={filters.location}
             onChange={handleLocationChange}
             MenuProps={{
               style: {
@@ -127,14 +79,14 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
             ) : (
               cities.map((el) => (
                 <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize' }}>
-                  <Radio checked={el._id === location} />
+                  <Radio checked={el._id === filters.location} />
                   <ListItemText primary={el.name} />
                 </MenuItem>
               ))
             )}
           </Select>
 
-          <Select label="Salon type" value={salonType} onChange={handleSalonTypeChange} multiple>
+          <Select label="Salon type" value={filters.salonType} onChange={handleSalonTypeChange} multiple>
             {salonTypesFetching ? (
               <Box display="flex" justifyContent="center" padding="10px 0">
                 <CircularProgress />
@@ -142,17 +94,17 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
             ) : (
               salonTypes.map((el) => (
                 <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize' }}>
-                  <Checkbox checked={salonType.indexOf(el._id) > -1} />
+                  <Checkbox checked={filters.salonType.indexOf(el._id) > -1} />
                   <ListItemText primary={el.name} />
                 </MenuItem>
               ))
             )}
           </Select>
 
-          <Select label="Sort by" value={sortBy} onChange={handleSortByChange}>
+          <Select label="Sort by" value={filters.sortBy} onChange={handleSortByChange}>
             {Object.entries(SortType).map((key) => (
               <MenuItem key={key[0]} value={key[0]} sx={{ textTransform: 'capitalize' }}>
-                <Radio checked={key[0] === sortBy} />
+                <Radio checked={key[0] === filters.sortBy} />
                 <ListItemText primary={key[1]} />
               </MenuItem>
             ))}
@@ -161,24 +113,24 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
       </Stack>
 
       <Stack direction="row" spacing={matches ? 2 : 1} width="100%" overflow="auto" marginTop={matches ? 2 : 1}>
-        {location !== '' && (
+        {filters.location !== '' && (
           <FilterChip
-            label={`Location: ${cities.find((el) => el._id === location)?.name}`}
-            onDelete={() => setLocation('')}
+            label={`Location: ${cities.find((el) => el._id === filters.location)?.name}`}
+            onDelete={() => dispatch(setFilters({ location: '' }))}
           />
         )}
-        {salonType.length > 0 &&
-          salonType.map((type) => (
+        {filters.salonType.length > 0 &&
+          filters.salonType.map((type) => (
             <FilterChip
               key={type}
               label={`Salon type: ${salonTypes.find((el) => el._id === type)?.name}`}
-              onDelete={() => setSalonType(salonType.filter((el) => el !== type))}
+              onDelete={() => dispatch(setFilters({ salonType: filters.salonType.filter((el) => el !== type) }))}
             />
           ))}
-        {sortBy !== '' && (
+        {filters.sortBy !== '' && (
           <FilterChip
-            label={`Sort by: ${Object.entries(SortType).find((el) => el[0] === sortBy)?.[1]}`}
-            onDelete={() => setSortBy('')}
+            label={`Sort by: ${Object.entries(SortType).find((el) => el[0] === filters.sortBy)?.[1]}`}
+            onDelete={() => dispatch(setFilters({ sortBy: '' }))}
           />
         )}
       </Stack>
