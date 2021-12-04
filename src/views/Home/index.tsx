@@ -4,8 +4,10 @@ import SalonCard from 'components/SalonCard';
 import { SalonType } from 'enums/salonType.enum';
 import { useCallback, useEffect } from 'react';
 import { useLazyFetchAllSalonsQuery } from 'store/api/salons';
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
+  const [translation] = useTranslation();
   const [fetchAllSalons, { isError, data = [], isFetching }] = useLazyFetchAllSalonsQuery();
 
   const handleFetching = useCallback((location: string, sortBy: string, salonType: string, search: string) => {
@@ -16,7 +18,7 @@ const Home = () => {
     fetchAllSalons({});
   }, []);
 
-  if (isError) return <Typography>An error occured!</Typography>;
+  if (isError) return <Typography>{translation('home:error.unknown')}</Typography>;
 
   return (
     <main>

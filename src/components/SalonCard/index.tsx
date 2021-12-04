@@ -6,8 +6,10 @@ import { isAuth } from 'helpers/auth';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/store';
 import { UserRole } from 'enums/userRole.enum';
+import { useTranslation } from 'react-i18next';
 
 const SalonCard = ({ imageUrl, name, city, address, rating, salonType, _id }: SalonCardTypes) => {
+  const [translation] = useTranslation();
   const userRole = useSelector((state: RootState) => state.user?.role);
   const showHeart = isAuth() && userRole !== UserRole.Business;
 
@@ -38,7 +40,7 @@ const SalonCard = ({ imageUrl, name, city, address, rating, salonType, _id }: Sa
         </Stack>
         <Stack direction="row" spacing={1}>
           {salonType.map((el) => (
-            <Chip key={el} label={el} size="small" color="secondary" />
+            <Chip key={el} label={translation(`common:salonType.${el.toLowerCase()}`)} size="small" color="secondary" />
           ))}
         </Stack>
       </CustomCardContent>

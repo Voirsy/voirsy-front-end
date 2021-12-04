@@ -22,8 +22,10 @@ import { useFetchAllCategoriesQuery, useFetchAllCitiesQuery } from 'store/api/sa
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
 import { setFilters } from '../../store/slices/salonsFiltersSlice';
+import { useTranslation } from 'react-i18next';
 
 const Filters = ({ handleFetching }: { handleFetching: any }) => {
+  const [translation] = useTranslation();
   const filters = useSelector((state: RootState) => state.salonsFilters);
   const dispatch = useDispatch();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
@@ -50,8 +52,8 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
             <Search />
           </IconButton>
           <InputBase
-            placeholder="Search..."
-            inputProps={{ 'aria-label': 'search voirsy' }}
+            placeholder={`${translation('home:filters.search.label')}...`}
+            inputProps={{ 'aria-label': translation('home:filters.search.ariaLabel') }}
             value={search}
             onChange={handleSearchChange}
             onKeyDown={(e) => {
@@ -62,7 +64,7 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
 
         <Stack direction="row" spacing={matches ? 2 : 1} width="100%" overflow={matches ? 'visible' : 'auto'}>
           <Select
-            label="Location"
+            label={translation('home:filters.location.label')}
             value={filters.location}
             onChange={handleLocationChange}
             MenuProps={{
@@ -85,7 +87,12 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
             )}
           </Select>
 
-          <Select label="Salon type" value={filters.salonType} onChange={handleSalonTypeChange} multiple>
+          <Select
+            label={translation('home:filters.salonType.label')}
+            value={filters.salonType}
+            onChange={handleSalonTypeChange}
+            multiple
+          >
             {salonTypesFetching ? (
               <Box display="flex" justifyContent="center" padding="10px 0">
                 <CircularProgress />
@@ -100,11 +107,11 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
             )}
           </Select>
 
-          <Select label="Sort by" value={filters.sortBy} onChange={handleSortByChange}>
+          <Select label={translation('home:sortBy.label')} value={filters.sortBy} onChange={handleSortByChange}>
             {Object.entries(SortType).map((key) => (
               <MenuItem key={key[0]} value={key[0]} sx={{ textTransform: 'capitalize' }}>
                 <Radio checked={key[0] === filters.sortBy} />
-                <ListItemText primary={key[1]} />
+                <ListItemText primary={translation(`home:sortBy.options.${key[0]}`)} />
               </MenuItem>
             ))}
           </Select>
@@ -114,7 +121,9 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
       <Stack direction="row" spacing={matches ? 2 : 1} width="100%" overflow="auto" marginTop={matches ? 2 : 1}>
         {filters.location !== '' && (
           <FilterChip
-            label={`Location: ${cities.find((el) => el._id === filters.location)?.name}`}
+            label={`${translation('home:filters.location.label')}: ${
+              cities.find((el) => el._id === filters.location)?.name
+            }`}
             onDelete={() => dispatch(setFilters({ location: '' }))}
           />
         )}
@@ -122,13 +131,17 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
           filters.salonType.map((type) => (
             <FilterChip
               key={type}
-              label={`Salon type: ${salonTypes.find((el) => el._id === type)?.name}`}
+              label={`${translation('home:filters.salonType.label')}: ${
+                salonTypes.find((el) => el._id === type)?.name
+              }`}
               onDelete={() => dispatch(setFilters({ salonType: filters.salonType.filter((el) => el !== type) }))}
             />
           ))}
         {filters.sortBy !== '' && (
           <FilterChip
-            label={`Sort by: ${Object.entries(SortType).find((el) => el[0] === filters.sortBy)?.[1]}`}
+            label={`translation('home:sortBy.label'): ${
+              Object.entries(SortType).find((el) => el[0] === filters.sortBy)?.[1]
+            }`}
             onDelete={() => dispatch(setFilters({ sortBy: '' }))}
           />
         )}
