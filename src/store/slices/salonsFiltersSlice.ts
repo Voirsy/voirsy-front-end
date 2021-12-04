@@ -1,11 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-interface SalonsFilters {
-  sortBy: string;
-  search: string;
-  location: string;
-  salonType: string[];
-}
+import { SalonsFilters } from 'models/salonsFilters.model';
 
 const initialState: SalonsFilters = {
   sortBy: '',
