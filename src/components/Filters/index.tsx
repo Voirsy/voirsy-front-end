@@ -62,7 +62,6 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
 
         <Stack direction="row" spacing={matches ? 2 : 1} width="100%" overflow={matches ? 'visible' : 'auto'}>
           <Select
-            isPrimary
             label="Location"
             value={filters.location}
             onChange={handleLocationChange}
