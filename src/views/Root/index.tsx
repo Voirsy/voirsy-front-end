@@ -7,7 +7,7 @@ import EditAccount from 'views/EditAccount';
 import MainTemplate from 'templates/Main';
 import Login from 'views/Login';
 import SalonsTemplate from 'templates/Salons';
-import Edit from 'views/Admin/Edit';
+import Edit from 'views/Admin/Details';
 import Portfolio from 'views/Admin/Portfolio';
 import Schedule from 'views/Admin/Schedule';
 import CustomRoute from 'components/CustomRoute';
@@ -53,7 +53,7 @@ const Root = () => (
             <>
               <Header />
               <Switch>
-                <Route path={`${url}/:salonId/schedule`}>
+                <Route path={`${url}/:salonId/calendar`}>
                   <SalonsTemplate>
                     <Schedule />
                   </SalonsTemplate>
@@ -66,15 +66,13 @@ const Root = () => (
                 <Route path={`${url}/add/:step`}>
                   <p>Add salon</p>
                 </Route>
-                <Route path={[`${url}/:salonId/edit`]}>
+                <Route path={[`${url}/:salonId/details`]}>
                   <SalonsTemplate>
                     <Edit />
                   </SalonsTemplate>
                 </Route>
                 <Route path="*">
-                  <SalonsTemplate>
-                    <span>Loading...</span>
-                  </SalonsTemplate>
+                  <SalonsTemplate></SalonsTemplate>
                 </Route>
               </Switch>
             </>

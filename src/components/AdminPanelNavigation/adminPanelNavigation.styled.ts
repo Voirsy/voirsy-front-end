@@ -1,5 +1,5 @@
 import { styled } from '@mui/system';
-import { Card, Drawer, Toolbar } from '@mui/material';
+import { Card, colors, Drawer, Paper, Toolbar } from '@mui/material';
 import theme from 'theme';
 
 export const CustomToolbar = styled(Toolbar)(() => ({
@@ -18,26 +18,12 @@ export const CustomDrawer = styled(Drawer)(() => ({
   },
 }));
 
-export const CustomCard = styled(Card)(() => ({
-  background: theme.palette.primary.main,
-
+export const CustomCard = styled(Paper, {
+  shouldForwardProp: (prop) => prop !== 'active',
+})<{ active?: boolean }>(({ active }) => ({
+  padding: theme.spacing(1),
   '& a': {
     textDecoration: 'none',
-    color: theme.palette.primary.contrastText,
-  },
-}));
-
-export const CustomAddSalonCard = styled(CustomCard)(() => ({
-  background: theme.palette.grey[100],
-  textTransform: 'uppercase',
-
-  '& a': {
-    textDecoration: 'none',
-    color: theme.palette.grey[700],
-  },
-
-  '& svg': {
-    width: '36px',
-    height: '36px',
+    color: active ? theme.palette.primary.main : theme.palette.text.primary,
   },
 }));

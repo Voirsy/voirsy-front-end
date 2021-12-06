@@ -1,0 +1,152 @@
+import { AddOutlined, ExpandMoreOutlined } from '@mui/icons-material';
+import {
+  CircularProgress,
+  Stack,
+  TextField,
+  Typography,
+  Grid,
+  Button,
+  IconButton,
+  ListItem,
+  ListItemAvatar,
+  Avatar,
+  ListItemText,
+  List,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from '@mui/material';
+import { Box } from '@mui/system';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { useFetchSalonDataQuery } from 'store/api/admin';
+import { RootState } from 'store/store';
+import theme from 'theme';
+import { CustomPaper } from './details.styles';
+
+const Edit = () => {
+  const { salonId } = useParams<{ salonId: string }>();
+  const { data, isFetching } = useFetchSalonDataQuery({ salonId });
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { isDirty },
+  } = useForm();
+  const currency = useSelector((state: RootState) => state.user?.currency);
+
+  useEffect(() => {
+    if (!isFetching) {
+      setValue('salonName', data?.name, { shouldDirty: false });
+      setValue('address', data?.address, { shouldDirty: false });
+      setValue('city', data?.city, { shouldDirty: false });
+      setValue('phone', data?.phone, { shouldDirty: false });
+      setValue('description', data?.description, { shouldDirty: false });
+    }
+  }, [data, isFetching]);
+
+  if (isFetching)
+    return (
+      <Box flexGrow={1} display="flex" justifyContent="center" alignItems="center">
+        <CircularProgress />
+      </Box>
+    );
+
+  return (
+    <Grid container spacing={2} paddingY={2}>
+      <Grid item direction="column" xs={12} lg={6}>
+        <Stack spacing={2}>
+          <CustomPaper variant="outlined">
+            <Grid container justifyContent="space-between" alignItems="center" marginBottom={2}>
+              <Typography component="h3" variant="h6">
+                Informations
+              </Typography>
+              <Button variant="text" size="small" disabled={!isDirty}>
+                Save
+              </Button>
+            </Grid>
+
+            <form>
+              <Stack spacing={2}>
+                <TextField variant="outlined" label="Salon name" size="small" {...register('salonName')} />
+                <TextField variant="outlined" label="Adress" size="small" {...register('address')} />
+                <TextField variant="outlined" label="City" size="small" {...register('city')} />
+                <TextField variant="outlined" label="Phone" size="small" {...register('phone')} />
+                <TextField
+                  variant="outlined"
+                  label="Description"
+                  size="small"
+                  multiline
+                  maxRows={4}
+                  {...register('description')}
+                />
+              </Stack>
+            </form>
+          </CustomPaper>
+          <CustomPaper variant="outlined">
+            <Grid container justifyContent="space-between" alignItems="center">
+              <Typography component="h3" variant="h6">
+                Crew
+              </Typography>
+              <IconButton size="small" color="primary">
+                <AddOutlined />
+              </IconButton>
+            </Grid>
+            <List>
+              {data?.crew &&
+                data.crew.map((person) => (
+                  <ListItem key={person._id}>
+                    <ListItemAvatar>
+                      <Avatar src={person.imageUrl}></Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primary={person.name} />
+                  </ListItem>
+                ))}
+            </List>
+          </CustomPaper>
+        </Stack>
+      </Grid>
+      <Grid item container xs={12} lg={6} alignItems="stretch">
+        <CustomPaper variant="outlined">
+          <Grid container justifyContent="space-between" alignItems="center" marginBottom={1}>
+            <Typography component="h3" variant="h6">
+              Services
+            </Typography>
+            <IconButton size="small" color="primary">
+              <AddOutlined />
+            </IconButton>
+          </Grid>
+          {data?.services &&
+            data.services.map((service) => (
+              <Accordion key={service._id} elevation={0}>
+                <AccordionSummary expandIcon={<ExpandMoreOutlined />}>
+                  <Stack>
+                    <Typography variant="subtitle1" component="p">
+                      {service.name}
+                    </Typography>
+                    <Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
+                      <Typography variant="body2" component="p">
+                        {`Price: ${service.price} ${currency}`}
+                      </Typography>
+                      <Typography variant="body2" component="p">
+                        {`Duration: ${service.duration} min`}
+                      </Typography>
+                    </Stack>
+                  </Stack>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography variant="body2" component="p">
+                    {service.description}
+                  </Typography>
+                </AccordionDetails>
+              </Accordion>
+            ))}
+        </CustomPaper>
+      </Grid>
+    </Grid>
+  );
+};
+
+export default Edit;

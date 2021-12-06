@@ -8,8 +8,8 @@
     },
     "deleteSalon": "Delete salon",
     "nav": {
-      "edit": "Edit",
-      "schedule": "Schedule",
+      "details": "Details",
+      "calendar": "Calendar",
       "portfolio": "Portfolio",
       "aria": "admin panel navigation"
     }
