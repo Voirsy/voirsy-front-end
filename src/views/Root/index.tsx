@@ -12,6 +12,7 @@ import Portfolio from 'views/Admin/Portfolio';
 import Schedule from 'views/Admin/Schedule';
 import CustomRoute from 'components/CustomRoute';
 import { UserType } from 'enums/userType.enum';
+import Salon from '../Salon';
 
 const Root = () => (
   <Router>
@@ -89,16 +90,16 @@ const Root = () => (
               <Home />
               <Switch>
                 <Route path={`${url}:salonId/reviews`}>
-                  <p>The salon reviews</p>
+                  <Salon pageType="reviews" />
                 </Route>
                 <Route path={`${url}:salonId/portfolio`}>
-                  <p>The salon portfolio</p>
+                  <Salon pageType="portfolio" />
                 </Route>
                 <CustomRoute path={`${url}:salonId/reservation`}>
-                  <p>Reservation</p>
+                  <Salon pageType="reservation" />
                 </CustomRoute>
                 <Route path={[`${url}:salonId`, `${url}:salonId/information`]}>
-                  <p>Information about salon</p>
+                  <Salon pageType="information" />
                 </Route>
               </Switch>
             </>
