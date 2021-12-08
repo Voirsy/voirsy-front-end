@@ -1,4 +1,4 @@
-import { Modal, Stack, useMediaQuery } from '@mui/material';
+import { CircularProgress, Modal, Stack, useMediaQuery, Box, Typography, Button } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeftRounded';
 import { useParams, Link } from 'react-router-dom';
 import { CustomLink, CustomSalonAddress, CustomSalonName, CustomWrapper } from './salon.styled';
@@ -10,10 +10,39 @@ import theme from 'theme';
 const Salon = () => {
   const { salonId } = useParams<{ salonId: string }>();
   const [translation] = useTranslation();
-  const { data } = useFetchSpecifiedSalonDataQuery({ salonId });
+  const { data, isFetching, isError } = useFetchSpecifiedSalonDataQuery({ salonId });
   const matches = useMediaQuery(theme.breakpoints.down('md'));
 
-  if (data === undefined) return null;
+  if (isError) {
+    return (
+      <Modal open>
+        <CustomWrapper>
+          <Box height="100vh" display="flex" alignItems="center" justifyContent="center">
+            <Stack maxWidth="40%">
+              <Typography variant="h4" textAlign="center" marginBottom={2}>
+                {translation('salon:error.unknown')}
+              </Typography>
+              <Button variant="text" component={Link} to="/" sx={{ alignSelf: 'center' }}>
+                {translation('salon:goBackButton.aria')}
+              </Button>
+            </Stack>
+          </Box>
+        </CustomWrapper>
+      </Modal>
+    );
+  }
+
+  if (isFetching || data === undefined) {
+    return (
+      <Modal open>
+        <CustomWrapper>
+          <Box height="100vh" display="flex" alignItems="center" justifyContent="center">
+            <CircularProgress />
+          </Box>
+        </CustomWrapper>
+      </Modal>
+    );
+  }
 
   return (
     <Modal open>

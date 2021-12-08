@@ -6,6 +6,10 @@
     "reviews": "Reviews"
   },
   "goBackButton": {
-    "aria": "Back to main page"
+    "aria": "back to main page",
+    "label": "Back to main page"
+  },
+  "error": {
+    "unknown": "An error occured while fetching the salon"
   }
 }
