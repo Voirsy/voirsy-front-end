@@ -79,7 +79,7 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
               </Box>
             ) : (
               cities.map((el) => (
-                <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize' }}>
+                <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize', paddingRight: 3 }}>
                   <Radio checked={el._id === filters.location} />
                   <ListItemText primary={el.name} />
                 </MenuItem>
@@ -99,7 +99,7 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
               </Box>
             ) : (
               salonTypes.map((el) => (
-                <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize' }}>
+                <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize', paddingRight: 3 }}>
                   <Checkbox checked={filters.salonType.indexOf(el._id) > -1} />
                   <ListItemText primary={el.name} />
                 </MenuItem>
@@ -109,7 +109,7 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
 
           <Select label={translation('home:sortBy.label')} value={filters.sortBy} onChange={handleSortByChange}>
             {Object.entries(SortType).map((key) => (
-              <MenuItem key={key[0]} value={key[0]} sx={{ textTransform: 'capitalize' }}>
+              <MenuItem key={key[0]} value={key[0]} sx={{ textTransform: 'capitalize', paddingRight: 3 }}>
                 <Radio checked={key[0] === filters.sortBy} />
                 <ListItemText primary={translation(`home:sortBy.options.${key[0]}`)} />
               </MenuItem>
