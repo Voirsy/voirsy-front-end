@@ -1,0 +1,11 @@
+{
+  "nav": {
+    "aria": "salon page navigation",
+    "info": "Information",
+    "portfolio": "Portfolio",
+    "reviews": "Reviews"
+  },
+  "goBackButton": {
+    "aria": "Back to main page"
+  }
+}
