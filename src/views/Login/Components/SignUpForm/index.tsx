@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { VisibilityOffOutlined, VisibilityOutlined } from '@mui/icons-material';
 import { FormControl, FormControlLabel, FormLabel, IconButton, Radio, RadioGroup, TextField } from '@mui/material';
 import axios from 'axios';

@@ -1,27 +1,25 @@
 {
   "filters": {
     "search": {
-      "label": "Search"
+      "label": "Search",
+      "ariaLabel": "search voirsy"
     },
     "location": {
       "label": "Location"
     },
-    "chip": {
-      "barbers": "Barbers",
-      "hairdressers": "Hairdressers",
-      "beauticians": "Beauticians",
-      "tattooists": "Tattooists"
+    "salonType": {
+      "label": "Salon type"
     }
   },
-  "sort": {
+  "sortBy": {
     "label": "Sort by",
-    "items": {
-      "most-popular": "Most popular",
-      "top-rated": "Top rated",
-      "number-of-ratings": "Number of ratings"
+    "options": {
+      "MostPopular": "Most popular",
+      "TopRated": "Top rated",
+      "QuantityOfRating": "Quantity of ratings"
     }
   },
-  "headings": {
-    "results": "Results"
+  "error": {
+    "unknown": "An error occured"
   }
 }

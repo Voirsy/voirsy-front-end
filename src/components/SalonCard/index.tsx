@@ -1,27 +1,51 @@
-import { Grid, Typography, Rating } from '@mui/material';
-import image from 'assets/salon.jpg';
-import { CustomImg, CustomPaper } from './salonCard.styles';
-import RoomIcon from '@mui/icons-material/Room';
+import { CardMedia, Typography, Chip, Stack } from '@mui/material';
+import { Place, LocationCity, Star, FavoriteBorder } from '@mui/icons-material';
+import { SalonCardTypes } from './salonCard.types';
+import { CustomCard, CustomCardContent, CustomLink, HeartButton, Rating } from './salonCard.styled';
+import { isAuth } from 'helpers/auth';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store/store';
+import { UserRole } from 'enums/userRole.enum';
+import { useTranslation } from 'react-i18next';
 
-const SalonCard = ({ data }: { data: any }) => (
-  <CustomPaper>
-    <Grid container columnSpacing={1}>
-      <Grid item container xs={2} justifyContent="center" alignItems="center">
-        <CustomImg alt="salon image" src={image} />
-      </Grid>
-      <Grid item xs container direction="column" justifyContent="space-evenly">
-        <Grid item>
-          <Typography variant="subtitle1">{data.title}</Typography>
-        </Grid>
-        <Grid item>
-          <Rating readOnly value={data.rating} size="small" precision={0.5} />
-        </Grid>
-        <Grid item container alignItems="center">
-          <RoomIcon color="action" />
-          <Typography variant="body2">{`${data.street}, ${data.zipCode}, ${data.city}`}</Typography>
-        </Grid>
-      </Grid>
-    </Grid>
-  </CustomPaper>
-);
+const SalonCard = ({ imageUrl, name, city, address, rating, salonType, _id }: SalonCardTypes) => {
+  const [translation] = useTranslation();
+  const userRole = useSelector((state: RootState) => state.user?.role);
+  const showHeart = isAuth() && userRole !== UserRole.Business;
+
+  return (
+    <CustomCard>
+      {rating !== '0' && <Rating size="small" label={Math.round(parseFloat(rating) * 10) / 10} icon={<Star />} />}
+      <CardMedia component="img" height="160" image={imageUrl} alt={name} />
+      <CustomCardContent>
+        {showHeart && (
+          <HeartButton size="large">
+            <FavoriteBorder />
+          </HeartButton>
+        )}
+        <Typography gutterBottom variant="subtitle1" component="div" noWrap maxWidth={showHeart ? '90%' : '100%'}>
+          <CustomLink to={`/${_id}`}>{name}</CustomLink>
+        </Typography>
+        <Stack direction="row" spacing={1} marginBottom={1} alignItems="center">
+          <Place sx={{ color: 'text.secondary', fontSize: 20 }} />
+          <Typography variant="body2" color="text.secondary" noWrap>
+            {address}
+          </Typography>
+        </Stack>
+        <Stack direction="row" spacing={1} marginBottom={1.5} alignItems="center">
+          <LocationCity sx={{ color: 'text.secondary', fontSize: 20 }} />
+          <Typography variant="body2" color="text.secondary" noWrap>
+            {city}
+          </Typography>
+        </Stack>
+        <Stack direction="row" spacing={1}>
+          {salonType.map((el) => (
+            <Chip key={el} label={translation(`common:salonType.${el.toLowerCase()}`)} size="small" color="secondary" />
+          ))}
+        </Stack>
+      </CustomCardContent>
+    </CustomCard>
+  );
+};
+
 export default SalonCard;
