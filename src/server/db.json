@@ -36,7 +36,16 @@
       "portfolio": [
         "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBmYWNlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
       ],
-      "schedule": "Something will be returned, but I don't know what :)"
+      "schedule": "Something will be returned, but I don't know what :)",
+      "reviews": [
+        {
+          "name": "Sophia",
+          "date": "21-10-03T17:08",
+          "rating": 4,
+          "description": "Lorem ipsum lorem ipsum",
+          "avatarUrl": "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBmYWNlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+        }
+      ]
     },
     {
       "_id": "2284a371-daad-4bd4-9f11-ad3e44665bc5",
@@ -74,7 +83,8 @@
       "portfolio": [
         "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBmYWNlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
       ],
-      "schedule": "Something will be returned, but I don't know what :)"
+      "schedule": "Something will be returned, but I don't know what :)",
+      "reviews": []
     },
     {
       "_id": "70416e22-762a-40b5-a31d-3f78a4e95c32",
@@ -112,7 +122,8 @@
       "portfolio": [
         "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBmYWNlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
       ],
-      "schedule": "Something will be returned, but I don't know what :)"
+      "schedule": "Something will be returned, but I don't know what :)",
+      "reviews": []
     }
   ],
   "cities": [

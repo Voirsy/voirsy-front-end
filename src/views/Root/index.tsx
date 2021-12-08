@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import Header from 'components/Header';
+import { UserType } from 'enums/userType.enum';
 import DeleteAccount from 'views/DeleteAccount';
 import Home from 'views/Home';
 import ChangePassword from 'views/ChangePassword';
@@ -10,9 +10,10 @@ import SalonsTemplate from 'templates/Salons';
 import Edit from 'views/Admin/Edit';
 import Portfolio from 'views/Admin/Portfolio';
 import Schedule from 'views/Admin/Schedule';
+import Salon from 'views/Salon';
+import Header from 'components/Header';
 import CustomRoute from 'components/CustomRoute';
-import { UserType } from 'enums/userType.enum';
-import Salon from '../Salon';
+import { SalonPageType } from 'enums/salonPageType';
 
 const Root = () => (
   <Router>
@@ -90,16 +91,16 @@ const Root = () => (
               <Home />
               <Switch>
                 <Route path={`${url}:salonId/reviews`}>
-                  <Salon pageType="reviews" />
+                  <Salon />
                 </Route>
                 <Route path={`${url}:salonId/portfolio`}>
-                  <Salon pageType="portfolio" />
+                  <Salon />
                 </Route>
                 <CustomRoute path={`${url}:salonId/reservation`}>
-                  <Salon pageType="reservation" />
+                  <p>Reservations</p>
                 </CustomRoute>
                 <Route path={[`${url}:salonId`, `${url}:salonId/information`]}>
-                  <Salon pageType="information" />
+                  <Salon />
                 </Route>
               </Switch>
             </>
