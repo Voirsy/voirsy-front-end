@@ -139,7 +139,7 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
           ))}
         {filters.sortBy !== '' && (
           <FilterChip
-            label={`translation('home:sortBy.label'): ${
+            label={`${translation('home:sortBy.label')}: ${
               Object.entries(SortType).find((el) => el[0] === filters.sortBy)?.[1]
             }`}
             onDelete={() => dispatch(setFilters({ sortBy: '' }))}
