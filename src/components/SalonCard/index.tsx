@@ -15,7 +15,7 @@ const SalonCard = ({ imageUrl, name, city, address, rating, salonType, _id }: Sa
 
   return (
     <CustomCard>
-      <Rating size="small" label={rating} icon={<Star />} />
+      {rating !== '0' && <Rating size="small" label={Math.round(parseFloat(rating) * 10) / 10} icon={<Star />} />}
       <CardMedia component="img" height="160" image={imageUrl} alt={name} />
       <CustomCardContent>
         {showHeart && (
