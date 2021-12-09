@@ -69,7 +69,7 @@ const Salon = () => {
           </Stack>
         </Stack>
         <NavTabs currentTab={currentTab} />
-        <Box padding={matches ? '10px' : '25px'}>
+        <Box padding={matches ? '10px' : '25px'} flexGrow={1} overflow="auto">
           {currentTab === '/:salonId' && (
             <Information
               description={data.description}
