@@ -1,17 +1,22 @@
 import { CircularProgress, Modal, Stack, useMediaQuery, Box, Typography, Button } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeftRounded';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useRouteMatch } from 'react-router-dom';
 import { CustomLink, CustomSalonAddress, CustomSalonName, CustomWrapper } from './salon.styled';
 import { useFetchSpecifiedSalonDataQuery } from 'store/api/salon';
 import { useTranslation } from 'react-i18next';
 import NavTabs from './salon.navtabs';
 import theme from 'theme';
+import Information from './Components/Information';
+import Reviews from './Components/Reviews';
+import Portfolio from './Components/Portfolio';
 
 const Salon = () => {
   const { salonId } = useParams<{ salonId: string }>();
   const [translation] = useTranslation();
   const { data, isFetching, isError } = useFetchSpecifiedSalonDataQuery({ salonId });
   const matches = useMediaQuery(theme.breakpoints.down('md'));
+  const routeMatch = useRouteMatch(['/:salonId/portfolio', '/:salonId/reviews', '/:salonId']);
+  const currentTab = routeMatch?.path;
 
   if (isError) {
     return (
@@ -63,7 +68,21 @@ const Salon = () => {
             <CustomSalonAddress variant="body1" noWrap>{`${data.address} ${data.city}`}</CustomSalonAddress>
           </Stack>
         </Stack>
-        <NavTabs />
+        <NavTabs currentTab={currentTab} />
+        <Box padding={matches ? '10px' : '25px'}>
+          {currentTab === '/:salonId' && (
+            <Information
+              description={data.description}
+              phone={data.phone}
+              imageUrl={data.imageUrl}
+              openingHours={data.openingHours}
+              services={data.services}
+              crew={data.crew}
+            />
+          )}
+          {currentTab === '/:salonId/reviews' && <Reviews />}
+          {currentTab === '/:salonId/portfolio' && <Portfolio />}
+        </Box>
       </CustomWrapper>
     </Modal>
   );

@@ -11,5 +11,32 @@
   },
   "error": {
     "unknown": "An error occured while fetching the salon"
+  },
+  "details": {
+    "contact": {
+      "label": "contact"
+    },
+    "openingHours": {
+      "label": "opening hours",
+      "closed": "closed",
+      "daysOfTheWeek": {
+        "monday": "monday",
+        "tuesday": "tuesday",
+        "wednesday": "wednesday",
+        "thursday": "thursday",
+        "friday": "friday",
+        "saturday": "saturday",
+        "sunday": "sunday"
+      }
+    },
+    "aboutUs": {
+      "label": "about us"
+    },
+    "crew": {
+      "label": "crew"
+    },
+    "services": {
+      "label": "services"
+    }
   }
 }

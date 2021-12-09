@@ -45,6 +45,33 @@
           "description": "Lorem ipsum lorem ipsum",
           "avatarUrl": "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBmYWNlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
         }
+      ],
+      "openingHours": [
+        {
+          "name": "monday",
+          "open": "9:00",
+          "close": "21:00"
+        },
+        {
+          "name": "tuesday",
+          "open": "10:00",
+          "close": "19:00"
+        },
+        {
+          "name": "wednesday",
+          "open": "10:00",
+          "close": "19:00"
+        },
+        {
+          "name": "thursday",
+          "open": "9:00",
+          "close": "20:00"
+        },
+        {
+          "name": "friday",
+          "open": "9:00",
+          "close": "20:00"
+        }
       ]
     },
     {
@@ -84,7 +111,34 @@
         "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBmYWNlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
       ],
       "schedule": "Something will be returned, but I don't know what :)",
-      "reviews": []
+      "reviews": [],
+      "openingHours": [
+        {
+          "name": "monday",
+          "open": "9:00",
+          "close": "21:00"
+        },
+        {
+          "name": "tuesday",
+          "open": "10:00",
+          "close": "19:00"
+        },
+        {
+          "name": "wednesday",
+          "open": "10:00",
+          "close": "19:00"
+        },
+        {
+          "name": "thursday",
+          "open": "9:00",
+          "close": "20:00"
+        },
+        {
+          "name": "friday",
+          "open": "9:00",
+          "close": "20:00"
+        }
+      ]
     },
     {
       "_id": "70416e22-762a-40b5-a31d-3f78a4e95c32",
@@ -123,7 +177,34 @@
         "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBmYWNlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
       ],
       "schedule": "Something will be returned, but I don't know what :)",
-      "reviews": []
+      "reviews": [],
+      "openingHours": [
+        {
+          "name": "monday",
+          "open": "9:00",
+          "close": "21:00"
+        },
+        {
+          "name": "tuesday",
+          "open": "10:00",
+          "close": "19:00"
+        },
+        {
+          "name": "wednesday",
+          "open": "10:00",
+          "close": "19:00"
+        },
+        {
+          "name": "thursday",
+          "open": "9:00",
+          "close": "20:00"
+        },
+        {
+          "name": "friday",
+          "open": "9:00",
+          "close": "20:00"
+        }
+      ]
     }
   ],
   "cities": [

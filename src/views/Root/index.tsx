@@ -13,7 +13,7 @@ import Schedule from 'views/Admin/Schedule';
 import Salon from 'views/Salon';
 import Header from 'components/Header';
 import CustomRoute from 'components/CustomRoute';
-import { SalonPageType } from 'enums/salonPageType';
+import { SalonPageTypeEnum } from 'enums/salonPageType.enum';
 
 const Root = () => (
   <Router>

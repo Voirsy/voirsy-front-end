@@ -3,10 +3,8 @@ import { Link, useParams, useRouteMatch } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import theme from 'theme';
 
-const NavTabs = () => {
+const NavTabs = ({ currentTab }: { currentTab: string | undefined }) => {
   const { salonId } = useParams<{ salonId: string }>();
-  const routeMatch = useRouteMatch(['/:salonId/portfolio', '/:salonId/reviews', '/:salonId']);
-  const currentTab = routeMatch?.path;
   const [translation] = useTranslation();
   const matches = useMediaQuery(theme.breakpoints.down('md'));
 
