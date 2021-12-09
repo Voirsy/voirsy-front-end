@@ -12,6 +12,9 @@
   "error": {
     "unknown": "An error occured while fetching the salon"
   },
+  "salonImg": {
+    "alt": "salon profile image"
+  },
   "details": {
     "contact": {
       "label": "contact"
@@ -37,6 +40,9 @@
     },
     "services": {
       "label": "services"
+    },
+    "ourServices": {
+      "label": "our services"
     }
   }
 }

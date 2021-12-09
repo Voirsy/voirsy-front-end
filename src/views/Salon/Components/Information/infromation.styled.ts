@@ -18,3 +18,12 @@ export const CustomSectionHeader = styled(Typography)(() => ({
   color: theme.palette.text.secondary,
   fontSize: theme.typography.overline.fontSize,
 }));
+
+export const CustomServicesHeading = styled(Typography)(() => ({
+  fontSize: theme.typography.body2.fontSize,
+  marginBottom: theme.spacing(1.25),
+}));
+
+export const CustomServiceHeading = styled(Typography)(() => ({
+  fontWeight: theme.typography.fontWeightBold,
+}));
