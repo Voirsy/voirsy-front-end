@@ -20,10 +20,11 @@ export type OpeningHour = {
 
 export type Review = {
   name: string;
-  data: string;
+  date: string;
   rating: string;
   description: string;
-  avatarUrl: string;
+  avatarUrl?: string;
+  authorId: string;
 };
 
 export type Salon = {

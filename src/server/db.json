@@ -39,11 +39,28 @@
       "schedule": "Something will be returned, but I don't know what :)",
       "reviews": [
         {
-          "name": "Sophia",
+          "name": "Sebastian Nowak",
           "date": "21-10-03T17:08",
           "rating": 4,
-          "description": "Lorem ipsum lorem ipsum",
-          "avatarUrl": "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBmYWNlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+          "description": "Zdecydowanie polecam.",
+          "authorId": "617adf9a620c81692d151de6",
+          "avatarUrl": "https://bit.ly/3pOyIOW"
+        },
+        {
+          "name": "Martin Wolf",
+          "date": "21-05-21T19:11",
+          "rating": 3,
+          "description": "As always Oleg was very professional and made a cut to the highest standard.",
+          "authorId": "617adf9a620c81692d151de7",
+          "avatarUrl": "https://bit.ly/3pKbxpc"
+        },
+        {
+          "name": "Eleonora Kowalski",
+          "date": "21-11-27T07:47",
+          "rating": 5,
+          "description": "Highly recommended! Very professional staff.",
+          "authorId": "617adf9a620c81692d151de8",
+          "avatarUrl": "https://bit.ly/3oK1ml4"
         }
       ],
       "openingHours": [
