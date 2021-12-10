@@ -18,6 +18,14 @@ export type OpeningHour = {
   close: string;
 };
 
+export type Review = {
+  name: string;
+  data: string;
+  rating: string;
+  description: string;
+  avatarUrl: string;
+};
+
 export type Salon = {
   _id: string;
   name: string;
@@ -33,4 +41,5 @@ export type Salon = {
   rating: string;
   imageUrl: string;
   openingHours: OpeningHour[];
+  reviews: Review[];
 };

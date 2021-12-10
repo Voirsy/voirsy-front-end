@@ -80,7 +80,7 @@ const Salon = () => {
               crew={data.crew}
             />
           )}
-          {currentTab === '/:salonId/reviews' && <Reviews />}
+          {currentTab === '/:salonId/reviews' && <Reviews reviews={data.reviews} />}
           {currentTab === '/:salonId/portfolio' && <Portfolio />}
         </Box>
       </CustomWrapper>
