@@ -7,6 +7,7 @@ import { RootState } from 'store/store';
 import { UserRole } from 'enums/userRole.enum';
 import { isAuth } from 'helpers/auth';
 import { CustomFab, ReviewCard } from './reviews.styled';
+import { format } from 'date-fns';
 
 const Reviews = ({ reviews }: Pick<Salon, 'reviews'>) => {
   const user = useSelector((state: RootState) => state.user);
@@ -24,7 +25,7 @@ const Reviews = ({ reviews }: Pick<Salon, 'reviews'>) => {
                 <Stack direction="row" justifyContent="space-between" marginBottom={1}>
                   <Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between">
                     <Avatar alt={el.name} src={el.avatarUrl} />
-                    <ListItemText primary={el.name} secondary={el.date} />
+                    <ListItemText primary={el.name} secondary={format(new Date(el.date), 'dd MMM y')} />
                   </Stack>
                   {el.rating}
                 </Stack>

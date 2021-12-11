@@ -1,15 +1,10 @@
 import { Salon } from 'models/admin.model';
-import { Box, Stack, Typography, useMediaQuery } from '@mui/material';
-import {
-  CustomImg,
-  CustomSectionHeader,
-  CustomDetailsSection,
-  CustomServiceHeading,
-  CustomServicesHeading,
-} from './infromation.styled';
+import { Box, Stack, useMediaQuery } from '@mui/material';
+import { CustomImg, CustomServicesHeading } from './infromation.styled';
 import Details from './information.details';
 import theme from 'theme';
 import { useTranslation } from 'react-i18next';
+import ServiceCard from '../ServiceCard';
 
 const Information = ({
   description,
@@ -25,7 +20,7 @@ const Information = ({
   return (
     <Stack direction={matches ? 'column' : 'row'} spacing={1.5}>
       <div>
-        <CustomImg src={imageUrl} alt={translation('salon:salonImg.alt')} />
+        <CustomImg src={imageUrl} alt={translation('salon:salonImg.alt')} sx={{ borderRadius: 1 }} />
         <Box sx={{ display: matches ? 'block' : 'none' }}>
           <Details description={description} phone={phone} openingHours={openingHours} crew={crew} />
         </Box>
@@ -34,17 +29,8 @@ const Information = ({
             {translation('salon:details.ourServices.label')}
           </CustomServicesHeading>
           <div>
-            {services.map((el) => (
-              <CustomDetailsSection key={el._id}>
-                <Stack direction="row" justifyContent="space-between" alignItems="center" marginBottom={1}>
-                  <Stack direction="row">
-                    <CustomServiceHeading>{el.name}&nbsp;</CustomServiceHeading>
-                    <Typography>{`• ${el.duration}`}</Typography>
-                  </Stack>
-                  <Typography>{el.price}$</Typography>
-                </Stack>
-                <Typography>{el.description}</Typography>
-              </CustomDetailsSection>
+            {services.map((service) => (
+              <ServiceCard key={service._id} {...service} />
             ))}
           </div>
         </div>

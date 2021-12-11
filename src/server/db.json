@@ -33,21 +33,12 @@
           "description": "Najnowszy trend w męskich fryzurach."
         }
       ],
-      "portfolio": [
-        "https://bit.ly/3IGPFnm",
-        "https://bit.ly/3dFIWM7",
-        "https://bit.ly/3GDAGZc",
-        "https://bit.ly/3dFIWM7",
-        "https://bit.ly/3GDAGZc",
-        "https://bit.ly/3IGPFnm",
-        "https://bit.ly/3dFIWM7",
-        "https://bit.ly/3IGPFnm"
-      ],
+      "portfolio": ["https://bit.ly/3IGPFnm", "https://bit.ly/3dFIWM7", "https://bit.ly/3GDAGZc"],
       "schedule": "Something will be returned, but I don't know what :)",
       "reviews": [
         {
           "name": "Sebastian Nowak",
-          "date": "21-10-03T17:08",
+          "date": "2021-10-03T17:08",
           "rating": 4,
           "description": "Zdecydowanie polecam.",
           "authorId": "617adf9a620c81692d151de6",
@@ -55,7 +46,7 @@
         },
         {
           "name": "Martin Wolf",
-          "date": "21-05-21T19:11",
+          "date": "2021-05-21T19:11",
           "rating": 3,
           "description": "As always Oleg was very professional and made a cut to the highest standard.",
           "authorId": "617adf9a620c81692d151de7",
@@ -63,7 +54,7 @@
         },
         {
           "name": "Eleonora Kowalski",
-          "date": "21-11-27T07:47",
+          "date": "2021-11-27T07:47",
           "rating": 5,
           "description": "Highly recommended! Very professional staff.",
           "authorId": "617adf9a620c81692d151de8",
