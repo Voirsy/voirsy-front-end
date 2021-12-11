@@ -81,7 +81,7 @@ const Salon = () => {
             />
           )}
           {currentTab === '/:salonId/reviews' && <Reviews reviews={data.reviews} />}
-          {currentTab === '/:salonId/portfolio' && <Portfolio />}
+          {currentTab === '/:salonId/portfolio' && <Portfolio portfolio={data.portfolio} />}
         </Box>
       </CustomWrapper>
     </Modal>
