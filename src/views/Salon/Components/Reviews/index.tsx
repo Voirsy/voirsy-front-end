@@ -1,5 +1,5 @@
 import { Comment } from '@mui/icons-material';
-import { Avatar, Grid, ListItemText, Paper, Stack, Typography } from '@mui/material';
+import { Avatar, Grid, ListItemText, Paper, Rating, Stack, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import NoContent from 'views/Salon/Components/NoContent';
 import { Salon } from 'models/admin.model';
@@ -27,7 +27,7 @@ const Reviews = ({ reviews }: Pick<Salon, 'reviews'>) => {
                     <Avatar alt={el.name} src={el.avatarUrl} />
                     <ListItemText primary={el.name} secondary={format(new Date(el.date), 'dd MMM y')} />
                   </Stack>
-                  {el.rating}
+                  <Rating name="Salon rating" value={parseInt(el.rating, 10)} readOnly />
                 </Stack>
                 <Typography variant="body1">{el.description}</Typography>
               </ReviewCard>
