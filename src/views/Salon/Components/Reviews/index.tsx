@@ -1,17 +1,32 @@
-import { Comment } from '@mui/icons-material';
-import { Avatar, Grid, ListItemText, Paper, Rating, Stack, Typography } from '@mui/material';
+import { Close, Comment } from '@mui/icons-material';
+import {
+  Avatar,
+  Button,
+  Fade,
+  Grid,
+  IconButton,
+  ListItemText,
+  Rating,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useSelector } from 'react-redux';
 import NoContent from 'views/Salon/Components/NoContent';
 import { Salon } from 'models/admin.model';
 import { RootState } from 'store/store';
 import { UserRole } from 'enums/userRole.enum';
 import { isAuth } from 'helpers/auth';
-import { CustomFab, ReviewCard } from './reviews.styled';
+import { CustomFab, CustomModal, ReviewCard } from './reviews.styled';
 import { format } from 'date-fns';
+import { useState } from 'react';
 
 const Reviews = ({ reviews }: Pick<Salon, 'reviews'>) => {
   const user = useSelector((state: RootState) => state.user);
   const alreadyAdded = reviews.find((el) => el.authorId === user?.id);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [opinion, setOpinion] = useState('');
+  const [rating, setRating] = useState<null | number>(null);
 
   return (
     <>
@@ -35,11 +50,31 @@ const Reviews = ({ reviews }: Pick<Salon, 'reviews'>) => {
           ))}
         </Grid>
       )}
-      {isAuth() && user?.role !== UserRole.Business && !alreadyAdded && (
-        <CustomFab size="medium" color="secondary" aria-label="add comment">
+      {isAuth() && user?.role !== UserRole.Business && !alreadyAdded && !isDrawerOpen && (
+        <CustomFab size="medium" color="secondary" aria-label="add comment" onClick={() => setIsDrawerOpen(true)}>
           <Comment />
         </CustomFab>
       )}
+      <Fade in={isDrawerOpen}>
+        <CustomModal>
+          <IconButton onClick={() => setIsDrawerOpen(false)} sx={{ position: 'absolute', top: 4, right: 4 }}>
+            <Close />
+          </IconButton>
+          <Stack spacing={2.5} alignItems="center">
+            <Typography variant="h5">Leave your opinion</Typography>
+            <Rating value={rating} onChange={(_, value) => setRating(value)} />
+            <TextField
+              label="Your opinion"
+              variant="filled"
+              value={opinion}
+              onChange={(e) => setOpinion(e.target.value)}
+            />
+            <Button variant="contained" color="secondary" size="large" sx={{ width: '144px' }}>
+              Submit
+            </Button>
+          </Stack>
+        </CustomModal>
+      </Fade>
     </>
   );
 };

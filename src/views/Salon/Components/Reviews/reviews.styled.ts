@@ -1,5 +1,5 @@
 import { styled } from '@mui/system';
-import { Fab, Paper } from '@mui/material';
+import { Box, Fab, Paper } from '@mui/material';
 import theme from 'theme';
 
 export const CustomFab = styled(Fab)(() => ({
@@ -11,4 +11,15 @@ export const CustomFab = styled(Fab)(() => ({
 export const ReviewCard = styled(Paper)(() => ({
   padding: theme.spacing(2),
   height: `calc(100% - ${theme.spacing(4)})`,
+}));
+
+export const CustomModal = styled(Box)(() => ({
+  position: 'absolute',
+  zIndex: theme.zIndex.modal + 1,
+  background: 'white',
+  bottom: 0,
+  left: 0,
+  right: 0,
+  borderTop: `1px solid ${theme.palette.grey['300']}`,
+  padding: theme.spacing(2),
 }));
