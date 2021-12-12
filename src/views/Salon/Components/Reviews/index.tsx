@@ -20,18 +20,22 @@ import { isAuth } from 'helpers/auth';
 import { CustomFab, CustomModal, ReviewCard } from './reviews.styled';
 import { format } from 'date-fns';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Reviews = ({ reviews }: Pick<Salon, 'reviews'>) => {
+  const [translation] = useTranslation();
   const user = useSelector((state: RootState) => state.user);
   const alreadyAdded = reviews.find((el) => el.authorId === user?.id);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [opinion, setOpinion] = useState('');
   const [rating, setRating] = useState<null | number>(null);
 
+  const isFabVisible = isAuth() && user?.role !== UserRole.Business && !alreadyAdded && !isDrawerOpen;
+
   return (
     <>
       {reviews.length === 0 ? (
-        <NoContent text="No comments yet" icon={<Comment />} />
+        <NoContent text={translation('salon:reviews.noReviews')} icon={<Comment />} />
       ) : (
         <Grid container spacing={2.5}>
           {reviews.map((el) => (
@@ -50,7 +54,7 @@ const Reviews = ({ reviews }: Pick<Salon, 'reviews'>) => {
           ))}
         </Grid>
       )}
-      {isAuth() && user?.role !== UserRole.Business && !alreadyAdded && !isDrawerOpen && (
+      {isFabVisible && (
         <CustomFab size="medium" color="secondary" aria-label="add comment" onClick={() => setIsDrawerOpen(true)}>
           <Comment />
         </CustomFab>
@@ -61,16 +65,16 @@ const Reviews = ({ reviews }: Pick<Salon, 'reviews'>) => {
             <Close />
           </IconButton>
           <Stack spacing={2.5} alignItems="center">
-            <Typography variant="h5">Leave your opinion</Typography>
+            <Typography variant="h5">{translation('salon:reviews.addReviewForm.title')}</Typography>
             <Rating value={rating} onChange={(_, value) => setRating(value)} />
             <TextField
-              label="Your opinion"
+              label={translation('salon:reviews.addReviewForm.textfield')}
               variant="filled"
               value={opinion}
               onChange={(e) => setOpinion(e.target.value)}
             />
             <Button variant="contained" color="secondary" size="large" sx={{ width: '144px' }}>
-              Submit
+              {translation('salon:reviews.addReviewForm.button')}
             </Button>
           </Stack>
         </CustomModal>

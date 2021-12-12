@@ -6,8 +6,10 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'store/store';
 import { isAuth } from 'helpers/auth';
 import { UserRole } from 'enums/userRole.enum';
+import { useTranslation } from 'react-i18next';
 
 const ServiceCard = ({ _id, name, description, price, duration }: Service) => {
+  const [translation] = useTranslation();
   const role = useSelector((state: RootState) => state.user?.role);
   const hours = minutesToHours(duration);
   let serviceDuration = '';
@@ -29,7 +31,7 @@ const ServiceCard = ({ _id, name, description, price, duration }: Service) => {
         <Typography>{description}</Typography>
         {isBookLinkVisible && (
           <Button variant="contained" color="secondary" size="small">
-            Book
+            {translation('salon:bookButton.label')}
           </Button>
         )}
       </Stack>

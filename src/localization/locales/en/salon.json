@@ -9,6 +9,9 @@
     "aria": "back to main page",
     "label": "Back to main page"
   },
+  "bookButton": {
+    "label": "Book"
+  },
   "error": {
     "unknown": "An error occured while fetching the salon"
   },
@@ -43,6 +46,17 @@
     },
     "ourServices": {
       "label": "our services"
+    }
+  },
+  "portfolio": {
+    "noImages": "No images yet"
+  },
+  "reviews": {
+    "noReviews": "No images yet",
+    "addReviewForm": {
+      "title": "Leave your opinion",
+      "textfield": "Your opinion",
+      "button": "Add"
     }
   }
 }

@@ -1,6 +1,6 @@
 import { CircularProgress, Modal, Stack, useMediaQuery, Box, Typography, Button } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeftRounded';
-import { useParams, Link, useRouteMatch } from 'react-router-dom';
+import { useParams, Link, useRouteMatch, useHistory } from 'react-router-dom';
 import { CustomLink, CustomSalonAddress, CustomSalonName, CustomWrapper } from './salon.styled';
 import { useFetchSpecifiedSalonDataQuery } from 'store/api/salon';
 import { useTranslation } from 'react-i18next';
@@ -11,6 +11,7 @@ import Reviews from './Components/Reviews';
 import Portfolio from './Components/Portfolio';
 
 const Salon = () => {
+  const history = useHistory();
   const { salonId } = useParams<{ salonId: string }>();
   const [translation] = useTranslation();
   const { data, isFetching, isError } = useFetchSpecifiedSalonDataQuery({ salonId });
@@ -50,7 +51,7 @@ const Salon = () => {
   }
 
   return (
-    <Modal open>
+    <Modal open BackdropProps={{ onClick: () => history.push('/') }}>
       <CustomWrapper>
         <Stack
           direction="row"
