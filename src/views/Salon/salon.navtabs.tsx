@@ -1,5 +1,5 @@
 import { Tab, Tabs, Box, useMediaQuery } from '@mui/material';
-import { Link, useParams, useRouteMatch } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import theme from 'theme';
 

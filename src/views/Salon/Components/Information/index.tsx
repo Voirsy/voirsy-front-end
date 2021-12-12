@@ -1,6 +1,6 @@
 import { Salon } from 'models/admin.model';
 import { Box, Stack, useMediaQuery } from '@mui/material';
-import { CustomImg, CustomServicesHeading } from './infromation.styled';
+import { CustomImg, CustomServicesHeading } from './information.styled';
 import Details from './information.details';
 import theme from 'theme';
 import { useTranslation } from 'react-i18next';

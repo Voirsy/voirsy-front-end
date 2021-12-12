@@ -1,7 +1,7 @@
 import { Salon } from 'models/admin.model';
 import { Stack, Typography } from '@mui/material';
 import { DaysOfTheWeek } from 'enums/dayOfTheWeek.enum';
-import { CustomDetailsSection, CustomSectionHeader } from './infromation.styled';
+import { CustomDetailsSection, CustomSectionHeader } from './information.styled';
 import { useTranslation } from 'react-i18next';
 
 const OpeningHours = ({ openingHours }: Pick<Salon, 'openingHours'>) => {

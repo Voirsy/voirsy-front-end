@@ -1,5 +1,5 @@
 import { Stack, Typography } from '@mui/material';
-import { CustomDetailsSection, CustomServiceHeading } from '../Information/infromation.styled';
+import { CustomDetailsSection, CustomServiceHeading } from '../Information/information.styled';
 import { minutesToHours } from 'date-fns';
 import { Service } from 'models/admin.model';
 
