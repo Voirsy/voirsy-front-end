@@ -17,14 +17,17 @@ import {
   AccordionDetails,
 } from '@mui/material';
 import { Box } from '@mui/system';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useFetchSalonDataQuery } from 'store/api/admin';
 import { RootState } from 'store/store';
 import theme from 'theme';
+import CrewDialog from './crewDialog';
 import { CustomPaper } from './details.styles';
+import ServiceDialog from './serviceDialog';
 
 const Edit = () => {
   const { salonId } = useParams<{ salonId: string }>();
@@ -36,6 +39,9 @@ const Edit = () => {
     formState: { isDirty },
   } = useForm();
   const currency = useSelector((state: RootState) => state.user?.currency);
+  const [isServiceDialogOpen, setIsServiceDialogOpen] = useState<boolean>(false);
+  const [isCrewDialogOpen, setIsCrewDialogOpen] = useState<boolean>(false);
+  const [translation] = useTranslation();
 
   useEffect(() => {
     if (!isFetching) {
@@ -55,97 +61,121 @@ const Edit = () => {
     );
 
   return (
-    <Grid container spacing={2} paddingY={2}>
-      <Grid item direction="column" xs={12} lg={6}>
-        <Stack spacing={2}>
-          <CustomPaper variant="outlined">
-            <Grid container justifyContent="space-between" alignItems="center" marginBottom={2}>
-              <Typography component="h3" variant="h6">
-                Informations
-              </Typography>
-              <Button variant="text" size="small" disabled={!isDirty}>
-                Save
-              </Button>
-            </Grid>
+    <>
+      <Grid container spacing={2} paddingY={2}>
+        <Grid item direction="column" xs={12} lg={6}>
+          <Stack spacing={2}>
+            <CustomPaper variant="outlined">
+              <Grid container justifyContent="space-between" alignItems="center" marginBottom={2}>
+                <Typography component="h3" variant="h6">
+                  {translation('admin:details.informations.title')}
+                </Typography>
+                <Button variant="text" size="small" disabled={!isDirty}>
+                  {translation('admin:confirmButton')}
+                </Button>
+              </Grid>
 
-            <form>
-              <Stack spacing={2}>
-                <TextField variant="outlined" label="Salon name" size="small" {...register('salonName')} />
-                <TextField variant="outlined" label="Adress" size="small" {...register('address')} />
-                <TextField variant="outlined" label="City" size="small" {...register('city')} />
-                <TextField variant="outlined" label="Phone" size="small" {...register('phone')} />
-                <TextField
-                  variant="outlined"
-                  label="Description"
-                  size="small"
-                  multiline
-                  maxRows={4}
-                  {...register('description')}
-                />
-              </Stack>
-            </form>
-          </CustomPaper>
+              <form>
+                <Stack spacing={2}>
+                  <TextField
+                    variant="outlined"
+                    label={translation('admin:details.informations.salonName')}
+                    size="small"
+                    {...register('salonName')}
+                  />
+                  <TextField
+                    variant="outlined"
+                    label={translation('admin:details.informations.address')}
+                    size="small"
+                    {...register('address')}
+                  />
+                  <TextField
+                    variant="outlined"
+                    label={translation('admin:details.informations.city')}
+                    size="small"
+                    {...register('city')}
+                  />
+                  <TextField
+                    variant="outlined"
+                    label={translation('admin:details.informations.phone')}
+                    size="small"
+                    {...register('phone')}
+                  />
+                  <TextField
+                    variant="outlined"
+                    label={translation('admin:details.informations.description')}
+                    size="small"
+                    multiline
+                    maxRows={4}
+                    {...register('description')}
+                  />
+                </Stack>
+              </form>
+            </CustomPaper>
+            <CustomPaper variant="outlined">
+              <Grid container justifyContent="space-between" alignItems="center">
+                <Typography component="h3" variant="h6">
+                  {translation('admin:details.crew.title')}
+                </Typography>
+                <IconButton size="small" color="primary" onClick={() => setIsCrewDialogOpen(true)}>
+                  <AddOutlined />
+                </IconButton>
+              </Grid>
+              <List>
+                {data?.crew &&
+                  data.crew.map((person) => (
+                    <ListItem key={person._id}>
+                      <ListItemAvatar>
+                        <Avatar src={person.imageUrl}></Avatar>
+                      </ListItemAvatar>
+                      <ListItemText primary={person.name} />
+                    </ListItem>
+                  ))}
+              </List>
+            </CustomPaper>
+          </Stack>
+        </Grid>
+        <Grid item container xs={12} lg={6} alignItems="stretch">
           <CustomPaper variant="outlined">
-            <Grid container justifyContent="space-between" alignItems="center">
+            <Grid container justifyContent="space-between" alignItems="center" marginBottom={1}>
               <Typography component="h3" variant="h6">
-                Crew
+                {translation('admin:details.services.title')}
               </Typography>
-              <IconButton size="small" color="primary">
+              <IconButton size="small" color="primary" onClick={() => setIsServiceDialogOpen(true)}>
                 <AddOutlined />
               </IconButton>
             </Grid>
-            <List>
-              {data?.crew &&
-                data.crew.map((person) => (
-                  <ListItem key={person._id}>
-                    <ListItemAvatar>
-                      <Avatar src={person.imageUrl}></Avatar>
-                    </ListItemAvatar>
-                    <ListItemText primary={person.name} />
-                  </ListItem>
-                ))}
-            </List>
-          </CustomPaper>
-        </Stack>
-      </Grid>
-      <Grid item container xs={12} lg={6} alignItems="stretch">
-        <CustomPaper variant="outlined">
-          <Grid container justifyContent="space-between" alignItems="center" marginBottom={1}>
-            <Typography component="h3" variant="h6">
-              Services
-            </Typography>
-            <IconButton size="small" color="primary">
-              <AddOutlined />
-            </IconButton>
-          </Grid>
-          {data?.services &&
-            data.services.map((service) => (
-              <Accordion key={service._id} elevation={0}>
-                <AccordionSummary expandIcon={<ExpandMoreOutlined />}>
-                  <Stack>
-                    <Typography variant="subtitle1" component="p">
-                      {service.name}
-                    </Typography>
-                    <Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
-                      <Typography variant="body2" component="p">
-                        {`Price: ${service.price} ${currency}`}
+            {data?.services &&
+              data.services.map((service) => (
+                <Accordion key={service._id} elevation={0}>
+                  <AccordionSummary expandIcon={<ExpandMoreOutlined />}>
+                    <Stack>
+                      <Typography variant="subtitle1" component="p">
+                        {service.name}
                       </Typography>
-                      <Typography variant="body2" component="p">
-                        {`Duration: ${service.duration} min`}
-                      </Typography>
+                      <Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
+                        <Typography variant="body2" component="p">
+                          {`Price: ${service.price} ${currency}`}
+                        </Typography>
+                        <Typography variant="body2" component="p">
+                          {`Duration: ${service.duration} min`}
+                        </Typography>
+                      </Stack>
                     </Stack>
-                  </Stack>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography variant="body2" component="p">
-                    {service.description}
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-            ))}
-        </CustomPaper>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography variant="body2" component="p">
+                      {service.description}
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
+              ))}
+          </CustomPaper>
+        </Grid>
       </Grid>
-    </Grid>
+      <ServiceDialog open={isServiceDialogOpen} close={() => setIsServiceDialogOpen(false)} />
+      <CrewDialog open={isCrewDialogOpen} close={() => setIsCrewDialogOpen(false)} />
+    </>
   );
 };
 
