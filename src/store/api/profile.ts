@@ -7,7 +7,10 @@ export const profileApi = createApi({
   reducerPath: 'profileApi',
   baseQuery: fetchBaseQuery({ baseUrl: ENV.apiUrl }),
   endpoints: (builder) => ({
-    fetchAllUsersFavorites: builder.query<Pick<Salon, '_id' | 'address' | 'name' | 'imageUrl'>[], void>({
+    fetchAllUsersFavorites: builder.query<
+      Pick<Salon, '_id' | 'address' | 'name' | 'imageUrl' | 'city' | 'rating' | 'type'>[],
+      void
+    >({
       query: () => `${PROFILE.FAVORITES}`,
     }),
   }),

@@ -4,6 +4,8 @@ import Spinner from 'components/Spinner';
 import { useTranslation } from 'react-i18next';
 import { useFetchAllUsersFavoritesQuery } from 'store/api/profile';
 import theme from 'theme';
+import { SalonType } from 'enums/salonType.enum';
+import SalonCard from 'components/SalonCard';
 
 const Favorites = () => {
   const [translation] = useTranslation();
@@ -23,22 +25,15 @@ const Favorites = () => {
         <Grid container spacing={2}>
           {data.map((el) => (
             <Grid key={el._id} item xs={12} lg={6}>
-              <Card>
-                <CardMedia component="img" height="200" image={el.imageUrl} alt={el.name} />
-                <CardContent>
-                  <Typography noWrap variant="h6">
-                    {el.name}
-                  </Typography>
-                  <Typography noWrap variant="subtitle2">
-                    {el.address}
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small" color="error">
-                    Delete
-                  </Button>
-                </CardActions>
-              </Card>
+              <SalonCard
+                _id={el._id}
+                address={el.address}
+                city={el.city}
+                imageUrl={el.imageUrl}
+                name={el.name}
+                salonType={el.type as SalonType[]}
+                rating={el.rating}
+              />
             </Grid>
           ))}
         </Grid>
