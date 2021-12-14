@@ -66,7 +66,7 @@ const Salon = () => {
             <CustomSalonName variant="h4" noWrap>
               {data.name}
             </CustomSalonName>
-            <CustomSalonAddress variant="body1" noWrap>{`${data.address} ${data.city}`}</CustomSalonAddress>
+            <CustomSalonAddress variant="caption" noWrap>{`${data.address} ${data.city}`}</CustomSalonAddress>
           </Stack>
         </Stack>
         <NavTabs currentTab={currentTab} />

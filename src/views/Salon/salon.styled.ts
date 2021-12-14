@@ -29,8 +29,6 @@ export const CustomWrapper = styled(Box)(() => ({
 
 export const CustomLink = styled(IconButton)<Partial<LinkProps>>(() => ({
   alignSelf: 'center',
-  width: '36px',
-  height: '36px',
   padding: '2px',
 
   '> svg': {
@@ -38,8 +36,6 @@ export const CustomLink = styled(IconButton)<Partial<LinkProps>>(() => ({
   },
 
   [theme.breakpoints.up('md')]: {
-    width: '48px',
-    height: '48px',
     '> svg': {
       fontSize: '46px',
     },
@@ -57,7 +53,6 @@ export const CustomSalonName = styled(Typography)(() => ({
 }));
 
 export const CustomSalonAddress = styled(Typography)(() => ({
-  fontSize: '13px',
   color: theme.palette.text.primary,
 
   [theme.breakpoints.up('md')]: {
