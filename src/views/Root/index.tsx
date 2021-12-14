@@ -11,15 +11,17 @@ import Edit from 'views/Admin/Edit';
 import Portfolio from 'views/Admin/Portfolio';
 import Schedule from 'views/Admin/Schedule';
 import Favorites from 'views/Favorites';
+import CustomRoute from 'components/CustomRoute';
+import { UserType } from 'enums/userType.enum';
 
 const Root = () => (
   <Router>
     <MainTemplate>
       <Switch>
-        <Route path="/login">
+        <CustomRoute userType={UserType.Unauthorized} path="/login">
           <Login />
-        </Route>
-        <Route
+        </CustomRoute>
+        <CustomRoute
           path="/profile"
           render={({ match: { url } }) => (
             <>
@@ -38,14 +40,15 @@ const Root = () => (
                   <Favorites />
                 </Route>
                 <Route path="*">
-                  <Redirect to="/edit" />
+                  <Redirect to={`${url}/edit`} />
                 </Route>
               </Switch>
             </>
           )}
         />
 
-        <Route
+        <CustomRoute
+          userType={UserType.Business}
           path="/salons"
           render={({ match: { url } }) => (
             <>
@@ -92,9 +95,9 @@ const Root = () => (
                 <Route path={`${url}:salonId/portfolio`}>
                   <p>The salon portfolio</p>
                 </Route>
-                <Route path={`${url}:salonId/reservation`}>
+                <CustomRoute path={`${url}:salonId/reservation`}>
                   <p>Reservation</p>
-                </Route>
+                </CustomRoute>
                 <Route path={[`${url}:salonId`, `${url}:salonId/information`]}>
                   <p>Information about salon</p>
                 </Route>

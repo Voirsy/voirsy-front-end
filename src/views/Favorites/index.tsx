@@ -24,7 +24,7 @@ const Favorites = () => {
           {data.map((el) => (
             <Grid key={el._id} item xs={12} lg={6}>
               <Card>
-                <CardMedia component="img" height="200" image={el.images[0]} alt={el.name} />
+                <CardMedia component="img" height="200" image={el.imageUrl} alt={el.name} />
                 <CardContent>
                   <Typography noWrap variant="h6">
                     {el.name}

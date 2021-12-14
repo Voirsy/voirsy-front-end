@@ -16,11 +16,14 @@ export type Salon = {
   _id: string;
   name: string;
   address: string;
+  city: string;
   phone: string;
   description: string;
   crew: CrewMember[];
   services: Service[];
   schedule: string;
   portfolio: string[];
-  images: string[];
+  type: string[];
+  rating: string;
+  imageUrl: string;
 };
