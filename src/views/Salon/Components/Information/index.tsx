@@ -19,7 +19,7 @@ const Information = ({
 
   return (
     <Stack direction={matches ? 'column' : 'row'} spacing={1.5}>
-      <div>
+      <Box width="100%">
         <CustomImg src={imageUrl} alt={translation('salon:salonImg.alt')} sx={{ borderRadius: 1 }} />
         <Box sx={{ display: matches ? 'block' : 'none' }}>
           <Details description={description} phone={phone} openingHours={openingHours} crew={crew} />
@@ -34,7 +34,7 @@ const Information = ({
             ))}
           </div>
         </div>
-      </div>
+      </Box>
       <Box sx={{ display: matches ? 'none' : 'block', minWidth: '300px', width: '300px' }}>
         <Details description={description} phone={phone} openingHours={openingHours} crew={crew} />
       </Box>
