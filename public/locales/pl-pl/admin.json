@@ -1,0 +1,17 @@
+{
+  "salonTemplate": {
+    "error": "Pojawił się nieznany błąd",
+    "noSalons": "Nie masz adnych salonów.",
+    "heading": {
+      "salonName": "Nazwa salonu",
+      "mySalons": "Moje salony"
+    },
+    "deleteSalon": "Usuń salon",
+    "nav": {
+      "edit": "Edytuj",
+      "schedule": "Terminarz",
+      "portfolio": "Portfolio",
+      "aria": "Nawigacja panelu administratora"
+    }
+  }
+}

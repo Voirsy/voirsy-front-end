@@ -1,0 +1,62 @@
+{
+  "nav": {
+    "aria": "salon page navigation",
+    "info": "Informacje",
+    "portfolio": "Portfolio",
+    "reviews": "Oceny"
+  },
+  "goBackButton": {
+    "aria": "Wróć do strony głównej",
+    "label": "Wróć do strony głównej"
+  },
+  "bookButton": {
+    "label": "Rezerwuj"
+  },
+  "error": {
+    "unknown": "Pojawił się błąd podczas pobierania salonów"
+  },
+  "salonImg": {
+    "alt": "Profil salonu"
+  },
+  "details": {
+    "contact": {
+      "label": "Kontakt"
+    },
+    "openingHours": {
+      "label": "Godziny otwarcia",
+      "closed": "Zamknięte",
+      "daysOfTheWeek": {
+        "monday": "Poniedziałek",
+        "tuesday": "Wtorek",
+        "wednesday": "Środa",
+        "thursday": "Czwartek",
+        "friday": "Piątek",
+        "saturday": "Sobota",
+        "sunday": "Niedziela"
+      }
+    },
+    "aboutUs": {
+      "label": "O nas"
+    },
+    "crew": {
+      "label": "Załoga"
+    },
+    "services": {
+      "label": "Usługi"
+    },
+    "ourServices": {
+      "label": "Nasze usługi"
+    }
+  },
+  "portfolio": {
+    "noImages": "Brak obrazów"
+  },
+  "reviews": {
+    "noReviews": "Brak opinii",
+    "addReviewForm": {
+      "title": "Zostaw swoją opinię",
+      "textfield": "Twoja opinia",
+      "button": "Dodaj"
+    }
+  }
+}
