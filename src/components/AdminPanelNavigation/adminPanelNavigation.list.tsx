@@ -7,11 +7,11 @@ import AddSalonCard from './adminPanelNavigation.addSalon';
 import { CustomCard } from './adminPanelNavigation.styled';
 
 const SalonsNavigation = ({ data }: { data: Pick<Salon, '_id' | 'name' | 'address'>[] }) => {
-  const [translation] = useTranslation();
+  const [translation] = useTranslation('admin');
 
   return (
     <Stack spacing={2.5}>
-      <Typography variant="h5">{translation('admin:salonTemplate.heading.mySalons')}</Typography>
+      <Typography variant="h5">{translation('salonTemplate.heading.mySalons')}</Typography>
       {data.length > 0 &&
         data.map(({ _id, name, address }) => (
           <CustomCard key={_id}>

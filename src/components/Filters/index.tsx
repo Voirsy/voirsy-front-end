@@ -25,7 +25,7 @@ import { setFilters } from '../../store/slices/salonsFiltersSlice';
 import { useTranslation } from 'react-i18next';
 
 const Filters = ({ handleFetching }: { handleFetching: any }) => {
-  const [translation] = useTranslation();
+  const [translation] = useTranslation('home');
   const filters = useSelector((state: RootState) => state.salonsFilters);
   const dispatch = useDispatch();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
@@ -52,8 +52,8 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
             <Search />
           </IconButton>
           <InputBase
-            placeholder={`${translation('home:filters.search.label')}...`}
-            inputProps={{ 'aria-label': translation('home:filters.search.ariaLabel') }}
+            placeholder={`${translation('filters.search.label')}...`}
+            inputProps={{ 'aria-label': translation('filters.search.ariaLabel') }}
             value={search}
             onChange={handleSearchChange}
             onKeyDown={(e) => {
@@ -64,7 +64,7 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
 
         <Stack direction="row" spacing={matches ? 2 : 1} width="100%" overflow={matches ? 'visible' : 'auto'}>
           <Select
-            label={translation('home:filters.location.label')}
+            label={translation('filters.location.label')}
             value={filters.location}
             onChange={handleLocationChange}
             MenuProps={{
@@ -88,7 +88,7 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
           </Select>
 
           <Select
-            label={translation('home:filters.salonType.label')}
+            label={translation('filters.salonType.label')}
             value={filters.salonType}
             onChange={handleSalonTypeChange}
             multiple
@@ -107,11 +107,11 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
             )}
           </Select>
 
-          <Select label={translation('home:sortBy.label')} value={filters.sortBy} onChange={handleSortByChange}>
+          <Select label={translation('sortBy.label')} value={filters.sortBy} onChange={handleSortByChange}>
             {Object.entries(SortType).map((key) => (
               <MenuItem key={key[0]} value={key[0]} sx={{ textTransform: 'capitalize', paddingRight: 3 }}>
                 <Radio checked={key[0] === filters.sortBy} />
-                <ListItemText primary={translation(`home:sortBy.options.${key[0]}`)} />
+                <ListItemText primary={translation(`sortBy.options.${key[0]}`)} />
               </MenuItem>
             ))}
           </Select>
@@ -121,7 +121,7 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
       <Stack direction="row" spacing={matches ? 2 : 1} width="100%" overflow="auto" marginTop={matches ? 2 : 1}>
         {filters.location !== '' && (
           <FilterChip
-            label={`${translation('home:filters.location.label')}: ${
+            label={`${translation('filters.location.label')}: ${
               cities.find((el) => el._id === filters.location)?.name
             }`}
             onDelete={() => dispatch(setFilters({ location: '' }))}
@@ -131,15 +131,13 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
           filters.salonType.map((type) => (
             <FilterChip
               key={type}
-              label={`${translation('home:filters.salonType.label')}: ${
-                salonTypes.find((el) => el._id === type)?.name
-              }`}
+              label={`${translation('filters.salonType.label')}: ${salonTypes.find((el) => el._id === type)?.name}`}
               onDelete={() => dispatch(setFilters({ salonType: filters.salonType.filter((el) => el !== type) }))}
             />
           ))}
         {filters.sortBy !== '' && (
           <FilterChip
-            label={`${translation('home:sortBy.label')}: ${
+            label={`${translation('sortBy.label')}: ${
               Object.entries(SortType).find((el) => el[0] === filters.sortBy)?.[1]
             }`}
             onDelete={() => dispatch(setFilters({ sortBy: '' }))}

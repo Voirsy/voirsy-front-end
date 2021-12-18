@@ -5,7 +5,7 @@ import store from 'store/store';
 import { Provider } from 'react-redux';
 
 import 'global.scss';
-import 'localization/i18n';
+import 'i18n';
 
 ReactDOM.render(
   <React.StrictMode>

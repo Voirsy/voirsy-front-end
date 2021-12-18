@@ -20,11 +20,12 @@ import { isAuth } from 'helpers/auth';
 import AdminPanelNavigation from 'components/AdminPanelNavigation';
 import HeaderNavigation from './header.navigation';
 import { Box } from '@mui/system';
+import i18next from 'i18next';
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [translation] = useTranslation();
+  const [translation] = useTranslation('header');
   const { pathname } = useLocation();
   const fullname = useSelector((state: RootState) => state.user?.fullname);
   const open = Boolean(anchorEl);
@@ -44,7 +45,7 @@ const Header = () => {
             )}
             <CustomPageTitle to="/">
               <Typography variant="h4" component="h1">
-                {translation('header:title')}
+                {translation('title')}
               </Typography>
             </CustomPageTitle>
           </Box>
@@ -57,11 +58,14 @@ const Header = () => {
                 </CustomAvatarButton>
               </>
             ) : (
-              <Link to="/login">
-                <CustomButton variant="contained" color="primary" disableElevation>
-                  {translation('header:button.signin')}
-                </CustomButton>
-              </Link>
+              <CustomButton
+                variant="contained"
+                color="primary"
+                disableElevation
+                onClick={() => i18next.changeLanguage('pl-PL')}
+              >
+                {translation('button.signin')}
+              </CustomButton>
             )}
           </Box>
         </CustomToolbar>

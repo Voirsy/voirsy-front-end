@@ -1,0 +1,62 @@
+{
+  "nav": {
+    "aria": "salon page navigation",
+    "info": "Information",
+    "portfolio": "Portfolio",
+    "reviews": "Reviews"
+  },
+  "goBackButton": {
+    "aria": "back to main page",
+    "label": "Back to main page"
+  },
+  "bookButton": {
+    "label": "Book"
+  },
+  "error": {
+    "unknown": "An error occured while fetching the salon"
+  },
+  "salonImg": {
+    "alt": "salon profile image"
+  },
+  "details": {
+    "contact": {
+      "label": "contact"
+    },
+    "openingHours": {
+      "label": "opening hours",
+      "closed": "closed",
+      "daysOfTheWeek": {
+        "monday": "monday",
+        "tuesday": "tuesday",
+        "wednesday": "wednesday",
+        "thursday": "thursday",
+        "friday": "friday",
+        "saturday": "saturday",
+        "sunday": "sunday"
+      }
+    },
+    "aboutUs": {
+      "label": "about us"
+    },
+    "crew": {
+      "label": "crew"
+    },
+    "services": {
+      "label": "services"
+    },
+    "ourServices": {
+      "label": "our services"
+    }
+  },
+  "portfolio": {
+    "noImages": "No images yet"
+  },
+  "reviews": {
+    "noReviews": "No images yet",
+    "addReviewForm": {
+      "title": "Leave your opinion",
+      "textfield": "Your opinion",
+      "button": "Add"
+    }
+  }
+}
