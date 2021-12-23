@@ -15,6 +15,21 @@
           "_id": "615b24eac9fac70ee4d58b8e",
           "name": "Jessica",
           "imageUrl": "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBmYWNlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+        },
+        {
+          "_id": "615b24eac9fac70ee4d58b8a",
+          "name": "John",
+          "imageUrl": "https://images.ctfassets.net/rvt0uslu5yqp/3AWGbEm44FqedUvsz7vUVx/6083b9a9e62f987577b9aa2c6ca87017/ramtin.png?w=300"
+        },
+        {
+          "_id": "615b24eac9fac70ee4d58b8b",
+          "name": "Isabella",
+          "imageUrl": "https://img.freepik.com/free-photo/young-caucasian-woman-winks-eye-holds-okay-gesture-with-hand_1187-23382.jpg?size=626&ext=jpg"
+        },
+        {
+          "_id": "615b24eac9fac70ee4d58b8c",
+          "name": "Sophia",
+          "imageUrl": "https://media.istockphoto.com/photos/young-beautiful-woman-picture-id1294339577?b=1&k=20&m=1294339577&s=170667a&w=0&h=_5-SM0Dmhb1fhRdz64lOUJMy8oic51GB_2_IPlhCCnU="
         }
       ],
       "services": [
@@ -31,12 +46,77 @@
           "price": 33.25,
           "duration": 50,
           "description": "Najnowszy trend w męskich fryzurach."
+        },
+        {
+          "_id": "845q24eac9fac70ee4d58b8f",
+          "name": "Strzyżenie włosów i brody",
+          "price": 40,
+          "duration": 50,
+          "description": "Najnowszy trend w męskich fryzurach."
+        },
+        {
+          "_id": "845q24eac9fac70ee4d58b8g",
+          "name": "Modelowanie",
+          "price": 10,
+          "duration": 50,
+          "description": "Najnowszy trend w męskich fryzurach."
         }
       ],
-      "portfolio": [
-        "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBmYWNlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+      "portfolio": ["https://bit.ly/3IGPFnm", "https://bit.ly/3dFIWM7", "https://bit.ly/3GDAGZc"],
+      "schedule": "Something will be returned, but I don't know what :)",
+      "reviews": [
+        {
+          "name": "Sebastian Nowak",
+          "date": "2021-10-03T17:08",
+          "rating": 4,
+          "description": "Zdecydowanie polecam.",
+          "authorId": "617adf9a620c81692d151de6",
+          "avatarUrl": "https://bit.ly/3pOyIOW"
+        },
+        {
+          "name": "Martin Wolf",
+          "date": "2021-05-21T19:11",
+          "rating": 3,
+          "description": "As always Oleg was very professional and made a cut to the highest standard.",
+          "authorId": "617adf9a620c81692d151de7",
+          "avatarUrl": "https://bit.ly/3pKbxpc"
+        },
+        {
+          "name": "Eleonora Kowalski",
+          "date": "2021-11-27T07:47",
+          "rating": 5,
+          "description": "Highly recommended! Very professional staff.",
+          "authorId": "617adf9a620c81692d151de8",
+          "avatarUrl": "https://bit.ly/3oK1ml4"
+        }
       ],
-      "schedule": "Something will be returned, but I don't know what :)"
+      "openingHours": [
+        {
+          "name": "monday",
+          "open": "9:00",
+          "close": "21:00"
+        },
+        {
+          "name": "tuesday",
+          "open": "10:00",
+          "close": "19:00"
+        },
+        {
+          "name": "wednesday",
+          "open": "10:00",
+          "close": "19:00"
+        },
+        {
+          "name": "thursday",
+          "open": "9:00",
+          "close": "20:00"
+        },
+        {
+          "name": "friday",
+          "open": "9:00",
+          "close": "20:00"
+        }
+      ]
     },
     {
       "_id": "2284a371-daad-4bd4-9f11-ad3e44665bc5",
@@ -74,7 +154,35 @@
       "portfolio": [
         "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBmYWNlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
       ],
-      "schedule": "Something will be returned, but I don't know what :)"
+      "schedule": "Something will be returned, but I don't know what :)",
+      "reviews": [],
+      "openingHours": [
+        {
+          "name": "monday",
+          "open": "9:00",
+          "close": "21:00"
+        },
+        {
+          "name": "tuesday",
+          "open": "10:00",
+          "close": "19:00"
+        },
+        {
+          "name": "wednesday",
+          "open": "10:00",
+          "close": "19:00"
+        },
+        {
+          "name": "thursday",
+          "open": "9:00",
+          "close": "20:00"
+        },
+        {
+          "name": "friday",
+          "open": "9:00",
+          "close": "20:00"
+        }
+      ]
     },
     {
       "_id": "70416e22-762a-40b5-a31d-3f78a4e95c32",
@@ -112,7 +220,35 @@
       "portfolio": [
         "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBmYWNlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
       ],
-      "schedule": "Something will be returned, but I don't know what :)"
+      "schedule": "Something will be returned, but I don't know what :)",
+      "reviews": [],
+      "openingHours": [
+        {
+          "name": "monday",
+          "open": "9:00",
+          "close": "21:00"
+        },
+        {
+          "name": "tuesday",
+          "open": "10:00",
+          "close": "19:00"
+        },
+        {
+          "name": "wednesday",
+          "open": "10:00",
+          "close": "19:00"
+        },
+        {
+          "name": "thursday",
+          "open": "9:00",
+          "close": "20:00"
+        },
+        {
+          "name": "friday",
+          "open": "9:00",
+          "close": "20:00"
+        }
+      ]
     }
   ],
   "cities": [
