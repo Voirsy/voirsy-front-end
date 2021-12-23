@@ -1,7 +1,7 @@
 {
   "salonTemplate": {
     "error": "Pojawił się nieznany błąd",
-    "noSalons": "Nie masz adnych salonów.",
+    "noSalons": "Nie masz żadnych salonów.",
     "heading": {
       "salonName": "Nazwa salonu",
       "mySalons": "Moje salony"

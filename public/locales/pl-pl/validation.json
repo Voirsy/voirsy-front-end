@@ -9,8 +9,8 @@
   },
   "file": {
     "errors": [
-      "Zły typ pliku.",
-      "Obraz jest za duy. Maksymalnie 2MB.",
+      "Nieprawidłowy typ pliku.",
+      "Obraz jest za duży. Maksymalnie 2MB.",
       "Obraz jest za mały.",
       "Osiągnięto maskymalną ilość obrazów."
     ]
