@@ -7,15 +7,18 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import CancelButton from 'components/CancelButton';
 import ProfileAvatar from 'components/ProfileAvatar';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store/store';
 
 interface EditAccountForm {
   fullname: string;
   email: string;
   birthdate: string;
-  phonenumber: string;
+  phone: string;
 }
 
 const EditAccount = () => {
+  const userData = useSelector((state: RootState) => state.user);
   const [img, setImg] = useState('https://bit.ly/2Zbhp10');
   const [translation] = useTranslation();
   const {
@@ -26,10 +29,10 @@ const EditAccount = () => {
     formState: { errors },
   } = useForm<EditAccountForm>({
     defaultValues: {
-      fullname: 'Alex Smith',
-      email: 'alex@gmail.com',
-      birthdate: '2014-08-18T00:00:00',
-      phonenumber: '324-562-647',
+      fullname: userData?.fullname,
+      email: userData?.email,
+      birthdate: userData?.birthday || '',
+      phone: userData?.phone || '',
     },
     mode: 'all',
   });
@@ -88,9 +91,6 @@ const EditAccount = () => {
           <Controller
             name="birthdate"
             control={control}
-            rules={{
-              required: translation('validation:common.required') as string,
-            }}
             render={({ field, fieldState: { error } }) => (
               <MobileDatePicker
                 inputFormat="dd-MM-yyyy"
@@ -116,12 +116,11 @@ const EditAccount = () => {
             )}
           />
           <Controller
-            name="phonenumber"
+            name="phone"
             control={control}
             rules={{
-              required: translation('validation:common.required') as string,
               pattern: {
-                value: /^[0-9]{3}-[0-9]{3}-[0-9]{3}$/,
+                value: /^$|^___-___-___$|^[0-9]{3}-[0-9]{3}-[0-9]{3}$/,
                 message: translation('validation:common.invalidFormat', { format: 'phone number' }),
               },
             }}

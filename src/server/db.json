@@ -90,6 +90,10 @@
           "avatarUrl": "https://bit.ly/3oK1ml4"
         }
       ],
+      "schedule": "Something will be returned, but I don't know what :)",
+      "images": [
+        "https://d375139ucebi94.cloudfront.net/region2/pl/74024/biz_photo/2efe307395784991b2fde38e56baca-warszawski-golibroda-barber-sh-biz-photo-8acaa8df0f1c48539b0614e8fc1b77-booksy.jpeg?size=640x427"
+      ],
       "openingHours": [
         {
           "name": "monday",
@@ -155,6 +159,7 @@
         "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBmYWNlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
       ],
       "schedule": "Something will be returned, but I don't know what :)",
+      "images": ["https://barbershoppoland.pl/wp-content/uploads/2019/12/MG_8834.jpg"],
       "reviews": [],
       "openingHours": [
         {
@@ -221,6 +226,7 @@
         "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBmYWNlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
       ],
       "schedule": "Something will be returned, but I don't know what :)",
+      "images": ["https://d375139ucebi94.cloudfront.net/pl/images/10880/biz_photo_153134527126.jpeg"],
       "reviews": [],
       "openingHours": [
         {
