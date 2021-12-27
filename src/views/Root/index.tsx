@@ -85,30 +85,31 @@ const Root = () => (
             )}
           />
 
-        <Route
-          path="/"
-          render={({ match: { url } }) => (
-            <>
-              <Header />
-              <Home />
-              <Switch>
-                <Route path={`${url}:salonId/reviews`}>
-                  <Salon />
-                </Route>
-                <Route path={`${url}:salonId/portfolio`}>
-                  <Salon />
-                </Route>
-                <CustomRoute path={`${url}:salonId/reservation/:serviceId`}>
-                  <Salon />
-                </CustomRoute>
-                <Route path={[`${url}:salonId`, `${url}:salonId/information`]}>
-                  <Salon />
-                </Route>
-              </Switch>
-            </>
-          )}
-        />
-      </Switch>
+          <Route
+            path="/"
+            render={({ match: { url } }) => (
+              <>
+                <Header />
+                <Home />
+                <Switch>
+                  <Route path={`${url}:salonId/reviews`}>
+                    <Salon />
+                  </Route>
+                  <Route path={`${url}:salonId/portfolio`}>
+                    <Salon />
+                  </Route>
+                  <CustomRoute path={`${url}:salonId/reservation/:serviceId`}>
+                    <Salon />
+                  </CustomRoute>
+                  <Route path={[`${url}:salonId`, `${url}:salonId/information`]}>
+                    <Salon />
+                  </Route>
+                </Switch>
+              </>
+            )}
+          />
+        </Switch>
+      </Suspense>
     </MainTemplate>
   </Router>
 );
