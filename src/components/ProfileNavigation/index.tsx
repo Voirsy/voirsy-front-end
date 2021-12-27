@@ -1,4 +1,10 @@
-import { PersonOutlined, DeleteOutlined, LockOpenOutlined, CloseOutlined } from '@mui/icons-material';
+import {
+  PersonOutlined,
+  DeleteOutlined,
+  LockOpenOutlined,
+  CloseOutlined,
+  FavoriteBorderOutlined,
+} from '@mui/icons-material';
 import { IconButton, ListItem, ListItemIcon, ListItemText, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/system';
 import { useEffect } from 'react';
@@ -20,6 +26,11 @@ const navigationElements = [
     link: '/profile/delete',
     text: 'Delete account',
     icon: <DeleteOutlined />,
+  },
+  {
+    link: '/profile/favorites',
+    text: 'Favorites',
+    icon: <FavoriteBorderOutlined />,
   },
 ];
 

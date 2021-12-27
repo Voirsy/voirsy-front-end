@@ -12,6 +12,21 @@ export type Service = {
   description: string;
 };
 
+export type OpeningHour = {
+  name: string;
+  open: string;
+  close: string;
+};
+
+export type Review = {
+  name: string;
+  date: string;
+  rating: string;
+  description: string;
+  avatarUrl?: string;
+  authorId: string;
+};
+
 export type Salon = {
   _id: string;
   name: string;
@@ -26,4 +41,6 @@ export type Salon = {
   type: string[];
   rating: string;
   imageUrl: string;
+  openingHours: OpeningHour[];
+  reviews: Review[];
 };
