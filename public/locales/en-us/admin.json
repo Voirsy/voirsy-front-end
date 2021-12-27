@@ -11,7 +11,8 @@
       "calendar": "Calendar",
       "portfolio": "Portfolio",
       "aria": "admin panel navigation"
-    }
+    },
+    "addSalon": "Add salon"
   },
   "details": {
     "informations": {
