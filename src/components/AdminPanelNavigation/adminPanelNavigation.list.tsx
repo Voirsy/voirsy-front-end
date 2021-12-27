@@ -7,12 +7,12 @@ import theme from 'theme';
 import { CustomCard } from './adminPanelNavigation.styled';
 
 const SalonsNavigation = ({ data }: { data: Pick<Salon, '_id' | 'name' | 'address' | 'city' | 'type'>[] }) => {
-  const [translation] = useTranslation();
+  const [translation] = useTranslation('admin');
   const { salonId } = useParams<{ salonId: string }>();
 
   return (
     <Stack spacing={2}>
-      <Typography variant="h5">{translation('admin:salonTemplate.heading.mySalons')}</Typography>
+      <Typography variant="h5">{translation('salonTemplate.heading.mySalons')}</Typography>
       <Button variant="outlined" color="primary" endIcon={<Add />} size="large">
         Add salon
       </Button>

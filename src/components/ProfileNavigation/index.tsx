@@ -1,34 +1,47 @@
-import { PersonOutlined, DeleteOutlined, LockOpenOutlined, CloseOutlined } from '@mui/icons-material';
+import {
+  PersonOutlined,
+  DeleteOutlined,
+  LockOpenOutlined,
+  CloseOutlined,
+  FavoriteBorderOutlined,
+} from '@mui/icons-material';
 import { IconButton, ListItem, ListItemIcon, ListItemText, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/system';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation } from 'react-router-dom';
 import { CustomDrawer, CustomList, CustomToolbar } from './profileNavigation.styles';
-
-const navigationElements = [
-  {
-    link: '/profile/edit',
-    text: 'Account',
-    icon: <PersonOutlined />,
-  },
-  {
-    link: '/profile/password',
-    text: 'Password',
-    icon: <LockOpenOutlined />,
-  },
-  {
-    link: '/profile/delete',
-    text: 'Delete account',
-    icon: <DeleteOutlined />,
-  },
-];
 
 const ProfileNavigation = ({ isMenuOpen, handleClose }: { isMenuOpen: boolean; handleClose: () => void }) => {
   const location = useLocation();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('md'));
+  const [translation] = useTranslation('profile');
 
   useEffect(() => handleClose(), [location]);
+
+  const navigationElements = [
+    {
+      link: '/profile/edit',
+      text: translation('navigation.account'),
+      icon: <PersonOutlined />,
+    },
+    {
+      link: '/profile/password',
+      text: translation('navigation.password'),
+      icon: <LockOpenOutlined />,
+    },
+    {
+      link: '/profile/delete',
+      text: translation('navigation.deleteAccount'),
+      icon: <DeleteOutlined />,
+    },
+    {
+      link: '/profile/favorites',
+      text: translation('navigation.favorites'),
+      icon: <FavoriteBorderOutlined />,
+    },
+  ];
 
   return (
     <CustomDrawer open={isMenuOpen} variant={matches ? 'temporary' : 'permanent'}>

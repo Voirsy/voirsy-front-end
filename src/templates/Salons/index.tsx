@@ -10,7 +10,7 @@ import SalonsNavigation from 'components/AdminPanelNavigation/adminPanelNavigati
 import { useFetchAllSalonsQuery } from 'store/api/admin';
 
 const SalonsTemplate = ({ children }: { children?: ReactNode }) => {
-  const [translation] = useTranslation();
+  const [translation] = useTranslation('admin');
   const { data = [], isFetching, isError } = useFetchAllSalonsQuery();
 
   const history = useHistory();
@@ -24,7 +24,7 @@ const SalonsTemplate = ({ children }: { children?: ReactNode }) => {
   if (isError)
     return (
       <Typography variant="h5" textAlign="center" marginTop={5}>
-        {translation('admin:salonTemplate.error')}
+        {translation('salonTemplate.error')}
       </Typography>
     );
 
@@ -37,16 +37,13 @@ const SalonsTemplate = ({ children }: { children?: ReactNode }) => {
         <Box display="flex" flexDirection="column" flexGrow={1}>
           {data.length > 0 ? (
             <>
-              {/* <CustomEditHeader>
-                <Typography variant="h5">Salon</Typography>
-              </CustomEditHeader> */}
               <NavTabs />
               {children}
             </>
           ) : (
             <Box height="100%" display="flex" justifyContent="center" alignItems="center">
               <Typography variant="h5" textAlign="center">
-                <Trans defaults={translation('admin:salonTemplate.noSalons')} components={[<br key="breakLine" />]} />
+                <Trans defaults={translation('salonTemplate.noSalons')} components={[<br key="breakLine" />]} />
               </Typography>
             </Box>
           )}

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { VisibilityOffOutlined, VisibilityOutlined } from '@mui/icons-material';
 import { FormControl, FormControlLabel, FormLabel, IconButton, Radio, RadioGroup, TextField } from '@mui/material';
 import axios from 'axios';
@@ -27,7 +28,7 @@ const SignUpForm = () => {
   const location = useLocation();
   const history = useHistory();
   const dispatch = useAppDispatch();
-  const [translation] = useTranslation();
+  const [translation] = useTranslation('login');
 
   const {
     register,
@@ -83,20 +84,20 @@ const SignUpForm = () => {
         variant="outlined"
         type="text"
         size="small"
-        label={translation('login:form.email.label')}
+        label={translation('form.email.label')}
         margin="normal"
         {...register('email', {
           required: {
             value: true,
-            message: translation('login:form.email.validation.required'),
+            message: translation('form.email.validation.required'),
           },
           minLength: {
             value: 3,
-            message: translation('login:form.email.validation.minLength'),
+            message: translation('form.email.validation.minLength'),
           },
           pattern: {
             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: translation('login:form.email.validation.pattern'),
+            message: translation('form.email.validation.pattern'),
           },
         })}
         error={!!errors.email}
@@ -106,7 +107,7 @@ const SignUpForm = () => {
         variant="outlined"
         type={isPasswordVisible ? 'text' : 'password'}
         size="small"
-        label={translation('login:form.password.label')}
+        label={translation('form.password.label')}
         margin="normal"
         InputProps={{
           endAdornment: (
@@ -118,11 +119,11 @@ const SignUpForm = () => {
         {...register('password', {
           required: {
             value: true,
-            message: translation('login:form.password.validation.required'),
+            message: translation('form.password.validation.required'),
           },
           minLength: {
             value: 8,
-            message: translation('login:form.password.validation.minLength'),
+            message: translation('form.password.validation.minLength'),
           },
         })}
         error={!!errors.password}
@@ -146,7 +147,7 @@ const SignUpForm = () => {
         </RadioGroup>
       </FormControl>
       <CustomButton type="submit" variant="contained" disableElevation disabled={!isDirty || !isValid}>
-        {translation('login:form.signInButton.label')}
+        {translation('form.signInButton.label')}
       </CustomButton>
     </CustomForm>
   );

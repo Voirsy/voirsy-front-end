@@ -7,17 +7,20 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import CancelButton from 'components/CancelButton';
 import ProfileAvatar from 'components/ProfileAvatar';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store/store';
 
 interface EditAccountForm {
   fullname: string;
   email: string;
   birthdate: string;
-  phonenumber: string;
+  phone: string;
 }
 
 const EditAccount = () => {
+  const userData = useSelector((state: RootState) => state.user);
   const [img, setImg] = useState('https://bit.ly/2Zbhp10');
-  const [translation] = useTranslation();
+  const [translation] = useTranslation(['profile', 'validation']);
   const {
     handleSubmit,
     control,
@@ -26,10 +29,10 @@ const EditAccount = () => {
     formState: { errors },
   } = useForm<EditAccountForm>({
     defaultValues: {
-      fullname: 'Alex Smith',
-      email: 'alex@gmail.com',
-      birthdate: '2014-08-18T00:00:00',
-      phonenumber: '324-562-647',
+      fullname: userData?.fullname,
+      email: userData?.email,
+      birthdate: userData?.birthday || '',
+      phone: userData?.phone || '',
     },
     mode: 'all',
   });
@@ -50,7 +53,7 @@ const EditAccount = () => {
   return (
     <Box component="main" maxWidth={400} margin="0 auto" padding={2}>
       <Typography marginBottom={6} variant="h4" component="h1" textAlign="center">
-        {translation('profile:edit.heading')}
+        {translation('edit.heading')}
       </Typography>
       <ProfileAvatar url={img} handleChangeImg={handleChangeImg} />
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
@@ -59,9 +62,9 @@ const EditAccount = () => {
             variant="outlined"
             type="text"
             size="small"
-            label={translation('profile:edit.input.fullname')}
+            label={translation('edit.input.fullname')}
             {...register('fullname', {
-              required: translation('validation:common.required') as string,
+              required: translation('common.required') as string,
             })}
             error={!!errors.fullname}
             helperText={!!errors.fullname && errors.fullname.message}
@@ -70,16 +73,16 @@ const EditAccount = () => {
             variant="outlined"
             type="email"
             size="small"
-            label={translation('profile:edit.input.email')}
+            label={translation('edit.input.email')}
             {...register('email', {
-              required: translation('validation:common.required') as string,
+              required: translation('common.required') as string,
               minLength: {
                 value: 3,
-                message: translation('validation:common.minLength', { min: '3' }),
+                message: translation('common.minLength', { min: '3' }),
               },
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: translation('validation:common.invalidFormat', { format: 'email' }),
+                message: translation('common.invalidFormat', { format: 'email' }),
               },
             })}
             error={!!errors.email}
@@ -88,14 +91,11 @@ const EditAccount = () => {
           <Controller
             name="birthdate"
             control={control}
-            rules={{
-              required: translation('validation:common.required') as string,
-            }}
             render={({ field, fieldState: { error } }) => (
               <MobileDatePicker
                 inputFormat="dd-MM-yyyy"
                 mask="__-__-____"
-                label={translation('profile:edit.input.birthdate')}
+                label={translation('edit.input.birthdate')}
                 onChange={(date: Date | null) =>
                   setValue('birthdate', date?.toString() || '', { shouldValidate: true, shouldDirty: true })
                 }
@@ -116,12 +116,11 @@ const EditAccount = () => {
             )}
           />
           <Controller
-            name="phonenumber"
+            name="phone"
             control={control}
             rules={{
-              required: translation('validation:common.required') as string,
               pattern: {
-                value: /^[0-9]{3}-[0-9]{3}-[0-9]{3}$/,
+                value: /^$|^___-___-___$|^[0-9]{3}-[0-9]{3}-[0-9]{3}$/,
                 message: translation('validation:common.invalidFormat', { format: 'phone number' }),
               },
             }}
@@ -131,7 +130,7 @@ const EditAccount = () => {
                   <TextField
                     {...inputProps}
                     fullWidth
-                    label={translation('profile:edit.input.phonenumber')}
+                    label={translation('edit.input.phonenumber')}
                     type="tel"
                     size="small"
                     error={!!inputProps.error}
@@ -142,9 +141,9 @@ const EditAccount = () => {
             )}
           />
           <Stack direction="row" spacing={2.5}>
-            <CancelButton>{translation('profile:delete.action.cancel')}</CancelButton>
+            <CancelButton>{translation('delete.action.cancel')}</CancelButton>
             <Button variant="contained" fullWidth size="large" type="submit" sx={{ color: 'common.white' }}>
-              {translation('profile:edit.action.save')}
+              {translation('edit.action.save')}
             </Button>
           </Stack>
         </Stack>

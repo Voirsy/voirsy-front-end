@@ -1,0 +1,25 @@
+{
+  "filters": {
+    "search": {
+      "label": "Search",
+      "ariaLabel": "search voirsy"
+    },
+    "location": {
+      "label": "Location"
+    },
+    "salonType": {
+      "label": "Salon type"
+    }
+  },
+  "sortBy": {
+    "label": "Sort by",
+    "options": {
+      "MostPopular": "Most popular",
+      "TopRated": "Top rated",
+      "QuantityOfRating": "Quantity of ratings"
+    }
+  },
+  "error": {
+    "unknown": "An error occured"
+  }
+}

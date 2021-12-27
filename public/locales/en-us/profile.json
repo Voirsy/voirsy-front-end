@@ -37,5 +37,18 @@
       "cancel": "Cancel",
       "save": "Save"
     }
+  },
+  "favorites": {
+    "heading": "Favorites",
+    "error": {
+      "noFavorites": "No favorites yet",
+      "unknown": "An error occured"
+    }
+  },
+  "navigation": {
+    "account": "Account",
+    "password": "Password",
+    "deleteAccount": "Delete account",
+    "favorites": "Favorites"
   }
 }

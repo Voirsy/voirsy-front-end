@@ -1,3 +1,5 @@
+import { SalonType } from 'enums/salonType.enum';
+
 export type CrewMember = {
   _id: string;
   name: string;
@@ -12,6 +14,21 @@ export type Service = {
   description: string;
 };
 
+export type OpeningHour = {
+  name: string;
+  open: string;
+  close: string;
+};
+
+export type Review = {
+  name: string;
+  date: string;
+  rating: string;
+  description: string;
+  avatarUrl?: string;
+  authorId: string;
+};
+
 export type Salon = {
   _id: string;
   name: string;
@@ -24,6 +41,8 @@ export type Salon = {
   schedule: string;
   portfolio: string[];
   type: SalonType[];
+  rating: string;
+  imageUrl: string;
+  openingHours: OpeningHour[];
+  reviews: Review[];
 };
-
-export type SalonType = 'Barber' | 'Hairdresser' | 'Tattooist' | 'Beautician';

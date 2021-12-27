@@ -1,0 +1,13 @@
+{
+  "title": "Voirsy",
+  "button": {
+    "signin": "Zaloguj się"
+  },
+  "navigation": {
+    "profile": "Profil",
+    "favorites": "Ulubione",
+    "schedule": "Kalendarz",
+    "business": "Biznes",
+    "signOut": "Wyloguj się"
+  }
+}

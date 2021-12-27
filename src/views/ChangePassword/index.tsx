@@ -12,8 +12,7 @@ interface ChangePasswordForm {
 }
 
 const ChangePassword = () => {
-  const [t] = useTranslation();
-  const [translation] = useTranslation();
+  const [translation] = useTranslation(['profile', 'validation']);
   const { handleSubmit, control, watch } = useForm<ChangePasswordForm>({
     defaultValues: { currentPassword: '', newPassword: '' },
     mode: 'all',
@@ -27,7 +26,7 @@ const ChangePassword = () => {
   return (
     <Box component="main" maxWidth={400} margin="0 auto" padding={2}>
       <Typography marginBottom={6} variant="h4" component="h1" textAlign="center">
-        {translation('profile:password.heading')}
+        {translation('password.heading')}
       </Typography>
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={2.5}>
@@ -35,39 +34,35 @@ const ChangePassword = () => {
             name="currentPassword"
             control={control}
             rules={{
-              required: t('validation:common.required') as string,
+              required: translation('common.required') as string,
               minLength: {
                 value: 8,
-                message: t('validation:common.minLength', { min: 8 }),
+                message: translation('common.minLength', { min: 8 }),
               },
             }}
             render={({ field, fieldState: { error } }) => (
-              <PasswordTextfield
-                label={translation('profile:password.input.currentPassword')}
-                error={error}
-                {...field}
-              />
+              <PasswordTextfield label={translation('password.input.currentPassword')} error={error} {...field} />
             )}
           />
           <Controller
             name="newPassword"
             control={control}
             rules={{
-              required: t('validation:common.required') as string,
-              validate: (value) => value !== currentPassword.current || (t('validation:password.cantMatch') as string),
+              required: translation('common.required') as string,
+              validate: (value) => value !== currentPassword.current || (translation('password.cantMatch') as string),
               minLength: {
                 value: 8,
-                message: t('validation:common.minLength', { min: 8 }),
+                message: translation('common.minLength', { min: 8 }),
               },
             }}
             render={({ field, fieldState: { error } }) => (
-              <PasswordTextfield label={translation('profile:password.input.newPassword')} error={error} {...field} />
+              <PasswordTextfield label={translation('password.input.newPassword')} error={error} {...field} />
             )}
           />
           <Stack direction="row" spacing={2.5}>
-            <CancelButton>{translation('profile:delete.action.cancel')}</CancelButton>
+            <CancelButton>{translation('delete.action.cancel')}</CancelButton>
             <Button variant="contained" fullWidth size="large" type="submit" sx={{ color: 'common.white' }}>
-              {translation('profile:password.action.save')}
+              {translation('password.action.save')}
             </Button>
           </Stack>
         </Stack>

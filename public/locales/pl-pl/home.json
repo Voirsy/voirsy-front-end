@@ -1,0 +1,25 @@
+{
+  "filters": {
+    "search": {
+      "label": "Szukaj",
+      "ariaLabel": "Szukaj"
+    },
+    "location": {
+      "label": "Lokalizacja"
+    },
+    "salonType": {
+      "label": "Rodzaj salonu"
+    }
+  },
+  "sortBy": {
+    "label": "Sortuj przez:",
+    "options": {
+      "MostPopular": "Najbardziej popularne",
+      "TopRated": "Najwyżej oceniany",
+      "QuantityOfRating": "Ilość ocen"
+    }
+  },
+  "error": {
+    "unknown": "Pojawił się błąd"
+  }
+}
