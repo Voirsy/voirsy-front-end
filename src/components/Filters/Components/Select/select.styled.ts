@@ -28,6 +28,6 @@ export const CustomFormControl = styled(FormControl, { shouldForwardProp: (prop)
     fill: isOpen ? theme.palette.background.paper : theme.palette.text.primary,
   },
   [theme.breakpoints.up('sm')]: {
-    maxWidth: '140px',
+    maxWidth: '180px',
   },
 }));
