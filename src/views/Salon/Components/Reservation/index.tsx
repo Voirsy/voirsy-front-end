@@ -30,9 +30,9 @@ const Reservation = ({ serviceName }: { serviceName: string }) => {
   const { name, duration, price } = data;
 
   return (
-    <Stack spacing={2.5} height="100%">
-      <Stack direction="row" justifyContent="space-between" alignItems="center" marginBottom={1}>
-        <Typography variant="h6" noWrap>
+    <Stack spacing={1.5} height="100%">
+      <Stack direction={{ xs: 'column', md: 'row' }} justifyContent="space-between" alignItems="center">
+        <Typography variant="h5" noWrap>
           {name}
         </Typography>
         <Typography variant="h6" width="fit-content" sx={{ whiteSpace: 'nowrap' }}>
