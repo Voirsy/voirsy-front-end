@@ -1,4 +1,4 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography, useMediaQuery } from '@mui/material';
+import { Grid, Typography, useMediaQuery } from '@mui/material';
 import { Box } from '@mui/system';
 import Spinner from 'components/Spinner';
 import { useTranslation } from 'react-i18next';
@@ -8,18 +8,18 @@ import { SalonType } from 'enums/salonType.enum';
 import SalonCard from 'components/SalonCard';
 
 const Favorites = () => {
-  const [translation] = useTranslation();
+  const [translation] = useTranslation('profile');
   const { data = [], isError, isFetching } = useFetchAllUsersFavoritesQuery();
   const match = useMediaQuery(theme.breakpoints.up('lg'));
 
   if (isFetching) return <Spinner />;
 
-  if (isError) return <Typography textAlign="center">{translation('profile:favorites.error.unknown')}</Typography>;
+  if (isError) return <Typography textAlign="center">{translation('favorites.error.unknown')}</Typography>;
 
   return (
     <Box component="main" maxWidth={match ? 700 : 380} margin="0 auto" padding={2}>
       <Typography marginBottom={6} variant="h4" component="h1" textAlign="center">
-        {translation('profile:favorites.heading')}
+        {translation('favorites.heading')}
       </Typography>
       {data.length > 0 ? (
         <Grid container spacing={2}>
@@ -38,7 +38,7 @@ const Favorites = () => {
           ))}
         </Grid>
       ) : (
-        <Typography>{translation('profile:favorites.error.noFavorites')}</Typography>
+        <Typography>{translation('favorites.error.noFavorites')}</Typography>
       )}
     </Box>
   );

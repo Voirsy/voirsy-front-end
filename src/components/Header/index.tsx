@@ -20,7 +20,6 @@ import { isAuth } from 'helpers/auth';
 import AdminPanelNavigation from 'components/AdminPanelNavigation';
 import HeaderNavigation from './header.navigation';
 import { Box } from '@mui/system';
-import i18next from 'i18next';
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -58,14 +57,11 @@ const Header = () => {
                 </CustomAvatarButton>
               </>
             ) : (
-              <CustomButton
-                variant="contained"
-                color="primary"
-                disableElevation
-                onClick={() => i18next.changeLanguage('pl-PL')}
-              >
-                {translation('button.signin')}
-              </CustomButton>
+              <Link to="/login">
+                <CustomButton variant="contained" color="primary" disableElevation>
+                  {translation('button.signin')}
+                </CustomButton>
+              </Link>
             )}
           </Box>
         </CustomToolbar>
