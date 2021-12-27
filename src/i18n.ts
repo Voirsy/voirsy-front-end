@@ -14,7 +14,6 @@ i18n
     },
     fallbackLng: 'en-us',
     lowerCaseLng: true,
-    debug: true,
   });
 
 export default i18n;

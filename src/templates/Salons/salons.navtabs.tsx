@@ -23,15 +23,15 @@ const NavTabs = () => {
     >
       <Tab
         component={Link}
-        label={translation('salonTemplate.nav.edit')}
-        value="/salons/:salonId/edit"
-        to={`/salons/${salonId}/edit`}
+        label={translation('salonTemplate.nav.details')}
+        value="/salons/:salonId/details"
+        to={`/salons/${salonId}/details`}
       />
       <Tab
         component={Link}
-        label={translation('salonTemplate.nav.schedule')}
-        value="/salons/:salonId/schedule"
-        to={`/salons/${salonId}/schedule`}
+        label={translation('salonTemplate.nav.calendar')}
+        value="/salons/:salonId/calendar"
+        to={`/salons/${salonId}/calendar`}
       />
       <Tab
         component={Link}

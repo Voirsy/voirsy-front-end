@@ -41,7 +41,7 @@ const Edit = () => {
   const currency = useSelector((state: RootState) => state.user?.currency);
   const [isServiceDialogOpen, setIsServiceDialogOpen] = useState<boolean>(false);
   const [isCrewDialogOpen, setIsCrewDialogOpen] = useState<boolean>(false);
-  const [translation] = useTranslation();
+  const [translation] = useTranslation('admin');
 
   useEffect(() => {
     if (!isFetching) {
@@ -68,10 +68,10 @@ const Edit = () => {
             <CustomPaper variant="outlined">
               <Grid container justifyContent="space-between" alignItems="center" marginBottom={2}>
                 <Typography component="h3" variant="h6">
-                  {translation('admin:details.informations.title')}
+                  {translation('details.informations.title')}
                 </Typography>
                 <Button variant="text" size="small" disabled={!isDirty}>
-                  {translation('admin:confirmButton')}
+                  {translation('confirmButton')}
                 </Button>
               </Grid>
 
@@ -79,31 +79,31 @@ const Edit = () => {
                 <Stack spacing={2}>
                   <TextField
                     variant="outlined"
-                    label={translation('admin:details.informations.salonName')}
+                    label={translation('details.informations.salonName')}
                     size="small"
                     {...register('salonName')}
                   />
                   <TextField
                     variant="outlined"
-                    label={translation('admin:details.informations.address')}
+                    label={translation('details.informations.address')}
                     size="small"
                     {...register('address')}
                   />
                   <TextField
                     variant="outlined"
-                    label={translation('admin:details.informations.city')}
+                    label={translation('details.informations.city')}
                     size="small"
                     {...register('city')}
                   />
                   <TextField
                     variant="outlined"
-                    label={translation('admin:details.informations.phone')}
+                    label={translation('details.informations.phone')}
                     size="small"
                     {...register('phone')}
                   />
                   <TextField
                     variant="outlined"
-                    label={translation('admin:details.informations.description')}
+                    label={translation('details.informations.description')}
                     size="small"
                     multiline
                     maxRows={4}
@@ -115,7 +115,7 @@ const Edit = () => {
             <CustomPaper variant="outlined">
               <Grid container justifyContent="space-between" alignItems="center">
                 <Typography component="h3" variant="h6">
-                  {translation('admin:details.crew.title')}
+                  {translation('details.crew.title')}
                 </Typography>
                 <IconButton size="small" color="primary" onClick={() => setIsCrewDialogOpen(true)}>
                   <AddOutlined />
@@ -139,7 +139,7 @@ const Edit = () => {
           <CustomPaper variant="outlined">
             <Grid container justifyContent="space-between" alignItems="center" marginBottom={1}>
               <Typography component="h3" variant="h6">
-                {translation('admin:details.services.title')}
+                {translation('details.services.title')}
               </Typography>
               <IconButton size="small" color="primary" onClick={() => setIsServiceDialogOpen(true)}>
                 <AddOutlined />
@@ -155,10 +155,10 @@ const Edit = () => {
                       </Typography>
                       <Stack direction="row" spacing={1} color={theme.palette.text.secondary}>
                         <Typography variant="body2" component="p">
-                          {`Price: ${service.price} ${currency}`}
+                          {`${translation('details.services.price')}: ${service.price} ${currency}`}
                         </Typography>
                         <Typography variant="body2" component="p">
-                          {`Duration: ${service.duration} min`}
+                          {`${translation('details.services.duration')}: ${service.duration} min`}
                         </Typography>
                       </Stack>
                     </Stack>

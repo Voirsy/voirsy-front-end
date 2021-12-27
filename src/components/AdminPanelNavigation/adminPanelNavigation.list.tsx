@@ -7,14 +7,14 @@ import theme from 'theme';
 import { CustomCard } from './adminPanelNavigation.styled';
 
 const SalonsNavigation = ({ data }: { data: Pick<Salon, '_id' | 'name' | 'address' | 'city' | 'type'>[] }) => {
-  const [translation] = useTranslation('admin');
+  const [translation] = useTranslation(['admin', 'common']);
   const { salonId } = useParams<{ salonId: string }>();
 
   return (
     <Stack spacing={2}>
       <Typography variant="h5">{translation('salonTemplate.heading.mySalons')}</Typography>
       <Button variant="outlined" color="primary" endIcon={<Add />} size="large">
-        Add salon
+        {translation('salonTemplate.addSalon')}
       </Button>
       {data.length > 0 &&
         data.map(({ _id, name, address, city, type }) => (
@@ -37,7 +37,12 @@ const SalonsNavigation = ({ data }: { data: Pick<Salon, '_id' | 'name' | 'addres
               </Stack>
               <Stack direction="row" spacing={0.5} alignItems="center" marginTop={1}>
                 {type.map((item, index) => (
-                  <Chip size="small" color="secondary" label={item} key={index} />
+                  <Chip
+                    size="small"
+                    color="secondary"
+                    label={translation(`common:salonType.${item.toLowerCase()}`)}
+                    key={index}
+                  />
                 ))}
               </Stack>
             </Link>
