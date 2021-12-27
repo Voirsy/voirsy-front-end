@@ -7,10 +7,10 @@ import { isAuth } from 'helpers/auth';
 import { UserRole } from 'enums/userRole.enum';
 import { useTranslation } from 'react-i18next';
 import { Link, useParams } from 'react-router-dom';
-import { calculateServiceDuration } from '../../../../helpers/util';
+import { calculateServiceDuration } from 'helpers/util';
 
 const ServiceCard = ({ _id: serviceId, name, description, price, duration }: Service) => {
-  const [translation] = useTranslation();
+  const [translation] = useTranslation('salon');
   const { salonId } = useParams<{ salonId: string }>();
   const role = useSelector((state: RootState) => state.user?.role);
   const isBookLinkVisible = isAuth() && role === UserRole.Standard;

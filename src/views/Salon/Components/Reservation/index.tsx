@@ -6,8 +6,7 @@ import { RangeInput } from '@mui/lab/DateRangePicker/RangeTypes';
 import { useFetchServiceQuery } from 'store/api/salon';
 import { useParams } from 'react-router-dom';
 import { CustomWrapper } from 'views/Salon/salon.styled';
-import { CustomServiceHeading } from '../Information/information.styled';
-import { calculateServiceDuration } from '../../../../helpers/util';
+import { calculateServiceDuration } from 'helpers/util';
 
 const Reservation = ({ serviceName }: { serviceName: string }) => {
   const { salonId, serviceId } = useParams<{ salonId: string; serviceId: string }>();

@@ -5,7 +5,7 @@ import theme from 'theme';
 
 const NavTabs = ({ currentTab }: { currentTab: string | undefined }) => {
   const { salonId } = useParams<{ salonId: string }>();
-  const [translation] = useTranslation();
+  const [translation] = useTranslation('salon');
   const matches = useMediaQuery(theme.breakpoints.down('md'));
 
   return (

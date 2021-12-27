@@ -15,7 +15,7 @@ const Information = ({
   crew,
 }: Pick<Salon, 'description' | 'imageUrl' | 'phone' | 'openingHours' | 'services' | 'crew'>) => {
   const matches = useMediaQuery(theme.breakpoints.down('md'));
-  const [translation] = useTranslation();
+  const [translation] = useTranslation('salon');
 
   return (
     <Stack direction={matches ? 'column' : 'row'} spacing={1.5}>

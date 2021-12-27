@@ -14,7 +14,7 @@ import Reservation from './Components/Reservation';
 const Salon = () => {
   const history = useHistory();
   const { salonId } = useParams<{ salonId: string }>();
-  const [translation] = useTranslation();
+  const [translation] = useTranslation('salon');
   const { data, isFetching, isError } = useFetchSpecifiedSalonDataQuery({ salonId });
   const matches = useMediaQuery(theme.breakpoints.down('md'));
   const routeMatch = useRouteMatch(['/:salonId/portfolio', '/:salonId/reviews', '/:salonId/reservation', '/:salonId']);
