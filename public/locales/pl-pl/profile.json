@@ -37,5 +37,18 @@
       "cancel": "Anuluj",
       "save": "Zapisz"
     }
+  },
+  "favorites": {
+    "heading": "Ulubione",
+    "error": {
+      "noFavorites": "Brak ulubionych salonów",
+      "unknown": "Nieznany błąd"
+    }
+  },
+  "navigation": {
+    "account": "Konto",
+    "password": "Hasło",
+    "deleteAccount": "Usuń konto",
+    "favorites": "Ulubione"
   }
 }
