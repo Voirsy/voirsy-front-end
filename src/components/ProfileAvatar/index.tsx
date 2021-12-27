@@ -8,11 +8,11 @@ import { CustomAvatar, CustomDropzoneContainer, CustomUploadWrapper } from './pr
 
 const ProfileAvatar = ({ url, handleChangeImg }: { url: string; handleChangeImg: (e: any) => void }) => {
   const { enqueueSnackbar } = useSnackbar();
-  const [translation] = useTranslation();
+  const [translation] = useTranslation(['profile', 'validation']);
 
   // error codes come from react-files documentation: https://github.com/mother/react-files#props
   const onError = ({ code }: { code: number; message: string }) => {
-    enqueueSnackbar(translation(`validation:file.errors.${code - 1}`), { variant: 'error' });
+    enqueueSnackbar(translation(`file.errors.${code - 1}`), { variant: 'error' });
   };
 
   return (
@@ -37,7 +37,7 @@ const ProfileAvatar = ({ url, handleChangeImg }: { url: string; handleChangeImg:
             >
               <IconButton
                 color="inherit"
-                aria-label={translation('profile:edit.form.file.uploadAria')}
+                aria-label={translation('edit.form.file.uploadAria')}
                 component="span"
                 size="large"
               >

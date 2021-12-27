@@ -1,0 +1,54 @@
+{
+  "delete": {
+    "heading": "Usuń konto",
+    "content": "Jesteś pewien by <0>usunąć</0> konto? Proces jest nieodwracalny.",
+    "action": {
+      "cancel": "Anuluj",
+      "delete": "Usuń"
+    }
+  },
+  "password": {
+    "heading": "Zmień hasło",
+    "input": {
+      "currentPassword": "Aktualne hasło",
+      "newPassword": "Nowe hasło"
+    },
+    "action": {
+      "cancel": "Anuluj",
+      "save": "Zapisz"
+    }
+  },
+  "edit": {
+    "heading": "Edytuj profil",
+    "input": {
+      "fullname": "Imię i nazwisko",
+      "email": "Email",
+      "birthdate": "Data urodzenia",
+      "phonenumber": "Numer telefonu"
+    },
+    "form": {
+      "fullname": "Imię i nazwisko",
+      "email": "Email",
+      "birthdate": "Data urodzenia",
+      "phonenumber": "Numer telefonu",
+      "file": "Prześlij zdjęcie"
+    },
+    "action": {
+      "cancel": "Anuluj",
+      "save": "Zapisz"
+    }
+  },
+  "favorites": {
+    "heading": "Ulubione",
+    "error": {
+      "noFavorites": "Brak ulubionych salonów",
+      "unknown": "Nieznany błąd"
+    }
+  },
+  "navigation": {
+    "account": "Konto",
+    "password": "Hasło",
+    "deleteAccount": "Usuń konto",
+    "favorites": "Ulubione"
+  }
+}

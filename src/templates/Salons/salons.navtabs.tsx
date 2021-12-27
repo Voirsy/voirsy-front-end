@@ -13,30 +13,30 @@ const NavTabs = () => {
     '/salons/:salonId/edit',
   ]);
   const currentTab = routeMatch?.path;
-  const [translation] = useTranslation();
+  const [translation] = useTranslation('admin');
 
   return (
     <Box paddingLeft={matches ? 0 : 2} maxWidth="100%">
       <Tabs
-        aria-label={translation('admin:salonTemplate.nav.aria')}
+        aria-label={translation('salonTemplate.nav.aria')}
         value={currentTab}
         variant={matches ? 'fullWidth' : 'standard'}
       >
         <Tab
           component={Link}
-          label={translation('admin:salonTemplate.nav.edit')}
+          label={translation('salonTemplate.nav.edit')}
           value="/salons/:salonId/edit"
           to={`/salons/${salonId}/edit`}
         />
         <Tab
           component={Link}
-          label={translation('admin:salonTemplate.nav.schedule')}
+          label={translation('salonTemplate.nav.schedule')}
           value="/salons/:salonId/schedule"
           to={`/salons/${salonId}/schedule`}
         />
         <Tab
           component={Link}
-          label={translation('admin:salonTemplate.nav.portfolio')}
+          label={translation('salonTemplate.nav.portfolio')}
           value="/salons/:salonId/portfolio"
           to={`/salons/${salonId}/portfolio`}
         />

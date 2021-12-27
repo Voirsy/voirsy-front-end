@@ -24,7 +24,7 @@ const HeaderNavigation = ({
 }) => {
   const role = useSelector((state: RootState) => state.user?.role);
   const history = useHistory();
-  const [translation] = useTranslation();
+  const [translation] = useTranslation('header');
 
   return (
     <Menu
@@ -39,14 +39,14 @@ const HeaderNavigation = ({
         <ListItemIcon>
           <PersonOutlineRounded />
         </ListItemIcon>
-        {translation('header:navigation.profile')}
+        {translation('navigation.profile')}
       </CustomMenuItem>
       {role === 'STANDARD' && (
         <CustomMenuItem component={Link} to="/profile/favorites">
           <ListItemIcon>
             <FavoriteBorderRounded />
           </ListItemIcon>
-          {translation('header:navigation.favorites')}
+          {translation('navigation.favorites')}
         </CustomMenuItem>
       )}
       {role === 'STANDARD' && (
@@ -54,7 +54,7 @@ const HeaderNavigation = ({
           <ListItemIcon>
             <CalendarTodayRounded />
           </ListItemIcon>
-          {translation('header:navigation.schedule')}
+          {translation('navigation.schedule')}
         </CustomMenuItem>
       )}
       {role === 'BUSINESS' && (
@@ -62,14 +62,14 @@ const HeaderNavigation = ({
           <ListItemIcon>
             <StoreRounded />
           </ListItemIcon>
-          {translation('header:navigation.business')}
+          {translation('navigation.business')}
         </CustomMenuItem>
       )}
       <CustomMenuItem onClick={() => logOut(history.push)}>
         <ListItemIcon>
           <ExitToAppRounded />
         </ListItemIcon>
-        {translation('header:navigation.signOut')}
+        {translation('navigation.signOut')}
       </CustomMenuItem>
     </Menu>
   );

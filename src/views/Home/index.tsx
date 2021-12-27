@@ -7,7 +7,7 @@ import { useLazyFetchAllSalonsQuery } from 'store/api/salons';
 import { useTranslation } from 'react-i18next';
 
 const Home = () => {
-  const [translation] = useTranslation();
+  const [translation] = useTranslation('home');
   const [fetchAllSalons, { isError, data = [], isFetching }] = useLazyFetchAllSalonsQuery();
 
   const handleFetching = useCallback((location: string, sortBy: string, salonType: string, search: string) => {
@@ -18,7 +18,7 @@ const Home = () => {
     fetchAllSalons({});
   }, []);
 
-  if (isError) return <Typography>{translation('home:error.unknown')}</Typography>;
+  if (isError) return <Typography>{translation('error.unknown')}</Typography>;
 
   return (
     <main>

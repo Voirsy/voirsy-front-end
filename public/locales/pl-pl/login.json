@@ -1,0 +1,29 @@
+{
+  "form": {
+    "email": {
+      "label": "Email",
+      "validation": {
+        "required": "Pole wymagane",
+        "minLength": "Email powinien zawierać przynajmniej 3 znaki",
+        "pattern": "Nieprawidłowy adres email"
+      }
+    },
+    "password": {
+      "label": "Hasło",
+      "validation": {
+        "required": "Pole wymagane",
+        "minLength": "Hasło powinno zawierać przynajmniej 8 znaków"
+      }
+    },
+    "role": {
+      "legend": "Rodzaj konta",
+      "label": ["Standardowe", "Biznesowe"]
+    },
+    "signUpButton": {
+      "label": "Stwórz konto"
+    },
+    "signInButton": {
+      "label": "Zaloguj się"
+    }
+  }
+}

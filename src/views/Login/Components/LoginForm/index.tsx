@@ -20,7 +20,7 @@ const LoginForm = () => {
   });
   const history = useHistory();
   const { url } = useRouteMatch();
-  const [translation] = useTranslation();
+  const [translation] = useTranslation('login');
 
   const submitForm = async (data: { email: string }) => {
     const result = await axios.post<ServerResponse>('http://localhost:8080/auth/checkemail', data);
@@ -43,7 +43,7 @@ const LoginForm = () => {
         variant="outlined"
         type="text"
         size="small"
-        label={translation('login:form.email.label')}
+        label={translation('form.email.label')}
         InputProps={{
           endAdornment: (
             <IconButton edge="end" type="submit" color="primary" disabled={!isDirty || !isValid}>
@@ -54,15 +54,15 @@ const LoginForm = () => {
         {...register('email', {
           required: {
             value: true,
-            message: translation('login:form.email.validation.required'),
+            message: translation('form.email.validation.required'),
           },
           minLength: {
             value: 3,
-            message: translation('login:form.email.validation.minLength'),
+            message: translation('form.email.validation.minLength'),
           },
           pattern: {
             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: translation('login:form.email.validation.pattern'),
+            message: translation('form.email.validation.pattern'),
           },
         })}
         error={!!errors.email}
