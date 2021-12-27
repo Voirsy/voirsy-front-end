@@ -9,6 +9,7 @@ import theme from 'theme';
 import Information from './Components/Information';
 import Reviews from './Components/Reviews';
 import Portfolio from './Components/Portfolio';
+import Reservation from './Components/Reservation';
 
 const Salon = () => {
   const history = useHistory();
@@ -16,8 +17,10 @@ const Salon = () => {
   const [translation] = useTranslation();
   const { data, isFetching, isError } = useFetchSpecifiedSalonDataQuery({ salonId });
   const matches = useMediaQuery(theme.breakpoints.down('md'));
-  const routeMatch = useRouteMatch(['/:salonId/portfolio', '/:salonId/reviews', '/:salonId']);
+  const routeMatch = useRouteMatch(['/:salonId/portfolio', '/:salonId/reviews', '/:salonId/reservation', '/:salonId']);
   const currentTab = routeMatch?.path;
+
+  console.log(currentTab);
 
   if (isError) {
     return (
@@ -59,7 +62,11 @@ const Salon = () => {
           sx={{ maxWidth: '100%' }}
           padding={matches ? '10px 15px 0' : '25px 25px 0'}
         >
-          <CustomLink component={Link} to="/" aria-label={translation('salon:goBackButton.aria')}>
+          <CustomLink
+            component={Link}
+            to={currentTab !== '/:salonId/reservation' ? '/' : `/${salonId}`}
+            aria-label={translation('salon:goBackButton.aria')}
+          >
             <ChevronLeftIcon />
           </CustomLink>
           <Stack spacing={-0.5} overflow="hidden" alignSelf="center">
@@ -69,7 +76,7 @@ const Salon = () => {
             <CustomSalonAddress variant="caption" noWrap>{`${data.address} ${data.city}`}</CustomSalonAddress>
           </Stack>
         </Stack>
-        <NavTabs currentTab={currentTab} />
+        {currentTab !== '/:salonId/reservation' && <NavTabs currentTab={currentTab} />}
         <Box padding={matches ? '10px' : '25px'} flexGrow={1} overflow="auto" position="relative">
           {currentTab === '/:salonId' && (
             <Information
@@ -83,6 +90,7 @@ const Salon = () => {
           )}
           {currentTab === '/:salonId/reviews' && <Reviews reviews={data.reviews} />}
           {currentTab === '/:salonId/portfolio' && <Portfolio portfolio={data.portfolio} />}
+          {currentTab === '/:salonId/reservation' && <Reservation serviceName="Depilacja" />}
         </Box>
       </CustomWrapper>
     </Modal>
