@@ -98,7 +98,7 @@ const Root = () => (
                 <Route path={`${url}:salonId/portfolio`}>
                   <Salon />
                 </Route>
-                <CustomRoute path={`${url}:salonId/reservation`}>
+                <CustomRoute path={`${url}:salonId/reservation/:serviceId`}>
                   <Salon />
                 </CustomRoute>
                 <Route path={[`${url}:salonId`, `${url}:salonId/information`]}>

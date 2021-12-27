@@ -1,11 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ENV } from 'config/enviroments';
-import { Salon } from 'models/admin.model';
+import { Salon, Service } from 'models/admin.model';
 import { SALON } from 'endpoints/salon';
 
 interface FetchSpecifiedSalonData {
   salonId: string;
+}
+
+interface FetchService extends FetchSpecifiedSalonData {
+  serviceId: string;
 }
 
 export const salonApi = createApi({
@@ -18,7 +22,19 @@ export const salonApi = createApi({
       }),
       transformResponse: (salon: Salon[]): Salon => salon[0],
     }),
+    fetchService: builder.query<Service, FetchService>({
+      query: ({ salonId, serviceId }) => ({
+        url: `${SALON.FETCH_SERVICE(salonId, serviceId)}`,
+      }),
+      transformResponse: (salon: Salon[], meta) => {
+        if (meta?.response) {
+          const serviceId = meta.response.url.split('/').reverse()[0];
+          return salon[0].services.find((el) => el._id === serviceId) || salon[0].services[0];
+        }
+        return salon[0].services[0];
+      },
+    }),
   }),
 });
 
-export const { useFetchSpecifiedSalonDataQuery } = salonApi;
+export const { useFetchSpecifiedSalonDataQuery, useFetchServiceQuery } = salonApi;

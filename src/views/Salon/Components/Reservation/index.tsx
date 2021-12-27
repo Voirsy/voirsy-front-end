@@ -1,22 +1,47 @@
-import { Box, Button, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Modal, Stack, TextField, Typography } from '@mui/material';
 import { Search } from '@mui/icons-material';
 import { useState } from 'react';
 import { DatePicker, DateRangePicker } from '@mui/lab';
 import { RangeInput } from '@mui/lab/DateRangePicker/RangeTypes';
+import { useFetchServiceQuery } from 'store/api/salon';
+import { useParams } from 'react-router-dom';
+import { CustomWrapper } from 'views/Salon/salon.styled';
+import { CustomServiceHeading } from '../Information/information.styled';
+import { calculateServiceDuration } from '../../../../helpers/util';
 
 const Reservation = ({ serviceName }: { serviceName: string }) => {
+  const { salonId, serviceId } = useParams<{ salonId: string; serviceId: string }>();
+  const { data, isFetching } = useFetchServiceQuery({ salonId, serviceId });
   const [date, setDate] = useState(new Date());
   const [range, setRange] = useState<RangeInput<Date>>([new Date(), new Date()]);
 
+  if (isFetching || data === undefined) {
+    return (
+      <Modal open>
+        <CustomWrapper>
+          <Box height="100vh" display="flex" alignItems="center" justifyContent="center">
+            <CircularProgress />
+          </Box>
+        </CustomWrapper>
+      </Modal>
+    );
+  }
+
+  const { name, duration, price } = data;
+
   return (
-    <Stack spacing={3} height="100%">
-      <Stack spacing={3}>
-        <Typography variant="h6">Service name</Typography>
-        <Typography>{serviceName}</Typography>
+    <Stack spacing={2.5} height="100%">
+      <Stack direction="row" justifyContent="space-between" alignItems="center" marginBottom={1}>
+        <Typography variant="h6" noWrap>
+          {name}
+        </Typography>
+        <Typography variant="h6" width="fit-content" sx={{ whiteSpace: 'nowrap' }}>
+          {`${calculateServiceDuration(duration)} • ${price}$`}
+        </Typography>
       </Stack>
-      <Stack spacing={3}>
+      <Stack spacing={2.5}>
         <Typography variant="h6">Your free time</Typography>
-        <Stack spacing={3} direction={{ xs: 'column', md: 'row' }}>
+        <Stack spacing={2.5} direction={{ xs: 'column', md: 'row' }}>
           <DatePicker
             disablePast
             label="Date"
@@ -44,7 +69,7 @@ const Reservation = ({ serviceName }: { serviceName: string }) => {
           </Button>
         </Stack>
       </Stack>
-      <Stack spacing={3} sx={{ flexGrow: 1 }}>
+      <Stack spacing={2.5} sx={{ flexGrow: 1 }}>
         <Typography variant="h6">Our free time</Typography>
         <Box height="100%">
           <p>{serviceName}</p>
