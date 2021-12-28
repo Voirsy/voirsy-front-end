@@ -88,7 +88,7 @@ const Salon = () => {
           )}
           {currentTab === '/:salonId/reviews' && <Reviews reviews={data.reviews} />}
           {currentTab === '/:salonId/portfolio' && <Portfolio portfolio={data.portfolio} />}
-          {currentTab === '/:salonId/reservation' && <Reservation serviceName="Depilacja" />}
+          {currentTab === '/:salonId/reservation' && <Reservation />}
         </Box>
       </CustomWrapper>
     </Modal>
