@@ -10,6 +10,7 @@ import { calculateServiceDuration } from 'helpers/util';
 import { format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import { AvailableLocales, locales } from 'config/locales';
+import { Checkbox, Tile } from './reservation.styled';
 
 const sortByDate = (dates: string[]) => dates.sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
 
@@ -61,6 +62,7 @@ const Reservation = () => {
   const { data, isFetching } = useFetchServiceQuery({ salonId, serviceId });
   const [date, setDate] = useState(new Date());
   const [range, setRange] = useState<RangeInput<Date>>([new Date(), new Date()]);
+  const [selectedDate, setSelectedDate] = useState<null | string>(null);
 
   const lng = i18n.language as AvailableLocales;
 
@@ -133,9 +135,15 @@ const Reservation = () => {
               <Grid container spacing={2}>
                 {day.map((el) => (
                   <Grid key={el} item>
-                    <Paper sx={{ width: '140px', padding: 1.5 }}>
+                    <Tile isActive={el === selectedDate}>
+                      <Checkbox
+                        type="radio"
+                        value={el}
+                        checked={selectedDate === el}
+                        onChange={() => setSelectedDate(el)}
+                      />
                       <Typography textAlign="center">{format(new Date(el), 'HH:mm')}</Typography>
-                    </Paper>
+                    </Tile>
                   </Grid>
                 ))}
               </Grid>
@@ -144,7 +152,9 @@ const Reservation = () => {
         </Stack>
       </Stack>
       <Box padding={2} display="flex" justifyContent="center" alignItems="center">
-        <Button variant="contained">book</Button>
+        <Button disabled={selectedDate === null} variant="contained">
+          book
+        </Button>
       </Box>
     </Stack>
   );
