@@ -18,8 +18,8 @@ import { Suspense } from 'react';
 
 const Root = () => (
   <Router>
-    <MainTemplate>
-      <Suspense fallback="loading">
+    <Suspense fallback="loading">
+      <MainTemplate>
         <Switch>
           <CustomRoute userType={UserType.Unauthorized} path="/login">
             <Login />
@@ -109,8 +109,8 @@ const Root = () => (
             )}
           />
         </Switch>
-      </Suspense>
-    </MainTemplate>
+      </MainTemplate>
+    </Suspense>
   </Router>
 );
 

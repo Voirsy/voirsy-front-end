@@ -1,6 +1,12 @@
 import { styled } from '@mui/system';
-import { Paper } from '@mui/material';
+import { Paper, TextField } from '@mui/material';
 import theme from 'theme';
+
+export const TimeField = styled(TextField)(() => ({
+  [theme.breakpoints.up('md')]: {
+    width: '140px',
+  },
+}));
 
 export const Checkbox = styled('input')(() => ({
   position: 'absolute',

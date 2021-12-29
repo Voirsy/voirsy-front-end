@@ -1,7 +1,7 @@
-import { Box, Button, CircularProgress, Grid, Modal, Paper, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Grid, Modal, Stack, TextField, Typography } from '@mui/material';
 import { Search } from '@mui/icons-material';
 import { useState } from 'react';
-import { DatePicker, DateRangePicker } from '@mui/lab';
+import { DatePicker, TimePicker } from '@mui/lab';
 import { RangeInput } from '@mui/lab/DateRangePicker/RangeTypes';
 import { useFetchServiceQuery } from 'store/api/salon';
 import { useParams } from 'react-router-dom';
@@ -10,7 +10,7 @@ import { calculateServiceDuration } from 'helpers/util';
 import { format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import { AvailableLocales, locales } from 'config/locales';
-import { Checkbox, Tile } from './reservation.styled';
+import { Checkbox, Tile, TimeField } from './reservation.styled';
 
 const sortByDate = (dates: string[]) => dates.sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
 
@@ -61,7 +61,8 @@ const Reservation = () => {
   const { salonId, serviceId } = useParams<{ salonId: string; serviceId: string }>();
   const { data, isFetching } = useFetchServiceQuery({ salonId, serviceId });
   const [date, setDate] = useState(new Date());
-  const [range, setRange] = useState<RangeInput<Date>>([new Date(), new Date()]);
+  const [timeStart, setTimeStart] = useState<null | string>(null);
+  const [timeEnd, setTimeEnd] = useState<null | string>(null);
   const [selectedDate, setSelectedDate] = useState<null | string>(null);
 
   const lng = i18n.language as AvailableLocales;
@@ -101,20 +102,20 @@ const Reservation = () => {
             views={['year', 'month', 'day']}
             value={date}
             onChange={(newValue: any) => setDate(newValue)}
-            renderInput={(params: any) => <TextField {...params} size="small" />}
+            renderInput={(params) => <TextField {...params} size="small" />}
           />
-          <DateRangePicker
-            startText="Check-in"
-            endText="Check-out"
-            value={range}
-            onChange={(newValue: any) => setRange(newValue)}
-            renderInput={(startProps: any, endProps: any) => (
-              <>
-                <TextField {...startProps} size="small" />
-                <Box sx={{ mx: 2 }}> to </Box>
-                <TextField {...endProps} size="small" />
-              </>
-            )}
+          <TimePicker
+            label="Start"
+            value={timeStart}
+            onChange={(newValue) => setTimeStart(newValue)}
+            renderInput={(params) => <TimeField {...params} size="small" />}
+          />
+          <TimePicker
+            label="End"
+            disabled={timeStart === null}
+            value={timeEnd}
+            onChange={(newValue) => setTimeEnd(newValue)}
+            renderInput={(params) => <TimeField {...params} size="small" />}
           />
           <Button variant="contained" size="small">
             <Search />
