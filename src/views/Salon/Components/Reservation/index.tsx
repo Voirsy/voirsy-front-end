@@ -2,7 +2,6 @@ import { Box, Button, CircularProgress, Grid, Modal, Stack, TextField, Typograph
 import { Search } from '@mui/icons-material';
 import { useState } from 'react';
 import { DatePicker, TimePicker } from '@mui/lab';
-import { RangeInput } from '@mui/lab/DateRangePicker/RangeTypes';
 import { useFetchServiceQuery } from 'store/api/salon';
 import { useParams } from 'react-router-dom';
 import { CustomWrapper } from 'views/Salon/salon.styled';
@@ -57,7 +56,7 @@ const freeHours = {
 };
 
 const Reservation = () => {
-  const [, i18n] = useTranslation('salon');
+  const [translation, i18n] = useTranslation('salon');
   const { salonId, serviceId } = useParams<{ salonId: string; serviceId: string }>();
   const { data, isFetching } = useFetchServiceQuery({ salonId, serviceId });
   const [date, setDate] = useState(new Date());
@@ -93,11 +92,11 @@ const Reservation = () => {
         </Typography>
       </Stack>
       <Stack spacing={2.5}>
-        <Typography variant="h6">Your free time</Typography>
+        <Typography variant="h6">{translation('reservation.yourFreeTimeHeading')}</Typography>
         <Stack spacing={2.5} direction={{ xs: 'column', md: 'row' }}>
           <DatePicker
             disablePast
-            label="Date"
+            label={translation('reservation.labels.date')}
             openTo="year"
             views={['year', 'month', 'day']}
             value={date}
@@ -105,25 +104,25 @@ const Reservation = () => {
             renderInput={(params) => <TextField {...params} size="small" />}
           />
           <TimePicker
-            label="Start"
+            label={translation('reservation.labels.start')}
             value={timeStart}
             onChange={(newValue) => setTimeStart(newValue)}
             renderInput={(params) => <TimeField {...params} size="small" />}
           />
           <TimePicker
-            label="End"
+            label={translation('reservation.labels.end')}
             disabled={timeStart === null}
             value={timeEnd}
             onChange={(newValue) => setTimeEnd(newValue)}
             renderInput={(params) => <TimeField {...params} size="small" />}
           />
-          <Button variant="contained" size="small">
+          <Button variant="contained" size="small" aria-label={translation('reservation.searchButton.aria')}>
             <Search />
           </Button>
         </Stack>
       </Stack>
       <Stack spacing={2.5} sx={{ flexGrow: 1 }}>
-        <Typography variant="h6">Our free time</Typography>
+        <Typography variant="h6">{translation('reservation.ourFreeTimeHeading')}</Typography>
         <Stack height="100%" spacing={1.5}>
           {availableHours.map((day) => (
             <Stack key={day[0]} spacing={0.05}>
@@ -154,7 +153,7 @@ const Reservation = () => {
       </Stack>
       <Box padding={2} display="flex" justifyContent="center" alignItems="center">
         <Button disabled={selectedDate === null} variant="contained">
-          book
+          {translation('reservation.bookButton.label')}
         </Button>
       </Box>
     </Stack>

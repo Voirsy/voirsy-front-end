@@ -58,5 +58,20 @@
       "textfield": "Your opinion",
       "button": "Add"
     }
+  },
+  "reservation": {
+    "yourFreeTimeHeading": "Your free time",
+    "ourFreeTimeHeading": "Our free time",
+    "labels": {
+      "date": "Date",
+      "start": "Start",
+      "end": "End"
+    },
+    "bookButton": {
+      "label": "Book"
+    },
+    "searchButton": {
+      "aria": "Find free hours"
+    }
   }
 }

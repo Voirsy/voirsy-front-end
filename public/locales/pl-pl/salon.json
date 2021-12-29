@@ -58,5 +58,20 @@
       "textfield": "Twoja opinia",
       "button": "Dodaj"
     }
+  },
+  "reservation": {
+    "yourFreeTimeHeading": "Twoje wolne godziny",
+    "ourFreeTimeHeading": "Nasze wolne godziny",
+    "labels": {
+      "date": "Data",
+      "start": "Początek",
+      "end": "Koniec"
+    },
+    "bookButton": {
+      "label": "Zarezerwuj"
+    },
+    "searchButton": {
+      "aria": "Znajdź wolne godziny"
+    }
   }
 }
