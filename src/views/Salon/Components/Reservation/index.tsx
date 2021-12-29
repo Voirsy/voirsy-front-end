@@ -125,14 +125,14 @@ const Reservation = () => {
         <Typography variant="h6">Our free time</Typography>
         <Stack height="100%" spacing={1.5}>
           {availableHours.map((day) => (
-            <Stack key={day[0]} spacing={1.5}>
+            <Stack key={day[0]} spacing={0.05}>
               <Typography>
                 {`
                   ${format(new Date(day[0]), 'd LLLL yyyy', { locale: locales[lng] })} • 
                   ${format(new Date(day[0]), 'eeee', { locale: locales[lng] })}
                 `}
               </Typography>
-              <Grid container spacing={2}>
+              <Grid container spacing={1.5}>
                 {day.map((el) => (
                   <Grid key={el} item>
                     <Tile isActive={el === selectedDate}>
