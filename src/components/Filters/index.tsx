@@ -109,7 +109,7 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
 
           <Select label={translation('sortBy.label')} value={filters.sortBy} onChange={handleSortByChange}>
             {Object.entries(SortType).map((key) => (
-              <MenuItem key={key[0]} value={key[0]} sx={{ textTransform: 'capitalize', paddingRight: 3 }}>
+              <MenuItem key={key[0]} value={key[0]} sx={{ paddingRight: 3 }}>
                 <Radio checked={key[0] === filters.sortBy} />
                 <ListItemText primary={translation(`sortBy.options.${key[0]}`)} />
               </MenuItem>
