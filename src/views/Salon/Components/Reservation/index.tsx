@@ -5,55 +5,12 @@ import { DatePicker, TimePicker } from '@mui/lab';
 import { useFetchServiceQuery } from 'store/api/salon';
 import { useParams } from 'react-router-dom';
 import { CustomWrapper } from 'views/Salon/salon.styled';
-import { calculateServiceDuration } from 'helpers/util';
+import { calculateServiceDuration, sortByDate, splitToDays } from 'helpers/util';
 import { format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import { AvailableLocales, locales } from 'config/locales';
 import { Checkbox, Tile, TimeField } from './reservation.styled';
-
-const sortByDate = (dates: string[]) => dates.sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
-
-const splitToDays = (dates: string[]) => {
-  const datesToReturn = [[dates[0]]];
-  let k = 0;
-
-  for (let i = 1; i < dates.length; i++) {
-    if (datesToReturn[k][0].split('T')[0] === dates[i].split('T')[0]) {
-      datesToReturn[k].push(dates[i]);
-    } else {
-      k++;
-      datesToReturn[k] = [dates[i]];
-    }
-  }
-
-  return datesToReturn;
-};
-
-const freeHours = {
-  freeHours: [
-    {
-      workedId: '60ae96dad2396a054c3ab53e',
-      startHours: [
-        '2021-10-04T13:15:00.000Z',
-        '2021-10-03T12:45:00.000Z',
-        '2021-10-03T12:15:00.000Z',
-        '2021-10-03T12:30:00.000Z',
-      ],
-    },
-    {
-      workedId: '60ae96dad2396a054c3ab53f',
-      startHours: ['2021-10-03T12:45:00.000Z', '2021-10-03T12:30:00.000Z', '2021-10-03T13:00:00.000Z'],
-    },
-    {
-      workedId: '60ae96dad2396a054c3ab53g',
-      startHours: ['2021-10-04T13:00:00.000Z', '2021-10-03T12:15:00.000Z', '2021-10-03T12:30:00.000Z'],
-    },
-    {
-      workedId: '60ae96dad2396a054c3ab53g',
-      startHours: ['2021-10-03T12:15:00.000Z', '2021-10-03T12:45:00.000Z', '2021-10-04T13:00:00.000Z'],
-    },
-  ],
-};
+import { freeHours } from './reservation.data';
 
 const Reservation = () => {
   const [translation, i18n] = useTranslation('salon');
