@@ -31,7 +31,7 @@ const Favorites = () => {
                 city={el.city}
                 imageUrl={el.imageUrl}
                 name={el.name}
-                salonType={el.type as SalonType[]}
+                salonType={el.type}
                 rating={el.rating}
               />
             </Grid>

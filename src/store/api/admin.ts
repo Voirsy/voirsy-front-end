@@ -9,25 +9,18 @@ export const adminPanelApi = createApi({
   reducerPath: 'adminPanelApi',
   baseQuery: fetchBaseQuery({ baseUrl: ENV.apiUrl }),
   endpoints: (builder) => ({
-    fetchAllSalons: builder.query<Pick<Salon, '_id' | 'address' | 'name'>[], void>({
+    fetchAllSalons: builder.query<Pick<Salon, '_id' | 'address' | 'name' | 'city' | 'type'>[], void>({
       query: () => `${ADMIN_PANEL.FETCH_SALONS}`,
     }),
     fetchSalonData: builder.query<
-      Pick<Salon, 'name' | 'address' | 'phone' | 'description' | 'services' | 'crew'>,
+      Pick<Salon, 'name' | 'address' | 'phone' | 'description' | 'services' | 'crew' | 'city'>,
       { salonId: string }
     >({
       query: ({ salonId }) => `${ADMIN_PANEL.FETCH_INFO(salonId)}`,
-      transformResponse: (salonData: Salon[]): any =>
-        isFilledArray(salonData)
-          ? {
-              name: salonData[0].name,
-              address: salonData[0].address,
-              phone: salonData[0].phone,
-              description: salonData[0].description,
-              services: salonData[0].services,
-              crew: salonData[0].crew,
-            }
-          : {},
+      transformResponse: (salonData: Salon[]): any => {
+        const [data] = salonData;
+        return data ? data : {};
+      },
     }),
     fetchSalonSchedule: builder.query<{ schedule: string }, { salonId: string }>({
       query: ({ salonId }) => `${ADMIN_PANEL.FETCH_SCHEDULE(salonId)}`,
