@@ -34,8 +34,13 @@ const Reservation = () => {
       </Modal>
     );
   }
-  const hours = Array.from(new Set(freeHours.freeHours.map((el) => el.startHours).flat()));
-  const availableHours = splitToDays(sortByDate(hours));
+
+  let availableHours: string[] = [];
+  if (freeHours.freeHours.length > 0) {
+    const hours = Array.from(new Set(freeHours.freeHours.map((el) => el.startHours).flat()));
+    availableHours = sortByDate(hours);
+  }
+
   const { name, duration, price } = data;
 
   return (
@@ -81,16 +86,16 @@ const Reservation = () => {
       <Stack spacing={2.5} sx={{ flexGrow: 1 }}>
         <Typography variant="h6">{translation('reservation.ourFreeTimeHeading')}</Typography>
         <Stack height="100%" spacing={1.5}>
-          {availableHours.map((day) => (
-            <Stack key={day[0]} spacing={0.05}>
+          {availableHours.length > 0 ? (
+            <Stack key={availableHours[0]} spacing={0.05}>
               <Typography>
                 {`
-                  ${format(new Date(day[0]), 'd LLLL yyyy', { locale: locales[lng] })} • 
-                  ${format(new Date(day[0]), 'eeee', { locale: locales[lng] })}
-                `}
+                ${format(new Date(availableHours[0]), 'd LLLL yyyy', { locale: locales[lng] })} • 
+                ${format(new Date(availableHours[0]), 'eeee', { locale: locales[lng] })}
+              `}
               </Typography>
               <Grid container spacing={1.5}>
-                {day.map((el) => (
+                {availableHours.map((el) => (
                   <Grid key={el} item>
                     <Tile isActive={el === selectedDate}>
                       <Checkbox
@@ -105,7 +110,9 @@ const Reservation = () => {
                 ))}
               </Grid>
             </Stack>
-          ))}
+          ) : (
+            <Typography>{translation('reservation.noDates')}</Typography>
+          )}
         </Stack>
       </Stack>
       <Box padding={2} display="flex" justifyContent="center" alignItems="center">
