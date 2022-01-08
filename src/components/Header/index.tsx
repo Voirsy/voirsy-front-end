@@ -57,11 +57,9 @@ const Header = () => {
                 </CustomAvatarButton>
               </>
             ) : (
-              <Link to="/login">
-                <CustomButton variant="contained" color="primary" disableElevation>
-                  {translation('button.signin')}
-                </CustomButton>
-              </Link>
+              <CustomButton variant="contained" color="primary" disableElevation component={Link} to="/login">
+                {translation('button.signin')}
+              </CustomButton>
             )}
           </Box>
         </CustomToolbar>

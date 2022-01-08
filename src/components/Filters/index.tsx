@@ -25,7 +25,7 @@ import { setFilters } from '../../store/slices/salonsFiltersSlice';
 import { useTranslation } from 'react-i18next';
 
 const Filters = ({ handleFetching }: { handleFetching: any }) => {
-  const [translation] = useTranslation('home');
+  const [translation] = useTranslation(['home', 'common']);
   const filters = useSelector((state: RootState) => state.salonsFilters);
   const dispatch = useDispatch();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
@@ -101,7 +101,7 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
               salonTypes.map((el) => (
                 <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize', paddingRight: 3 }}>
                   <Checkbox checked={filters.salonType.indexOf(el._id) > -1} />
-                  <ListItemText primary={el.name} />
+                  <ListItemText primary={translation(`salonType.${el.name.toLowerCase()}`, { ns: 'common' })} />
                 </MenuItem>
               ))
             )}
@@ -109,7 +109,7 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
 
           <Select label={translation('sortBy.label')} value={filters.sortBy} onChange={handleSortByChange}>
             {Object.entries(SortType).map((key) => (
-              <MenuItem key={key[0]} value={key[0]} sx={{ textTransform: 'capitalize', paddingRight: 3 }}>
+              <MenuItem key={key[0]} value={key[0]} sx={{ paddingRight: 3 }}>
                 <Radio checked={key[0] === filters.sortBy} />
                 <ListItemText primary={translation(`sortBy.options.${key[0]}`)} />
               </MenuItem>
