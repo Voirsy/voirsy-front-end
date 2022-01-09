@@ -9,6 +9,8 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-20.04
+    env:
+      DISABLE_ESLINT_PLUGIN: true
 
     steps:
       - name: Checkout
