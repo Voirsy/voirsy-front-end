@@ -2,6 +2,7 @@
   "name": "voirsy-front-end",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://voirsy.github.io/voirsy-front-end/",
   "scripts": {
     "start": "react-scripts start",
     "start:dev": "concurrently -k -c red,blue \"npm start\" \"npm run server\"",
