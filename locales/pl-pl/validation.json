@@ -1,0 +1,18 @@
+{
+  "password": {
+    "cantMatch": "Hasła muszą się różnić"
+  },
+  "common": {
+    "required": "Pole wymagane",
+    "minLength": "Musi zawierać przynajmniej {{min}} znaków",
+    "invalidFormat": "Nieprawidłowy {{format}} format"
+  },
+  "file": {
+    "errors": [
+      "Nieprawidłowy typ pliku.",
+      "Obraz jest za duży. Maksymalnie 2MB.",
+      "Obraz jest za mały.",
+      "Osiągnięto maskymalną ilość obrazów."
+    ]
+  }
+}

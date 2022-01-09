@@ -1,0 +1,29 @@
+{
+  "form": {
+    "email": {
+      "label": "Email",
+      "validation": {
+        "required": "Field is required",
+        "minLength": "Email should contains at least 3 characters",
+        "pattern": "Invalid email address"
+      }
+    },
+    "password": {
+      "label": "Password",
+      "validation": {
+        "required": "Field is required",
+        "minLength": "Password should contains at least 8 characters"
+      }
+    },
+    "role": {
+      "legend": "Account type",
+      "label": ["Standard", "Business"]
+    },
+    "signUpButton": {
+      "label": "Create account"
+    },
+    "signInButton": {
+      "label": "Sign in"
+    }
+  }
+}

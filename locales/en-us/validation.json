@@ -1,0 +1,18 @@
+{
+  "password": {
+    "cantMatch": "Passwords must be different"
+  },
+  "common": {
+    "required": "Field is required",
+    "minLength": "Must be minimum {{min}} characters",
+    "invalidFormat": "Invalid {{format}} format"
+  },
+  "file": {
+    "errors": [
+      "Invalid file type.",
+      "Image is too large. 2MB maximum.",
+      "Image is too small.",
+      "Maximum file count reached."
+    ]
+  }
+}
