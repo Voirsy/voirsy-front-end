@@ -3,7 +3,7 @@ name: Build and deploy app
 on:
   push:
     branches:
-      - main
+      - develop
 
 jobs:
   build:
@@ -35,7 +35,7 @@ jobs:
     name: Deploy to Github Pages
     needs: build
     runs-on: ubuntu-20.04
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/develop'
 
     steps:
       - name: Download a Build Artifact
