@@ -12,6 +12,7 @@ i18n
       loadPath: './locales/{{lng}}/{{ns}}.json',
       allowMultiLoading: true,
     },
+    load: 'currentOnly',
     fallbackLng: 'en-us',
     lowerCaseLng: true,
   });
