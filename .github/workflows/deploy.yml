@@ -29,6 +29,9 @@ jobs:
         env:
           REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
 
+      - name: Create 404.html
+        run: cp ./build/index.html ./build/404.html
+
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.3.1
         with:
