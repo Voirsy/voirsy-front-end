@@ -11,6 +11,7 @@ import { setUserData } from 'store/slices/userSlice';
 import { User } from 'models/user.model';
 import { UserRole } from 'enums/userRole.enum';
 import { useTranslation } from 'react-i18next';
+import { ENV } from 'config/enviroments';
 
 type ServerResponse = {
   token: string;
@@ -49,7 +50,7 @@ const SignInForm = () => {
 
   const signIn = async (data: FormData) => {
     try {
-      const result = await axios.post<ServerResponse>('http://localhost:8080/auth/signin', data);
+      const result = await axios.post<ServerResponse>(`${ENV.apiUrl}/auth/signin`, data);
       localStorage.setItem('JWT_TOKEN', result.data.token);
       dispatch(setUserData(result.data.user));
       history.push('/');

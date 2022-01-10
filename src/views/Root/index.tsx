@@ -17,7 +17,7 @@ import { UserType } from 'enums/userType.enum';
 import { Suspense } from 'react';
 
 const Root = () => (
-  <Router>
+  <Router basename={process.env.PUBLIC_URL}>
     <MainTemplate>
       <Suspense fallback="loading">
         <Switch>
