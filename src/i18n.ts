@@ -10,9 +10,8 @@ i18n
   .init({
     backend: {
       loadPath: './locales/{{lng}}/{{ns}}.json',
-      allowMultiLoading: true,
     },
-    fallbackLng: 'false',
+    fallbackLng: 'en-us',
     lowerCaseLng: true,
   });
 
