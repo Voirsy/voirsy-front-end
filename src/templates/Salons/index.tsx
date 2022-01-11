@@ -8,15 +8,18 @@ import { CustomSalonsNavigation } from './salons.styled';
 import NavTabs from './salons.navtabs';
 import SalonsNavigation from 'components/AdminPanelNavigation/adminPanelNavigation.list';
 import { useFetchAllSalonsQuery } from 'store/api/admin';
+import { RootState } from 'store/store';
+import { useSelector } from 'react-redux';
 
 const SalonsTemplate = ({ children }: { children?: ReactNode }) => {
   const [translation] = useTranslation('admin');
-  const { data = [], isFetching, isError } = useFetchAllSalonsQuery();
+  const userId = useSelector((state: RootState) => state.user?.id) as string;
+  const { data = { salons: [], message: '' }, isFetching, isError } = useFetchAllSalonsQuery({ userId });
 
   const history = useHistory();
 
   useEffect(() => {
-    isFetching === false && data.length ? history.replace(`/salons/${data[0]._id}/details`) : null;
+    isFetching === false && data.salons.length ? history.replace(`/salons/${data.salons[0]._id}/details`) : null;
   }, [isFetching]);
 
   if (isFetching) return <Spinner />;
@@ -35,7 +38,7 @@ const SalonsTemplate = ({ children }: { children?: ReactNode }) => {
           <SalonsNavigation data={data} />
         </CustomSalonsNavigation>
         <Box display="flex" flexDirection="column" flexGrow={1}>
-          {data.length > 0 ? (
+          {data.salons.length > 0 ? (
             <>
               <NavTabs />
               {children}

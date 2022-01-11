@@ -18,7 +18,7 @@ export const salonsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: ENV.apiUrl }),
   endpoints: (builder) => ({
     fetchAllSalons: builder.query<
-      Pick<Salon, '_id' | 'address' | 'name' | 'city' | 'type' | 'rating' | 'imageUrl'>[],
+      { salons: Pick<Salon, '_id' | 'address' | 'name' | 'city' | 'type' | 'rating' | 'imageUrl'>[]; message: string },
       FetchAllSalon
     >({
       query: ({ location = '', search = '', sortBy = '', salonType = '' }) => ({
@@ -33,10 +33,10 @@ export const salonsApi = createApi({
         },
       }),
     }),
-    fetchAllCities: builder.query<City[], void>({
+    fetchAllCities: builder.query<{ cities: City[]; message: string }, void>({
       query: () => `${SALONS.FETCH_CITIES}`,
     }),
-    fetchAllCategories: builder.query<Category[], void>({
+    fetchAllCategories: builder.query<{ categories: Category[]; message: string }, void>({
       query: () => `${SALONS.FETCH_CATEGORIES}`,
     }),
   }),

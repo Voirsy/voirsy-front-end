@@ -30,8 +30,8 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
   const dispatch = useDispatch();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const [search, setSearch] = useState('');
-  const { data: salonTypes = [], isFetching: salonTypesFetching } = useFetchAllCategoriesQuery();
-  const { data: cities = [], isFetching: citiesFetching } = useFetchAllCitiesQuery();
+  const { data: salonTypes, isFetching: salonTypesFetching } = useFetchAllCategoriesQuery();
+  const { data: cities, isFetching: citiesFetching } = useFetchAllCitiesQuery();
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => setSearch(event.target.value);
   const handleLocationChange = (event: any) => dispatch(setFilters({ location: event.target.value }));
@@ -78,7 +78,7 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
                 <CircularProgress />
               </Box>
             ) : (
-              cities.map((el) => (
+              cities?.cities.map((el) => (
                 <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize', paddingRight: 3 }}>
                   <Radio checked={el._id === filters.location} />
                   <ListItemText primary={el.name} />
@@ -98,7 +98,7 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
                 <CircularProgress />
               </Box>
             ) : (
-              salonTypes.map((el) => (
+              salonTypes?.categories.map((el) => (
                 <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize', paddingRight: 3 }}>
                   <Checkbox checked={filters.salonType.indexOf(el._id) > -1} />
                   <ListItemText primary={translation(`salonType.${el.name.toLowerCase()}`, { ns: 'common' })} />
@@ -122,7 +122,7 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
         {filters.location !== '' && (
           <FilterChip
             label={`${translation('filters.location.label')}: ${
-              cities.find((el) => el._id === filters.location)?.name
+              cities?.cities.find((el) => el._id === filters.location)?.name
             }`}
             onDelete={() => dispatch(setFilters({ location: '' }))}
           />
@@ -131,7 +131,9 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
           filters.salonType.map((type) => (
             <FilterChip
               key={type}
-              label={`${translation('filters.salonType.label')}: ${salonTypes.find((el) => el._id === type)?.name}`}
+              label={`${translation('filters.salonType.label')}: ${
+                salonTypes?.categories.find((el) => el._id === type)?.name
+              }`}
               onDelete={() => dispatch(setFilters({ salonType: filters.salonType.filter((el) => el !== type) }))}
             />
           ))}

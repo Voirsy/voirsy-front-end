@@ -6,7 +6,11 @@ import { Link, useParams } from 'react-router-dom';
 import theme from 'theme';
 import { CustomCard } from './adminPanelNavigation.styled';
 
-const SalonsNavigation = ({ data }: { data: Pick<Salon, '_id' | 'name' | 'address' | 'city' | 'type'>[] }) => {
+const SalonsNavigation = ({
+  data,
+}: {
+  data: { salons: Pick<Salon, '_id' | 'name' | 'address' | 'city' | 'type'>[]; message: string };
+}) => {
   const [translation] = useTranslation(['admin', 'common']);
   const { salonId } = useParams<{ salonId: string }>();
 
@@ -16,8 +20,8 @@ const SalonsNavigation = ({ data }: { data: Pick<Salon, '_id' | 'name' | 'addres
       <Button variant="outlined" color="primary" endIcon={<Add />} size="large">
         {translation('salonTemplate.addSalon')}
       </Button>
-      {data.length > 0 &&
-        data.map(({ _id, name, address, city, type }) => (
+      {data.salons.length > 0 &&
+        data.salons.map(({ _id, name, address, city, type }) => (
           <CustomCard key={_id} active={salonId === _id} variant="outlined">
             <Link to={`/salons/${_id}/details`}>
               <Typography variant="subtitle1" noWrap>
