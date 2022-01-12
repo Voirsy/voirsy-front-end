@@ -19,8 +19,6 @@ const Salon = () => {
   const routeMatch = useRouteMatch(['/:salonId/portfolio', '/:salonId/reviews', '/:salonId']);
   const currentTab = routeMatch?.path;
 
-  console.log(data, isError, isFetching);
-
   if (isError) {
     return (
       <Modal open>

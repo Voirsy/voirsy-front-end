@@ -19,18 +19,33 @@ import { UserRole } from 'enums/userRole.enum';
 import { isAuth } from 'helpers/auth';
 import { CustomFab, CustomModal, ReviewCard } from './reviews.styled';
 import { format } from 'date-fns';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSnackbar } from 'notistack';
+import { useAddReviewMutation } from 'store/api/salon';
+import { useParams } from 'react-router-dom';
 
 const Reviews = ({ reviews = [] }: Pick<Salon, 'reviews'>) => {
   const [translation] = useTranslation('salon');
   const user = useSelector((state: RootState) => state.user);
+  const { salonId } = useParams<{ salonId: string }>();
   const alreadyAdded = reviews.find((el) => el.authorId === user?.id);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [opinion, setOpinion] = useState('');
   const [rating, setRating] = useState<null | number>(null);
+  const [addReview, { isError, isSuccess }] = useAddReviewMutation();
+  const { enqueueSnackbar } = useSnackbar();
 
   const isFabVisible = isAuth() && user?.role !== UserRole.Business && !alreadyAdded && !isDrawerOpen;
+
+  const handleSubmit = () => {
+    if (rating !== null && opinion !== '') addReview({ opinion, rating, salonId });
+  };
+
+  useEffect(() => {
+    if (isError) enqueueSnackbar(translation('salon:reviews.errorMsg'), { variant: 'error' });
+    if (isSuccess) enqueueSnackbar(translation('salon:reviews.successMsg'), { variant: 'success' });
+  }, [isError, isSuccess]);
 
   return (
     <>
@@ -73,7 +88,14 @@ const Reviews = ({ reviews = [] }: Pick<Salon, 'reviews'>) => {
               value={opinion}
               onChange={(e) => setOpinion(e.target.value)}
             />
-            <Button variant="contained" color="secondary" size="large" sx={{ width: '144px' }}>
+            <Button
+              variant="contained"
+              color="secondary"
+              size="large"
+              sx={{ width: '144px' }}
+              onClick={handleSubmit}
+              disabled={opinion === '' || rating === null}
+            >
               {translation('salon:reviews.addReviewForm.button')}
             </Button>
           </Stack>
