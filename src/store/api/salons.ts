@@ -22,7 +22,6 @@ export const salonsApi = createApi({
       FetchAllSalon
     >({
       query: ({ location = '', search = '', sortBy = '', salonType = '' }) => ({
-        // we will need to add POST method and body with passed arguments
         url: `${SALONS.FETCH_SALONS}`,
         method: 'post',
         body: {
