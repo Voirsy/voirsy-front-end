@@ -24,7 +24,7 @@ import { RootState } from 'store/store';
 import { setFilters } from '../../store/slices/salonsFiltersSlice';
 import { useTranslation } from 'react-i18next';
 
-const Filters = ({ handleFetching }: { handleFetching: any }) => {
+const Filters = () => {
   const [translation] = useTranslation(['home', 'common']);
   const filters = useSelector((state: RootState) => state.salonsFilters);
   const dispatch = useDispatch();
@@ -38,11 +38,6 @@ const Filters = ({ handleFetching }: { handleFetching: any }) => {
   const handleSalonTypeChange = (event: any) => dispatch(setFilters({ salonType: event.target.value }));
   const handleSortByChange = (event: any) => dispatch(setFilters({ sortBy: event.target.value }));
   const handleSubmitSearch = () => dispatch(setFilters({ search }));
-
-  useEffect(() => {
-    if (salonTypesFetching || citiesFetching) return;
-    handleFetching({ filters });
-  }, [filters, salonTypesFetching, citiesFetching]);
 
   return (
     <Container component="nav" maxWidth={false}>

@@ -10,7 +10,7 @@ interface FetchAllSalon {
   location?: string;
   search?: string;
   sortBy?: string;
-  salonType?: string;
+  salonType?: string[];
 }
 
 export const salonsApi = createApi({
@@ -21,16 +21,18 @@ export const salonsApi = createApi({
       { salons: Pick<Salon, '_id' | 'address' | 'name' | 'city' | 'type' | 'rating' | 'imageUrl'>[]; message: string },
       FetchAllSalon
     >({
-      query: ({ location = '', search = '', sortBy = '', salonType = '' }) => ({
-        url: `${SALONS.FETCH_SALONS}`,
-        method: 'post',
-        body: {
-          location,
-          search,
-          sortBy,
-          salonType,
-        },
-      }),
+      query: ({ location = '', search = '', sortBy = '', salonType = '' }) => {
+        const body: FetchAllSalon = { search };
+        if (location) body.location = location;
+        if (sortBy) body.sortBy = sortBy;
+        if (salonType.length > 0) body.salonType = salonType as string[];
+
+        return {
+          url: `${SALONS.FETCH_SALONS}`,
+          method: 'post',
+          body,
+        };
+      },
     }),
     fetchAllCities: builder.query<{ cities: City[]; message: string }, void>({
       query: () => `${SALONS.FETCH_CITIES}`,

@@ -2,27 +2,30 @@ import { Box, CircularProgress, Container, Grid, Typography } from '@mui/materia
 import Filters from 'components/Filters';
 import SalonCard from 'components/SalonCard';
 import { SalonType } from 'enums/salonType.enum';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useLazyFetchAllSalonsQuery } from 'store/api/salons';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 
 const Home = () => {
   const [translation] = useTranslation('home');
   const [fetchAllSalons, { isError, data = { salons: [], message: '' }, isFetching }] = useLazyFetchAllSalonsQuery();
-
-  const handleFetching = useCallback((location: string, sortBy: string, salonType: string, search: string) => {
-    fetchAllSalons({ location, sortBy, salonType, search });
-  }, []);
+  const filters = useSelector((state: RootState) => state.salonsFilters);
 
   useEffect(() => {
     fetchAllSalons({});
   }, []);
 
+  useEffect(() => {
+    fetchAllSalons(filters);
+  }, [filters]);
+
   if (isError) return <Typography>{translation('error.unknown')}</Typography>;
 
   return (
     <main>
-      <Filters handleFetching={handleFetching} />
+      <Filters />
       <Container maxWidth={false} sx={{ display: 'flex', justifyContent: 'center', marginTop: 4 }}>
         {isFetching && (
           <Box>
