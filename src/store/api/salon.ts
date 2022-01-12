@@ -16,7 +16,8 @@ export const salonApi = createApi({
       query: ({ salonId }) => ({
         url: `${SALON.FETCH_SALON_DATA(salonId)}`,
       }),
-      transformResponse: (salon: Salon[]): Salon => salon[0],
+      transformResponse: (data: { salon: Omit<Salon, 'schedule'>; message: string }): Omit<Salon, 'schedule'> =>
+        data.salon,
     }),
   }),
 });

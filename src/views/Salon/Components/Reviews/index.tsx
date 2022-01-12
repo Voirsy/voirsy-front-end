@@ -22,8 +22,8 @@ import { format } from 'date-fns';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const Reviews = ({ reviews }: Pick<Salon, 'reviews'>) => {
-  const [translation] = useTranslation();
+const Reviews = ({ reviews = [] }: Pick<Salon, 'reviews'>) => {
+  const [translation] = useTranslation('salon');
   const user = useSelector((state: RootState) => state.user);
   const alreadyAdded = reviews.find((el) => el.authorId === user?.id);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);

@@ -9,7 +9,7 @@ import { UserRole } from 'enums/userRole.enum';
 import { useTranslation } from 'react-i18next';
 
 const ServiceCard = ({ _id, name, description, price, duration }: Service) => {
-  const [translation] = useTranslation();
+  const [translation] = useTranslation('salon');
   const role = useSelector((state: RootState) => state.user?.role);
   const hours = minutesToHours(duration);
   let serviceDuration = '';

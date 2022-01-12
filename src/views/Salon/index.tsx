@@ -13,11 +13,13 @@ import Portfolio from './Components/Portfolio';
 const Salon = () => {
   const history = useHistory();
   const { salonId } = useParams<{ salonId: string }>();
-  const [translation] = useTranslation();
+  const [translation] = useTranslation('salon');
   const { data, isFetching, isError } = useFetchSpecifiedSalonDataQuery({ salonId });
   const matches = useMediaQuery(theme.breakpoints.down('md'));
   const routeMatch = useRouteMatch(['/:salonId/portfolio', '/:salonId/reviews', '/:salonId']);
   const currentTab = routeMatch?.path;
+
+  console.log(data, isError, isFetching);
 
   if (isError) {
     return (
@@ -66,7 +68,11 @@ const Salon = () => {
             <CustomSalonName variant="h4" noWrap>
               {data.name}
             </CustomSalonName>
-            <CustomSalonAddress variant="caption" noWrap>{`${data.address} ${data.city}`}</CustomSalonAddress>
+            <CustomSalonAddress variant="caption" noWrap>
+              {`${data.address} 
+              ${data.city.charAt(0).toUpperCase()}
+              ${data.city.slice(1)}`}
+            </CustomSalonAddress>
           </Stack>
         </Stack>
         <NavTabs currentTab={currentTab} />
