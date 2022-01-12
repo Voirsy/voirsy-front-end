@@ -19,7 +19,12 @@ const Details = ({
         <CustomSectionHeader variant="button">{translation('salon:details.contact.label')}</CustomSectionHeader>
         <Stack direction="row" spacing={1.25} justifyContent="space-between">
           <Call />
-          <Typography>{phone.split(/(.{3})/).join(' ')}</Typography>
+          <Typography>
+            {phone
+              .replace(/ /g, '')
+              .split(/(.{3})/)
+              .join(' ')}
+          </Typography>
         </Stack>
       </CustomDetailsSection>
       <OpeningHours openingHours={openingHours} />
