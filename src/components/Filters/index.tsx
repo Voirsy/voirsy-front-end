@@ -29,7 +29,7 @@ const Filters = () => {
   const filters = useSelector((state: RootState) => state.salonsFilters);
   const dispatch = useDispatch();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(filters.search);
   const { data: salonTypes, isFetching: salonTypesFetching } = useFetchAllCategoriesQuery();
   const { data: cities, isFetching: citiesFetching } = useFetchAllCitiesQuery();
 
