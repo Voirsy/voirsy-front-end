@@ -67,9 +67,7 @@ const Salon = () => {
               {data.name}
             </CustomSalonName>
             <CustomSalonAddress variant="caption" noWrap>
-              {`${data.address} 
-              ${data.city.charAt(0).toUpperCase()}
-              ${data.city.slice(1)}`}
+              {`${data.address} ${data.city.charAt(0).toUpperCase()}${data.city.slice(1)}`}
             </CustomSalonAddress>
           </Stack>
         </Stack>
