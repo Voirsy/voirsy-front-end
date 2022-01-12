@@ -16,7 +16,13 @@ const store = configureStore({
     [salonsApi.reducerPath]: salonsApi.reducer,
     [salonApi.reducerPath]: salonApi.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(adminPanelApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(
+      adminPanelApi.middleware,
+      salonApi.middleware,
+      salonsApi.middleware,
+      profileApi.middleware
+    ),
 });
 
 type AppDispatch = typeof store.dispatch;
