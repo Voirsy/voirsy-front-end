@@ -21,5 +21,11 @@
   },
   "error": {
     "unknown": "Pojawił się błąd"
+  },
+  "favoriteMsg": {
+    "successAdd": "Salon pomyślnie dodany do ulubionych.",
+    "errorAdd": "Wystąpił błąd podczas dodawania!",
+    "successRemove": "Salon pomyślnie usunięty z ulubionych.",
+    "errorRemove": "Wystąpił błąd podczas usuwania!"
   }
 }

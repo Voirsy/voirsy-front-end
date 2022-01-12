@@ -10,4 +10,5 @@ export type User = {
   language: string;
   currency: string;
   password?: string;
+  favorites?: string[];
 };
