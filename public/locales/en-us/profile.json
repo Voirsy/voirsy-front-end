@@ -16,7 +16,9 @@
     "action": {
       "cancel": "Cancel",
       "save": "Save"
-    }
+    },
+    "successMsg": "Password sucessfully changed.",
+    "errorMsg": "An error occured!"
   },
   "edit": {
     "heading": "Edit profile",

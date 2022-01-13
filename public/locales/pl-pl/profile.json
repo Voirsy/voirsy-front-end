@@ -16,7 +16,9 @@
     "action": {
       "cancel": "Anuluj",
       "save": "Zapisz"
-    }
+    },
+    "successMsg": "Hasło zmienione pomyślnie.",
+    "errorMsg": "Wystąpił nieznany błąd!"
   },
   "edit": {
     "heading": "Edytuj profil",
