@@ -6,7 +6,7 @@ import Files from 'react-files';
 import { useTranslation } from 'react-i18next';
 import { CustomAvatar, CustomDropzoneContainer, CustomUploadWrapper } from './profileAvatar.styles';
 
-const ProfileAvatar = ({ url, handleChangeImg }: { url: string; handleChangeImg: (e: any) => void }) => {
+const ProfileAvatar = ({ url, handleChangeImg }: { url: string | undefined; handleChangeImg: (e: any) => void }) => {
   const { enqueueSnackbar } = useSnackbar();
   const [translation] = useTranslation(['profile', 'validation']);
 

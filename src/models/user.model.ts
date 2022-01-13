@@ -4,11 +4,12 @@ export type User = {
   id: string;
   email: string;
   fullname: string;
-  birthday: string | null;
+  birthdate: string | null;
   phone: string | null;
   role: UserRole;
   language: string;
   currency: string;
   password?: string;
   favorites?: string[];
+  avatarUrl: string;
 };

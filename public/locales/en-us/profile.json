@@ -40,7 +40,9 @@
     "action": {
       "cancel": "Cancel",
       "save": "Save"
-    }
+    },
+    "successMsg": "Account sucessfully updated.",
+    "errorMsg": "An error occured!"
   },
   "favorites": {
     "heading": "Favorites",

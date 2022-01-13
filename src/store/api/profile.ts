@@ -3,8 +3,17 @@ import { ENV } from 'config/enviroments';
 import { PROFILE } from 'endpoints/profile';
 import { Salon } from 'models/admin.model';
 import { getToken } from '../../helpers/auth';
+import { User } from '../../models/user.model';
 
 type ReturnedSalon = Pick<Salon, '_id' | 'address' | 'name' | 'imageUrl' | 'city' | 'rating' | 'type'>[];
+
+export interface ChangeUserData {
+  email?: string;
+  fullname?: string;
+  birthdata?: string;
+  phone?: string;
+  avatarUrl?: string;
+}
 
 export const profileApi = createApi({
   reducerPath: 'profileApi',
@@ -35,7 +44,20 @@ export const profileApi = createApi({
         method: 'DELETE',
       }),
     }),
+    changeUserData: builder.mutation<User, ChangeUserData>({
+      query: (body) => ({
+        url: `${PROFILE.CHANGE_DATA}`,
+        method: 'PATCH',
+        body,
+      }),
+      transformResponse: (response: { message: string; user: User }) => response.user,
+    }),
   }),
 });
 
-export const { useFetchAllUsersFavoritesQuery, useChangePasswordMutation, useDeleteAccountMutation } = profileApi;
+export const {
+  useFetchAllUsersFavoritesQuery,
+  useChangePasswordMutation,
+  useDeleteAccountMutation,
+  useChangeUserDataMutation,
+} = profileApi;

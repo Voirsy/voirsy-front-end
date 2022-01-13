@@ -40,7 +40,9 @@
     "action": {
       "cancel": "Anuluj",
       "save": "Zapisz"
-    }
+    },
+    "successMsg": "Dane zaktualizowane pomyślnie.",
+    "errorMsg": "Wystąpił nieznany błąd!"
   },
   "favorites": {
     "heading": "Ulubione",

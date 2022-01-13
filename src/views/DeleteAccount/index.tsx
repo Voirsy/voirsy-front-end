@@ -6,7 +6,7 @@ import { useDeleteAccountMutation } from 'store/api/profile';
 import { useEffect } from 'react';
 import { useSnackbar } from 'notistack';
 import { useHistory } from 'react-router-dom';
-import { logOut } from '../../helpers/auth';
+import { logOut } from 'helpers/auth';
 
 const DeleteAccount = () => {
   const [deleteAccount, { isSuccess, isError, isLoading }] = useDeleteAccountMutation();
