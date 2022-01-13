@@ -5,11 +5,16 @@ import { useTranslation } from 'react-i18next';
 import { useFetchAllUsersFavoritesQuery } from 'store/api/profile';
 import theme from 'theme';
 import SalonCard from 'components/SalonCard';
+import { useEffect } from 'react';
 
 const Favorites = () => {
   const [translation] = useTranslation('profile');
-  const { data = [], isError, isFetching } = useFetchAllUsersFavoritesQuery();
+  const { data = [], isError, isFetching, refetch } = useFetchAllUsersFavoritesQuery();
   const match = useMediaQuery(theme.breakpoints.up('lg'));
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   if (isFetching) return <Spinner />;
 
@@ -37,7 +42,9 @@ const Favorites = () => {
           ))}
         </Grid>
       ) : (
-        <Typography>{translation('favorites.error.noFavorites')}</Typography>
+        <Typography variant="h6" textAlign="center">
+          {translation('favorites.error.noFavorites')}
+        </Typography>
       )}
     </Box>
   );
