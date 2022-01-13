@@ -5,7 +5,9 @@
     "action": {
       "cancel": "Cancel",
       "delete": "Delete"
-    }
+    },
+    "successMsg": "Account sucessfully deleted.",
+    "errorMsg": "An error occured!"
   },
   "password": {
     "heading": "Change password",

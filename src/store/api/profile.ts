@@ -29,7 +29,13 @@ export const profileApi = createApi({
         body,
       }),
     }),
+    deleteAccount: builder.mutation<{ message: string }, void>({
+      query: () => ({
+        url: `${PROFILE.DELETE_ACCOUNT}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 
-export const { useFetchAllUsersFavoritesQuery, useChangePasswordMutation } = profileApi;
+export const { useFetchAllUsersFavoritesQuery, useChangePasswordMutation, useDeleteAccountMutation } = profileApi;

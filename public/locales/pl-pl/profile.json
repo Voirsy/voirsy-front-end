@@ -5,7 +5,9 @@
     "action": {
       "cancel": "Anuluj",
       "delete": "Usuń"
-    }
+    },
+    "successMsg": "Konto usunięte pomyślnie.",
+    "errorMsg": "Wystąpił nieznany błąd!"
   },
   "password": {
     "heading": "Zmień hasło",

@@ -4,7 +4,6 @@ import Spinner from 'components/Spinner';
 import { useTranslation } from 'react-i18next';
 import { useFetchAllUsersFavoritesQuery } from 'store/api/profile';
 import theme from 'theme';
-import { SalonType } from 'enums/salonType.enum';
 import SalonCard from 'components/SalonCard';
 
 const Favorites = () => {
