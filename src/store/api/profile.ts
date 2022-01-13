@@ -4,6 +4,8 @@ import { PROFILE } from 'endpoints/profile';
 import { Salon } from 'models/admin.model';
 import { getToken } from '../../helpers/auth';
 
+type ReturnedSalon = Pick<Salon, '_id' | 'address' | 'name' | 'imageUrl' | 'city' | 'rating' | 'type'>[];
+
 export const profileApi = createApi({
   reducerPath: 'profileApi',
   baseQuery: fetchBaseQuery({
@@ -16,11 +18,9 @@ export const profileApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    fetchAllUsersFavorites: builder.query<
-      Pick<Salon, '_id' | 'address' | 'name' | 'imageUrl' | 'city' | 'rating' | 'type'>[],
-      void
-    >({
+    fetchAllUsersFavorites: builder.query<ReturnedSalon, void>({
       query: () => `${PROFILE.FAVORITES}`,
+      transformResponse: (data: { message: string; favorites: ReturnedSalon }) => data.favorites,
     }),
     changePassword: builder.mutation<{ message: string }, { oldPassword: string; newPassword: string }>({
       query: (body) => ({
