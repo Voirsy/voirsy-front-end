@@ -22,7 +22,7 @@ import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSnackbar } from 'notistack';
-import { useAddReviewMutation } from 'store/api/salon';
+import { useAddReviewMutation } from 'store/api/salon/salon';
 import { useParams } from 'react-router-dom';
 
 const Reviews = ({ reviews = [] }: Pick<Salon, 'reviews'>) => {

@@ -4,15 +4,16 @@ import { Box } from '@mui/system';
 import InputMask from 'react-input-mask';
 import { useTranslation } from 'react-i18next';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import axios from 'axios';
 import CancelButton from 'components/CancelButton';
 import ProfileAvatar from 'components/ProfileAvatar';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
-import { ChangeUserData, useChangeUserDataMutation } from 'store/api/profile';
+import { useChangeUserDataMutation } from 'store/api/profile/profile';
 import { useSnackbar } from 'notistack';
 import { setUserData } from 'store/slices/userSlice';
-import axios from 'axios';
+import { ChangeUserDataArguments } from 'store/api/profile/profile.types';
 import { IMAGE } from 'endpoints/images';
 import { ENV } from 'config/enviroments';
 
@@ -58,7 +59,7 @@ const EditAccount = () => {
   };
 
   const onSubmit: SubmitHandler<EditAccountForm> = async (data) => {
-    const dataToSend: ChangeUserData = { ...data };
+    const dataToSend: ChangeUserDataArguments = { ...data };
 
     try {
       setLoading(true);

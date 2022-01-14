@@ -2,7 +2,7 @@ import { Button, CircularProgress, Stack, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import CancelButton from 'components/CancelButton';
 import { Trans, useTranslation } from 'react-i18next';
-import { useDeleteAccountMutation } from 'store/api/profile';
+import { useDeleteAccountMutation } from 'store/api/profile/profile';
 import { useEffect } from 'react';
 import { useSnackbar } from 'notistack';
 import { useHistory } from 'react-router-dom';

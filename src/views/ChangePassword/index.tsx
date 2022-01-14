@@ -5,7 +5,7 @@ import PasswordTextfield from 'components/PasswordTextfield';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import CancelButton from 'components/CancelButton';
 import { useEffect, useRef } from 'react';
-import { useChangePasswordMutation } from 'store/api/profile';
+import { useChangePasswordMutation } from 'store/api/profile/profile';
 import { useSnackbar } from 'notistack';
 
 interface ChangePasswordForm {

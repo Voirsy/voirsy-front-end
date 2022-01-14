@@ -22,7 +22,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { useFetchSalonDataQuery } from 'store/api/admin';
+import { useFetchSalonDataQuery } from 'store/api/admin/admin';
 import { RootState } from 'store/store';
 import theme from 'theme';
 import CrewDialog from './crewDialog';

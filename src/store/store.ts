@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import { adminPanelApi } from './api/admin';
-import { profileApi } from './api/profile';
+import { adminPanelApi } from './api/admin/admin';
+import { profileApi } from './api/profile/profile';
 import userReducer from './slices/userSlice';
 import salonsFiltersReducer from './slices/salonsFiltersSlice';
-import { salonsApi } from './api/salons';
-import { salonApi } from './api/salon';
+import { salonsApi } from './api/home/home';
+import { salonApi } from './api/salon/salon';
 
 const store = configureStore({
   reducer: {

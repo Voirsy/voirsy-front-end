@@ -7,7 +7,7 @@ import Spinner from 'components/Spinner';
 import { CustomSalonsNavigation } from './salons.styled';
 import NavTabs from './salons.navtabs';
 import SalonsNavigation from 'components/AdminPanelNavigation/adminPanelNavigation.list';
-import { useFetchAllSalonsQuery } from 'store/api/admin';
+import { useFetchAllSalonsQuery } from 'store/api/admin/admin';
 
 const SalonsTemplate = ({ children }: { children?: ReactNode }) => {
   const [translation] = useTranslation('admin');

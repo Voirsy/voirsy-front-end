@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
 import { UserRole } from 'enums/userRole.enum';
 import { useTranslation } from 'react-i18next';
-import { useAddToFavoritesMutation, useRemoveFromFavoritesMutation } from 'store/api/salons';
+import { useAddToFavoritesMutation, useRemoveFromFavoritesMutation } from 'store/api/home/home';
 import { addToFav, removeFromFav } from 'store/slices/userSlice';
 
 const SalonCard = ({ imageUrl, name, city, address, rating, salonType, _id }: SalonCardTypes) => {

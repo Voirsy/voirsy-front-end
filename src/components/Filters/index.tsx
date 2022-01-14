@@ -18,7 +18,7 @@ import theme from 'theme';
 import { SortType } from 'enums/sortType.enum';
 import FilterChip from './Components/FilterChip';
 import Select from './Components/Select';
-import { useFetchAllCategoriesQuery, useFetchAllCitiesQuery } from 'store/api/salons';
+import { useFetchAllCategoriesQuery, useFetchAllCitiesQuery } from 'store/api/home/home';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
 import { setFilters } from '../../store/slices/salonsFiltersSlice';

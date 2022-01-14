@@ -3,7 +3,7 @@ import Filters from 'components/Filters';
 import SalonCard from 'components/SalonCard';
 import { SalonType } from 'enums/salonType.enum';
 import { useEffect } from 'react';
-import { useLazyFetchAllSalonsQuery } from 'store/api/salons';
+import { useLazyFetchAllSalonsQuery } from 'store/api/home/home';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';

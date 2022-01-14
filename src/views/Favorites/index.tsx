@@ -2,7 +2,7 @@ import { Grid, Typography, useMediaQuery } from '@mui/material';
 import { Box } from '@mui/system';
 import Spinner from 'components/Spinner';
 import { useTranslation } from 'react-i18next';
-import { useFetchAllUsersFavoritesQuery } from 'store/api/profile';
+import { useFetchAllUsersFavoritesQuery } from 'store/api/profile/profile';
 import theme from 'theme';
 import SalonCard from 'components/SalonCard';
 import { useEffect } from 'react';
