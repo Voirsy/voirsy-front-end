@@ -6,13 +6,10 @@ import { useLocation } from 'react-router-dom';
 import { useFetchAllSalonsQuery } from 'store/api/admin';
 import { CustomDrawer, CustomToolbar } from './adminPanelNavigation.styled';
 import SalonsNavigation from './adminPanelNavigation.list';
-import { RootState } from 'store/store';
-import { useSelector } from 'react-redux';
 
 const AdminPanelNavigation = ({ isMenuOpen, handleClose }: { isMenuOpen: boolean; handleClose: () => void }) => {
   const location = useLocation();
-  const userId = useSelector((state: RootState) => state.user?.id) as string;
-  const { data = { salons: [], message: '' } } = useFetchAllSalonsQuery({ userId });
+  const { data = { salons: [], message: '' } } = useFetchAllSalonsQuery();
 
   useEffect(() => handleClose(), [location]);
 

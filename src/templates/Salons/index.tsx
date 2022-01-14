@@ -8,14 +8,10 @@ import { CustomSalonsNavigation } from './salons.styled';
 import NavTabs from './salons.navtabs';
 import SalonsNavigation from 'components/AdminPanelNavigation/adminPanelNavigation.list';
 import { useFetchAllSalonsQuery } from 'store/api/admin';
-import { RootState } from 'store/store';
-import { useSelector } from 'react-redux';
 
 const SalonsTemplate = ({ children }: { children?: ReactNode }) => {
   const [translation] = useTranslation('admin');
-  const userId = useSelector((state: RootState) => state.user?.id) as string;
-  const { data = { salons: [], message: '' }, isFetching, isError } = useFetchAllSalonsQuery({ userId });
-
+  const { data = { salons: [], message: '' }, isFetching, isError } = useFetchAllSalonsQuery();
   const history = useHistory();
 
   useEffect(() => {
