@@ -4,6 +4,7 @@ export type CrewMember = {
   _id: string;
   name: string;
   imageUrl: string;
+  schedule: [];
 };
 
 export type Service = {

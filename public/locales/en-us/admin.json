@@ -34,7 +34,10 @@
   },
   "crewDialog": {
     "title": "Add new crew member",
-    "fullname": "Fullname"
+    "fullname": "Fullname",
+    "form": {
+      "required": "Field is required"
+    }
   },
   "serviceDialog": {
     "title": "Create new service",

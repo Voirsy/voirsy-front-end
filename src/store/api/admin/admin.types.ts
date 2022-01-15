@@ -1,5 +1,5 @@
 import { Message } from 'types/util';
-import { Salon } from 'models/admin.model';
+import { Salon, CrewMember, Service } from 'models/admin.model';
 
 export interface FetchAllSalonsReturn extends Message {
   salons: Pick<Salon, '_id' | 'address' | 'name' | 'city' | 'type'>[];
@@ -20,4 +20,20 @@ export interface FetchSalonPortfolioReturn extends Message {
 
 export interface FetchSalonPortfolioResponse extends Message {
   salon: Pick<Salon, 'name' | 'address' | 'phone' | 'description' | 'services' | 'crew' | 'city'>;
+}
+
+export interface AddCrewMemberResponse extends Message {
+  crew: CrewMember[];
+}
+
+export interface AddServiceResponse extends Message {
+  services: Service[];
+}
+
+export interface AddServiceArguments {
+  salonId: string;
+  name: string;
+  price: number;
+  duration: number;
+  description: string;
 }

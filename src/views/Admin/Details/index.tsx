@@ -173,8 +173,8 @@ const Edit = () => {
           </CustomPaper>
         </Grid>
       </Grid>
-      <ServiceDialog open={isServiceDialogOpen} close={() => setIsServiceDialogOpen(false)} />
-      <CrewDialog open={isCrewDialogOpen} close={() => setIsCrewDialogOpen(false)} />
+      {isServiceDialogOpen && <ServiceDialog open={isServiceDialogOpen} close={() => setIsServiceDialogOpen(false)} />}
+      {isCrewDialogOpen && <CrewDialog open={isCrewDialogOpen} close={() => setIsCrewDialogOpen(false)} />}
     </>
   );
 };

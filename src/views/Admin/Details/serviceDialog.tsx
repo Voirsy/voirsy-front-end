@@ -13,16 +13,43 @@ import {
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
+import { useAddServiceMutation } from 'store/api/admin/admin';
 import theme from 'theme';
+import { useSnackbar } from 'notistack';
+import { useEffect } from 'react';
 
 const ServiceDialog = ({ open, close }: { open: boolean; close: () => void }) => {
   const {
     register,
     handleSubmit,
     setValue,
-    formState: { isDirty },
-  } = useForm();
-  const [translation] = useTranslation();
+    formState: { errors, isDirty, isValid },
+  } = useForm({ mode: 'all' });
+  const [translation] = useTranslation('admin');
+  const [addService, { isSuccess, isError }] = useAddServiceMutation();
+  const { salonId } = useParams<{ salonId: string }>();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleAddService = (data: any) => {
+    addService({ salonId, ...data });
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      enqueueSnackbar('Service added', {
+        variant: 'success',
+        anchorOrigin: { horizontal: 'right', vertical: 'bottom' },
+      });
+    }
+    if (isError) {
+      enqueueSnackbar('Service created failed', {
+        variant: 'success',
+        anchorOrigin: { horizontal: 'right', vertical: 'bottom' },
+      });
+    }
+    return () => close();
+  }, [isSuccess, isError]);
 
   return (
     <Dialog open={open} maxWidth="md" fullWidth>
@@ -44,6 +71,8 @@ const ServiceDialog = ({ open, close }: { open: boolean; close: () => void }) =>
                   variant="outlined"
                   label={translation('admin:serviceDialog.name')}
                   {...register('name')}
+                  error={!!errors.name}
+                  helperText={errors.name?.message}
                 />
                 <TextField
                   size="small"
@@ -55,6 +84,8 @@ const ServiceDialog = ({ open, close }: { open: boolean; close: () => void }) =>
                     endAdornment: <InputAdornment position="start">€</InputAdornment>,
                     inputProps: { min: 0 },
                   }}
+                  error={!!errors.price}
+                  helperText={errors.price?.message}
                 />
                 <TextField
                   size="small"
@@ -68,12 +99,16 @@ const ServiceDialog = ({ open, close }: { open: boolean; close: () => void }) =>
                     endAdornment: <InputAdornment position="start">min</InputAdornment>,
                     inputProps: { min: 0, step: 1 },
                   }}
+                  error={!!errors.duration}
+                  helperText={errors.duration?.message}
                 />
                 <TextField
                   size="small"
                   variant="outlined"
                   label={translation('admin:serviceDialog.description')}
                   {...register('description')}
+                  error={!!errors.description}
+                  helperText={errors.description?.message}
                 />
               </Stack>
             </form>
@@ -81,7 +116,13 @@ const ServiceDialog = ({ open, close }: { open: boolean; close: () => void }) =>
         </Grid>
       </DialogContent>
       <DialogActions sx={{ padding: theme.spacing(2, 3) }}>
-        <Button variant="contained" color="primary" disableElevation>
+        <Button
+          variant="contained"
+          color="primary"
+          disableElevation
+          disabled={!isDirty || !isValid}
+          onClick={handleSubmit(handleAddService)}
+        >
           {translation('admin:confirmButton')}
         </Button>
       </DialogActions>
