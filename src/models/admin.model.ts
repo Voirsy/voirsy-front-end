@@ -36,6 +36,7 @@ export type Salon = {
   address: string;
   city: string;
   phone: string;
+  email: string;
   description: string;
   crew: CrewMember[];
   services: Service[];
