@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/voirsy-front-end/static/css/main.e940d647.chunk.css",
-    "main.js": "/voirsy-front-end/static/js/main.6051fc45.chunk.js",
-    "main.js.map": "/voirsy-front-end/static/js/main.6051fc45.chunk.js.map",
+    "main.js": "/voirsy-front-end/static/js/main.41df797f.chunk.js",
+    "main.js.map": "/voirsy-front-end/static/js/main.41df797f.chunk.js.map",
     "runtime-main.js": "/voirsy-front-end/static/js/runtime-main.ea98d898.js",
     "runtime-main.js.map": "/voirsy-front-end/static/js/runtime-main.ea98d898.js.map",
-    "static/js/2.3f1e0c64.chunk.js": "/voirsy-front-end/static/js/2.3f1e0c64.chunk.js",
-    "static/js/2.3f1e0c64.chunk.js.map": "/voirsy-front-end/static/js/2.3f1e0c64.chunk.js.map",
+    "static/js/2.dc191419.chunk.js": "/voirsy-front-end/static/js/2.dc191419.chunk.js",
+    "static/js/2.dc191419.chunk.js.map": "/voirsy-front-end/static/js/2.dc191419.chunk.js.map",
     "index.html": "/voirsy-front-end/index.html",
     "static/css/main.e940d647.chunk.css.map": "/voirsy-front-end/static/css/main.e940d647.chunk.css.map",
-    "static/js/2.3f1e0c64.chunk.js.LICENSE.txt": "/voirsy-front-end/static/js/2.3f1e0c64.chunk.js.LICENSE.txt",
+    "static/js/2.dc191419.chunk.js.LICENSE.txt": "/voirsy-front-end/static/js/2.dc191419.chunk.js.LICENSE.txt",
     "static/media/getFetch.cjs": "/voirsy-front-end/static/media/getFetch.582d29c4.cjs"
   },
   "entrypoints": [
     "static/js/runtime-main.ea98d898.js",
-    "static/js/2.3f1e0c64.chunk.js",
+    "static/js/2.dc191419.chunk.js",
     "static/css/main.e940d647.chunk.css",
-    "static/js/main.6051fc45.chunk.js"
+    "static/js/main.41df797f.chunk.js"
   ]
 }

@@ -30,18 +30,27 @@
       "title": "Usługi",
       "price": "Cena",
       "duration": "Czas trwania"
-    }
+    },
+    "operationSuccess": "Zaktualizowano dane salonu",
+    "operationError": "Aktualizacja danych salonu nie powiodła się"
   },
   "crewDialog": {
     "title": "Dodaj nowego członka zespołu",
-    "fullname": "Imię i nazwisko"
+    "fullname": "Imię i nazwisko",
+    "form": {
+      "required": "Pole wymagane"
+    },
+    "operationSuccess": "Dodane członka zespołu",
+    "operationError": "Dodawanie członka zespołu nie powiodło się"
   },
   "serviceDialog": {
     "title": "Dodaj nową usługę",
     "name": "Nazwa",
     "price": "Cena",
     "duration": "Czas trwania",
-    "description": "Opis"
+    "description": "Opis",
+    "operationSuccess": "Dodano usługę",
+    "operationError": "Dodawanie usługi nie powiodło się"
   },
   "confirmButton": "Zapisz"
 }
