@@ -74,6 +74,7 @@
     },
     "searchButton": {
       "aria": "Znajdź wolne godziny"
-    }
+    },
+    "noDates": "Brak wolnych terminów w podanym zakresie"
   }
 }

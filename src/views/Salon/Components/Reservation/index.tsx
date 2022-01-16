@@ -10,13 +10,12 @@ import { addDays, differenceInDays, format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import { AvailableLocales, locales } from 'config/locales';
 import { Checkbox, Tile, TimeField } from './reservation.styled';
-import { freeHours } from './reservation.data';
-import { useGetFreeHoursMutation } from 'store/api/salon/salon';
+import { useLazyGetFreeHoursQuery } from 'store/api/salon/salon';
 import { useSnackbar } from 'notistack';
 
 const Reservation = () => {
   const { salonId, serviceId } = useParams<{ salonId: string; serviceId: string }>();
-  const [getFreeHours, { data: fetchAvailableHours, error }] = useGetFreeHoursMutation();
+  const [getFreeHours, { data: fetchAvailableHours, error }] = useLazyGetFreeHoursQuery();
   const { data, isFetching } = useFetchServiceQuery({ salonId, serviceId });
   const [translation, i18n] = useTranslation('salon');
   const [date, setDate] = useState(new Date());

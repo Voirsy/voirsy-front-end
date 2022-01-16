@@ -46,7 +46,7 @@ export const salonApi = createApi({
         body,
       }),
     }),
-    getFreeHours: builder.mutation<GetFreeHoursReturn, GetFreeHoursArguments>({
+    getFreeHours: builder.query<GetFreeHoursReturn, GetFreeHoursArguments>({
       query: (body) => ({
         url: `${SALON.GET_FREE_HOURS}`,
         method: 'POST',
@@ -56,5 +56,5 @@ export const salonApi = createApi({
   }),
 });
 
-export const { useFetchSpecifiedSalonDataQuery, useAddReviewMutation, useFetchServiceQuery, useGetFreeHoursMutation } =
+export const { useFetchSpecifiedSalonDataQuery, useAddReviewMutation, useFetchServiceQuery, useLazyGetFreeHoursQuery } =
   salonApi;
