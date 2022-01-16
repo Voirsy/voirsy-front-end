@@ -21,5 +21,11 @@
   },
   "error": {
     "unknown": "An error occured"
+  },
+  "favoriteMsg": {
+    "successAdd": "Salon sucessfully added to favorites.",
+    "errorAdd": "An error occured!",
+    "successRemove": "Salon sucessfully removed from favorites.",
+    "errorRemove": "An error occured!"
   }
 }

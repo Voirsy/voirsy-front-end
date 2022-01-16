@@ -5,7 +5,9 @@
     "action": {
       "cancel": "Anuluj",
       "delete": "Usuń"
-    }
+    },
+    "successMsg": "Konto usunięte pomyślnie.",
+    "errorMsg": "Wystąpił nieznany błąd!"
   },
   "password": {
     "heading": "Zmień hasło",
@@ -16,7 +18,9 @@
     "action": {
       "cancel": "Anuluj",
       "save": "Zapisz"
-    }
+    },
+    "successMsg": "Hasło zmienione pomyślnie.",
+    "errorMsg": "Wystąpił nieznany błąd!"
   },
   "edit": {
     "heading": "Edytuj profil",
@@ -36,7 +40,9 @@
     "action": {
       "cancel": "Anuluj",
       "save": "Zapisz"
-    }
+    },
+    "successMsg": "Dane zaktualizowane pomyślnie.",
+    "errorMsg": "Wystąpił nieznany błąd!"
   },
   "favorites": {
     "heading": "Ulubione",
