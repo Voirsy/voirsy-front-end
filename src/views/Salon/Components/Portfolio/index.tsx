@@ -4,7 +4,7 @@ import { Box, Grid } from '@mui/material';
 import { Salon } from 'models/admin.model';
 import { useTranslation } from 'react-i18next';
 
-const Portfolio = ({ portfolio }: Pick<Salon, 'portfolio'>) => {
+const Portfolio = ({ portfolio = [] }: Pick<Salon, 'portfolio'>) => {
   const [translation] = useTranslation('salon');
 
   return (

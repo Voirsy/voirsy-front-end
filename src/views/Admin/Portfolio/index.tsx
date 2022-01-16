@@ -1,7 +1,7 @@
 import { CircularProgress, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useParams } from 'react-router-dom';
-import { useFetchSalonPortfolioQuery } from 'store/api/admin';
+import { useFetchSalonPortfolioQuery } from 'store/api/admin/admin';
 
 const Portfolio = () => {
   const { salonId } = useParams<{ salonId: string }>();

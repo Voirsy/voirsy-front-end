@@ -5,7 +5,9 @@
     "action": {
       "cancel": "Cancel",
       "delete": "Delete"
-    }
+    },
+    "successMsg": "Account sucessfully deleted.",
+    "errorMsg": "An error occured!"
   },
   "password": {
     "heading": "Change password",
@@ -16,7 +18,9 @@
     "action": {
       "cancel": "Cancel",
       "save": "Save"
-    }
+    },
+    "successMsg": "Password sucessfully changed.",
+    "errorMsg": "An error occured!"
   },
   "edit": {
     "heading": "Edit profile",
@@ -36,7 +40,9 @@
     "action": {
       "cancel": "Cancel",
       "save": "Save"
-    }
+    },
+    "successMsg": "Account sucessfully updated.",
+    "errorMsg": "An error occured!"
   },
   "favorites": {
     "heading": "Favorites",

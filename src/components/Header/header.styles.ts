@@ -16,8 +16,9 @@ export const CustomToolbar = styled(Toolbar)(() => ({
   justifyContent: 'space-between',
 }));
 
-export const CustomButton = styled(Button)(() => ({
+export const CustomButton = styled(Button)<Partial<LinkProps>>(() => ({
   color: '#fff',
+  textDecoration: 'none',
 }));
 
 export const CustomMenuButton = styled(IconButton)(() => ({

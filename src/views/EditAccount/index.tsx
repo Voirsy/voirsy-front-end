@@ -1,14 +1,21 @@
-import { Button, Stack, TextField, Typography } from '@mui/material';
+import { Button, CircularProgress, Stack, TextField, Typography } from '@mui/material';
 import { MobileDatePicker } from '@mui/lab';
 import { Box } from '@mui/system';
 import InputMask from 'react-input-mask';
 import { useTranslation } from 'react-i18next';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import axios from 'axios';
 import CancelButton from 'components/CancelButton';
 import ProfileAvatar from 'components/ProfileAvatar';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
+import { useChangeUserDataMutation } from 'store/api/profile/profile';
+import { useSnackbar } from 'notistack';
+import { setUserData } from 'store/slices/userSlice';
+import { ChangeUserDataArguments } from 'store/api/profile/profile.types';
+import { IMAGE } from 'endpoints/images';
+import { ENV } from 'config/enviroments';
 
 interface EditAccountForm {
   fullname: string;
@@ -18,8 +25,13 @@ interface EditAccountForm {
 }
 
 const EditAccount = () => {
+  const [isLoading, setLoading] = useState(false);
+  const [imgToSend, setImgToSend] = useState<FormData | null>(null);
+  const [changeUserData, { isSuccess, isError, data: changedData }] = useChangeUserDataMutation();
+  const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
   const userData = useSelector((state: RootState) => state.user);
-  const [img, setImg] = useState('https://bit.ly/2Zbhp10');
+  const [img, setImg] = useState(userData?.avatarUrl || undefined);
   const [translation] = useTranslation(['profile', 'validation']);
   const {
     handleSubmit,
@@ -31,24 +43,48 @@ const EditAccount = () => {
     defaultValues: {
       fullname: userData?.fullname,
       email: userData?.email,
-      birthdate: userData?.birthday || '',
+      birthdate: userData?.birthdate || '',
       phone: userData?.phone || '',
     },
     mode: 'all',
   });
 
   const handleChangeImg = (file: any) => {
+    const formData = new FormData();
     if (file && file.length > 0 && file[0].preview.url) {
       setImg(file[0].preview.url);
+      formData.append('avatar', file[0]);
+      setImgToSend(formData);
+    } else setImgToSend(null);
+  };
 
-      //preparation for send
-      //the image will be sent separately from the form data
-      const formData = new FormData();
-      formData.append('avatar', new Blob([file], { type: file.type }), file.name || 'file');
+  const onSubmit: SubmitHandler<EditAccountForm> = async (data) => {
+    const dataToSend: ChangeUserDataArguments = { ...data };
+
+    try {
+      setLoading(true);
+      let link: null | string = null;
+      if (imgToSend !== null) {
+        const response = await axios.post(`${ENV.apiUrl}${IMAGE.UPLOAD}`, imgToSend);
+        console.log(response);
+        if (response && (response.data.links as string[]) && (response.data.links as string[]).length === 1)
+          link = response.data.links[0];
+      }
+
+      if (link !== null) dataToSend.avatarUrl = link;
+
+      changeUserData(dataToSend);
+      setLoading(false);
+    } catch {
+      enqueueSnackbar(translation('edit.errorMsg'), { variant: 'error' });
     }
   };
 
-  const onSubmit: SubmitHandler<EditAccountForm> = (data) => console.log(data);
+  useEffect(() => {
+    if (isSuccess) enqueueSnackbar(translation('edit.successMsg'), { variant: 'success' });
+    if (isError) enqueueSnackbar(translation('edit.errorMsg'), { variant: 'error' });
+    if (changedData) dispatch(setUserData(changedData));
+  }, [isSuccess, isError, changedData]);
 
   return (
     <Box component="main" maxWidth={400} margin="0 auto" padding={2}>
@@ -142,8 +178,15 @@ const EditAccount = () => {
           />
           <Stack direction="row" spacing={2.5}>
             <CancelButton>{translation('delete.action.cancel')}</CancelButton>
-            <Button variant="contained" fullWidth size="large" type="submit" sx={{ color: 'common.white' }}>
-              {translation('edit.action.save')}
+            <Button
+              disabled={isLoading}
+              variant="contained"
+              fullWidth
+              size="large"
+              type="submit"
+              sx={{ color: 'common.white' }}
+            >
+              {isLoading ? <CircularProgress size={25} /> : translation('edit.action.save')}
             </Button>
           </Stack>
         </Stack>

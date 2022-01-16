@@ -1,7 +1,10 @@
+import { SalonType } from 'enums/salonType.enum';
+
 export type CrewMember = {
   _id: string;
   name: string;
   imageUrl: string;
+  schedule: [];
 };
 
 export type Service = {
@@ -38,7 +41,7 @@ export type Salon = {
   services: Service[];
   schedule: string;
   portfolio: string[];
-  type: string[];
+  type: SalonType[];
   rating: string;
   imageUrl: string;
   openingHours: OpeningHour[];

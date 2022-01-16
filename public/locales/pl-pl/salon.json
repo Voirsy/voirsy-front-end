@@ -52,6 +52,8 @@
     "noImages": "Brak obrazów"
   },
   "reviews": {
+    "successMsg": "Opinia dodana pomyślnie.",
+    "errorMsg": "Wystąpił błąd podczas dodawania opinii!",
     "noReviews": "Brak opinii",
     "addReviewForm": {
       "title": "Zostaw swoją opinię",

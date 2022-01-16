@@ -2,7 +2,7 @@ import { CircularProgress, Modal, Stack, useMediaQuery, Box, Typography, Button 
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeftRounded';
 import { useParams, Link, useRouteMatch, useHistory } from 'react-router-dom';
 import { CustomLink, CustomSalonAddress, CustomSalonName, CustomWrapper } from './salon.styled';
-import { useFetchSpecifiedSalonDataQuery } from 'store/api/salon';
+import { useFetchSpecifiedSalonDataQuery } from 'store/api/salon/salon';
 import { useTranslation } from 'react-i18next';
 import NavTabs from './salon.navtabs';
 import theme from 'theme';
@@ -71,7 +71,9 @@ const Salon = () => {
             <CustomSalonName variant="h4" noWrap>
               {data.name}
             </CustomSalonName>
-            <CustomSalonAddress variant="caption" noWrap>{`${data.address} ${data.city}`}</CustomSalonAddress>
+            <CustomSalonAddress variant="caption" noWrap>
+              {`${data.address} ${data.city.charAt(0).toUpperCase()}${data.city.slice(1)}`}
+            </CustomSalonAddress>
           </Stack>
         </Stack>
         {currentTab !== '/:salonId/reservation' && <NavTabs currentTab={currentTab} />}

@@ -8,40 +8,38 @@ const NavTabs = () => {
   const { salonId } = useParams<{ salonId: string }>();
   const matches = useMediaQuery(theme.breakpoints.down('md'));
   const routeMatch = useRouteMatch([
-    '/salons/:salonId/schedule',
+    '/salons/:salonId/calendar',
     '/salons/:salonId/portfolio',
-    '/salons/:salonId/edit',
+    '/salons/:salonId/details',
   ]);
   const currentTab = routeMatch?.path;
   const [translation] = useTranslation('admin');
 
   return (
-    <Box paddingLeft={matches ? 0 : 2} maxWidth="100%">
-      <Tabs
-        aria-label={translation('salonTemplate.nav.aria')}
-        value={currentTab}
-        variant={matches ? 'fullWidth' : 'standard'}
-      >
-        <Tab
-          component={Link}
-          label={translation('salonTemplate.nav.edit')}
-          value="/salons/:salonId/edit"
-          to={`/salons/${salonId}/edit`}
-        />
-        <Tab
-          component={Link}
-          label={translation('salonTemplate.nav.schedule')}
-          value="/salons/:salonId/schedule"
-          to={`/salons/${salonId}/schedule`}
-        />
-        <Tab
-          component={Link}
-          label={translation('salonTemplate.nav.portfolio')}
-          value="/salons/:salonId/portfolio"
-          to={`/salons/${salonId}/portfolio`}
-        />
-      </Tabs>
-    </Box>
+    <Tabs
+      aria-label={translation('salonTemplate.nav.aria')}
+      value={currentTab}
+      variant={matches ? 'fullWidth' : 'standard'}
+    >
+      <Tab
+        component={Link}
+        label={translation('salonTemplate.nav.details')}
+        value="/salons/:salonId/details"
+        to={`/salons/${salonId}/details`}
+      />
+      <Tab
+        component={Link}
+        label={translation('salonTemplate.nav.calendar')}
+        value="/salons/:salonId/calendar"
+        to={`/salons/${salonId}/calendar`}
+      />
+      <Tab
+        component={Link}
+        label={translation('salonTemplate.nav.portfolio')}
+        value="/salons/:salonId/portfolio"
+        to={`/salons/${salonId}/portfolio`}
+      />
+    </Tabs>
   );
 };
 

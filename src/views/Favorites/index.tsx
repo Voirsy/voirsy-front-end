@@ -2,15 +2,19 @@ import { Grid, Typography, useMediaQuery } from '@mui/material';
 import { Box } from '@mui/system';
 import Spinner from 'components/Spinner';
 import { useTranslation } from 'react-i18next';
-import { useFetchAllUsersFavoritesQuery } from 'store/api/profile';
+import { useFetchAllUsersFavoritesQuery } from 'store/api/profile/profile';
 import theme from 'theme';
-import { SalonType } from 'enums/salonType.enum';
 import SalonCard from 'components/SalonCard';
+import { useEffect } from 'react';
 
 const Favorites = () => {
   const [translation] = useTranslation('profile');
-  const { data = [], isError, isFetching } = useFetchAllUsersFavoritesQuery();
+  const { data = [], isError, isFetching, refetch } = useFetchAllUsersFavoritesQuery();
   const match = useMediaQuery(theme.breakpoints.up('lg'));
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   if (isFetching) return <Spinner />;
 
@@ -31,14 +35,16 @@ const Favorites = () => {
                 city={el.city}
                 imageUrl={el.imageUrl}
                 name={el.name}
-                salonType={el.type as SalonType[]}
+                salonType={el.type}
                 rating={el.rating}
               />
             </Grid>
           ))}
         </Grid>
       ) : (
-        <Typography>{translation('favorites.error.noFavorites')}</Typography>
+        <Typography variant="h6" textAlign="center">
+          {translation('favorites.error.noFavorites')}
+        </Typography>
       )}
     </Box>
   );

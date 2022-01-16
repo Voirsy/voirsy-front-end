@@ -3,15 +3,48 @@
     "error": "Unknown error occured",
     "noSalons": "You don’t have any salons yet. <0 /> Add your salon to begin bussiness on Voirsy",
     "heading": {
-      "salonName": "Salon name",
       "mySalons": "My salons"
     },
     "deleteSalon": "Delete salon",
     "nav": {
-      "edit": "Edit",
-      "schedule": "Schedule",
+      "details": "Details",
+      "calendar": "Calendar",
       "portfolio": "Portfolio",
       "aria": "admin panel navigation"
+    },
+    "addSalon": "Add salon"
+  },
+  "details": {
+    "informations": {
+      "title": "Informations",
+      "salonName": "Salon name",
+      "address": "Address",
+      "city": "City",
+      "phone": "Phone",
+      "description": "Description"
+    },
+    "crew": {
+      "title": "Crew"
+    },
+    "services": {
+      "title": "Services",
+      "price": "Price",
+      "duration": "Duration"
     }
-  }
+  },
+  "crewDialog": {
+    "title": "Add new crew member",
+    "fullname": "Fullname",
+    "form": {
+      "required": "Field is required"
+    }
+  },
+  "serviceDialog": {
+    "title": "Create new service",
+    "name": "Name",
+    "price": "Price",
+    "duration": "Duration",
+    "description": "Description"
+  },
+  "confirmButton": "Save"
 }

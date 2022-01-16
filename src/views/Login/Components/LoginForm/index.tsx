@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useRouteMatch } from 'react-router-dom';
+import { ENV } from 'config/enviroments';
 
 type ServerResponse = {
   email: string;
@@ -23,7 +24,7 @@ const LoginForm = () => {
   const [translation] = useTranslation('login');
 
   const submitForm = async (data: { email: string }) => {
-    const result = await axios.post<ServerResponse>('http://localhost:8080/auth/checkemail', data);
+    const result = await axios.post<ServerResponse>(`${ENV.apiUrl}/auth/checkemail`, data);
     if (result.data.exist) {
       history.push({
         pathname: `${url}/signin`,

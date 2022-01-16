@@ -1,7 +1,7 @@
 import { CircularProgress, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useParams } from 'react-router-dom';
-import { useFetchSalonScheduleQuery } from 'store/api/admin';
+import { useFetchSalonScheduleQuery } from 'store/api/admin/admin';
 
 const Schedule = () => {
   const { salonId } = useParams<{ salonId: string }>();

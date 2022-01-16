@@ -35,6 +35,10 @@ export const HeartButton = styled(IconButton)(() => ({
   ':hover': {
     backgroundColor: theme.palette.background.paper,
   },
+
+  ':disabled': {
+    background: theme.palette.background.paper,
+  },
 }));
 
 export const CustomLink = styled(Link)(() => ({

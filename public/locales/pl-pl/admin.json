@@ -3,15 +3,45 @@
     "error": "Pojawił się nieznany błąd",
     "noSalons": "Nie masz żadnych salonów.",
     "heading": {
-      "salonName": "Nazwa salonu",
       "mySalons": "Moje salony"
     },
     "deleteSalon": "Usuń salon",
     "nav": {
-      "edit": "Edytuj",
-      "schedule": "Terminarz",
+      "details": "Szczegóły",
+      "calendar": "Kalendarz",
       "portfolio": "Portfolio",
       "aria": "Nawigacja panelu administratora"
+    },
+    "addSalon": "Dodaj salon"
+  },
+  "details": {
+    "informations": {
+      "title": "Informacje",
+      "salonName": "Nazwa salonu",
+      "address": "Adres",
+      "city": "Miasto",
+      "phone": "Telefon",
+      "description": "Opis"
+    },
+    "crew": {
+      "title": "Zespół"
+    },
+    "services": {
+      "title": "Usługi",
+      "price": "Cena",
+      "duration": "Czas trwania"
     }
-  }
+  },
+  "crewDialog": {
+    "title": "Dodaj nowego członka zespołu",
+    "fullname": "Imię i nazwisko"
+  },
+  "serviceDialog": {
+    "title": "Dodaj nową usługę",
+    "name": "Nazwa",
+    "price": "Cena",
+    "duration": "Czas trwania",
+    "description": "Opis"
+  },
+  "confirmButton": "Zapisz"
 }

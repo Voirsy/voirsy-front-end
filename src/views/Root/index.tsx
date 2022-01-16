@@ -1,12 +1,12 @@
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import DeleteAccount from 'views/DeleteAccount';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Home from 'views/Home';
 import ChangePassword from 'views/ChangePassword';
 import EditAccount from 'views/EditAccount';
 import MainTemplate from 'templates/Main';
 import Login from 'views/Login';
 import SalonsTemplate from 'templates/Salons';
-import Edit from 'views/Admin/Edit';
+import Edit from 'views/Admin/Details';
 import Portfolio from 'views/Admin/Portfolio';
 import Schedule from 'views/Admin/Schedule';
 import Favorites from 'views/Favorites';
@@ -17,7 +17,7 @@ import { UserType } from 'enums/userType.enum';
 import { Suspense } from 'react';
 
 const Root = () => (
-  <Router>
+  <Router basename={process.env.PUBLIC_URL}>
     <Suspense fallback="loading">
       <MainTemplate>
         <Switch>
@@ -57,7 +57,7 @@ const Root = () => (
               <>
                 <Header />
                 <Switch>
-                  <Route path={`${url}/:salonId/schedule`}>
+                  <Route path={`${url}/:salonId/calendar`}>
                     <SalonsTemplate>
                       <Schedule />
                     </SalonsTemplate>
@@ -70,15 +70,13 @@ const Root = () => (
                   <Route path={`${url}/add/:step`}>
                     <p>Add salon</p>
                   </Route>
-                  <Route path={[`${url}/:salonId/edit`]}>
+                  <Route path={[`${url}/:salonId/details`]}>
                     <SalonsTemplate>
                       <Edit />
                     </SalonsTemplate>
                   </Route>
                   <Route path="*">
-                    <SalonsTemplate>
-                      <span>Loading...</span>
-                    </SalonsTemplate>
+                    <SalonsTemplate></SalonsTemplate>
                   </Route>
                 </Switch>
               </>

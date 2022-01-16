@@ -2,6 +2,7 @@
 import { VisibilityOffOutlined, VisibilityOutlined } from '@mui/icons-material';
 import { FormControl, FormControlLabel, FormLabel, IconButton, Radio, RadioGroup, TextField } from '@mui/material';
 import axios from 'axios';
+import { ENV } from 'config/enviroments';
 import { UserRole } from 'enums/userRole.enum';
 import { User } from 'models/user.model';
 import { useState } from 'react';
@@ -50,7 +51,7 @@ const SignUpForm = () => {
 
   const signUp = async (data: FormData) => {
     try {
-      const result = await axios.post<ServerResponse>('http://localhost:8080/auth/signup', data);
+      const result = await axios.post<ServerResponse>(`${ENV.apiUrl}/auth/signup`, data);
       localStorage.setItem('JWT_TOKEN', result.data.token);
       dispatch(setUserData(result.data.user));
       history.push('/');
