@@ -21,7 +21,8 @@
       "address": "Address",
       "city": "City",
       "phone": "Phone",
-      "description": "Description"
+      "description": "Description",
+      "email": "Email"
     },
     "crew": {
       "title": "Crew"
@@ -30,21 +31,27 @@
       "title": "Services",
       "price": "Price",
       "duration": "Duration"
-    }
+    },
+    "operationSuccess": "Salon informations updated",
+    "operationError": "Salon informations update failed"
   },
   "crewDialog": {
     "title": "Add new crew member",
     "fullname": "Fullname",
     "form": {
       "required": "Field is required"
-    }
+    },
+    "operationSuccess": "Crew member added",
+    "operationError": "Crew member add failed"
   },
   "serviceDialog": {
     "title": "Create new service",
     "name": "Name",
     "price": "Price",
     "duration": "Duration",
-    "description": "Description"
+    "description": "Description",
+    "operationSuccess": "Service added",
+    "operationError": "Service add failed"
   },
   "confirmButton": "Save"
 }
