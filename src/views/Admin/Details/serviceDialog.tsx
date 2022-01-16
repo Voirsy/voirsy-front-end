@@ -18,12 +18,12 @@ import { useAddServiceMutation } from 'store/api/admin/admin';
 import theme from 'theme';
 import { useSnackbar } from 'notistack';
 import { useEffect } from 'react';
+import { Service } from 'models/admin.model';
 
 const ServiceDialog = ({ open, close }: { open: boolean; close: () => void }) => {
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors, isDirty, isValid },
   } = useForm({ mode: 'all' });
   const [translation] = useTranslation('admin');
@@ -31,19 +31,19 @@ const ServiceDialog = ({ open, close }: { open: boolean; close: () => void }) =>
   const { salonId } = useParams<{ salonId: string }>();
   const { enqueueSnackbar } = useSnackbar();
 
-  const handleAddService = (data: any) => {
+  const handleAddService = (data: Pick<Service, 'name' | 'duration' | 'price' | 'description'>) => {
     addService({ salonId, ...data });
   };
 
   useEffect(() => {
     if (isSuccess) {
-      enqueueSnackbar('Service added', {
+      enqueueSnackbar(translation('serviceDialog.operationSuccess'), {
         variant: 'success',
         anchorOrigin: { horizontal: 'right', vertical: 'bottom' },
       });
     }
     if (isError) {
-      enqueueSnackbar('Service created failed', {
+      enqueueSnackbar(translation('serviceDialog.operationSuccess'), {
         variant: 'success',
         anchorOrigin: { horizontal: 'right', vertical: 'bottom' },
       });

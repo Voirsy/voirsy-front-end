@@ -45,13 +45,13 @@ const CrewDialog = ({ open, close }: { open: boolean; close: () => void }) => {
   //clean up for avatarPreview, when is set and close dialog to add new crew member
   useEffect(() => {
     if (isSuccess) {
-      enqueueSnackbar('Crew member added', {
+      enqueueSnackbar(translation('crewDialog.operationSuccess'), {
         variant: 'success',
         anchorOrigin: { horizontal: 'right', vertical: 'bottom' },
       });
     }
     if (isError) {
-      enqueueSnackbar('Crew member added failed', {
+      enqueueSnackbar(translation('crewDialog.operationError'), {
         variant: 'error',
         anchorOrigin: { horizontal: 'right', vertical: 'bottom' },
       });
@@ -62,7 +62,7 @@ const CrewDialog = ({ open, close }: { open: boolean; close: () => void }) => {
     };
   }, [isSuccess, isError]);
 
-  const addMember = async (data: any) => {
+  const addMember = async (data: { avatar: File; fullname: string }) => {
     const fullname = data.fullname;
     let avatarUrl = '';
     if (data.avatar) {
