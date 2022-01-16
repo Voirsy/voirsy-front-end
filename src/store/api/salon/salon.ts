@@ -6,6 +6,7 @@ import { setAuthHeader } from 'helpers/headers';
 import { Message } from 'types/util';
 import {
   AddReviewArguments,
+  ConfirmReservationArguments,
   FetchServiceArguments,
   FetchServiceReturn,
   FetchSpecifiedSalonDataArguments,
@@ -18,7 +19,7 @@ import { Salon, Service } from '../../../models/admin.model';
 
 export const salonApi = createApi({
   reducerPath: 'salonApi',
-  tagTypes: ['Salon'],
+  tagTypes: ['Salon', 'Reservation'],
   baseQuery: fetchBaseQuery({
     baseUrl: ENV.apiUrl,
     prepareHeaders: (headers) => setAuthHeader(headers),
@@ -52,9 +53,23 @@ export const salonApi = createApi({
         method: 'POST',
         body,
       }),
+      providesTags: ['Reservation'],
+    }),
+    confirmReservation: builder.mutation<Message, ConfirmReservationArguments>({
+      query: (body) => ({
+        url: `${SALON.CONFIRM_RESERVATION}`,
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['Reservation'],
     }),
   }),
 });
 
-export const { useFetchSpecifiedSalonDataQuery, useAddReviewMutation, useFetchServiceQuery, useLazyGetFreeHoursQuery } =
-  salonApi;
+export const {
+  useFetchSpecifiedSalonDataQuery,
+  useAddReviewMutation,
+  useFetchServiceQuery,
+  useLazyGetFreeHoursQuery,
+  useConfirmReservationMutation,
+} = salonApi;

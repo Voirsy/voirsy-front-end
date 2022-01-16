@@ -1,5 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 import { minutesToHours } from 'date-fns';
+import { GetFreeHoursReturn } from 'store/api/salon/salon.types';
 
 export const isFilledArray = (array: any) => Array.isArray(array) && !!array.length;
 
@@ -28,4 +29,9 @@ export const splitToDays = (dates: string[]) => {
   }
 
   return datesToReturn;
+};
+
+export const findWorder = (date: string, hours: GetFreeHoursReturn) => {
+  const worker = hours.freeHours.find((el) => el.startHours.includes(date));
+  return worker !== undefined ? worker.workerId : null;
 };

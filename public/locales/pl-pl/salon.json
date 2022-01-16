@@ -75,6 +75,8 @@
     "searchButton": {
       "aria": "Znajdź wolne godziny"
     },
-    "noDates": "Brak wolnych terminów w podanym zakresie"
+    "noDates": "Brak wolnych terminów w podanym zakresie",
+    "successMsg": "Usługa zarezerwowana pomyślnie.",
+    "errorMsg": "ystąpił błąd podczas dodawania opinii!"
   }
 }

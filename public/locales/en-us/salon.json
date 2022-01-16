@@ -75,6 +75,8 @@
     "searchButton": {
       "aria": "Find free hours"
     },
-    "noDates": "There are no available dates"
+    "noDates": "There are no available dates",
+    "successMsg": "Service sucessfully booked.",
+    "errorMsg": "An error occured!"
   }
 }

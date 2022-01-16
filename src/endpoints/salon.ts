@@ -3,4 +3,5 @@ export const SALON = {
   FETCH_SERVICE: '/salons/service',
   ADD_REVIEW: '/salons/rating',
   GET_FREE_HOURS: '/salons/freehours',
+  CONFIRM_RESERVATION: '/salons/reservation',
 };

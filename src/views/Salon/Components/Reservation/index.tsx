@@ -2,10 +2,10 @@ import { Box, Button, CircularProgress, Grid, Modal, Stack, TextField, Typograph
 import { Search } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
 import { DatePicker, TimePicker } from '@mui/lab';
-import { useFetchServiceQuery } from 'store/api/salon/salon';
+import { useConfirmReservationMutation, useFetchServiceQuery } from 'store/api/salon/salon';
 import { useParams } from 'react-router-dom';
 import { CustomWrapper } from 'views/Salon/salon.styled';
-import { calculateServiceDuration, sortByDate } from 'helpers/util';
+import { calculateServiceDuration, findWorder, sortByDate } from 'helpers/util';
 import { addDays, differenceInDays, format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import { AvailableLocales, locales } from 'config/locales';
@@ -15,8 +15,9 @@ import { useSnackbar } from 'notistack';
 
 const Reservation = () => {
   const { salonId, serviceId } = useParams<{ salonId: string; serviceId: string }>();
-  const [getFreeHours, { data: fetchAvailableHours, error }] = useLazyGetFreeHoursQuery();
+  const [getFreeHours, { data: fetchedAvailableHours, error }] = useLazyGetFreeHoursQuery();
   const { data, isFetching } = useFetchServiceQuery({ salonId, serviceId });
+  const [confirmReservation, { isSuccess, isError }] = useConfirmReservationMutation();
   const [translation, i18n] = useTranslation('salon');
   const [date, setDate] = useState(new Date());
   const [timeStart, setTimeStart] = useState<null | Date>(null);
@@ -29,8 +30,6 @@ const Reservation = () => {
   const handleGetFreeHours = () => {
     if (timeStart && timeEnd) {
       const diff = differenceInDays(date, timeStart);
-      console.log(diff);
-      console.log(timeStart, timeEnd);
       getFreeHours({
         salonId,
         serviceId,
@@ -42,11 +41,19 @@ const Reservation = () => {
     }
   };
 
+  const handleConfirmReservation = () => {
+    if (selectedDate && fetchedAvailableHours) {
+      const workerId = findWorder(selectedDate, fetchedAvailableHours);
+      if (workerId !== null) {
+        confirmReservation({ salonId, workerId, serviceId, startHour: selectedDate });
+      }
+    }
+  };
+
   useEffect(() => {
-    console.log(error, fetchAvailableHours);
-    // if (isError) enqueueSnackbar(translation('salon:reviews.errorMsg'), { variant: 'error' });
-    // if (isSuccess) enqueueSnackbar(translation('salon:reviews.successMsg'), { variant: 'success' });
-  }, [error, fetchAvailableHours]);
+    if (isError) enqueueSnackbar(translation('salon:reservation.errorMsg'), { variant: 'error' });
+    if (isSuccess) enqueueSnackbar(translation('salon:reservation.successMsg'), { variant: 'success' });
+  }, [isError, isSuccess]);
 
   if (isFetching || data === undefined) {
     return (
@@ -61,8 +68,8 @@ const Reservation = () => {
   }
 
   let availableHours: string[] = [];
-  if (fetchAvailableHours && fetchAvailableHours.freeHours.length > 0) {
-    const hours = Array.from(new Set(fetchAvailableHours.freeHours.map((el) => el.startHours).flat()));
+  if (fetchedAvailableHours && fetchedAvailableHours.freeHours.length > 0) {
+    const hours = Array.from(new Set(fetchedAvailableHours.freeHours.map((el) => el.startHours).flat()));
     availableHours = sortByDate(hours);
   }
 
@@ -147,7 +154,7 @@ const Reservation = () => {
         </Stack>
       </Stack>
       <Box padding={2} display="flex" justifyContent="center" alignItems="center">
-        <Button disabled={selectedDate === null} variant="contained">
+        <Button disabled={selectedDate === null} variant="contained" onClick={handleConfirmReservation}>
           {translation('reservation.bookButton.label')}
         </Button>
       </Box>

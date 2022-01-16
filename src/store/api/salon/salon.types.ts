@@ -41,3 +41,10 @@ export interface GetFreeHoursReturn extends Message {
     startHours: string[];
   }[];
 }
+
+export interface ConfirmReservationArguments {
+  salonId: string;
+  serviceId: string;
+  workerId: string;
+  startHour: string;
+}
