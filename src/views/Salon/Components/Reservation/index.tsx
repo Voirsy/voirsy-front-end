@@ -1,27 +1,53 @@
 import { Box, Button, CircularProgress, Grid, Modal, Stack, TextField, Typography } from '@mui/material';
 import { Search } from '@mui/icons-material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DatePicker, TimePicker } from '@mui/lab';
-import { useFetchServiceQuery } from 'store/api/salon';
+import { useFetchServiceQuery } from 'store/api/salon/salon';
 import { useParams } from 'react-router-dom';
 import { CustomWrapper } from 'views/Salon/salon.styled';
-import { calculateServiceDuration, sortByDate, splitToDays } from 'helpers/util';
-import { format } from 'date-fns';
+import { calculateServiceDuration, sortByDate } from 'helpers/util';
+import { addDays, differenceInDays, format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import { AvailableLocales, locales } from 'config/locales';
 import { Checkbox, Tile, TimeField } from './reservation.styled';
 import { freeHours } from './reservation.data';
+import { useGetFreeHoursMutation } from 'store/api/salon/salon';
+import { useSnackbar } from 'notistack';
 
 const Reservation = () => {
-  const [translation, i18n] = useTranslation('salon');
   const { salonId, serviceId } = useParams<{ salonId: string; serviceId: string }>();
+  const [getFreeHours, { data: fetchAvailableHours, error }] = useGetFreeHoursMutation();
   const { data, isFetching } = useFetchServiceQuery({ salonId, serviceId });
+  const [translation, i18n] = useTranslation('salon');
   const [date, setDate] = useState(new Date());
-  const [timeStart, setTimeStart] = useState<null | string>(null);
-  const [timeEnd, setTimeEnd] = useState<null | string>(null);
+  const [timeStart, setTimeStart] = useState<null | Date>(null);
+  const [timeEnd, setTimeEnd] = useState<null | Date>(null);
   const [selectedDate, setSelectedDate] = useState<null | string>(null);
+  const { enqueueSnackbar } = useSnackbar();
 
   const lng = i18n.language as AvailableLocales;
+
+  const handleGetFreeHours = () => {
+    if (timeStart && timeEnd) {
+      const diff = differenceInDays(date, timeStart);
+      console.log(diff);
+      console.log(timeStart, timeEnd);
+      getFreeHours({
+        salonId,
+        serviceId,
+        timeRange: {
+          start: addDays(timeStart, diff).toString(),
+          end: addDays(timeEnd, diff).toString(),
+        },
+      });
+    }
+  };
+
+  useEffect(() => {
+    console.log(error, fetchAvailableHours);
+    // if (isError) enqueueSnackbar(translation('salon:reviews.errorMsg'), { variant: 'error' });
+    // if (isSuccess) enqueueSnackbar(translation('salon:reviews.successMsg'), { variant: 'success' });
+  }, [error, fetchAvailableHours]);
 
   if (isFetching || data === undefined) {
     return (
@@ -36,12 +62,12 @@ const Reservation = () => {
   }
 
   let availableHours: string[] = [];
-  if (freeHours.freeHours.length > 0) {
-    const hours = Array.from(new Set(freeHours.freeHours.map((el) => el.startHours).flat()));
+  if (fetchAvailableHours && fetchAvailableHours.freeHours.length > 0) {
+    const hours = Array.from(new Set(fetchAvailableHours.freeHours.map((el) => el.startHours).flat()));
     availableHours = sortByDate(hours);
   }
 
-  const { name, duration, price } = data;
+  const { name, duration, price } = data.service;
 
   return (
     <Stack spacing={1.5} height="100%">
@@ -59,8 +85,6 @@ const Reservation = () => {
           <DatePicker
             disablePast
             label={translation('reservation.labels.date')}
-            openTo="year"
-            views={['year', 'month', 'day']}
             value={date}
             onChange={(newValue: any) => setDate(newValue)}
             renderInput={(params) => <TextField {...params} size="small" />}
@@ -70,6 +94,7 @@ const Reservation = () => {
             value={timeStart}
             onChange={(newValue) => setTimeStart(newValue)}
             renderInput={(params) => <TimeField {...params} size="small" />}
+            minutesStep={15}
           />
           <TimePicker
             label={translation('reservation.labels.end')}
@@ -77,8 +102,15 @@ const Reservation = () => {
             value={timeEnd}
             onChange={(newValue) => setTimeEnd(newValue)}
             renderInput={(params) => <TimeField {...params} size="small" />}
+            minutesStep={15}
           />
-          <Button variant="contained" size="small" aria-label={translation('reservation.searchButton.aria')}>
+          <Button
+            variant="contained"
+            size="small"
+            aria-label={translation('reservation.searchButton.aria')}
+            disabled={timeStart === null || timeEnd === null}
+            onClick={() => handleGetFreeHours()}
+          >
             <Search />
           </Button>
         </Stack>

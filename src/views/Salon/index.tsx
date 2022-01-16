@@ -2,7 +2,6 @@ import { CircularProgress, Modal, Stack, useMediaQuery, Box, Typography, Button 
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeftRounded';
 import { useParams, Link, useRouteMatch, useHistory } from 'react-router-dom';
 import { CustomLink, CustomSalonAddress, CustomSalonName, CustomWrapper } from './salon.styled';
-import { useFetchSpecifiedSalonDataQuery } from 'store/api/salon/salon';
 import { useTranslation } from 'react-i18next';
 import NavTabs from './salon.navtabs';
 import theme from 'theme';
@@ -10,6 +9,7 @@ import Information from './Components/Information';
 import Reviews from './Components/Reviews';
 import Portfolio from './Components/Portfolio';
 import Reservation from './Components/Reservation';
+import { useFetchSpecifiedSalonDataQuery } from 'store/api/salon/salon';
 
 const Salon = () => {
   const history = useHistory();

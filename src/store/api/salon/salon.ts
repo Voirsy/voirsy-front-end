@@ -6,10 +6,15 @@ import { setAuthHeader } from 'helpers/headers';
 import { Message } from 'types/util';
 import {
   AddReviewArguments,
+  FetchServiceArguments,
+  FetchServiceReturn,
   FetchSpecifiedSalonDataArguments,
   FetchSpecifiedSalonDataResponse,
   FetchSpecifiedSalonDataReturn,
+  GetFreeHoursArguments,
+  GetFreeHoursReturn,
 } from './salon.types';
+import { Salon, Service } from '../../../models/admin.model';
 
 export const salonApi = createApi({
   reducerPath: 'salonApi',
@@ -34,7 +39,22 @@ export const salonApi = createApi({
       }),
       invalidatesTags: ['Salon'],
     }),
+    fetchService: builder.query<FetchServiceReturn, FetchServiceArguments>({
+      query: (body) => ({
+        url: SALON.FETCH_SERVICE,
+        method: 'POST',
+        body,
+      }),
+    }),
+    getFreeHours: builder.mutation<GetFreeHoursReturn, GetFreeHoursArguments>({
+      query: (body) => ({
+        url: `${SALON.GET_FREE_HOURS}`,
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useFetchSpecifiedSalonDataQuery, useAddReviewMutation } = salonApi;
+export const { useFetchSpecifiedSalonDataQuery, useAddReviewMutation, useFetchServiceQuery, useGetFreeHoursMutation } =
+  salonApi;
