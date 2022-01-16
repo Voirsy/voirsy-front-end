@@ -12,6 +12,7 @@ import {
   FetchSalonPortfolioResponse,
   FetchSalonPortfolioReturn,
   FetchSalonScheduleReturn,
+  UpdateSalonArguments,
 } from './admin.types';
 
 export const adminPanelApi = createApi({
@@ -60,6 +61,23 @@ export const adminPanelApi = createApi({
       }),
       invalidatesTags: ['SalonDetails'],
     }),
+    updateSalon: builder.mutation<FetchSalonDataReturn, UpdateSalonArguments>({
+      query: ({ salonId, salon }) => ({
+        url: `${ADMIN_PANEL.UPDATE_SALON(salonId)}`,
+        method: 'PATCH',
+        body: {
+          name: salon.name,
+          address: salon.address,
+          city: salon.city,
+          contact: {
+            phone: salon.phone,
+            email: salon.email,
+          },
+          description: salon.description,
+        },
+      }),
+      invalidatesTags: ['SalonDetails'],
+    }),
   }),
 });
 
@@ -70,4 +88,5 @@ export const {
   useFetchSalonScheduleQuery,
   useAddCrewMemberMutation,
   useAddServiceMutation,
+  useUpdateSalonMutation,
 } = adminPanelApi;

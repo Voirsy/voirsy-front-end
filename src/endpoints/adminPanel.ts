@@ -5,4 +5,5 @@ export const ADMIN_PANEL = {
   FETCH_PORTFOLIO: (salonId: string) => `/business/salon/${salonId}/portfolio`,
   ADD_CREW_MEMBER: (salonId: string) => `/business/salon/${salonId}/crew`,
   ADD_SERVICE: (salonId: string) => `/business/salon/${salonId}/service`,
+  UPDATE_SALON: (salonId: string) => `/business/salon/${salonId}`,
 };

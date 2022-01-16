@@ -7,7 +7,7 @@ export interface FetchAllSalonsReturn extends Message {
 
 export type FetchSalonDataReturn = Pick<
   Salon,
-  'name' | 'address' | 'phone' | 'description' | 'services' | 'crew' | 'city'
+  'name' | 'address' | 'phone' | 'description' | 'services' | 'crew' | 'city' | 'email'
 >;
 
 export interface FetchSalonScheduleReturn extends Message {
@@ -19,7 +19,7 @@ export interface FetchSalonPortfolioReturn extends Message {
 }
 
 export interface FetchSalonPortfolioResponse extends Message {
-  salon: Pick<Salon, 'name' | 'address' | 'phone' | 'description' | 'services' | 'crew' | 'city'>;
+  salon: Pick<Salon, 'name' | 'address' | 'phone' | 'description' | 'services' | 'crew' | 'city' | 'email'>;
 }
 
 export interface AddCrewMemberResponse extends Message {
@@ -36,4 +36,9 @@ export interface AddServiceArguments {
   price: number;
   duration: number;
   description: string;
+}
+
+export interface UpdateSalonArguments {
+  salonId: string;
+  salon: Pick<Salon, 'name' | 'address' | 'phone' | 'description' | 'city' | 'email'>;
 }
