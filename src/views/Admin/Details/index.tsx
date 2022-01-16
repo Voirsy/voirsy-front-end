@@ -15,19 +15,26 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
 } from '@mui/material';
 import { Box } from '@mui/system';
+import { Salon } from 'models/admin.model';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { useFetchSalonDataQuery } from 'store/api/admin/admin';
+import { useFetchSalonDataQuery, useUpdateSalonMutation } from 'store/api/admin/admin';
+import { useFetchAllCitiesQuery } from 'store/api/home/home';
 import { RootState } from 'store/store';
 import theme from 'theme';
 import CrewDialog from './crewDialog';
 import { CustomPaper } from './details.styles';
 import ServiceDialog from './serviceDialog';
+import { useSnackbar } from 'notistack';
 
 const Edit = () => {
   const { salonId } = useParams<{ salonId: string }>();
@@ -36,22 +43,54 @@ const Edit = () => {
     register,
     handleSubmit,
     setValue,
-    formState: { isDirty },
+    formState: { isDirty, isValid },
   } = useForm();
   const currency = useSelector((state: RootState) => state.user?.currency);
   const [isServiceDialogOpen, setIsServiceDialogOpen] = useState<boolean>(false);
   const [isCrewDialogOpen, setIsCrewDialogOpen] = useState<boolean>(false);
   const [translation] = useTranslation('admin');
+  const { data: cities } = useFetchAllCitiesQuery();
+  const [cityToDisplay, setCityToDisplay] = useState<string | undefined>('');
+  const [updateSalon, { isSuccess, isError }] = useUpdateSalonMutation();
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     if (!isFetching) {
-      setValue('salonName', data?.name, { shouldDirty: false });
+      setValue('name', data?.name, { shouldDirty: false });
       setValue('address', data?.address, { shouldDirty: false });
       setValue('city', data?.city, { shouldDirty: false });
       setValue('phone', data?.phone, { shouldDirty: false });
+      setValue('email', data?.email, { shouldDirty: false });
       setValue('description', data?.description, { shouldDirty: false });
+      setCityToDisplay(data?.city);
     }
   }, [data, isFetching]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      enqueueSnackbar(translation('details.operationSuccess'), {
+        variant: 'success',
+        anchorOrigin: { horizontal: 'right', vertical: 'bottom' },
+      });
+    }
+    if (isError) {
+      enqueueSnackbar(translation('details.operationError'), {
+        variant: 'error',
+        anchorOrigin: { horizontal: 'right', vertical: 'bottom' },
+      });
+    }
+    return () => close();
+  }, [isSuccess, isError]);
+
+  const handleChangeCity = (event: any) => {
+    const cityId = event.target.value;
+    setValue('city', cityId, { shouldDirty: true });
+    setCityToDisplay(cityId);
+  };
+
+  const updateSalonInfo = (salon: Pick<Salon, 'name' | 'address' | 'phone' | 'description' | 'city' | 'email'>) => {
+    updateSalon({ salonId, salon });
+  };
 
   if (isFetching)
     return (
@@ -63,14 +102,19 @@ const Edit = () => {
   return (
     <>
       <Grid container spacing={2} paddingY={2}>
-        <Grid item direction="column" xs={12} lg={6}>
+        <Grid item container direction="column" xs={12} lg={6}>
           <Stack spacing={2}>
             <CustomPaper variant="outlined">
               <Grid container justifyContent="space-between" alignItems="center" marginBottom={2}>
                 <Typography component="h3" variant="h6">
                   {translation('details.informations.title')}
                 </Typography>
-                <Button variant="text" size="small" disabled={!isDirty}>
+                <Button
+                  variant="text"
+                  size="small"
+                  disabled={!isDirty || !isValid}
+                  onClick={handleSubmit(updateSalonInfo)}
+                >
                   {translation('confirmButton')}
                 </Button>
               </Grid>
@@ -81,7 +125,7 @@ const Edit = () => {
                     variant="outlined"
                     label={translation('details.informations.salonName')}
                     size="small"
-                    {...register('salonName')}
+                    {...register('name')}
                   />
                   <TextField
                     variant="outlined"
@@ -89,17 +133,34 @@ const Edit = () => {
                     size="small"
                     {...register('address')}
                   />
-                  <TextField
-                    variant="outlined"
-                    label={translation('details.informations.city')}
-                    size="small"
-                    {...register('city')}
-                  />
+                  <FormControl>
+                    <InputLabel id="select-label">{translation('details.informations.city')}</InputLabel>
+                    <Select
+                      labelId="select-label"
+                      size="small"
+                      value={cityToDisplay}
+                      onChange={(event) => handleChangeCity(event)}
+                      variant="outlined"
+                    >
+                      {cities?.cities.map((el) => (
+                        <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize' }}>
+                          <ListItemText primary={el.name} />
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+
                   <TextField
                     variant="outlined"
                     label={translation('details.informations.phone')}
                     size="small"
                     {...register('phone')}
+                  />
+                  <TextField
+                    variant="outlined"
+                    label={translation('details.informations.email')}
+                    size="small"
+                    {...register('email')}
                   />
                   <TextField
                     variant="outlined"
