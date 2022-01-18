@@ -15,6 +15,7 @@ import Header from 'components/Header';
 import CustomRoute from 'components/CustomRoute';
 import { UserType } from 'enums/userType.enum';
 import { Suspense } from 'react';
+import CreateSalonForm from 'views/Admin/CreateSalonForm';
 
 const Root = () => (
   <Router basename={process.env.PUBLIC_URL}>
@@ -67,8 +68,8 @@ const Root = () => (
                       <Portfolio />
                     </SalonsTemplate>
                   </Route>
-                  <Route path={`${url}/add/:step`}>
-                    <p>Add salon</p>
+                  <Route path={`${url}/create-salon`}>
+                    <CreateSalonForm />
                   </Route>
                   <Route path={[`${url}/:salonId/details`]}>
                     <SalonsTemplate>
