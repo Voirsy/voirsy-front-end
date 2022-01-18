@@ -7,6 +7,7 @@ import {
   AddCrewMemberResponse,
   AddServiceArguments,
   AddServiceResponse,
+  CreateSalonArguments,
   FetchAllSalonsReturn,
   FetchSalonDataReturn,
   FetchSalonPortfolioResponse,
@@ -78,6 +79,16 @@ export const adminPanelApi = createApi({
       }),
       invalidatesTags: ['SalonDetails'],
     }),
+    createSalon: builder.mutation<FetchSalonDataReturn, CreateSalonArguments>({
+      query: (salon) => ({
+        url: ADMIN_PANEL.CREATE_SALON,
+        method: 'post',
+        body: {
+          ...salon,
+        },
+      }),
+      invalidatesTags: ['SalonDetails'],
+    }),
   }),
 });
 
@@ -89,4 +100,5 @@ export const {
   useAddCrewMemberMutation,
   useAddServiceMutation,
   useUpdateSalonMutation,
+  useCreateSalonMutation,
 } = adminPanelApi;
