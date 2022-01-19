@@ -42,3 +42,14 @@ export interface UpdateSalonArguments {
   salonId: string;
   salon: Pick<Salon, 'name' | 'address' | 'phone' | 'description' | 'city' | 'email'>;
 }
+
+export type CreateSalonArguments = Omit<
+  Salon,
+  '_id' | 'portfolio' | 'schedule' | 'rating' | 'reviews' | 'phone' | 'email'
+> & {
+  owner: string | undefined;
+  contact: {
+    email: string;
+    phone: string;
+  };
+};
