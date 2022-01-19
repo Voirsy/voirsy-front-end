@@ -29,7 +29,7 @@ const Reservation = () => {
 
   const handleGetFreeHours = () => {
     if (timeStart && timeEnd) {
-      const diff = differenceInDays(date, timeStart);
+      const diff = differenceInDays(date, timeStart) + 1;
       getFreeHours({
         salonId,
         serviceId,
