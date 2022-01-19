@@ -2,13 +2,14 @@ import { CircularProgress, Modal, Stack, useMediaQuery, Box, Typography, Button 
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeftRounded';
 import { useParams, Link, useRouteMatch, useHistory } from 'react-router-dom';
 import { CustomLink, CustomSalonAddress, CustomSalonName, CustomWrapper } from './salon.styled';
-import { useFetchSpecifiedSalonDataQuery } from 'store/api/salon/salon';
 import { useTranslation } from 'react-i18next';
 import NavTabs from './salon.navtabs';
 import theme from 'theme';
 import Information from './Components/Information';
 import Reviews from './Components/Reviews';
 import Portfolio from './Components/Portfolio';
+import Reservation from './Components/Reservation';
+import { useFetchSpecifiedSalonDataQuery } from 'store/api/salon/salon';
 
 const Salon = () => {
   const history = useHistory();
@@ -16,7 +17,7 @@ const Salon = () => {
   const [translation] = useTranslation('salon');
   const { data, isFetching, isError } = useFetchSpecifiedSalonDataQuery({ salonId });
   const matches = useMediaQuery(theme.breakpoints.down('md'));
-  const routeMatch = useRouteMatch(['/:salonId/portfolio', '/:salonId/reviews', '/:salonId']);
+  const routeMatch = useRouteMatch(['/:salonId/portfolio', '/:salonId/reviews', '/:salonId/reservation', '/:salonId']);
   const currentTab = routeMatch?.path;
 
   if (isError) {
@@ -59,7 +60,11 @@ const Salon = () => {
           sx={{ maxWidth: '100%' }}
           padding={matches ? '10px 15px 0' : '25px 25px 0'}
         >
-          <CustomLink component={Link} to="/" aria-label={translation('salon:goBackButton.aria')}>
+          <CustomLink
+            component={Link}
+            to={currentTab !== '/:salonId/reservation' ? '/' : `/${salonId}`}
+            aria-label={translation('salon:goBackButton.aria')}
+          >
             <ChevronLeftIcon />
           </CustomLink>
           <Stack spacing={-0.5} overflow="hidden" alignSelf="center">
@@ -71,7 +76,7 @@ const Salon = () => {
             </CustomSalonAddress>
           </Stack>
         </Stack>
-        <NavTabs currentTab={currentTab} />
+        {currentTab !== '/:salonId/reservation' && <NavTabs currentTab={currentTab} />}
         <Box padding={matches ? '10px' : '25px'} flexGrow={1} overflow="auto" position="relative">
           {currentTab === '/:salonId' && (
             <Information
@@ -85,6 +90,7 @@ const Salon = () => {
           )}
           {currentTab === '/:salonId/reviews' && <Reviews reviews={data.reviews} />}
           {currentTab === '/:salonId/portfolio' && <Portfolio portfolio={data.portfolio} />}
+          {currentTab === '/:salonId/reservation' && <Reservation />}
         </Box>
       </CustomWrapper>
     </Modal>

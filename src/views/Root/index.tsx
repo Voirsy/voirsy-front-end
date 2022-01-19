@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import DeleteAccount from 'views/DeleteAccount';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Home from 'views/Home';
 import ChangePassword from 'views/ChangePassword';
 import EditAccount from 'views/EditAccount';
@@ -18,8 +18,8 @@ import { Suspense } from 'react';
 
 const Root = () => (
   <Router basename={process.env.PUBLIC_URL}>
-    <MainTemplate>
-      <Suspense fallback="loading">
+    <Suspense fallback="loading">
+      <MainTemplate>
         <Switch>
           <CustomRoute userType={UserType.Unauthorized} path="/login">
             <Login />
@@ -96,8 +96,8 @@ const Root = () => (
                   <Route path={`${url}:salonId/portfolio`}>
                     <Salon />
                   </Route>
-                  <CustomRoute path={`${url}:salonId/reservation`}>
-                    <p>Reservations</p>
+                  <CustomRoute path={`${url}:salonId/reservation/:serviceId`}>
+                    <Salon />
                   </CustomRoute>
                   <Route path={[`${url}:salonId`, `${url}:salonId/information`]}>
                     <Salon />
@@ -107,8 +107,8 @@ const Root = () => (
             )}
           />
         </Switch>
-      </Suspense>
-    </MainTemplate>
+      </MainTemplate>
+    </Suspense>
   </Router>
 );
 

@@ -1,4 +1,7 @@
 export const SALON = {
   FETCH_SALON_DATA: (salonId: string) => `/salons/${salonId}`,
-  ADD_REVIEW: `/salons/rating`,
+  FETCH_SERVICE: '/salons/service',
+  ADD_REVIEW: '/salons/rating',
+  GET_FREE_HOURS: '/salons/freehours',
+  CONFIRM_RESERVATION: '/salons/reservation',
 };

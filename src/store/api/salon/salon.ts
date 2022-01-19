@@ -6,14 +6,20 @@ import { setAuthHeader } from 'helpers/headers';
 import { Message } from 'types/util';
 import {
   AddReviewArguments,
+  ConfirmReservationArguments,
+  FetchServiceArguments,
+  FetchServiceReturn,
   FetchSpecifiedSalonDataArguments,
   FetchSpecifiedSalonDataResponse,
   FetchSpecifiedSalonDataReturn,
+  GetFreeHoursArguments,
+  GetFreeHoursReturn,
 } from './salon.types';
+import { Salon, Service } from '../../../models/admin.model';
 
 export const salonApi = createApi({
   reducerPath: 'salonApi',
-  tagTypes: ['Salon'],
+  tagTypes: ['Salon', 'Reservation'],
   baseQuery: fetchBaseQuery({
     baseUrl: ENV.apiUrl,
     prepareHeaders: (headers) => setAuthHeader(headers),
@@ -34,7 +40,36 @@ export const salonApi = createApi({
       }),
       invalidatesTags: ['Salon'],
     }),
+    fetchService: builder.query<FetchServiceReturn, FetchServiceArguments>({
+      query: (body) => ({
+        url: SALON.FETCH_SERVICE,
+        method: 'POST',
+        body,
+      }),
+    }),
+    getFreeHours: builder.query<GetFreeHoursReturn, GetFreeHoursArguments>({
+      query: (body) => ({
+        url: `${SALON.GET_FREE_HOURS}`,
+        method: 'POST',
+        body,
+      }),
+      providesTags: ['Reservation'],
+    }),
+    confirmReservation: builder.mutation<Message, ConfirmReservationArguments>({
+      query: (body) => ({
+        url: `${SALON.CONFIRM_RESERVATION}`,
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['Reservation'],
+    }),
   }),
 });
 
-export const { useFetchSpecifiedSalonDataQuery, useAddReviewMutation } = salonApi;
+export const {
+  useFetchSpecifiedSalonDataQuery,
+  useAddReviewMutation,
+  useFetchServiceQuery,
+  useLazyGetFreeHoursQuery,
+  useConfirmReservationMutation,
+} = salonApi;
