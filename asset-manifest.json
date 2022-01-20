@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/voirsy-front-end/static/css/main.e940d647.chunk.css",
-    "main.js": "/voirsy-front-end/static/js/main.f698d527.chunk.js",
-    "main.js.map": "/voirsy-front-end/static/js/main.f698d527.chunk.js.map",
+    "main.js": "/voirsy-front-end/static/js/main.e7b6495b.chunk.js",
+    "main.js.map": "/voirsy-front-end/static/js/main.e7b6495b.chunk.js.map",
     "runtime-main.js": "/voirsy-front-end/static/js/runtime-main.ea98d898.js",
     "runtime-main.js.map": "/voirsy-front-end/static/js/runtime-main.ea98d898.js.map",
     "static/js/2.b7ac7110.chunk.js": "/voirsy-front-end/static/js/2.b7ac7110.chunk.js",
@@ -16,6 +16,6 @@
     "static/js/runtime-main.ea98d898.js",
     "static/js/2.b7ac7110.chunk.js",
     "static/css/main.e940d647.chunk.css",
-    "static/js/main.f698d527.chunk.js"
+    "static/js/main.e7b6495b.chunk.js"
   ]
 }
