@@ -26,7 +26,7 @@ const Home = () => {
   return (
     <main>
       <Filters />
-      <Container maxWidth={false} sx={{ display: 'flex', justifyContent: 'center', marginTop: 4 }}>
+      <Container maxWidth={false} sx={{ display: 'flex', justifyContent: 'center', marginTop: 4, paddingBottom: 4 }}>
         {isFetching && (
           <Box>
             <CircularProgress />
