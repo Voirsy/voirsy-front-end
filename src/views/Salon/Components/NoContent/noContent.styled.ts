@@ -5,6 +5,7 @@ import theme from 'theme';
 export const Text = styled(Typography)(() => ({
   fontSize: theme.typography.h3.fontSize,
   color: theme.palette.grey['400'],
+  textAlign: 'center',
 }));
 
 export const IconWrapper = styled('div')(() => ({
