@@ -26,7 +26,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [translation] = useTranslation('header');
   const { pathname } = useLocation();
-  const fullname = useSelector((state: RootState) => state.user?.fullname);
+  const { fullname, avatarUrl } = useSelector((state: RootState) => state.user!);
   const open = Boolean(anchorEl);
   const handleMenuHeaderOpen = (event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget);
   const handleMenuHeaderClose = () => setAnchorEl(null);
@@ -53,7 +53,7 @@ const Header = () => {
               <>
                 <CustomAuthorName variant="body2">{fullname}</CustomAuthorName>
                 <CustomAvatarButton onClick={handleMenuHeaderOpen}>
-                  <Avatar>S</Avatar>
+                  <Avatar alt={fullname} src={avatarUrl} />
                 </CustomAvatarButton>
               </>
             ) : (
