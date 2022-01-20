@@ -1,8 +1,8 @@
 {
   "salonType": {
-    "barbers": "Barberzy",
-    "hairdressers": "Fryzjerzy",
-    "beauticians": "Kosmetyczki",
-    "tattooists": "Tatuażyści"
+    "barber": "Barberzy",
+    "hairdresser": "Fryzjerzy",
+    "beautician": "Kosmetyczki",
+    "tattooist": "Tatuażyści"
   }
 }
