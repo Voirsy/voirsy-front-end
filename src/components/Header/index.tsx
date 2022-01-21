@@ -26,7 +26,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [translation] = useTranslation('header');
   const { pathname } = useLocation();
-  const { fullname, avatarUrl } = useSelector((state: RootState) => state.user!);
+  const user = useSelector((state: RootState) => state.user!);
   const open = Boolean(anchorEl);
   const handleMenuHeaderOpen = (event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget);
   const handleMenuHeaderClose = () => setAnchorEl(null);
@@ -51,9 +51,9 @@ const Header = () => {
           <Box display="flex" alignItems="center">
             {isAuth() ? (
               <>
-                <CustomAuthorName variant="body2">{fullname}</CustomAuthorName>
+                <CustomAuthorName variant="body2">{user?.fullname}</CustomAuthorName>
                 <CustomAvatarButton onClick={handleMenuHeaderOpen}>
-                  <Avatar alt={fullname} src={avatarUrl} />
+                  <Avatar alt={user?.fullname} src={user?.avatarUrl} />
                 </CustomAvatarButton>
               </>
             ) : (
