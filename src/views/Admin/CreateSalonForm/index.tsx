@@ -263,10 +263,11 @@ const CreateSalonForm = () => {
                               error={!!errors.city}
                               helperText={errors.city?.message}
                               defaultValue={''}
+                              sx={{ textTransform: 'capitalize' }}
                             >
                               {cities &&
                                 cities?.cities.map((city) => (
-                                  <MenuItem key={city._id} value={city._id}>
+                                  <MenuItem key={city._id} value={city._id} sx={{ textTransform: 'capitalize' }}>
                                     {city.name}
                                   </MenuItem>
                                 ))}
