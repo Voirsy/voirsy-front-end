@@ -19,7 +19,7 @@ const SalonsNavigation = ({
   if (isLoading || cities === undefined) return null;
 
   return (
-    <Stack spacing={2}>
+    <Stack spacing={2} sx={{ paddingBottom: 3 }}>
       <Typography variant="h5">{translation('salonTemplate.heading.mySalons')}</Typography>
       <Button
         variant="outlined"
