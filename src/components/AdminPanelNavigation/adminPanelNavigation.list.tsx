@@ -3,6 +3,7 @@ import { Button, Chip, Stack, Typography } from '@mui/material';
 import { Salon } from 'models/admin.model';
 import { useTranslation } from 'react-i18next';
 import { Link, useParams } from 'react-router-dom';
+import { useFetchAllCitiesQuery } from 'store/api/home/home';
 import theme from 'theme';
 import { CustomCard } from './adminPanelNavigation.styled';
 
@@ -13,6 +14,9 @@ const SalonsNavigation = ({
 }) => {
   const [translation] = useTranslation(['admin', 'common']);
   const { salonId } = useParams<{ salonId: string }>();
+  const { data: cities, isLoading } = useFetchAllCitiesQuery();
+
+  if (isLoading || cities === undefined) return null;
 
   return (
     <Stack spacing={2}>
@@ -37,8 +41,8 @@ const SalonsNavigation = ({
               </Stack>
               <Stack direction="row" spacing={1} alignItems="center" color={theme.palette.text.secondary}>
                 <LocationCityOutlined />
-                <Typography variant="body2" noWrap>
-                  {city}
+                <Typography variant="body2" noWrap sx={{ textTransform: 'capitalize' }}>
+                  {cities.cities.find((el) => el._id === city)?.name}
                 </Typography>
               </Stack>
               <Stack direction="row" spacing={0.5} alignItems="center" marginTop={1}>
