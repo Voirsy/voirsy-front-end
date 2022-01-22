@@ -21,11 +21,16 @@ const SalonsNavigation = ({
   return (
     <Stack spacing={2}>
       <Typography variant="h5">{translation('salonTemplate.heading.mySalons')}</Typography>
-      <Link to="/salons/create-salon">
-        <Button variant="outlined" color="primary" endIcon={<Add />} size="large">
-          {translation('salonTemplate.addSalon')}
-        </Button>
-      </Link>
+      <Button
+        variant="outlined"
+        color="primary"
+        endIcon={<Add />}
+        size="large"
+        component={Link}
+        to="/salons/create-salon"
+      >
+        {translation('salonTemplate.addSalon')}
+      </Button>
       {data.salons.length > 0 &&
         data.salons.map(({ _id, name, address, city, type }) => (
           <CustomCard key={_id} active={salonId === _id} variant="outlined">
