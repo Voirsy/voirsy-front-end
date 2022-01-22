@@ -34,12 +34,18 @@ import { useSnackbar } from 'notistack';
 import { useHistory } from 'react-router-dom';
 
 const CreateSalonForm = () => {
-  const stepsLabel = ['Details', 'Opening hours', 'Crew', 'Services'];
+  const [translation] = useTranslation(['admin', 'common', 'validation']);
+  const stepsLabel = [
+    translation('createSalon.stepsLabel.details'),
+    translation('createSalon.stepsLabel.openingHours'),
+    translation('createSalon.stepsLabel.crew'),
+    translation('createSalon.stepsLabel.services'),
+  ];
   const stepsTitle = [
-    "Let's provide some informations",
-    'Time of your work',
-    'Introduce your crew',
-    'What services will be provided?',
+    translation('createSalon.stepsTitle.details'),
+    translation('createSalon.stepsTitle.openingHours'),
+    translation('createSalon.stepsTitle.crew'),
+    translation('createSalon.stepsTitle.services'),
   ];
   const [activeStep, setActiveStep] = useState<number>(0);
   const {
@@ -55,7 +61,6 @@ const CreateSalonForm = () => {
   });
   const addedCrew = watch('crew');
   const addedServices = watch('services');
-  const [translation] = useTranslation('admin');
   const [imagePreview, setImagePreview] = useState<string | undefined>(undefined);
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   const [createSalon, { isSuccess, isError }] = useCreateSalonMutation();
@@ -186,7 +191,7 @@ const CreateSalonForm = () => {
     <Container maxWidth={false}>
       <Box sx={{ marginBottom: 2 }}>
         <Typography component="h1" variant="h5">
-          Create salon
+          {translation('createSalon.mainHeading')}
         </Typography>
       </Box>
       <Stack spacing={2} alignItems="center">
@@ -215,15 +220,21 @@ const CreateSalonForm = () => {
                             <TextField
                               variant="outlined"
                               size="small"
-                              label="Salon name"
+                              label={translation('createSalon.forms.details.name')}
                               type="text"
                               {...register('name', {
-                                required: { value: true, message: 'Field is required' },
-                                minLength: { value: 3, message: 'Minimum field length is 3' },
+                                required: {
+                                  value: true,
+                                  message: translation('common.required', { ns: 'validation' }),
+                                },
+                                minLength: {
+                                  value: 3,
+                                  message: translation('common.minLength', { ns: 'validation', min: 3 }),
+                                },
                               })}
                               error={!!errors.name}
                               helperText={errors.name?.message}
-                            ></TextField>
+                            />
                             <input
                               type="file"
                               id="avatar-image-upload"
@@ -238,7 +249,7 @@ const CreateSalonForm = () => {
                                 ) : (
                                   <Stack height="100%" justifyContent="center" alignItems="center">
                                     <ImageOutlined />
-                                    <Typography>Add photo</Typography>
+                                    <Typography>{translation('createSalon.forms.details.photo')}</Typography>
                                   </Stack>
                                 )}
                               </Paper>
@@ -246,18 +257,21 @@ const CreateSalonForm = () => {
                             <TextField
                               variant="outlined"
                               size="small"
-                              label="Address"
+                              label={translation('createSalon.forms.details.address')}
                               type="text"
                               {...register('address', {
-                                required: { value: true, message: 'Field is required' },
+                                required: {
+                                  value: true,
+                                  message: translation('common.required', { ns: 'validation' }),
+                                },
                               })}
                               error={!!errors.address}
                               helperText={errors.address?.message}
-                            ></TextField>
+                            />
                             <TextField
                               variant="outlined"
                               size="small"
-                              label="City"
+                              label={translation('createSalon.forms.details.city')}
                               select
                               onChange={(event) => setValue('city', event.target.value)}
                               error={!!errors.city}
@@ -275,37 +289,53 @@ const CreateSalonForm = () => {
                             <TextField
                               variant="outlined"
                               size="small"
-                              label="Postal code"
+                              label={translation('createSalon.forms.details.postalCode')}
                               type="text"
                               {...register('postalCode', {
-                                required: { value: true, message: 'Field is required' },
-                                pattern: { value: /\d{2}[-]{0,1}\d{3}$/, message: 'Wrong postal code' },
+                                required: {
+                                  value: true,
+                                  message: translation('common.required', { ns: 'validation' }),
+                                },
+                                pattern: {
+                                  value: /\d{2}[-]{0,1}\d{3}$/,
+                                  message: translation('postalCode.pattern', { ns: 'validation' }),
+                                },
                               })}
                               error={!!errors.postalCode}
                               helperText={errors.postalCode?.message}
-                            ></TextField>
+                            />
                             <TextField
                               variant="outlined"
                               size="small"
-                              label="Phone"
+                              label={translation('createSalon.forms.details.phone')}
                               type="text"
-                              {...register('phone', { required: { value: true, message: 'Field is required' } })}
+                              {...register('phone', {
+                                required: {
+                                  value: true,
+                                  message: translation('common.required', { ns: 'validation' }),
+                                },
+                              })}
                               error={!!errors.phone}
                               helperText={errors.phone?.message}
-                            ></TextField>
+                            />
                             <TextField
                               variant="outlined"
                               size="small"
-                              label="Contact email"
+                              label={translation('createSalon.forms.details.email')}
                               type="text"
-                              {...register('contactEmail', { required: { value: true, message: 'Field is required' } })}
+                              {...register('contactEmail', {
+                                required: {
+                                  value: true,
+                                  message: translation('common.required', { ns: 'validation' }),
+                                },
+                              })}
                               error={!!errors.contactEmail}
                               helperText={errors.contactEmail?.message}
-                            ></TextField>
+                            />
                             <TextField
                               variant="outlined"
                               size="small"
-                              label="Type"
+                              label={translation('createSalon.forms.details.type')}
                               select
                               onChange={(event) => setValue('type', event.target.value)}
                               error={!!errors.type}
@@ -315,7 +345,7 @@ const CreateSalonForm = () => {
                               {types &&
                                 types?.categories.map((type) => (
                                   <MenuItem key={type._id} value={type._id}>
-                                    {type.name}
+                                    {translation(`salonType.${type.name.toLowerCase()}`, { ns: 'common' })}
                                   </MenuItem>
                                 ))}
                             </TextField>
@@ -328,12 +358,14 @@ const CreateSalonForm = () => {
                               {days.map((day, index) => (
                                 <Grid container key={index}>
                                   <Grid item container xs={3} alignItems="center">
-                                    <Typography variant="body1">{day}</Typography>
+                                    <Typography variant="body1">
+                                      {translation(`daysOfTheWeek.${day.toLowerCase()}`, { ns: 'common' })}
+                                    </Typography>
                                   </Grid>
                                   <Grid item container xs alignItems="center">
                                     <TextField
                                       variant="outlined"
-                                      label="From"
+                                      label={translation('createSalon.forms.openingHours.from')}
                                       size="small"
                                       {...register(`openingHours.${day}.open`)}
                                       margin="dense"
@@ -341,7 +373,7 @@ const CreateSalonForm = () => {
                                     />
                                     <TextField
                                       variant="outlined"
-                                      label="To"
+                                      label={translation('createSalon.forms.openingHours.to')}
                                       size="small"
                                       {...register(`openingHours.${day}.close`)}
                                       margin="dense"
@@ -359,17 +391,17 @@ const CreateSalonForm = () => {
                               <TextField
                                 variant="outlined"
                                 size="small"
-                                label="Fullname"
+                                label={translation('createSalon.forms.crew.fullname')}
                                 type="text"
                                 sx={{ flexGrow: 1 }}
                                 {...register('crewInput')}
                               />
                               <Button onClick={handleCrewAdd} endIcon={<Add />} variant="outlined">
-                                Add
+                                {translation('createSalon.forms.crew.addButton')}
                               </Button>
                             </Stack>
                             <Typography variant="body1" component="p">
-                              Crew members:
+                              {translation('createSalon.forms.crew.heading')}:
                             </Typography>
                             <Stack direction="row" spacing={1} flexWrap="wrap">
                               {addedCrew &&
@@ -435,11 +467,11 @@ const CreateSalonForm = () => {
                                 helperText={errors.description?.message}
                               />
                               <Button onClick={handleServiceAdd} endIcon={<Add />} variant="outlined">
-                                Add
+                                {translation('createSalon.forms.services.addButton')}
                               </Button>
                             </Stack>
                             <Typography variant="body1" component="p">
-                              Services:
+                              {translation('createSalon.forms.services.heading')}:
                             </Typography>
                             <List>
                               {addedServices &&
@@ -499,10 +531,12 @@ const CreateSalonForm = () => {
               disabled={activeStep === 0}
               disableElevation
             >
-              Back
+              {translation('createSalon.controls.back')}
             </Button>
             <Button variant="contained" onClick={() => handleStepChange('next')} disableElevation type="button">
-              {activeStep === stepsLabel.length - 1 ? 'Save' : 'Next'}
+              {activeStep === stepsLabel.length - 1
+                ? translation('createSalon.controls.back')
+                : translation('createSalon.controls.next')}
             </Button>
           </Stack>
         </Container>

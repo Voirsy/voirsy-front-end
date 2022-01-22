@@ -14,5 +14,8 @@
       "Obraz jest za mały.",
       "Osiągnięto maskymalną ilość obrazów."
     ]
+  },
+  "postalCode": {
+    "pattern": "Nieprawidłowy format"
   }
 }

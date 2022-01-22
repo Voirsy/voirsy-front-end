@@ -52,5 +52,50 @@
     "operationSuccess": "Dodano usługę",
     "operationError": "Dodawanie usługi nie powiodło się"
   },
-  "confirmButton": "Zapisz"
+  "confirmButton": "Zapisz",
+  "createSalon": {
+    "mainHeading": "Tworzenie salonu",
+    "stepsLabel": {
+      "details": "Informacje",
+      "openingHours": "Godziny otwarcia",
+      "crew": "Pracownicy",
+      "services": "Usługi"
+    },
+    "stepsTitle": {
+      "details": "Opisz swój salon",
+      "openingHours": "W jakich godzinach pracujesz?",
+      "crew": "Przedstaw swoją załogę",
+      "services": "Jakie usługi będziesz świadczył?"
+    },
+    "forms": {
+      "details": {
+        "name": "Nazwa salonu",
+        "photo": "Dodaj zdjęcie",
+        "address": "Adres",
+        "city": "Miasto",
+        "postalCode": "Kod pocztowy",
+        "phone": "Telefon",
+        "email": "Email kontaktowy",
+        "type": "Typ"
+      },
+      "openingHours": {
+        "from": "Od",
+        "to": "Do"
+      },
+      "crew": {
+        "fullname": "Imię",
+        "addButton": "Dodaj",
+        "heading": "Pracownicy"
+      },
+      "services": {
+        "addButton": "Dodaj",
+        "heading": "Usługi"
+      }
+    },
+    "controls": {
+      "back": "Cofnij",
+      "save": "Zapisz",
+      "next": "Dalej"
+    }
+  }
 }
