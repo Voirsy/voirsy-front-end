@@ -39,15 +39,16 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(submitForm)}>
+    <form onSubmit={handleSubmit(submitForm)} data-testid="form">
       <TextField
         variant="outlined"
         type="text"
         size="small"
+        inputProps={{ 'data-testid': 'Email' }}
         label={translation('form.email.label')}
         InputProps={{
           endAdornment: (
-            <IconButton edge="end" type="submit" color="primary" disabled={!isDirty || !isValid}>
+            <IconButton edge="end" type="submit" color="primary" disabled={!isDirty || !isValid} data-testid="Submit">
               <ArrowForward />
             </IconButton>
           ),
@@ -67,7 +68,7 @@ const LoginForm = () => {
           },
         })}
         error={!!errors.email}
-        helperText={errors.email && errors.email.password}
+        helperText={errors.email && errors.email.message}
       />
     </form>
   );
