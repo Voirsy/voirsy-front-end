@@ -11,7 +11,9 @@
     "eject": "react-scripts eject",
     "lint": "eslint . --max-warnings 15",
     "server": "json-server --watch ./src/server/db.json --routes ./src/server/routes.json --port 3001",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "dependencies": {
     "@date-io/date-fns": "^2.11.0",
@@ -21,7 +23,7 @@
     "@mui/lab": "^5.0.0-alpha.51",
     "@mui/material": "^5.0.0",
     "@reduxjs/toolkit": "^1.6.2",
-    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "@types/jest": "^26.0.24",
@@ -53,7 +55,7 @@
     "@typescript-eslint/eslint-plugin": "^4.28.4",
     "@typescript-eslint/parser": "^4.28.4",
     "concurrently": "^6.3.0",
-    "cypress": "^8.0.0",
+    "cypress": "^9.3.1",
     "eslint": "^7.31.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.23.4",
