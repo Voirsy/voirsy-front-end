@@ -1,7 +1,7 @@
 name: Build and deploy app
 
 on:
-  push:
+  [push, pull_request]:
     branches:
       - develop
 
@@ -37,6 +37,39 @@ jobs:
         with:
           name: production-build
           path: ./build
+
+  units:
+    name: 'Unit tests'
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.4.0
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.5.1
+        with:
+          node-version: '14.17.x'
+
+      - name: Install NPM packages
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm run test
+
+  e2e:
+    name: E2E
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.4.0
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm run start
+          wait-on: 'http://localhost:8080'
 
   deploy:
     name: Deploy to Github Pages
