@@ -33,7 +33,7 @@ const Home = () => {
           </Box>
         )}
         {!isFetching && data.salons.length > 0 && (
-          <Grid container spacing={3}>
+          <Grid container spacing={3} data-test-id="Grid of salon cards">
             {data.salons.map((el, i) => (
               <Grid item key={i} xs={12} sm={6} md={4} lg={3}>
                 <SalonCard
