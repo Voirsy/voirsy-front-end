@@ -1,7 +1,8 @@
 name: Build and deploy app
 
 on:
-  [push, pull_request]:
+  push:
+  pull_request:
     branches:
       - develop
 
@@ -54,6 +55,23 @@ jobs:
       - name: Install NPM packages
         run: npm ci
 
+      - name: Pull Dockerized Back-end
+        run: docker pull ghcr.io/voirsy/back-end:main
+
+      - name: Start Dockerized Back-end
+        run: docker run -d -p 8080:8080 \
+          -e DB_CONNECT=${{ secrets.DB_CONNECT }} \
+          -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
+          -e FRONTEND_URL=${{ secrets.FRONTEND_URL }} \
+          -e PROJECT_ID=${{ secrets.PROJECT_ID }} \
+          -e BUCKET_URL=${{ secrets.BUCKET_URL }} \
+          -e CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }} \
+          -e CLIENT_ID=${{ secrets.CLIENT_ID }} \
+          -e PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} \
+          -e TYPE=${{ secrets.TYPE }} \
+          -e PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} \
+          ghcr.io/voirsy/back-end
+
       - name: Run unit tests
         run: npm run test
 
@@ -65,11 +83,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.4.0
 
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.5.1
+        with:
+          node-version: '14.17.x'
+
+      - name: Install NPM packages
+        run: npm ci
+
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
           start: npm run start
-          wait-on: 'http://localhost:8080'
+          wait-on: 'http://localhost:3000'
 
   deploy:
     name: Deploy to Github Pages
