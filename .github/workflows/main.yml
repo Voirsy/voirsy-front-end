@@ -99,6 +99,12 @@ jobs:
           browser: chrome
           headless: true
 
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+
   deploy:
     name: Deploy to Github Pages
     needs: build
