@@ -3,7 +3,6 @@ import i18n from 'i18n';
 import { Suspense } from 'react';
 import { I18nextProvider } from 'react-i18next';
 import LoginForm from './index';
-// import '@/localization/i18n';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
