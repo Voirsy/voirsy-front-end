@@ -82,16 +82,16 @@ jobs:
       - name: Start Dockerized Back-end
         run: |
           docker run -d -p 8080:8080 \
-          -e DB_CONNECT=${{ secrets.DB_CONNECT }} \
-          -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
-          -e FRONTEND_URL=${{ secrets.FRONTEND_URL }} \
-          -e PROJECT_ID=${{ secrets.PROJECT_ID }} \
-          -e BUCKET_URL=${{ secrets.BUCKET_URL }} \
-          -e CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }} \
-          -e CLIENT_ID=${{ secrets.CLIENT_ID }} \
-          -e PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} \
-          -e TYPE=${{ secrets.TYPE }} \
-          -e PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} \
+          -e DB_CONNECT="${{ secrets.DB_CONNECT }}" \
+          -e JWT_SECRET="${{ secrets.JWT_SECRET }}" \
+          -e FRONTEND_URL="${{ secrets.FRONTEND_URL }}" \
+          -e PROJECT_ID="${{ secrets.PROJECT_ID }}" \
+          -e BUCKET_URL="${{ secrets.BUCKET_URL }}" \
+          -e CLIENT_EMAIL="${{ secrets.CLIENT_EMAIL }}" \
+          -e CLIENT_ID="${{ secrets.CLIENT_ID }}" \
+          -e PRIVATE_KEY_ID="${{ secrets.PRIVATE_KEY_ID }}" \
+          -e TYPE="${{ secrets.TYPE }}" \
+          -e PRIVATE_KEY="${{ secrets.PRIVATE_KEY }}" \
           ghcr.io/voirsy/back-end
 
       - name: Cypress run
