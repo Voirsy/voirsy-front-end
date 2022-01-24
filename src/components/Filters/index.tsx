@@ -48,7 +48,7 @@ const Filters = () => {
           </IconButton>
           <InputBase
             placeholder={`${translation('filters.search.label')}...`}
-            inputProps={{ 'aria-label': translation('filters.search.ariaLabel') }}
+            inputProps={{ 'aria-label': translation('filters.search.ariaLabel'), 'data-test-id': 'Search input' }}
             value={search}
             onChange={handleSearchChange}
             onKeyDown={(e) => {
@@ -59,6 +59,7 @@ const Filters = () => {
 
         <Stack direction="row" spacing={matches ? 2 : 1} width="100%" overflow={matches ? 'visible' : 'auto'}>
           <Select
+            data-test-id="Location select"
             label={translation('filters.location.label')}
             value={filters.location}
             onChange={handleLocationChange}
