@@ -89,7 +89,12 @@
       },
       "services": {
         "addButton": "Dodaj",
-        "heading": "Usługi"
+        "heading": "Usługi",
+        "cards": {
+          "price": "Cena",
+          "duration": "Czas trwania",
+          "description": "Opis"
+        }
       }
     },
     "controls": {

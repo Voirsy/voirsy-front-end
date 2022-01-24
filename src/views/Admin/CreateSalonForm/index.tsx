@@ -495,17 +495,20 @@ const CreateSalonForm = () => {
                                           <List sx={{ width: '100%' }}>
                                             <ListItem>
                                               <Typography variant="body2" component="p">
-                                                Price: {service.price} €
+                                                {translation('createSalon.forms.services.cards.price')}: {service.price}
+                                                €
                                               </Typography>
                                             </ListItem>
                                             <ListItem>
                                               <Typography variant="body2" component="p">
-                                                Duration: {service.duration} min
+                                                {translation('createSalon.forms.services.cards.duration')}:{' '}
+                                                {service.duration} min
                                               </Typography>
                                             </ListItem>
                                             <ListItem>
                                               <Typography variant="body2" component="p">
-                                                Description: {service.description}
+                                                {translation('createSalon.forms.services.cards.description')}:{' '}
+                                                {service.description}
                                               </Typography>
                                             </ListItem>
                                           </List>
@@ -535,7 +538,7 @@ const CreateSalonForm = () => {
             </Button>
             <Button variant="contained" onClick={() => handleStepChange('next')} disableElevation type="button">
               {activeStep === stepsLabel.length - 1
-                ? translation('createSalon.controls.back')
+                ? translation('createSalon.controls.save')
                 : translation('createSalon.controls.next')}
             </Button>
           </Stack>

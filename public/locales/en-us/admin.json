@@ -90,7 +90,12 @@
       },
       "services": {
         "addButton": "Add",
-        "heading": "Services"
+        "heading": "Services",
+        "cards": {
+          "price": "Price",
+          "duration": "Duration",
+          "description": "Description"
+        }
       }
     },
     "controls": {
