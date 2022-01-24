@@ -98,6 +98,8 @@ jobs:
           wait-on: 'http://localhost:3000'
           browser: chrome
           headless: true
+        env:
+          REACT_APP_API_URL: 'http://localhost:8080'
 
       - uses: actions/upload-artifact@v2
         if: failure()
