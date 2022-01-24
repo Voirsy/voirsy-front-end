@@ -99,6 +99,8 @@ jobs:
         with:
           start: npm run start
           wait-on: 'http://localhost:3000'
+          browser: chrome
+          headless: true
 
   deploy:
     name: Deploy to Github Pages
