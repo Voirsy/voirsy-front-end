@@ -73,9 +73,6 @@ jobs:
         with:
           node-version: '14.17.x'
 
-      - name: Install NPM packages
-        run: npm ci
-
       - name: Pull Dockerized Back-end
         run: docker pull ghcr.io/voirsy/back-end:main
 
