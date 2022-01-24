@@ -15,7 +15,6 @@ import {
   GetFreeHoursArguments,
   GetFreeHoursReturn,
 } from './salon.types';
-import { Salon, Service } from '../../../models/admin.model';
 
 export const salonApi = createApi({
   reducerPath: 'salonApi',

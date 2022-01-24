@@ -53,5 +53,55 @@
     "operationSuccess": "Service added",
     "operationError": "Service add failed"
   },
-  "confirmButton": "Save"
+  "confirmButton": "Save",
+  "createSalon": {
+    "mainHeading": "Create salon",
+    "stepsLabel": {
+      "details": "Details",
+      "openingHours": "Opening hours",
+      "crew": "Crew",
+      "services": "Services"
+    },
+    "stepsTitle": {
+      "details": "Let's provide some informations",
+      "openingHours": "Time of your work",
+      "crew": "Introduce your crew",
+      "services": "What services will be provided?"
+    },
+    "forms": {
+      "details": {
+        "name": "Salon name",
+        "photo": "Add photo",
+        "address": "Address",
+        "city": "City",
+        "postalCode": "Postal code",
+        "phone": "Phone",
+        "email": "Contact email",
+        "type": "Type"
+      },
+      "openingHours": {
+        "from": "From",
+        "to": "To"
+      },
+      "crew": {
+        "fullname": "Fullname",
+        "addButton": "Add",
+        "heading": "Crew members"
+      },
+      "services": {
+        "addButton": "Add",
+        "heading": "Services",
+        "cards": {
+          "price": "Price",
+          "duration": "Duration",
+          "description": "Description"
+        }
+      }
+    },
+    "controls": {
+      "back": "Back",
+      "save": "Save",
+      "next": "Next"
+    }
+  }
 }

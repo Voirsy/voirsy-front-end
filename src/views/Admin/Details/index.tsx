@@ -137,10 +137,15 @@ const Edit = () => {
                     <InputLabel id="select-label">{translation('details.informations.city')}</InputLabel>
                     <Select
                       labelId="select-label"
-                      size="small"
                       value={cityToDisplay}
                       onChange={(event) => handleChangeCity(event)}
                       variant="outlined"
+                      label={translation('details.informations.city')}
+                      size="small"
+                      sx={{
+                        '& > div': { height: '1.4375em !important' },
+                        '& span.MuiTypography-root': { lineHeight: '1 !important' },
+                      }}
                     >
                       {cities?.cities.map((el) => (
                         <MenuItem key={el._id} value={el._id} sx={{ textTransform: 'capitalize' }}>

@@ -14,5 +14,8 @@
       "Image is too small.",
       "Maximum file count reached."
     ]
+  },
+  "postalCode": {
+    "pattern": "Wrong postal code"
   }
 }
