@@ -1,26 +1,4 @@
-import { Add, DeleteOutlined, ImageOutlined } from '@mui/icons-material';
-import {
-  Avatar,
-  Box,
-  Button,
-  Chip,
-  Container,
-  Divider,
-  Grid,
-  IconButton,
-  InputAdornment,
-  List,
-  ListItem,
-  ListItemText,
-  MenuItem,
-  Paper,
-  Stack,
-  Step,
-  StepLabel,
-  Stepper,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Box, Button, Container, Grid, Stack, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import axios from 'axios';
 import { ENV } from 'config/enviroments';
 import { useEffect, useState } from 'react';
@@ -28,10 +6,14 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useCreateSalonMutation } from 'store/api/admin/admin';
-import { useFetchAllCategoriesQuery, useFetchAllCitiesQuery } from 'store/api/home/home';
 import { RootState } from 'store/store';
 import { useSnackbar } from 'notistack';
 import { useHistory } from 'react-router-dom';
+import Details from './Components/Details';
+import OpeningHours from './Components/OpeningHours';
+import Crew from './Components/Crew';
+import Service from './Components/Service';
+import { CreateSalonFormArguments } from './createSalonForm.types';
 
 const CreateSalonForm = () => {
   const [translation] = useTranslation(['admin', 'common', 'validation']);
@@ -56,17 +38,11 @@ const CreateSalonForm = () => {
     setValue,
     reset,
     formState: { errors },
-  } = useForm({
+  } = useForm<CreateSalonFormArguments>({
     mode: 'onBlur',
   });
-  const addedCrew = watch('crew');
-  const addedServices = watch('services');
-  const [imagePreview, setImagePreview] = useState<string | undefined>(undefined);
-  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   const [createSalon, { isSuccess, isError }] = useCreateSalonMutation();
   const userId = useSelector((state: RootState) => state.user?.id);
-  const { data: cities } = useFetchAllCitiesQuery();
-  const { data: types } = useFetchAllCategoriesQuery();
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
 
@@ -140,53 +116,6 @@ const CreateSalonForm = () => {
     }
   };
 
-  const handleCrewAdd = () => {
-    const crewArray = getValues('crew');
-    const name = getValues('crewInput');
-    const crewMember = {
-      name,
-      imageId: '',
-    };
-    if (Array.isArray(crewArray)) {
-      crewArray.push(crewMember);
-      setValue('crew', crewArray);
-    } else {
-      setValue('crew', [crewMember]);
-    }
-    setValue('crewInput', '');
-  };
-
-  const handleCrewDelete = (index: number) => {
-    const crewArray = getValues('crew');
-    crewArray.splice(index, 1);
-    setValue('crew', crewArray);
-  };
-
-  const handleServiceAdd = () => {
-    const servicesArray = getValues('services');
-    const service = getValues('service');
-    if (Array.isArray(servicesArray)) {
-      servicesArray.push(service);
-      setValue('services', servicesArray);
-    } else {
-      setValue('services', [service]);
-    }
-    reset({ ...getValues(), service: {} });
-  };
-
-  const handleServiceDelete = (index: number) => {
-    const servicesArray = getValues('services');
-    servicesArray.splice(index, 1);
-    setValue('services', servicesArray);
-  };
-
-  const showImagePreview = (event: any) => {
-    const file = event?.target?.files?.[0];
-    const fileSrc = URL.createObjectURL(file);
-    setValue('image', file);
-    setImagePreview(fileSrc);
-  };
-
   return (
     <Container maxWidth={false}>
       <Box sx={{ marginBottom: 2 }}>
@@ -215,311 +144,21 @@ const CreateSalonForm = () => {
                   {(() => {
                     switch (activeStep) {
                       case 0:
-                        return (
-                          <>
-                            <TextField
-                              variant="outlined"
-                              size="small"
-                              label={translation('createSalon.forms.details.name')}
-                              type="text"
-                              {...register('name', {
-                                required: {
-                                  value: true,
-                                  message: translation('common.required', { ns: 'validation' }),
-                                },
-                                minLength: {
-                                  value: 3,
-                                  message: translation('common.minLength', { ns: 'validation', min: 3 }),
-                                },
-                              })}
-                              error={!!errors.name}
-                              helperText={errors.name?.message}
-                            />
-                            <input
-                              type="file"
-                              id="avatar-image-upload"
-                              accept="image/png, image/jpeg"
-                              onChange={(event) => showImagePreview(event)}
-                              hidden
-                            />
-                            <label htmlFor="avatar-image-upload">
-                              <Paper elevation={0} variant="outlined" sx={{ height: '300px', cursor: 'pointer' }}>
-                                {imagePreview ? (
-                                  <img src={imagePreview} width="100%" height="100%" />
-                                ) : (
-                                  <Stack height="100%" justifyContent="center" alignItems="center">
-                                    <ImageOutlined />
-                                    <Typography>{translation('createSalon.forms.details.photo')}</Typography>
-                                  </Stack>
-                                )}
-                              </Paper>
-                            </label>
-                            <TextField
-                              variant="outlined"
-                              size="small"
-                              label={translation('createSalon.forms.details.address')}
-                              type="text"
-                              {...register('address', {
-                                required: {
-                                  value: true,
-                                  message: translation('common.required', { ns: 'validation' }),
-                                },
-                              })}
-                              error={!!errors.address}
-                              helperText={errors.address?.message}
-                            />
-                            <TextField
-                              variant="outlined"
-                              size="small"
-                              label={translation('createSalon.forms.details.city')}
-                              select
-                              onChange={(event) => setValue('city', event.target.value)}
-                              error={!!errors.city}
-                              helperText={errors.city?.message}
-                              defaultValue={''}
-                              sx={{ textTransform: 'capitalize' }}
-                            >
-                              {cities &&
-                                cities?.cities.map((city) => (
-                                  <MenuItem key={city._id} value={city._id} sx={{ textTransform: 'capitalize' }}>
-                                    {city.name}
-                                  </MenuItem>
-                                ))}
-                            </TextField>
-                            <TextField
-                              variant="outlined"
-                              size="small"
-                              label={translation('createSalon.forms.details.postalCode')}
-                              type="text"
-                              {...register('postalCode', {
-                                required: {
-                                  value: true,
-                                  message: translation('common.required', { ns: 'validation' }),
-                                },
-                                pattern: {
-                                  value: /\d{2}[-]{0,1}\d{3}$/,
-                                  message: translation('postalCode.pattern', { ns: 'validation' }),
-                                },
-                              })}
-                              error={!!errors.postalCode}
-                              helperText={errors.postalCode?.message}
-                            />
-                            <TextField
-                              variant="outlined"
-                              size="small"
-                              label={translation('createSalon.forms.details.phone')}
-                              type="text"
-                              {...register('phone', {
-                                required: {
-                                  value: true,
-                                  message: translation('common.required', { ns: 'validation' }),
-                                },
-                              })}
-                              error={!!errors.phone}
-                              helperText={errors.phone?.message}
-                            />
-                            <TextField
-                              variant="outlined"
-                              size="small"
-                              label={translation('createSalon.forms.details.email')}
-                              type="text"
-                              {...register('contactEmail', {
-                                required: {
-                                  value: true,
-                                  message: translation('common.required', { ns: 'validation' }),
-                                },
-                              })}
-                              error={!!errors.contactEmail}
-                              helperText={errors.contactEmail?.message}
-                            />
-                            <TextField
-                              variant="outlined"
-                              size="small"
-                              label={translation('createSalon.forms.details.type')}
-                              select
-                              onChange={(event) => setValue('type', event.target.value)}
-                              error={!!errors.type}
-                              helperText={errors.type?.message}
-                              defaultValue={''}
-                            >
-                              {types &&
-                                types?.categories.map((type) => (
-                                  <MenuItem key={type._id} value={type._id}>
-                                    {translation(`salonType.${type.name.toLowerCase()}`, { ns: 'common' })}
-                                  </MenuItem>
-                                ))}
-                            </TextField>
-                          </>
-                        );
+                        return <Details register={register} errors={errors} setValue={setValue} />;
                       case 1:
-                        return (
-                          <>
-                            <Stack direction="column" spacing={1}>
-                              {days.map((day, index) => (
-                                <Grid container key={index}>
-                                  <Grid item container xs={3} alignItems="center">
-                                    <Typography variant="body1">
-                                      {translation(`daysOfTheWeek.${day.toLowerCase()}`, { ns: 'common' })}
-                                    </Typography>
-                                  </Grid>
-                                  <Grid item container xs alignItems="center">
-                                    <TextField
-                                      variant="outlined"
-                                      label={translation('createSalon.forms.openingHours.from')}
-                                      size="small"
-                                      {...register(`openingHours.${day}.open`)}
-                                      margin="dense"
-                                      sx={{ marginRight: 1 }}
-                                    />
-                                    <TextField
-                                      variant="outlined"
-                                      label={translation('createSalon.forms.openingHours.to')}
-                                      size="small"
-                                      {...register(`openingHours.${day}.close`)}
-                                      margin="dense"
-                                    />
-                                  </Grid>
-                                </Grid>
-                              ))}
-                            </Stack>
-                          </>
-                        );
+                        return <OpeningHours register={register} />;
                       case 2:
-                        return (
-                          <>
-                            <Stack direction="row" spacing={1}>
-                              <TextField
-                                variant="outlined"
-                                size="small"
-                                label={translation('createSalon.forms.crew.fullname')}
-                                type="text"
-                                sx={{ flexGrow: 1 }}
-                                {...register('crewInput')}
-                              />
-                              <Button onClick={handleCrewAdd} endIcon={<Add />} variant="outlined">
-                                {translation('createSalon.forms.crew.addButton')}
-                              </Button>
-                            </Stack>
-                            <Typography variant="body1" component="p">
-                              {translation('createSalon.forms.crew.heading')}:
-                            </Typography>
-                            <Stack direction="row" spacing={1} flexWrap="wrap">
-                              {addedCrew &&
-                                addedCrew.map((member: { name: string; imageId: string }, index: number) => (
-                                  <Chip
-                                    key={index}
-                                    label={member.name}
-                                    avatar={<Avatar>{member.name[0]}</Avatar>}
-                                    onDelete={() => handleCrewDelete(index)}
-                                    color="secondary"
-                                    sx={{ marginBottom: 1 }}
-                                  />
-                                ))}
-                            </Stack>
-                          </>
-                        );
+                        return <Crew register={register} watch={watch} setValue={setValue} getValues={getValues} />;
                       case 3:
                         return (
-                          <>
-                            <Stack spacing={2}>
-                              <TextField
-                                size="small"
-                                variant="outlined"
-                                label={translation('admin:serviceDialog.name')}
-                                {...register('service.name')}
-                                error={!!errors.name}
-                                helperText={errors.name?.message}
-                              />
-                              <TextField
-                                size="small"
-                                variant="outlined"
-                                label={translation('admin:serviceDialog.price')}
-                                type="number"
-                                {...register('service.price')}
-                                InputProps={{
-                                  endAdornment: <InputAdornment position="start">€</InputAdornment>,
-                                  inputProps: { min: 0 },
-                                }}
-                                error={!!errors.price}
-                                helperText={errors.price?.message}
-                              />
-                              <TextField
-                                size="small"
-                                variant="outlined"
-                                label={translation('admin:serviceDialog.duration')}
-                                type="number"
-                                multiline
-                                maxRows={4}
-                                {...register('service.duration')}
-                                InputProps={{
-                                  endAdornment: <InputAdornment position="start">min</InputAdornment>,
-                                  inputProps: { min: 0, step: 1 },
-                                }}
-                                error={!!errors.duration}
-                                helperText={errors.duration?.message}
-                              />
-                              <TextField
-                                size="small"
-                                variant="outlined"
-                                label={translation('admin:serviceDialog.description')}
-                                {...register('service.description')}
-                                error={!!errors.description}
-                                helperText={errors.description?.message}
-                              />
-                              <Button onClick={handleServiceAdd} endIcon={<Add />} variant="outlined">
-                                {translation('createSalon.forms.services.addButton')}
-                              </Button>
-                            </Stack>
-                            <Typography variant="body1" component="p">
-                              {translation('createSalon.forms.services.heading')}:
-                            </Typography>
-                            <List>
-                              {addedServices &&
-                                addedServices.map((service: any, index: number) => (
-                                  <>
-                                    <ListItem
-                                      key={index}
-                                      secondaryAction={
-                                        <IconButton
-                                          edge="end"
-                                          aria-label="delete"
-                                          onClick={() => handleServiceDelete(index)}
-                                        >
-                                          <DeleteOutlined />
-                                        </IconButton>
-                                      }
-                                    >
-                                      <ListItemText
-                                        primary={service.name}
-                                        secondary={
-                                          <List sx={{ width: '100%' }}>
-                                            <ListItem>
-                                              <Typography variant="body2" component="p">
-                                                {translation('createSalon.forms.services.cards.price')}: {service.price}
-                                                €
-                                              </Typography>
-                                            </ListItem>
-                                            <ListItem>
-                                              <Typography variant="body2" component="p">
-                                                {translation('createSalon.forms.services.cards.duration')}:{' '}
-                                                {service.duration} min
-                                              </Typography>
-                                            </ListItem>
-                                            <ListItem>
-                                              <Typography variant="body2" component="p">
-                                                {translation('createSalon.forms.services.cards.description')}:{' '}
-                                                {service.description}
-                                              </Typography>
-                                            </ListItem>
-                                          </List>
-                                        }
-                                      ></ListItemText>
-                                    </ListItem>
-                                    {index < addedServices.length - 1 && <Divider />}
-                                  </>
-                                ))}
-                            </List>
-                          </>
+                          <Service
+                            register={register}
+                            watch={watch}
+                            setValue={setValue}
+                            getValues={getValues}
+                            reset={reset}
+                            errors={errors}
+                          />
                         );
                     }
                   })()}
