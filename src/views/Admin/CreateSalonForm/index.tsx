@@ -48,14 +48,14 @@ const CreateSalonForm = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      enqueueSnackbar(translation('Salon created'), {
+      enqueueSnackbar(translation(translation('createSalon.snackbar.created')), {
         variant: 'success',
         anchorOrigin: { horizontal: 'right', vertical: 'bottom' },
       });
       history.push('/salons');
     }
     if (isError) {
-      enqueueSnackbar(translation('Salon creation failed'), {
+      enqueueSnackbar(translation(translation('createSalon.snackbar.failed')), {
         variant: 'error',
         anchorOrigin: { horizontal: 'right', vertical: 'bottom' },
       });

@@ -97,6 +97,10 @@
         }
       }
     },
+    "snackbar": {
+      "created": "Salon utworzony pomyślnie",
+      "failed": "Wystąpił błąd podczas tworzenia salonu"
+    },
     "controls": {
       "back": "Cofnij",
       "save": "Zapisz",
