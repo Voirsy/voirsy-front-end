@@ -35,6 +35,10 @@
     "operationSuccess": "Salon informations updated",
     "operationError": "Salon informations update failed"
   },
+  "schedule": {
+    "client": "Client",
+    "phone": "Phone"
+  },
   "crewDialog": {
     "title": "Add new crew member",
     "fullname": "Fullname",
