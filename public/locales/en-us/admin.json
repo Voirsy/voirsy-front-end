@@ -98,6 +98,10 @@
         }
       }
     },
+    "snackbar": {
+      "created": "Salon created",
+      "failed": "Salon creation failed"
+    },
     "controls": {
       "back": "Back",
       "save": "Save",
