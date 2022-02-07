@@ -34,6 +34,14 @@ export const adminPanelApi = createApi({
     }),
     fetchSalonSchedule: builder.query<FetchSalonScheduleReturn, { salonId: string }>({
       query: ({ salonId }) => `${ADMIN_PANEL.FETCH_SCHEDULE(salonId)}`,
+      transformResponse: ({ message, salon }: FetchSalonScheduleReturn) => ({
+        message,
+        salon: salon.map((item) => ({
+          ...item,
+          start: new Date(item.start),
+          end: new Date(item.end),
+        })),
+      }),
     }),
     fetchSalonPortfolio: builder.query<FetchSalonPortfolioReturn, { salonId: string }>({
       query: ({ salonId }) => `${ADMIN_PANEL.FETCH_PORTFOLIO(salonId)}`,
