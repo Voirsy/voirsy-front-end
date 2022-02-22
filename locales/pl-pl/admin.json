@@ -34,6 +34,10 @@
     "operationSuccess": "Zaktualizowano dane salonu",
     "operationError": "Aktualizacja danych salonu nie powiodła się"
   },
+  "schedule": {
+    "client": "Klient",
+    "phone": "Telefon"
+  },
   "crewDialog": {
     "title": "Dodaj nowego członka zespołu",
     "fullname": "Imię i nazwisko",
