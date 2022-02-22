@@ -48,3 +48,12 @@ export type Salon = {
   openingHours: OpeningHour[];
   reviews: Review[];
 };
+
+export type Appointment = {
+  worker: string;
+  avatar: string;
+  customer: string;
+  phone: string;
+  start: Date;
+  end: Date;
+};
